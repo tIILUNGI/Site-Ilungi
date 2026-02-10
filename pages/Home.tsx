@@ -152,7 +152,7 @@ const Home: React.FC = () => {
                   <img 
                     src={partner.logo} 
                     alt={partner.name}
-                    className="h-20 w-auto object-contain hover:opacity-80 transition-opacity"
+                    className="h-20 w-auto object-contain rounded-2xl border-2 border-[#1B3C2B] hover:opacity-80 transition-opacity bg-white/50"
                   />
                 </a>
               </motion.div>
