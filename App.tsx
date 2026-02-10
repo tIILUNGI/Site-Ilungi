@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { translations } from './translations';
 import { Language } from './types';
 import Navbar from './components/Navbar';
