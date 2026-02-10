@@ -42,7 +42,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section with Service Slider (includes logo) */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
+      <section className="relative h-[100vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode='wait'>
             <motion.div
