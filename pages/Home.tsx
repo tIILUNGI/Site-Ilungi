@@ -69,7 +69,7 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
             >
-                <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 mt-48">
+                <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
                     {t.home.heroTitle}
                 </h1>
                 <p className="text-lg text-slate-300 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
