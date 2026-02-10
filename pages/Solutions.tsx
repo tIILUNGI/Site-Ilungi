@@ -11,8 +11,8 @@ const Solutions: React.FC = () => {
   const products = [
     {
       name: "Salya",
-      tagline: "GRC & Audit Management",
-      desc: "Plataforma robusta para gestão de riscos, controlos internos e automação de auditorias ISO.",
+      tagline: "Gestão de Salários & RH",
+      desc: "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos.",
       icon: <Database className="w-10 h-10" />,
       path: "/solucoes/salya",
       color: "bg-purple-600"

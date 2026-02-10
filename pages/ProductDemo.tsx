@@ -18,7 +18,7 @@ const ProductDemo: React.FC<{ productName: string }> = ({ productName }) => {
             </motion.span>
             <h1 className="text-6xl font-black text-[#1B3C2B] mb-8">{productName}</h1>
             <p className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed">
-                A plataforma SaaS definitiva para {productName === 'Salya' ? 'Gestão de Riscos e Auditorias' : 'Compliance Integrado e Governança 360'}.
+                A plataforma SaaS definitiva para {productName === 'Salya' ? 'Gestão de Salários e Recursos Humanos' : 'Compliance Integrado e Governança 360'}.
             </p>
         </div>
 
