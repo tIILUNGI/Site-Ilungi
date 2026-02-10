@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
         <div className="space-y-6">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto" />
+            <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
           </Link>
           <p className="text-slate-300 text-sm leading-relaxed">
             Especialistas globais em consultoria ISO, gestão de riscos e formação executiva. 

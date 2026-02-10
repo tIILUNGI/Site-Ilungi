@@ -14,10 +14,34 @@ const partnerLogos = [
 ];
 
 const serviceImages = [
-  { src: "/imagens/ISO.png", title: "ISO 9001", subtitle: "Gestão da Qualidade" },
-  { src: "/imagens/Notação de Risco.jpg", title: "Gestão de Risco", subtitle: "Análise Estratégica" },
-  { src: "/imagens/Gestão de Projecto.jpg", title: "PMO", subtitle: "Gestão de Projetos" },
-  { src: "/imagens/ilungi_logo.jpg", title: "ILUNGI", subtitle: "Excelência em Consultoria" },
+  { 
+    src: "/imagens/ISO.png", 
+    title: "ISO 9001", 
+    subtitle: "Gestão da Qualidade",
+    heroTitle: "Excelência em Consultoria",
+    heroSubtitle: "Transformamos desafios em oportunidades de crescimento sustentável para sua empresa."
+  },
+  { 
+    src: "/imagens/Notação de Risco.jpg", 
+    title: "Gestão de Risco", 
+    subtitle: "Análise Estratégica",
+    heroTitle: "Gestão de Riscos Corporativos",
+    heroSubtitle: "Identificamos e mitigamos riscos para proteger o futuro do seu negócio."
+  },
+  { 
+    src: "/imagens/Gestão de Projecto.jpg", 
+    title: "PMO", 
+    subtitle: "Gestão de Projetos",
+    heroTitle: "Gestão de Projetos Estratégicos",
+    heroSubtitle: "Impulsionamos a execução de projetos com metodologia comprovada e resultados mensuráveis."
+  },
+  { 
+    src: "/imagens/ilungi_logo.jpg", 
+    title: "ILUNGI", 
+    subtitle: "Excelência em Consultoria",
+    heroTitle: "Consultoria de Excelência",
+    heroSubtitle: "Soluções integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
+  },
 ];
 
 const Home: React.FC = () => {
@@ -28,7 +52,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % serviceImages.length);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -42,7 +66,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section with Service Slider (includes logo) */}
-      <section className="relative h-[100vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode='wait'>
             <motion.div
@@ -65,15 +89,16 @@ const Home: React.FC = () => {
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 text-white text-center w-full">
             <motion.div
+                key={currentSlide}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 0.8 }}
             >
                 <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                    {t.home.heroTitle}
+                    {serviceImages[currentSlide].heroTitle}
                 </h1>
                 <p className="text-lg text-slate-300 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
-                    {t.home.heroSubtitle}
+                    {serviceImages[currentSlide].heroSubtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
                     <Link to="/contacto" className="px-10 py-4 bg-[#6B0FA3] rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40">

@@ -67,7 +67,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto" />
+          <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-16 w-auto" />
         </Link>
 
         {/* Desktop Menu */}
