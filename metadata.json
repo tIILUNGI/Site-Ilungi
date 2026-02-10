@@ -1,0 +1,8 @@
+{
+  "name": "ILUNGI - Global Consulting & Corporate Solutions",
+  "description": "A premium, modern corporate website for ILUNGI, a leader in ISO certification, risk management, and digital corporate solutions in Angola and beyond.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

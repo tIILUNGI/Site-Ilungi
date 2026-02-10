@@ -1,0 +1,89 @@
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { CheckCircle, ArrowRight, Layers, Target, Activity } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAppContext } from '../App';
+
+interface ServiceDetailProps {
+  type: 'risk' | 'procurement' | 'pmo';
+}
+
+const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
+  const { t } = useAppContext();
+  const content = t.services[type];
+
+  const icons = {
+    risk: <Activity className="w-12 h-12" />,
+    procurement: <Layers className="w-12 h-12" />,
+    pmo: <Target className="w-12 h-12" />
+  };
+
+  const images = {
+    risk: "/imagens/Notação de Risco.jpg",
+    procurement: "/imagens/procurement.png",
+    pmo: "/imagens/Gestão de Projecto.jpg"
+  };
+
+  return (
+    <div className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
+          <div className="flex-1">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <div className="p-3 bg-purple-100 text-[#6B0FA3] rounded-2xl w-fit">
+                {icons[type]}
+              </div>
+              <h1 className="text-5xl font-black text-[#1B3C2B] leading-tight">{content.title}</h1>
+              <p className="text-xl text-slate-500 font-light leading-relaxed">{content.desc}</p>
+              <p className="text-lg text-slate-600 leading-relaxed">{content.content}</p>
+              
+              <div className="pt-8">
+                <Link to="/contacto" className="px-10 py-4 bg-[#6B0FA3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
+                  Solicitar Proposta
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+          <div className="flex-1">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 bg-[#1B3C2B]/5 rounded-[3rem] blur-3xl"></div>
+              <img 
+                src={images[type]} 
+                className="relative z-10 rounded-[3rem] shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" 
+                alt={content.title} 
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[
+            { title: "Metodologia ILUNGI", desc: "Processos refinados por anos de prática no mercado Angolano e Internacional." },
+            { title: "Diferenciais", desc: "Abordagem focada em resultados práticos e redução de desperdícios." },
+            { title: "Sectores Atendidos", desc: "Experiência em Petróleo & Gás, Finanças, Construção e Sector Público." }
+          ].map((item, i) => (
+            <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
+              <h4 className="text-xl font-bold mb-4 flex items-center">
+                <CheckCircle className="w-5 h-5 text-[#6B0FA3] mr-2" />
+                {item.title}
+              </h4>
+              <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ServiceDetail;
