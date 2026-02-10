@@ -79,7 +79,7 @@ const Home: React.FC = () => {
             >
               <img 
                 src={serviceImages[currentSlide].src} 
-                className="w-full h-full object-cover opacity-30"
+                className="w-full h-full object-cover opacity-30 bg-white p-4 rounded-lg"
                 alt={serviceImages[currentSlide].title}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#1B3C2B] via-[#1B3C2B]/70 to-transparent"></div>
