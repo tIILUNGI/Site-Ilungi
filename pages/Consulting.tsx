@@ -20,7 +20,7 @@ const Consulting: React.FC = () => {
       desc: t.consultingAreas.risk.desc,
       image: "/imagens/Notação de Risco.jpg",
       path: "/consultoria/risco",
-      color: "#6B0FA3"
+      color: "#6a00a3"
     },
     {
       title: t.consultingAreas.procurement.title,
@@ -159,10 +159,10 @@ const Consulting: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA Section - Porquê a ILUNGI */}
+        {/* CTA Section - Porqué a ILUNGI */}
         <div className="relative bg-[#1B3C2B] rounded-[2.5rem] overflow-hidden p-12 lg:p-20 text-white">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-[#6B0FA3]/20 blur-3xl rounded-full"></div>
-          <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-[#6B0FA3]/10 blur-3xl rounded-full"></div>
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-[#6a00a3]/20 blur-3xl rounded-full"></div>
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-[#6a00a3]/10 blur-3xl rounded-full"></div>
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -210,7 +210,7 @@ const Consulting: React.FC = () => {
             >
               <Link 
                 to="/contacto" 
-                className="inline-block px-10 py-4 bg-[#6B0FA3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40"
+                className="inline-block px-10 py-4 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40"
               >
                 {t.consulting.cta}
               </Link>

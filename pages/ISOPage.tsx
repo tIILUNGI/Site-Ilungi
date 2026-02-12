@@ -14,8 +14,8 @@ const ISOPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-16 mb-24">
             <div className="flex-1">
-                <span className="text-[#6B0FA3] font-black tracking-widest uppercase text-sm mb-4 block">
-                  {lang === 'pt' ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
+                <span className="text-[#6a00a3] font-black tracking-widest uppercase text-sm mb-4 block">
+                    {lang === 'pt' ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
                 </span>
                 <h1 className="text-5xl font-black text-[#1B3C2B] mb-8 leading-tight">{t.iso.title}</h1>
                 <p className="text-xl text-slate-500 font-light leading-relaxed mb-8">
@@ -46,14 +46,14 @@ const ISOPage: React.FC = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
             {isoKeys.map((key, i) => (
-                <div key={i} className="p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#6B0FA3]/20 transition-all">
-                    <div className="w-12 h-12 bg-[#6B0FA3]/10 text-[#6B0FA3] rounded-xl flex items-center justify-center mb-6">
+                <div key={i} className="p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#6a00a3]/20 transition-all">
+                    <div className="w-12 h-12 bg-[#6a00a3]/10 text-[#6a00a3] rounded-xl flex items-center justify-center mb-6">
                         <Shield className="w-6 h-6" />
                     </div>
-                    <h4 className="text-xs font-black text-[#6B0FA3] uppercase mb-1">{key}</h4>
+                    <h4 className="text-xs font-black text-[#6a00a3] uppercase mb-1">{key}</h4>
                     <h3 className="text-xl font-bold mb-4">{t.services.iso.items[key].title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed mb-6">{t.services.iso.items[key].benefit}</p>
-                    <Link to="/contacto" className="text-sm font-bold text-[#1B3C2B] hover:text-[#6B0FA3] flex items-center">
+                    <Link to="/contacto" className="text-sm font-bold text-[#1B3C2B] hover:text-[#6a00a3] flex items-center">
                         {t.home.ctaPrimary} <CheckCircle className="w-4 h-4 ml-2" />
                     </Link>
                 </div>
@@ -70,7 +70,7 @@ const ISOPage: React.FC = () => {
                         { title: t.iso.steps.certification, desc: t.iso.steps.certificationDesc, icon: <Book /> }
                     ].map((step, i) => (
                         <div key={i} className="flex space-x-4">
-                            <div className="shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-[#6B0FA3]">{step.icon}</div>
+                            <div className="shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-[#6a00a3]">{step.icon}</div>
                             <div>
                                 <h4 className="font-bold">{step.title}</h4>
                                 <p className="text-slate-300 text-sm">{step.desc}</p>
@@ -80,7 +80,7 @@ const ISOPage: React.FC = () => {
                 </div>
             </div>
             <div className="shrink-0">
-                <Link to="/contacto" className="px-12 py-5 bg-[#6B0FA3] rounded-full font-bold text-lg hover:bg-white hover:text-[#6B0FA3] transition-all shadow-xl shadow-purple-900/40">
+                <Link to="/contacto" className="px-12 py-5 bg-[#6a00a3] rounded-full font-bold text-lg hover:bg-white hover:text-[#6a00a3] transition-all shadow-xl shadow-purple-900/40">
                     {t.iso.cta}
                 </Link>
             </div>

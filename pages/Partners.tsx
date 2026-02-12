@@ -68,7 +68,7 @@ const Partners: React.FC = () => {
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid-partners" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6B0FA3" strokeWidth="0.5"/>
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6a00a3" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid-partners)" />
@@ -82,7 +82,7 @@ const Partners: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-1.5 bg-[#6B0FA3]/10 text-[#6B0FA3] rounded-full text-sm font-black uppercase mb-6 tracking-wider"
+            className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider"
           >
             {lang === 'pt' ? 'ECOSSISTEMA DE PARCERIAS' : 'PARTNERSHIP ECOSYSTEM'}
           </motion.span>
@@ -157,21 +157,11 @@ const Partners: React.FC = () => {
                     <div className="w-full aspect-square p-6 relative">
                       <motion.div 
                         className="w-full h-full relative flex items-center justify-center"
-                        animate={{
-                          borderColor: isHovered ? p.color : '#f1f5f9'
-                        }}
-                        transition={{ duration: 0.3 }}
                       >
-                        {/* Borda animada */}
-                        <motion.div 
+                        {/* Borda completa com cor do parceiro */}
+                        <div 
                           className="absolute inset-0 border-2 rounded-xl"
                           style={{ borderColor: p.color }}
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          animate={{ 
-                            opacity: isHovered ? 1 : 0,
-                            scale: isHovered ? 1 : 0.95
-                          }}
-                          transition={{ duration: 0.3 }}
                         />
                         
                         {/* Container da imagem */}
@@ -293,7 +283,7 @@ const Partners: React.FC = () => {
           onHoverEnd={() => setIsHoveringCTA(false)}
         >
           {/* Fundo com gradiente animado */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1B3C2B] via-[#2E5E4A] to-[#6B0FA3]"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1B3C2B] via-[#2E5E4A] to-[#6a00a3]"></div>
           
           {/* Overlay com padrão geométrico */}
           <div className="absolute inset-0 opacity-10">
@@ -325,7 +315,7 @@ const Partners: React.FC = () => {
           />
           
           <motion.div 
-            className="absolute -bottom-32 -left-20 w-80 h-80 bg-[#6B0FA3]/20 rounded-full blur-3xl"
+            className="absolute -bottom-32 -left-20 w-80 h-80 bg-[#6a00a3]/20 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.1, 0.2, 0.1]
@@ -398,7 +388,7 @@ const Partners: React.FC = () => {
                   >
                     {/* Efeito de brilho no hover */}
                     <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      className="absolute inset-0 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     />
                     
                     <span className="relative z-10 flex items-center space-x-3">
@@ -458,7 +448,7 @@ const Partners: React.FC = () => {
                 </div>
 
                 {/* Depoimento/Chamada secundária */}
-                <div className="bg-gradient-to-br from-[#6B0FA3]/30 to-[#1B3C2B]/30 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+                <div className="bg-gradient-to-br from-[#6a00a3]/30 to-[#1B3C2B]/30 backdrop-blur-md rounded-3xl p-8 border border-white/20">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
                       <Users className="w-6 h-6 text-white" />

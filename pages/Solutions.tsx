@@ -46,7 +46,7 @@ const Solutions: React.FC = () => {
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6B0FA3" strokeWidth="0.5"/>
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6a00a3" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -54,29 +54,29 @@ const Solutions: React.FC = () => {
       </div>
       
       {/* Linhas de conexão tecnológicas */}
-      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6B0FA3]/30 to-transparent"></div>
+      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
       <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/30 to-transparent"></div>
       
       {/* Pontos de dados flutuantes */}
-      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6B0FA3]/40 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
       <div className="absolute top-60 left-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6B0FA3]/40 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
       <div className="absolute bottom-60 right-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
       
       {/* Círculos concêntricos tecnológicos */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6B0FA3]/10 rounded-full"></div>
-      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6B0FA3]/5 rounded-full"></div>
+      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6a00a3]/10 rounded-full"></div>
+      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6a00a3]/5 rounded-full"></div>
       <div className="absolute bottom-1/4 -right-20 w-64 h-64 border border-[#1B3C2B]/10 rounded-full"></div>
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 border border-[#1B3C2B]/5 rounded-full"></div>
       
       {/* Ícones tecnológicos sutis */}
-      <div className="absolute top-20 right-[20%] text-[#6B0FA3]/5 rotate-12">
+      <div className="absolute top-20 right-[20%] text-[#6a00a3]/5 rotate-12">
         <Cpu size={80} />
       </div>
       <div className="absolute bottom-20 left-[20%] text-[#1B3C2B]/5 -rotate-12">
         <Cloud size={80} />
       </div>
-      <div className="absolute top-1/2 left-[5%] text-[#6B0FA3]/5">
+      <div className="absolute top-1/2 left-[5%] text-[#6a00a3]/5">
         <Globe size={60} />
       </div>
 
@@ -84,12 +84,12 @@ const Solutions: React.FC = () => {
         {/* Header com brilho tecnológico */}
         <div className="text-center mb-24 relative">
           {/* Efeito de brilho no header */}
-          <div className="absolute -inset-20 bg-gradient-to-r from-[#6B0FA3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
+          <div className="absolute -inset-20 bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
           
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 bg-[#6B0FA3]/10 text-[#6B0FA3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6B0FA3]/20 relative"
+            className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6a00a3]/20 relative"
           >
             {lang === 'pt' ? 'Ecossistema Digital ILUNGI' : 'ILUNGI Digital Ecosystem'}
           </motion.span>
@@ -102,7 +102,7 @@ const Solutions: React.FC = () => {
           >
             {t.solutions.title}
             {/* Linha decorativa tecnológica */}
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] rounded-full"></span>
+            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
           </motion.h1>
           
           <motion.p 
@@ -127,7 +127,7 @@ const Solutions: React.FC = () => {
               className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-500"
             >
               {/* Efeito de borda tecnológica no hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6B0FA3]/0 via-[#6B0FA3]/0 to-[#1B3C2B]/0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3]/0 via-[#6a00a3]/0 to-[#1B3C2B]/0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
               
               {/* Container da imagem */}
               <div className="relative h-56 overflow-hidden">
@@ -202,12 +202,12 @@ const Solutions: React.FC = () => {
               {/* Conteúdo do card */}
               <div className="p-8 bg-white relative">
                 {/* Linha tecnológica superior */}
-                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6B0FA3]/20 to-transparent"></div>
+                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
                 
                 <h3 className="text-2xl font-black text-slate-800 mb-3 flex items-center">
                   {product.name}
                   {/* Ícone de verificação tecnológica */}
-                  <span className="ml-2 w-5 h-5 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] rounded-full flex items-center justify-center">
+                  <span className="ml-2 w-5 h-5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
                     </svg>
@@ -224,7 +224,7 @@ const Solutions: React.FC = () => {
                       href={product.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6B0FA3] transition-colors group/link"
+                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
                       <span>Visitar SICLIC</span>
                       <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
@@ -232,7 +232,7 @@ const Solutions: React.FC = () => {
                   ) : (
                     <Link 
                       to={product.path || '#'}
-                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6B0FA3] transition-colors group/link"
+                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
                       <span>{lang === 'pt' ? 'Solicitar Demo' : 'Request Demo'}</span>
                       <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
@@ -252,7 +252,7 @@ const Solutions: React.FC = () => {
               <motion.div 
                 className="absolute bottom-0 left-0 h-1 bg-gradient-to-r"
                 style={{ 
-                  backgroundImage: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6B0FA3, ${product.bgColor.replace('bg-', '')})` 
+                  backgroundImage: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3, ${product.bgColor.replace('bg-', '')})` 
                 }}
                 initial={{ width: 0 }}
                 whileHover={{ width: '100%' }}
@@ -266,7 +266,7 @@ const Solutions: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative">
           {/* Elemento tecnológico de fundo */}
           <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
-            <div className="w-full h-full bg-gradient-to-r from-[#6B0FA3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
+            <div className="w-full h-full bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
           </div>
           
           <div className="order-2 lg:order-1 relative">
@@ -278,7 +278,7 @@ const Solutions: React.FC = () => {
             >
               {lang === 'pt' ? 'Implementação Ágil & Suporte Especializado' : 'Agile Implementation & Specialized Support'}
               {/* Linha decorativa tecnológica */}
-              <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
             </motion.h2>
             
             <div className="space-y-8">
@@ -308,7 +308,7 @@ const Solutions: React.FC = () => {
                   className="flex items-start space-x-5 group"
                 >
                   <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 shadow-lg relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#6B0FA3]/20 to-[#1B3C2B]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#6a00a3]/20 to-[#1B3C2B]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img 
                       src={item.image} 
                       alt={item.title}
@@ -318,7 +318,7 @@ const Solutions: React.FC = () => {
                   <div>
                     <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
                       {item.title}
-                      <span className="ml-2 w-1.5 h-1.5 bg-[#6B0FA3] rounded-full animate-pulse"></span>
+                      <span className="ml-2 w-1.5 h-1.5 bg-[#6a00a3] rounded-full animate-pulse"></span>
                     </h4>
                     <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
                   </div>
@@ -328,7 +328,7 @@ const Solutions: React.FC = () => {
             
             {/* Badge tecnológico */}
             <div className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100">
-              <Cpu className="w-4 h-4 text-[#6B0FA3]" />
+              <Cpu className="w-4 h-4 text-[#6a00a3]" />
               <span className="text-xs font-medium text-slate-600">Tecnologia cloud-native</span>
               <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </div>
@@ -341,8 +341,8 @@ const Solutions: React.FC = () => {
             className="order-1 lg:order-2 relative"
           >
             {/* Anel tecnológico ao redor da imagem */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-[#6B0FA3]/20 to-[#1B3C2B]/20 rounded-[3rem] blur-2xl animate-pulse"></div>
-            <div className="absolute -inset-1 border-2 border-[#6B0FA3]/20 rounded-[3rem]"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-[#6a00a3]/20 to-[#1B3C2B]/20 rounded-[3rem] blur-2xl animate-pulse"></div>
+            <div className="absolute -inset-1 border-2 border-[#6a00a3]/20 rounded-[3rem]"></div>
             <div className="absolute -inset-2 border border-[#1B3C2B]/10 rounded-[3rem]"></div>
             
             <img 
@@ -352,7 +352,7 @@ const Solutions: React.FC = () => {
             />
             
             {/* Overlay tecnológico na imagem */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#6B0FA3]/10 via-transparent to-[#1B3C2B]/10 rounded-[2.5rem] pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#6a00a3]/10 via-transparent to-[#1B3C2B]/10 rounded-[2.5rem] pointer-events-none"></div>
           </motion.div>
         </div>
 
@@ -364,7 +364,7 @@ const Solutions: React.FC = () => {
           className="mt-20 text-center relative"
         >
           {/* Fundo tecnológico */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#6B0FA3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
           
           <div className="relative inline-flex flex-wrap items-center justify-center gap-6 p-6 bg-white/80 backdrop-blur-md rounded-full shadow-lg border border-slate-100">
             <div className="flex items-center space-x-2">
@@ -377,8 +377,8 @@ const Solutions: React.FC = () => {
             <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center space-x-2">
               <div className="relative">
-                <div className="w-2 h-2 bg-[#6B0FA3] rounded-full"></div>
-                <div className="absolute inset-0 w-2 h-2 bg-[#6B0FA3] rounded-full animate-ping opacity-50"></div>
+                <div className="w-2 h-2 bg-[#6a00a3] rounded-full"></div>
+                <div className="absolute inset-0 w-2 h-2 bg-[#6a00a3] rounded-full animate-ping opacity-50"></div>
               </div>
               <span className="text-sm font-medium text-slate-600">ISO 27001 Certified</span>
             </div>
@@ -396,7 +396,7 @@ const Solutions: React.FC = () => {
         {/* Barra de progresso tecnológica animada */}
         <div className="mt-16 h-1 w-full bg-slate-200 rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B]"
+            className="h-full bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B]"
             initial={{ width: "0%" }}
             whileInView={{ width: "100%" }}
             viewport={{ once: true }}

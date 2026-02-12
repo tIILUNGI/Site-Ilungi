@@ -19,13 +19,13 @@ const Footer: React.FC = () => {
             Transformamos desafios corporativos em excelência operacional.
           </p>
           <div className="flex space-x-4">
-            <a href="https://www.linkedin.com/company/33236785/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6B0FA3] hover:border-transparent transition-all">
+            <a href="https://www.linkedin.com/company/33236785/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://www.instagram.com/op_ilungi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6B0FA3] hover:border-transparent transition-all">
+            <a href="https://www.instagram.com/op_ilungi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://www.facebook.com/op.ilungi" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6B0FA3] hover:border-transparent transition-all">
+            <a href="https://www.facebook.com/op.ilungi" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Facebook className="w-5 h-5" />
             </a>
           </div>
@@ -55,15 +55,15 @@ const Footer: React.FC = () => {
           <h4 className="font-bold text-lg mb-6">Contacto</h4>
           <ul className="space-y-4 text-slate-300">
             <li className="flex items-start space-x-3">
-              <MapPin className="w-5 h-5 text-[#6B0FA3] shrink-0" />
+              <MapPin className="w-5 h-5 text-[#6a00a3] shrink-0" />
               <span className="text-sm">Luanda, Projeto Nova Vida, Prédio E209 Apt 24</span>
             </li>
             <li className="flex items-center space-x-3">
-              <Phone className="w-5 h-5 text-[#6B0FA3] shrink-0" />
+              <Phone className="w-5 h-5 text-[#6a00a3] shrink-0" />
               <span className="text-sm">+244 935 793 270</span>
             </li>
             <li className="flex items-center space-x-3">
-              <Mail className="w-5 h-5 text-[#6B0FA3] shrink-0" />
+              <Mail className="w-5 h-5 text-[#6a00a3] shrink-0" />
               <span className="text-sm">geral@ilungi.ao</span>
             </li>
           </ul>

@@ -86,7 +86,7 @@ ${formData.message}
 
             <div className="space-y-10">
                 <div className="flex items-start space-x-6">
-                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6B0FA3]">
+                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6a00a3]">
                         <Phone className="w-6 h-6" />
                     </div>
                     <div>
@@ -97,7 +97,7 @@ ${formData.message}
                 </div>
 
                 <div className="flex items-start space-x-6">
-                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6B0FA3]">
+                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6a00a3]">
                         <Mail className="w-6 h-6" />
                     </div>
                     <div>
@@ -108,7 +108,7 @@ ${formData.message}
                 </div>
 
                 <div className="flex items-start space-x-6">
-                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6B0FA3]">
+                    <div className="p-4 bg-slate-50 rounded-2xl text-[#6a00a3]">
                         <MapPin className="w-6 h-6" />
                     </div>
                     <div>
@@ -132,7 +132,7 @@ ${formData.message}
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-4 bg-[#6B0FA3]/5 rounded-3xl blur-2xl"></div>
+            <div className="absolute -inset-4 bg-[#6a00a3]/5 rounded-3xl blur-2xl"></div>
             <form onSubmit={handleSubmit} className="relative bg-white p-10 rounded-3xl shadow-2xl border border-slate-100 space-y-6">
                 {status === 'success' && (
                     <div className="p-4 bg-green-50 text-green-700 rounded-xl flex items-center space-x-2">
@@ -156,7 +156,7 @@ ${formData.message}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                             required
                             placeholder="Seu nome completo"
-                            className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]" 
+                            className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]" 
                         />
                     </div>
                     <div className="space-y-2">
@@ -168,7 +168,7 @@ ${formData.message}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                             required
                             placeholder="seu@email.com"
-                            className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]" 
+                            className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]" 
                         />
                     </div>
                 </div>
@@ -180,7 +180,7 @@ ${formData.message}
                         value={formData.subject}
                         onChange={(e) => setFormData({...formData, subject: e.target.value})}
                         required
-                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]">
+                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]">
                         <option value="">Selecione um assunto</option>
                         <option value="Consultoria ISO">{lang === 'pt' ? 'Consultoria ISO' : 'ISO Consulting'}</option>
                         <option value="Gestão de Projectos">{lang === 'pt' ? 'Gestão de Projectos' : 'Project Management'}</option>
@@ -199,7 +199,7 @@ ${formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         required
                         placeholder="Como podemos ajudar?"
-                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]"></textarea>
+                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"></textarea>
                 </div>
 
                 <button 

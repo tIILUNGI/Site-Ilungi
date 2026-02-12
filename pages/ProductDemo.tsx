@@ -64,7 +64,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid-demo" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6B0FA3" strokeWidth="0.5"/>
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6a00a3" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid-demo)" />
@@ -72,29 +72,29 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
       </div>
       
       {/* Linhas de conexão tecnológicas */}
-      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6B0FA3]/30 to-transparent"></div>
+      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
       <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/30 to-transparent"></div>
       
       {/* Pontos de dados flutuantes */}
-      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6B0FA3]/40 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
       <div className="absolute top-60 left-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6B0FA3]/40 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
       <div className="absolute bottom-60 right-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
       
       {/* Círculos concêntricos tecnológicos */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6B0FA3]/10 rounded-full"></div>
-      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6B0FA3]/5 rounded-full"></div>
+      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6a00a3]/10 rounded-full"></div>
+      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6a00a3]/5 rounded-full"></div>
       <div className="absolute bottom-1/4 -right-20 w-64 h-64 border border-[#1B3C2B]/10 rounded-full"></div>
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 border border-[#1B3C2B]/5 rounded-full"></div>
       
       {/* Ícones tecnológicos sutis */}
-      <div className="absolute top-20 right-[20%] text-[#6B0FA3]/5 rotate-12">
+      <div className="absolute top-20 right-[20%] text-[#6a00a3]/5 rotate-12">
         <Cpu size={80} />
       </div>
       <div className="absolute bottom-20 left-[20%] text-[#1B3C2B]/5 -rotate-12">
         <Cloud size={80} />
       </div>
-      <div className="absolute top-1/2 left-[5%] text-[#6B0FA3]/5">
+      <div className="absolute top-1/2 left-[5%] text-[#6a00a3]/5">
         <Globe size={60} />
       </div>
 
@@ -102,12 +102,12 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         {/* Hero Section */}
         <div className="text-center mb-20 relative">
           {/* Efeito de brilho no header */}
-          <div className="absolute -inset-20 bg-gradient-to-r from-[#6B0FA3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
+          <div className="absolute -inset-20 bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
           
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 bg-[#6B0FA3]/10 text-[#6B0FA3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6B0FA3]/20 relative"
+            className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6a00a3]/20 relative"
           >
             ILUNGI DIGITAL SOLUTIONS
           </motion.span>
@@ -120,7 +120,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
           >
             {productName}
             {/* Linha decorativa tecnológica */}
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] rounded-full"></span>
+            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
           </motion.h1>
           
           <motion.p 
@@ -135,10 +135,10 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
 
         {/* Mockup Simulation - COM IMAGEM CORPORATIVA */}
         <div className="relative max-w-5xl mx-auto mb-24">
-          <div className="absolute -inset-10 bg-gradient-to-tr from-[#6B0FA3]/10 via-transparent to-[#1B3C2B]/10 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -inset-10 bg-gradient-to-tr from-[#6a00a3]/10 via-transparent to-[#1B3C2B]/10 rounded-full blur-3xl opacity-50"></div>
           
           {/* Anel tecnológico ao redor do mockup */}
-          <div className="absolute -inset-4 border-2 border-[#6B0FA3]/20 rounded-[2rem]"></div>
+          <div className="absolute -inset-4 border-2 border-[#6a00a3]/20 rounded-[2rem]"></div>
           <div className="absolute -inset-2 border border-[#1B3C2B]/10 rounded-[2rem]"></div>
           
           <div className={`relative bg-gradient-to-br ${productImages.gradient} rounded-3xl p-4 shadow-2xl border border-white/20 overflow-hidden group`}>
@@ -242,7 +242,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
                   {f.title}
-                  <span className="ml-2 w-1.5 h-1.5 bg-[#6B0FA3] rounded-full animate-pulse"></span>
+                  <span className="ml-2 w-1.5 h-1.5 bg-[#6a00a3] rounded-full animate-pulse"></span>
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
               </div>
@@ -251,7 +251,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <motion.div 
                 className="absolute bottom-0 left-0 h-1 bg-gradient-to-r"
                 style={{ 
-                  backgroundImage: `linear-gradient(to right, ${productImages.gradient.split(' ')[0].replace('from-', '')}, #6B0FA3, ${productImages.gradient.split(' ')[1].replace('to-', '')})` 
+                  backgroundImage: `linear-gradient(to right, ${productImages.gradient.split(' ')[0].replace('from-', '')}, #6a00a3, ${productImages.gradient.split(' ')[1].replace('to-', '')})` 
                 }}
                 initial={{ width: 0 }}
                 whileHover={{ width: '100%' }}
@@ -267,7 +267,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
           <div className="absolute inset-0 opacity-5">
             <svg width="100%" height="100%">
               <pattern id="pricing-grid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                <path d="M30 0 L0 0 0 30" fill="none" stroke="#6B0FA3" strokeWidth="0.3"/>
+                <path d="M30 0 L0 0 0 30" fill="none" stroke="#6a00a3" strokeWidth="0.3"/>
               </pattern>
               <rect width="100%" height="100%" fill="url(#pricing-grid)"/>
             </svg>
@@ -328,7 +328,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                   <span className="text-xs text-white/80">Demo disponível imediatamente</span>
                 </div>
                 
-                <button className="w-full py-3 bg-white text-[#6B0FA3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
+                <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
                   Iniciar Demo Gratuita
                 </button>
               </motion.div>
@@ -341,7 +341,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               viewport={{ once: true }}
               className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
             >
-              <Cpu className="w-4 h-4 text-[#6B0FA3]" />
+              <Cpu className="w-4 h-4 text-[#6a00a3]" />
               <span className="text-xs font-medium text-slate-600">Cloud SaaS • Implementação em 24h</span>
               <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </motion.div>
@@ -351,7 +351,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         {/* Barra de progresso tecnológica */}
         <div className="mt-20 h-1 w-full bg-slate-200 rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B]"
+            className="h-full bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B]"
             initial={{ width: "0%" }}
             whileInView={{ width: "100%" }}
             viewport={{ once: true }}

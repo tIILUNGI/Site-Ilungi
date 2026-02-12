@@ -35,7 +35,7 @@ const AlumniPortal: React.FC = () => {
                 { icon: <History className="w-5 h-5" />, label: "Histórico" },
                 { icon: <MessageCircle className="w-5 h-5" />, label: "Suporte" },
             ].map((item, i) => (
-                <div key={i} className={`flex items-center space-x-3 px-4 py-3 rounded-xl cursor-pointer transition-all ${item.active ? 'bg-[#6B0FA3] text-white shadow-lg shadow-purple-900/40' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}>
+                <div key={i} className={`flex items-center space-x-3 px-4 py-3 rounded-xl cursor-pointer transition-all ${item.active ? 'bg-[#6a00a3] text-white shadow-lg shadow-purple-900/40' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}>
                     {item.icon}
                     <span className="font-medium">{item.label}</span>
                 </div>
@@ -104,9 +104,9 @@ const AlumniPortal: React.FC = () => {
                         <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold uppercase">65% concluído</span>
                     </div>
                     <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-4">
-                        <div className="h-full bg-[#6B0FA3]" style={{ width: '65%' }}></div>
+                        <div className="h-full bg-[#6a00a3]" style={{ width: '65%' }}></div>
                     </div>
-                    <button className="px-6 py-2 bg-[#6B0FA3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all">Continuar Aula</button>
+                    <button className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all">Continuar Aula</button>
                 </div>
             </div>
         </div>

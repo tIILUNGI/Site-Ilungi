@@ -63,7 +63,7 @@ const AlumniLogin: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu.email@exemplo.com"
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@ const AlumniLogin: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-12 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6B0FA3]"
+                  className="w-full pl-12 pr-12 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"
                 />
                 <button 
                   type="button"
@@ -91,15 +91,15 @@ const AlumniLogin: React.FC = () => {
 
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center">
-                <input type="checkbox" className="rounded border-slate-300 text-[#6B0FA3] focus:ring-[#6B0FA3]" />
+                <input type="checkbox" className="rounded border-slate-300 text-[#6a00a3] focus:ring-[#6a00a3]" />
                 <span className="ml-2 text-slate-500">Lembrar-me</span>
               </label>
-              <a href="#" className="text-[#6B0FA3] hover:underline">Esqueci a palavra-passe</a>
+              <a href="#" className="text-[#6a00a3] hover:underline">Esqueci a palavra-passe</a>
             </div>
 
             <button 
               type="submit"
-              className="w-full py-3 bg-[#6B0FA3] text-white rounded-xl font-bold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/20"
+              className="w-full py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/20"
             >
               Aceder
             </button>
@@ -107,7 +107,7 @@ const AlumniLogin: React.FC = () => {
 
           <div className="mt-8 text-center">
             <p className="text-slate-500 text-sm">
-              Ainda não tens conta? <Link to="/academia/alumni" className="text-[#6B0FA3] font-bold hover:underline">Regista-te aqui</Link>
+              Ainda não tens conta? <Link to="/academia/alumni" className="text-[#6a00a3] font-bold hover:underline">Regista-te aqui</Link>
             </p>
           </div>
         </div>

@@ -35,7 +35,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-6"
             >
-              <div className="p-3 bg-purple-100 text-[#6B0FA3] rounded-2xl w-fit">
+              <div className="p-3 bg-purple-100 text-[#6a00a3] rounded-2xl w-fit">
                 {icons[type]}
               </div>
               <h1 className="text-5xl font-black text-[#1B3C2B] leading-tight">{content.title}</h1>
@@ -43,7 +43,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               <p className="text-lg text-slate-600 leading-relaxed">{content.content}</p>
               
               <div className="pt-8">
-                <Link to="/contacto" className="px-10 py-4 bg-[#6B0FA3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
+                <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
                   Solicitar Proposta
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -74,7 +74,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
           ].map((item, i) => (
             <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
               <h4 className="text-xl font-bold mb-4 flex items-center">
-                <CheckCircle className="w-5 h-5 text-[#6B0FA3] mr-2" />
+                <CheckCircle className="w-5 h-5 text-[#6a00a3] mr-2" />
                 {item.title}
               </h4>
               <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>

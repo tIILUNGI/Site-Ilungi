@@ -80,7 +80,7 @@ const services = [
     title: "Gestão de Projectos", 
     desc: "Metodologias ágeis e tradicionais para entregar resultados com excelência. Planeamento, execução e controlo de projetos complexos.",
     image: "https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    color: "#6B0FA3",
+    color: "#6a00a3",
     path: "/consultoria/pmo"
   },
   { 
@@ -151,7 +151,7 @@ const Home: React.FC = () => {
               {serviceImages[currentSlide].heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
-              <Link to="/contacto" className="px-10 py-4 bg-[#6B0FA3] rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40">
+              <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40">
                 {t.home.ctaPrimary}
               </Link>
               <Link to="/consultoria" className="px-10 py-4 border border-white/30 backdrop-blur-md rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center space-x-2">
@@ -182,7 +182,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-sm uppercase tracking-[0.2em] text-[#6B0FA3] font-semibold"
+              className="text-sm uppercase tracking-[0.2em] text-[#6a00a3] font-semibold"
             >
               Nossas Competências
             </motion.span>
@@ -334,7 +334,7 @@ const Home: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-black text-white mt-4 mb-4">
               Parceiros Estratégicos
             </h2>
-            <div className="w-20 h-1.5 bg-[#6B0FA3] mx-auto rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#6a00a3] mx-auto rounded-full"></div>
           </motion.div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -394,11 +394,11 @@ const Home: React.FC = () => {
                         />
                         
                         {/* Container da imagem com fundo branco suave */}
-                        <div className="w-full h-full relative z-10 p-3 bg-white rounded-xl">
+                        <div className="w-full h-full relative z-10 bg-white rounded-xl overflow-hidden">
                           <img 
                             src={partner.logo} 
                             alt={partner.name} 
-                            className="w-full h-full object-contain transition-all duration-500"
+                            className="w-full h-full object-contain transition-all duration-500 p-1"
                             style={{
                               filter: isHovered ? 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))' : 'none',
                               transform: isHovered ? 'scale(1.05)' : 'scale(1)'
@@ -466,7 +466,7 @@ const Home: React.FC = () => {
       <section className="py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <div className="absolute -inset-4 bg-[#6B0FA3]/10 rounded-full blur-3xl"></div>
+            <div className="absolute -inset-4 bg-[#6a00a3]/10 rounded-full blur-3xl"></div>
             <img 
               src="/imagens/Soluções Digitasi.png" 
               className="relative z-10 rounded-2xl shadow-xl w-full h-auto" 
@@ -474,8 +474,8 @@ const Home: React.FC = () => {
             />
           </div>
           <div>
-            <span className="text-[#6B0FA3] font-bold uppercase tracking-widest text-sm mb-4 block">
-              {lang === 'pt' ? 'Tecnologia & Inovação' : 'Technology & Innovation'}
+            <span className="text-[#6a00a3] font-bold uppercase tracking-widest text-sm mb-4 block">
+              {lang === 'pt' ? 'Tecnologia & inovação' : 'Technology & Innovation'}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-800 mb-6 leading-tight">
               {t.home.solutions.title}

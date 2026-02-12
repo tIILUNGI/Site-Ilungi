@@ -47,7 +47,7 @@ const CertificateVerify: React.FC = () => {
                         value={certId}
                         onChange={(e) => setCertId(e.target.value)}
                         placeholder="Ex: ILUNGI-2024-001"
-                        className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-100 border-none focus:ring-2 focus:ring-[#6B0FA3] transition-all"
+                        className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-100 border-none focus:ring-2 focus:ring-[#6a00a3] transition-all"
                     />
                 </div>
                 <button 

@@ -53,7 +53,7 @@ const Academy: React.FC = () => {
                 { icon: <UserCheck />, title: t.academy.features.networking, desc: t.academy.features.networkingDesc },
             ].map((box, i) => (
                 <div key={i} className="bg-white p-8 rounded-3xl shadow-lg shadow-slate-200/50 text-center">
-                    <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-[#6B0FA3] mx-auto mb-6">
+                    <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-[#6a00a3] mx-auto mb-6">
                         {box.icon}
                     </div>
                     <h3 className="font-bold text-lg mb-2">{box.title}</h3>
@@ -67,7 +67,7 @@ const Academy: React.FC = () => {
                 <h2 className="text-3xl font-bold">{t.academy.coursesTitle}</h2>
                 <p className="text-slate-500">{t.academy.coursesDesc}</p>
             </div>
-            <Link to="/academia/cursos" className="text-[#6B0FA3] font-bold flex items-center hover:underline">
+            <Link to="/academia/cursos" className="text-[#6a00a3] font-bold flex items-center hover:underline">
                 {t.academy.viewAll} <ChevronRight className="w-5 h-5" />
             </Link>
         </div>
@@ -84,10 +84,10 @@ const Academy: React.FC = () => {
                     </div>
                     <div className="flex-1 p-8">
                         <div className="flex justify-between items-start mb-4">
-                            <span className="text-xs font-bold text-[#6B0FA3] bg-purple-50 px-3 py-1 rounded-full uppercase">{course.level}</span>
+                            <span className="text-xs font-bold text-[#6a00a3] bg-purple-50 px-3 py-1 rounded-full uppercase">{course.level}</span>
                             <span className="text-xs font-bold text-slate-400">{course.duration}</span>
                         </div>
-                        <h3 className="text-xl font-bold mb-4 group-hover:text-[#6B0FA3] transition-colors">{course.title}</h3>
+                        <h3 className="text-xl font-bold mb-4 group-hover:text-[#6a00a3] transition-colors">{course.title}</h3>
                         <Link to="/contacto" className="px-6 py-2 bg-[#1B3C2B] text-white rounded-full text-sm font-bold hover:bg-[#142d20] transition-all inline-block">
                             {t.academy.viewDetails}
                         </Link>
@@ -96,11 +96,11 @@ const Academy: React.FC = () => {
             ))}
         </div>
 
-        <div className="bg-[#6B0FA3] rounded-[3rem] p-12 text-center text-white">
+        <div className="bg-[#6a00a3] rounded-[3rem] p-12 text-center text-white">
             <h2 className="text-4xl font-black mb-6">{t.academy.banner.title}</h2>
             <p className="text-purple-100 mb-10 text-lg">{t.academy.banner.desc}</p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <Link to="/academia/login" className="px-10 py-4 bg-white text-[#6B0FA3] rounded-full font-bold hover:shadow-2xl transition-all">{t.academy.banner.portal}</Link>
+                <Link to="/academia/login" className="px-10 py-4 bg-white text-[#6a00a3] rounded-full font-bold hover:shadow-2xl transition-all">{t.academy.banner.portal}</Link>
                 <Link to="/academia/verificar" className="px-10 py-4 border border-white/30 rounded-full font-bold hover:bg-white/10 transition-all">{t.academy.banner.verify}</Link>
             </div>
         </div>
