@@ -10,7 +10,7 @@ const partners = [
     url: "https://gpmoi.org/", 
     desc: "Especialistas em Governança de Projectos e Gestão Estratégica.",
     logo: "/imagens/GPMoi.png",
-    color: "#1B3C2B"
+    color: "#6a00a3"
   },
   { 
     name: "CFC Institute", 
@@ -31,7 +31,7 @@ const partners = [
     url: "https://novaselect.co/index.html", 
     desc: "Desde a primeira conversa até a entrega final, entregamos crescimento mensurável. Especialistas em enfrentar desafios digitais complexos com design bem elaborado, criatividade e engenharia de precisão.",
     logo: "/imagens/Nova Select.png",
-    color: "#5A3E2B"
+    color: "#f06d16"
   },
   { 
     name: "Ixi Ambiental", 

@@ -9,13 +9,13 @@ const partners = [
     name: "GPMOi", 
     url: "https://gpmoi.org/", 
     logo: "/imagens/GPMoi.png",
-    color: "#1B3C2B"
+    color: "#4c0253"
   },
   { 
     name: "CFC Institute", 
     url: "https://cfc-institute.org/", 
     logo: "/imagens/CFC-institute.png",
-    color: "#0A4D8C"
+    color: "#031f3a"
   },
   { 
     name: "UCS", 
@@ -27,7 +27,7 @@ const partners = [
     name: "Nova Select", 
     url: "https://novaselect.co/index.html", 
     logo: "/imagens/Nova Select.png",
-    color: "#5A3E2B"
+    color: "#3b1e0b"
   },
   { 
     name: "Ixi Ambiental", 
