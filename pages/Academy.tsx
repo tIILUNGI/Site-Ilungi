@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { GraduationCap, Award, BookOpen, UserCheck, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';

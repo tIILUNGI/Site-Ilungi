@@ -4,9 +4,9 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-reac
 import { useAppContext } from '../App';
 
 const teamMembers = [
-  { name: "Amarilda", role: "Diretora Geral", image: "/imagens/Amarilda.png" },
-  { name: "Plínio", role: "Consultor Sênior", image: "/imagens/Plinio.png" },
-  { name: "Didier", role: "Coordenador Técnico", image: "/imagens/Didier.png" },
+  { name: "Amarilda", role: "Assistente Administrativa", image: "/imagens/Amarilda.png" },
+  { name: "Plínio", role: "Tecnico de Marketing", image: "/imagens/Plinio.png" },
+  { name: "Didier", role: "Contabilista", image: "/imagens/Didier.png" },
   { name: "Estefânio", role: "Gestor de Projetos", image: "/imagens/Estefanio.png" },
 ];
 
