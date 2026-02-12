@@ -18,7 +18,7 @@ export const translations: Record<'pt' | 'en', any> = {
       verify: "Verificar Certificado",
       scr: "School of Corp. Reputation",
       demo: "Demonstração",
-      home: "Home",
+      home: "Início",
     },
     home: {
       heroTitle: "Excelência em Consultoria e Soluções Digitais",

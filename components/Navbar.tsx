@@ -65,9 +65,8 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center space-x-6">
-          <Link to="/" className="flex items-center space-x-1 font-medium hover:text-[#6a00a3] transition-colors">
-            <Home className="w-4 h-4" />
-            <span>Home</span>
+          <Link to="/" className="font-medium hover:text-[#6a00a3] transition-colors">
+            {t.nav.home}
           </Link>
           {menuItems.map((item) => (
             <div 
