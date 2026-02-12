@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, BarChart3, ShoppingBag, Briefcase, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 
@@ -12,32 +11,37 @@ const Consulting: React.FC = () => {
     {
       title: t.consultingAreas.iso.title,
       desc: t.consultingAreas.iso.desc,
-      icon: <Shield className="w-8 h-8" />,
-      path: "/consultoria/iso"
+      image: "/imagens/ISO.png",
+      path: "/consultoria/iso",
+      color: "#1B3C2B"
     },
     {
       title: t.consultingAreas.risk.title,
       desc: t.consultingAreas.risk.desc,
-      icon: <BarChart3 className="w-8 h-8" />,
-      path: "/consultoria/risco"
+      image: "/imagens/Notação de Risco.jpg",
+      path: "/consultoria/risco",
+      color: "#6B0FA3"
     },
     {
       title: t.consultingAreas.procurement.title,
       desc: t.consultingAreas.procurement.desc,
-      icon: <ShoppingBag className="w-8 h-8" />,
-      path: "/consultoria/procurement"
+      image: "/imagens/procurement.png",
+      path: "/consultoria/procurement",
+      color: "#0A4D8C"
     },
     {
       title: t.consultingAreas.pmo.title,
       desc: t.consultingAreas.pmo.desc,
-      icon: <Briefcase className="w-8 h-8" />,
-      path: "/consultoria/pmo"
+      image: "/imagens/Gestão de Projecto.jpg",
+      path: "/consultoria/pmo",
+      color: "#B31B1B"
     }
   ];
 
   return (
     <div className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-20">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -46,54 +50,201 @@ const Consulting: React.FC = () => {
           >
             {t.consulting.title}
           </motion.h1>
-          <p className="max-w-3xl mx-auto text-xl text-slate-500 font-light">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="max-w-3xl mx-auto text-xl text-slate-500 font-light"
+          >
             {t.consulting.subtitle}
-          </p>
+          </motion.p>
         </div>
 
+        {/* Áreas de Consultoria - COM IMAGENS ESPECÍFICAS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
           {areas.map((area, i) => (
             <motion.div 
               key={i}
-              whileHover={{ y: -10 }}
-              className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:shadow-2xl hover:shadow-purple-500/10 transition-all group"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg shadow-slate-200/40 hover:shadow-2xl transition-all duration-500"
             >
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#6B0FA3] mb-8 shadow-sm group-hover:bg-[#6B0FA3] group-hover:text-white transition-all">
-                {area.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{area.title}</h3>
-              <p className="text-slate-500 leading-relaxed mb-8">{area.desc}</p>
-              <Link to={area.path} className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6B0FA3] transition-colors">
-                <span>{t.consulting.explore}</span>
-                <ChevronRight className="w-5 h-5" />
+              <Link to={area.path} className="block">
+                {/* Container da imagem - quadrado perfeito */}
+                <div className="relative aspect-square overflow-hidden">
+                  {/* Overlay gradiente */}
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"
+                    initial={{ opacity: 0.4 }}
+                    whileHover={{ opacity: 0.6 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  
+                  {/* Imagem específica da área */}
+                  <motion.img 
+                    src={area.image} 
+                    alt={area.title}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  
+                  {/* Título sobre a imagem */}
+                  <motion.div 
+                    className="absolute bottom-6 left-6 z-20"
+                    whileHover={{ y: -3 }}
+                  >
+                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
+                      {area.title}
+                    </h3>
+                    <div className="flex items-center space-x-2">
+                      <span 
+                        className="text-xs px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium inline-flex items-center"
+                        style={{ border: `1px solid ${area.color}60` }}
+                      >
+                        Explorar área
+                        <ChevronRight className="w-3 h-3 ml-1" />
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Badge circular com cor da área */}
+                  <div className="absolute top-6 right-6 z-20">
+                    <div 
+                      className="w-12 h-12 rounded-full backdrop-blur-sm flex items-center justify-center"
+                      style={{ backgroundColor: `${area.color}80` }}
+                    >
+                      <span className="text-white font-bold text-lg">
+                        {i + 1}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Conteúdo em baixo da imagem - aparece no hover */}
+                <motion.div 
+                  className="p-6 bg-white"
+                  initial={{ opacity: 0.8 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-slate-600 leading-relaxed text-sm">
+                    {area.desc}
+                  </p>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileHover={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="mt-4 inline-flex items-center space-x-1 font-semibold text-sm"
+                    style={{ color: area.color }}
+                  >
+                    <span>Saber mais</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Linha decorativa na cor da área */}
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1"
+                  style={{ backgroundColor: area.color }}
+                  initial={{ width: 0 }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.4 }}
+                />
               </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="relative bg-[#1B3C2B] rounded-[3rem] overflow-hidden p-12 lg:p-20 text-white">
+        {/* CTA Section - Porquê a ILUNGI */}
+        <div className="relative bg-[#1B3C2B] rounded-[2.5rem] overflow-hidden p-12 lg:p-20 text-white">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-[#6B0FA3]/20 blur-3xl rounded-full"></div>
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-[#6B0FA3]/10 blur-3xl rounded-full"></div>
+          
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-8">{t.consulting.whyTitle}</h2>
-              <div className="space-y-6">
-                {t.consulting.features.map((item: string, i: number) => (
-                  <div key={i} className="flex items-center space-x-4">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0">
+              <motion.h2 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl font-bold mb-8"
+              >
+                {t.consulting.whyTitle}
+              </motion.h2>
+              <div className="space-y-5">
+                {Array.isArray(t.consulting.features) ? (
+                  t.consulting.features.map((item: string, i: number) => (
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-center space-x-4"
+                    >
+                      <div className="w-7 h-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <span className="text-base md:text-lg font-medium text-slate-200">{item}</span>
+                    </motion.div>
+                  ))
+                ) : (
+                  <div className="flex items-center space-x-4">
+                    <div className="w-7 h-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <span className="text-lg font-medium text-slate-200">{item}</span>
+                    <span className="text-base md:text-lg font-medium text-slate-200">{t.consulting.features}</span>
                   </div>
-                ))}
+                )}
               </div>
             </div>
-            <div className="text-center lg:text-right">
-              <Link to="/contacto" className="inline-block px-12 py-5 bg-[#6B0FA3] text-white rounded-full font-bold text-xl hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40">
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="text-center lg:text-right"
+            >
+              <Link 
+                to="/contacto" 
+                className="inline-block px-10 py-4 bg-[#6B0FA3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40"
+              >
                 {t.consulting.cta}
               </Link>
-            </div>
+              <p className="text-sm text-white/60 mt-3">
+                Consultoria personalizada para o seu negócio
+              </p>
+            </motion.div>
           </div>
         </div>
+
+        {/* Estatísticas */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          <div className="text-center p-6 bg-slate-50 rounded-2xl">
+            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">50+</div>
+            <div className="text-sm text-slate-500">Projetos Entregues</div>
+          </div>
+          <div className="text-center p-6 bg-slate-50 rounded-2xl">
+            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">100%</div>
+            <div className="text-sm text-slate-500">Certificações ISO</div>
+          </div>
+          <div className="text-center p-6 bg-slate-50 rounded-2xl">
+            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">15+</div>
+            <div className="text-sm text-slate-500">Especialistas</div>
+          </div>
+          <div className="text-center p-6 bg-slate-50 rounded-2xl">
+            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">24/7</div>
+            <div className="text-sm text-slate-500">Suporte Contínuo</div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

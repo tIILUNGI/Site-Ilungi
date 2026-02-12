@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Handshake, ArrowRight, Star, Shield, TrendingUp, Users, ChevronRight } from 'lucide-react';
 import { useAppContext } from '../App';
+import { Link } from 'react-router-dom';
 
 const partners = [
   { 
@@ -44,6 +45,7 @@ const partners = [
 const Partners: React.FC = () => {
   const { t, lang } = useAppContext();
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  const [isHoveringCTA, setIsHoveringCTA] = React.useState(false);
 
   // Função para truncar texto com elegância
   const truncateText = (text: string, maxLength: number = 90) => {
@@ -51,18 +53,49 @@ const Partners: React.FC = () => {
     return text.substring(0, maxLength) + '...';
   };
 
+  // Benefícios de ser parceiro
+  const benefits = [
+    { icon: <TrendingUp className="w-5 h-5" />, title: "Crescimento Mútuo", desc: "Expanda seu portfólio com nossas soluções" },
+    { icon: <Shield className="w-5 h-5" />, title: "Certificação Oficial", desc: "Torne-se um parceiro certificado ILUNGI" },
+    { icon: <Users className="w-5 h-5" />, title: "Rede Exclusiva", desc: "Acesso a eventos e networking estratégico" },
+    { icon: <Star className="w-5 h-5" />, title: "Suporte Prioritário", desc: "Equipe dedicada para parceiros" }
+  ];
+
   return (
-    <div className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-20">
-          <motion.h1 
+    <div className="py-20 bg-slate-50 relative overflow-hidden">
+      {/* Elementos decorativos de fundo */}
+      <div className="absolute inset-0 z-0 opacity-5">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid-partners" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6B0FA3" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-partners)" />
+        </svg>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="inline-block px-4 py-1.5 bg-[#6B0FA3]/10 text-[#6B0FA3] rounded-full text-sm font-black uppercase mb-6 tracking-wider"
+          >
+            {lang === 'pt' ? 'ECOSSISTEMA DE PARCERIAS' : 'PARTNERSHIP ECOSYSTEM'}
+          </motion.span>
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl font-black text-[#1B3C2B] mb-6"
           >
             {t.partners.title}
           </motion.h1>
+          
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -73,7 +106,8 @@ const Partners: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        {/* Grid de Parceiros */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-24">
           {partners.map((p, i) => {
             const isHovered = hoveredIndex === i;
             const isNovaSelect = p.name === "Nova Select";
@@ -247,6 +281,223 @@ const Partners: React.FC = () => {
             );
           })}
         </div>
+
+        {/* SEÇÃO TORNE-SE NOSSO PARCEIRO - BONITA E CHAMATIVA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative rounded-[3rem] overflow-hidden"
+          onHoverStart={() => setIsHoveringCTA(true)}
+          onHoverEnd={() => setIsHoveringCTA(false)}
+        >
+          {/* Fundo com gradiente animado */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1B3C2B] via-[#2E5E4A] to-[#6B0FA3]"></div>
+          
+          {/* Overlay com padrão geométrico */}
+          <div className="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%">
+              <defs>
+                <pattern id="partner-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <circle cx="10" cy="10" r="2" fill="white"/>
+                  <circle cx="40" cy="30" r="2" fill="white"/>
+                  <circle cx="20" cy="50" r="2" fill="white"/>
+                  <path d="M30 10 L50 30 M10 40 L30 50" stroke="white" strokeWidth="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#partner-pattern)"/>
+            </svg>
+          </div>
+          
+          {/* Círculos decorativos animados */}
+          <motion.div 
+            className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.15, 0.1]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <motion.div 
+            className="absolute -bottom-32 -left-20 w-80 h-80 bg-[#6B0FA3]/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
+
+          {/* Conteúdo principal */}
+          <div className="relative z-20 p-12 lg:p-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Coluna da esquerda - Texto e CTA */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30 mb-8">
+                  <Handshake className="w-4 h-4 text-white" />
+                  <span className="text-xs font-medium text-white uppercase tracking-wider">
+                    {lang === 'pt' ? 'OPORTUNIDADE EXCLUSIVA' : 'EXCLUSIVE OPPORTUNITY'}
+                  </span>
+                </div>
+
+                <h2 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
+                  {lang === 'pt' ? 'Torne-se Nosso Parceiro' : 'Become Our Partner'}
+                </h2>
+                
+                <p className="text-white/80 text-lg mb-8 leading-relaxed">
+                  {lang === 'pt' 
+                    ? 'Junte-se ao nosso ecossistema de parcerias e leve soluções de excelência para seus clientes. Acesso a treinamentos, certificações e oportunidades exclusivas.'
+                    : 'Join our partnership ecosystem and bring excellence solutions to your clients. Access to training, certifications, and exclusive opportunities.'}
+                </p>
+
+                {/* Benefícios em grid */}
+                <div className="grid grid-cols-2 gap-4 mb-10">
+                  {benefits.map((benefit, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + (i * 0.1) }}
+                      className="flex items-start space-x-3"
+                    >
+                      <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shrink-0">
+                        <div className="text-white">
+                          {benefit.icon}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-sm">{benefit.title}</h4>
+                        <p className="text-white/60 text-xs">{benefit.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Botão CTA principal */}
+                <Link to="/contacto">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group relative px-10 py-5 bg-white rounded-full shadow-2xl overflow-hidden"
+                  >
+                    {/* Efeito de brilho no hover */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-[#6B0FA3] to-[#1B3C2B] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    />
+                    
+                    <span className="relative z-10 flex items-center space-x-3">
+                      <span className="text-lg font-black text-[#1B3C2B] group-hover:text-white transition-colors duration-500">
+                        {lang === 'pt' ? 'QUERO SER PARCEIRO' : 'BECOME A PARTNER'}
+                      </span>
+                      <motion.div
+                        animate={{ x: isHoveringCTA ? [0, 5, 0] : 0 }}
+                        transition={{ duration: 1.5, repeat: isHoveringCTA ? Infinity : 0 }}
+                      >
+                        <ArrowRight className="w-6 h-6 text-[#1B3C2B] group-hover:text-white transition-colors duration-500" />
+                      </motion.div>
+                    </span>
+                  </motion.button>
+                </Link>
+
+                {/* Texto adicional */}
+                <p className="text-white/50 text-sm mt-4 flex items-center space-x-1">
+                  <span>✓</span>
+                  <span>{lang === 'pt' ? 'Sem compromisso • Respondemos em até 24h' : 'No commitment • We reply within 24h'}</span>
+                </p>
+              </motion.div>
+
+              {/* Coluna da direita - Estatísticas e Destaques */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="space-y-8"
+              >
+                {/* Card de estatísticas */}
+                <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+                  <h3 className="text-white font-bold text-xl mb-6 flex items-center">
+                    <Star className="w-5 h-5 mr-2 text-yellow-300 fill-yellow-300" />
+                    {lang === 'pt' ? 'Impacto da Rede' : 'Network Impact'}
+                  </h3>
+                  
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <div className="text-3xl font-black text-white">15+</div>
+                      <div className="text-white/60 text-sm">{lang === 'pt' ? 'Parceiros Ativos' : 'Active Partners'}</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-black text-white">+50</div>
+                      <div className="text-white/60 text-sm">{lang === 'pt' ? 'Projetos Conjuntos' : 'Joint Projects'}</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-black text-white">100%</div>
+                      <div className="text-white/60 text-sm">{lang === 'pt' ? 'Satisfação' : 'Satisfaction'}</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-black text-white">24/7</div>
+                      <div className="text-white/60 text-sm">{lang === 'pt' ? 'Suporte VIP' : 'VIP Support'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Depoimento/Chamada secundária */}
+                <div className="bg-gradient-to-br from-[#6B0FA3]/30 to-[#1B3C2B]/30 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
+                      <Users className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-white/90 text-sm italic mb-2">
+                        "A parceria com ILUNGI transformou nosso portfólio e abriu novas oportunidades de negócio."
+                      </p>
+                      <p className="text-white font-bold text-xs">— Parceiro Certificado</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 pt-6 border-t border-white/20">
+                    <Link to="/contacto" className="flex items-center justify-between group/link">
+                      <span className="text-white font-medium text-sm">
+                        {lang === 'pt' ? 'Saiba mais sobre o programa' : 'Learn more about the program'}
+                      </span>
+                      <ChevronRight className="w-5 h-5 text-white group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Selo de confiança */}
+                <div className="flex items-center space-x-4">
+                  <div className="flex -space-x-2">
+                    {[1,2,3,4].map((i) => (
+                      <div key={i} className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/50 flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">IL</span>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-white/60 text-xs">
+                    {lang === 'pt' ? 'Junte-se a empresas que já confiam' : 'Join companies that already trust us'}
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
