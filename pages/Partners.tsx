@@ -20,11 +20,11 @@ const partners = [
     color: "#0A4D8C"
   },
   { 
-    name: "UCS", 
-    url: "https://www.ucs.br/site", 
-    desc: "Universidade de Caxias do Sul - Parceria em investigação académica.",
+    name: "Universal Certification and Services", 
+    url: "https://unicertservices.com/", 
+    desc: "Líder em certificação e serviços de conformidade internacional.",
     logo: "/imagens/UCS.png",
-    color: "#B31B1B"
+    color: "#6c0606"
   },
   { 
     name: "Nova Select", 

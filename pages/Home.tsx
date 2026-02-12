@@ -18,16 +18,16 @@ const partners = [
     color: "#031f3a"
   },
   { 
-    name: "UCS", 
-    url: "https://www.ucs.br/site", 
+    name: "Universal Certification and Services", 
+    url: "https://unicertservices.com/", 
     logo: "/imagens/UCS.png",
-    color: "#B31B1B"
+    color: "#550b06"
   },
   { 
     name: "Nova Select", 
     url: "https://novaselect.co/index.html", 
     logo: "/imagens/Nova Select.png",
-    color: "#3b1e0b"
+    color: "#dc6516"
   },
   { 
     name: "Ixi Ambiental", 
@@ -38,6 +38,13 @@ const partners = [
 ];
 
 const serviceImages = [
+  { 
+    src: "/imagens/ilungi_logo.jpg", 
+    title: "ILUNGI", 
+    subtitle: "Excelência em Consultoria",
+    heroTitle: "Consultoria de Excelência",
+    heroSubtitle: "Soluções integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
+  },
   { 
     src: "/imagens/ISO.png", 
     title: "ISO 9001", 
@@ -59,20 +66,13 @@ const serviceImages = [
     heroTitle: "Gestão de Projetos Estratégicos",
     heroSubtitle: "Impulsionamos a execução de projetos com metodologia comprovada e resultados mensuráveis."
   },
-  { 
-    src: "/imagens/ilungi_logo.jpg", 
-    title: "ILUNGI", 
-    subtitle: "Excelência em Consultoria",
-    heroTitle: "Consultoria de Excelência",
-    heroSubtitle: "Soluções integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
-  },
 ];
 
 const services = [
   { 
     title: "Consultoria ISO", 
     desc: "Implementação e certificação de normas ISO. Garantia de conformidade, eficiência operacional e reconhecimento internacional.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/imagens/Consultoria.png",
     color: "#1B3C2B",
     path: "/consultoria/iso"
   },
@@ -468,7 +468,7 @@ const Home: React.FC = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-[#6a00a3]/10 rounded-full blur-3xl"></div>
             <img 
-              src="/imagens/Soluções Digitasi.png" 
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" 
               className="relative z-10 rounded-2xl shadow-xl w-full h-auto" 
               alt="ILUNGI Solutions"
             />
