@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
@@ -13,13 +12,15 @@ const AlumniLogin: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && password) {
-      // Simular login com sucesso
+    setError('');
+    
+    // Restrição de acesso específica
+    if (email === 'geral@ilungi.ao' && password === 'Ilungi2026') {
       localStorage.setItem('alumni_logged_in', 'true');
       localStorage.setItem('alumni_email', email);
       navigate('/academia/alumni');
     } else {
-      setError('Por favor, preencha todos os campos');
+      setError('Credenciais inválidas. Acesso restrito.');
     }
   };
 
@@ -50,7 +51,7 @@ const AlumniLogin: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
-              <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
+              <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-200">
                 {error}
               </div>
             )}
@@ -62,8 +63,9 @@ const AlumniLogin: React.FC = () => {
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu.email@exemplo.com"
+                  placeholder="geral@ilungi.ao"
                   className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -78,6 +80,7 @@ const AlumniLogin: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full pl-12 pr-12 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"
+                  autoComplete="off"
                 />
                 <button 
                   type="button"
