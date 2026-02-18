@@ -3,6 +3,7 @@ import React from 'react';
 import { Shield, Book, CheckCircle, Search, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import ReferenceCard from '../components/ReferenceCard';
 
 const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
@@ -59,6 +60,28 @@ const ISOPage: React.FC = () => {
         <p className="text-center text-sm text-slate-500 mb-24">
           {isPt ? 'Estas e muitas mais.' : 'These and many more.'}
         </p>
+
+        {/* References Section */}
+        {(t.references?.clients || []).length > 0 && (
+          <div className="mb-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-[#1B3C2B] mb-4">
+                {t.references?.title || (isPt ? 'Nossas Referências' : 'Our References')}
+              </h2>
+              <p className="text-slate-500">
+                {t.references?.subtitle || (isPt ? 'Empresas que confiaram nos nossos serviços' : 'Companies that trusted our services')}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {t.references?.clients
+                .filter((ref: any) => ref.service === 'iso')
+                .slice(0, 3)
+                .map((ref: any, i: number) => (
+                  <ReferenceCard key={ref.id} reference={ref} index={i} />
+                ))}
+            </div>
+          </div>
+        )}
 
         <div className="bg-[#1B3C2B] rounded-[3rem] p-12 lg:p-20 text-white flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1">

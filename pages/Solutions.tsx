@@ -293,34 +293,29 @@ const Solutions: React.FC = () => {
                 { 
                   title: isPt ? "Segurança de Dados" : "Data Security", 
                   desc: isPt ? "Infraestrutura em nuvem com criptografia de ponta a ponta e compliance ISO 27001." : "Cloud infrastructure with end-to-end encryption and ISO 27001 compliance.",
-                  image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  image: ""
                 },
                 { 
                   title: isPt ? "Customização" : "Customization", 
                   desc: isPt ? "Módulos adaptáveis aos processos específicos da sua indústria." : "Modules adaptable to your industry's specific processes.",
-                  image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  image: ""
                 },
                 { 
                   title: isPt ? "Escalabilidade" : "Scalability", 
                   desc: isPt ? "Cresça sua operação sem preocupações com performance ou limites técnicos." : "Grow your operation without worrying about performance or technical limits.",
-                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  image: ""
                 }
               ].map((item, i) => (
                 <motion.div 
                   key={i} 
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start space-x-5 group"
                 >
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 shadow-lg relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#6a00a3]/20 to-[#1B3C2B]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#6a00a3] to-[#1B3C2B] flex items-center justify-center shrink-0 shadow-lg">
+                    <span className="text-white font-bold text-xl">{i + 1}</span>
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
@@ -331,15 +326,6 @@ const Solutions: React.FC = () => {
                   </div>
                 </motion.div>
               ))}
-            </div>
-            
-            {/* Badge tecnológico */}
-            <div className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100">
-              <Cpu className="w-4 h-4 text-[#6a00a3]" />
-              <span className="text-xs font-medium text-slate-600">
-                {isPt ? 'Tecnologia cloud-native' : 'Cloud-native technology'}
-              </span>
-              <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </div>
           </div>
           

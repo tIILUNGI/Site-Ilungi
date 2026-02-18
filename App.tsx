@@ -17,6 +17,8 @@ import Contact from './pages/Contact';
 import ProductDemo from './pages/ProductDemo';
 import ServiceDetail from './pages/ServiceDetail';
 import Partners from './pages/Partners';
+import ReferenceDetail from './pages/ReferenceDetail';
+import AdminReferences from './pages/AdminReferences';
 import { AnimatePresence } from 'framer-motion';
 
 // Context for Language and Dark Mode
@@ -90,6 +92,8 @@ const App: React.FC = () => {
                 <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
                 <Route path="/parceiros" element={<Partners />} />
                 <Route path="/contacto" element={<Contact />} />
+                <Route path="/referencia/:id" element={<ReferenceDetail />} />
+                <Route path="/admin/referencias" element={<AdminReferences />} />
               </Routes>
             </AnimatePresence>
           </main>

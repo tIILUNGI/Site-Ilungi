@@ -229,6 +229,153 @@ export const translations: Record<'pt' | 'en', any> = {
       cta: "Falar com Consultor Senior",
       testimonial: "A ILUNGI foi fundamental para nossa expansão internacional através da ISO 9001.",
       testimonialAuthor: "",
+    },
+    references: {
+      title: "Nossas Referências",
+      subtitle: "Empresas que confiaram nos nossos serviços",
+      viewDetails: "Ver Detalhes",
+      clients: [
+        // ISO References
+        {
+          id: "sonangol",
+          name: "Sonangol",
+          logo: "/imagens/Sonangol.png",
+          role: "Gerente de Qualidade",
+          comment: "A ILUNGI foi fundamental para nossa certificação ISO 9001. Profissionalismo exemplar.",
+          person: "João Miguel",
+          service: "iso",
+          description: "Implementação do Sistema de Gestão de Qualidade ISO 9001 para a Sonangol EP.",
+          attachments: [
+            { name: "Certificado ISO 9001.pdf", url: "/docs/sonangol-iso9001.pdf" }
+          ]
+        },
+        {
+          id: "taag",
+          name: "TAAG",
+          logo: "/imagens/TAAG.png",
+          role: "Diretor de Operações",
+          comment: "Excelente trabalho na implementação ISO 14001. Recomendamos!",
+          person: "Maria das Dores",
+          service: "iso",
+          description: "Consultoria para certificação ISO 14001 - Gestão Ambiental.",
+          attachments: [
+            { name: "Certificado TAAG.pdf", url: "/docs/taag-iso14001.pdf" }
+          ]
+        },
+        {
+          id: "bank-bai",
+          name: "Bank BAI",
+          logo: "/imagens/Bank-BAI.png",
+          role: "CEO",
+          comment: "Transformação digital e compliance excelentes.",
+          person: "António José",
+          service: "iso",
+          description: "Implementação de sistema de gestão ISO 27001 - Segurança da Informação.",
+          attachments: []
+        },
+        // Risk References
+        {
+          id: "sos",
+          name: "SOS Televisão",
+          logo: "/imagens/SOS.png",
+          role: "Diretor Financeiro",
+          comment: "A análise de riscos helped us evitar milhões em perdas.",
+          person: "Carlos Manuel",
+          service: "risk",
+          description: "Implementação de sistema de gestão de riscos corporativos para o grupo SOS.",
+          attachments: []
+        },
+        {
+          id: "fincorp",
+          name: "Fincorp Angola",
+          logo: "/imagens/Fincorp.png",
+          role: "Presidente",
+          comment: "Excelente serviço de notação de risco para decisões de investimento.",
+          person: "Pedro Almeida",
+          service: "risk",
+          description: "Serviço de notação de risco corporativo para a Fincorp.",
+          attachments: []
+        },
+        {
+          id: "petroangol",
+          name: "PetroAngol",
+          logo: "/imagens/PetroAngol.png",
+          role: "Gestor de Risco",
+          comment: "Profissionalismo e rigor na análise de riscos do projeto.",
+          person: "Ana Beatriz",
+          service: "risk",
+          description: "Consultoria em gestão de riscos para projetos petrolíferos.",
+          attachments: []
+        },
+        // Procurement References
+        {
+          id: "coca cola",
+          name: "Coca-Cola Angola",
+          logo: "/imagens/CocaCola.png",
+          role: "Diretor de Supply Chain",
+          comment: "Optimização de custos significativa na cadeia de suprimentos.",
+          person: "Jorge Silva",
+          service: "procurement",
+          description: "Consultoria em procurement e otimização da cadeia de suprimentos.",
+          attachments: []
+        },
+        {
+          id: "kero",
+          name: "Kero",
+          logo: "/imagens/Kero.png",
+          role: "Gerente de Compras",
+          comment: "Processos de compra muito mais eficientes após a consultoria.",
+          person: "Sofia Martins",
+          service: "procurement",
+          description: "Implementação de sistema de procurement para a Kero.",
+          attachments: []
+        },
+        {
+          id: "shells",
+          name: "Shell Angola",
+          logo: "/imagens/Shell.png",
+          role: "Procurement Manager",
+          comment: "Excelente parceria na gestão de fornecedores locais.",
+          person: "Miguel Sousa",
+          service: "procurement",
+          description: "Consultoria em procurement para operações da Shell em Angola.",
+          attachments: []
+        },
+        // PMO References
+        {
+          id: "minfin",
+          name: "Ministério das Finanças",
+          logo: "/imagens/MinFin.png",
+          role: "Secretário Geral",
+          comment: "Projeto de modernização implementado com sucesso.",
+          person: "Dr. António Cardoso",
+          service: "pmo",
+          description: "PMO para o projeto de modernização administrativa do Ministério das Finanças.",
+          attachments: []
+        },
+        {
+          id: " unitel",
+          name: "Unitel",
+          logo: "/imagens/Unitel.png",
+          role: "Diretor de Projetos",
+          comment: "Gestão de projetos exemplar. Recomendo!",
+          person: "Ricardo Gomes",
+          service: "pmo",
+          description: "PMO estratégico para projetos de expansão da Unitel.",
+          attachments: []
+        },
+        {
+          id: " movep",
+          name: "MOVEP",
+          logo: "/imagens/MOVEP.png",
+          role: "Coordenador",
+          comment: "Suporte de TI transformou nossa operação.",
+          person: "Nelson Paulo",
+          service: "pmo",
+          description: "Assistência e suporte de TI para a MOVEP.",
+          attachments: []
+        }
+      ]
     }
   },
   en: {
@@ -458,6 +605,153 @@ export const translations: Record<'pt' | 'en', any> = {
       cta: "Talk to Senior Consultant",
       testimonial: "ILUNGI was fundamental for our international expansion through ISO 9001.",
       testimonialAuthor: "",
+    },
+    references: {
+      title: "Our References",
+      subtitle: "Companies that trusted our services",
+      viewDetails: "View Details",
+      clients: [
+        // ISO References
+        {
+          id: "sonangol",
+          name: "Sonangol",
+          logo: "/imagens/Sonangol.png",
+          role: "Quality Manager",
+          comment: "ILUNGI was fundamental for our ISO 9001 certification. Exemplary professionalism.",
+          person: "João Miguel",
+          service: "iso",
+          description: "Implementation of ISO 9001 Quality Management System for Sonangol EP.",
+          attachments: [
+            { name: "ISO 9001 Certificate.pdf", url: "/docs/sonangol-iso9001.pdf" }
+          ]
+        },
+        {
+          id: "taag",
+          name: "TAAG",
+          logo: "/imagens/TAAG.png",
+          role: "Operations Director",
+          comment: "Excellent work on ISO 14001 implementation. We recommend!",
+          person: "Maria das Dores",
+          service: "iso",
+          description: "Consulting for ISO 14001 certification - Environmental Management.",
+          attachments: [
+            { name: "TAAG Certificate.pdf", url: "/docs/taag-iso14001.pdf" }
+          ]
+        },
+        {
+          id: "bank-bai",
+          name: "Bank BAI",
+          logo: "/imagens/Bank-BAI.png",
+          role: "CEO",
+          comment: "Excellent digital transformation and compliance.",
+          person: "António José",
+          service: "iso",
+          description: "Implementation of ISO 27001 Information Security Management System.",
+          attachments: []
+        },
+        // Risk References
+        {
+          id: "sos",
+          name: "SOS Televisão",
+          logo: "/imagens/SOS.png",
+          role: "Finance Director",
+          comment: "The risk analysis helped us avoid millions in losses.",
+          person: "Carlos Manuel",
+          service: "risk",
+          description: "Corporate risk management system implementation for SOS Group.",
+          attachments: []
+        },
+        {
+          id: "fincorp",
+          name: "Fincorp Angola",
+          logo: "/imagens/Fincorp.png",
+          role: "President",
+          comment: "Excellent risk rating service for investment decisions.",
+          person: "Pedro Almeida",
+          service: "risk",
+          description: "Corporate risk rating service for Fincorp.",
+          attachments: []
+        },
+        {
+          id: "petroangol",
+          name: "PetroAngol",
+          logo: "/imagens/PetroAngol.png",
+          role: "Risk Manager",
+          comment: "Professionalism and rigor in project risk analysis.",
+          person: "Ana Beatriz",
+          service: "risk",
+          description: "Risk management consulting for oil projects.",
+          attachments: []
+        },
+        // Procurement References
+        {
+          id: "coca-cola",
+          name: "Coca-Cola Angola",
+          logo: "/imagens/CocaCola.png",
+          role: "Supply Chain Director",
+          comment: "Significant cost optimization in the supply chain.",
+          person: "Jorge Silva",
+          service: "procurement",
+          description: "Procurement consulting and supply chain optimization.",
+          attachments: []
+        },
+        {
+          id: "kero",
+          name: "Kero",
+          logo: "/imagens/Kero.png",
+          role: "Purchasing Manager",
+          comment: "Much more efficient purchasing processes after consulting.",
+          person: "Sofia Martins",
+          service: "procurement",
+          description: "Procurement system implementation for Kero.",
+          attachments: []
+        },
+        {
+          id: "shells",
+          name: "Shell Angola",
+          logo: "/imagens/Shell.png",
+          role: "Procurement Manager",
+          comment: "Excellent partnership in local supplier management.",
+          person: "Miguel Sousa",
+          service: "procurement",
+          description: "Procurement consulting for Shell operations in Angola.",
+          attachments: []
+        },
+        // PMO References
+        {
+          id: "minfin",
+          name: "Ministry of Finance",
+          logo: "/imagens/MinFin.png",
+          role: "Secretary General",
+          comment: "Modernization project successfully implemented.",
+          person: "Dr. António Cardoso",
+          service: "pmo",
+          description: "PMO for the Ministry of Finance administrative modernization project.",
+          attachments: []
+        },
+        {
+          id: " unitel",
+          name: "Unitel",
+          logo: "/imagens/Unitel.png",
+          role: "Projects Director",
+          comment: "Exemplary project management. I recommend!",
+          person: "Ricardo Gomes",
+          service: "pmo",
+          description: "Strategic PMO for Unitel expansion projects.",
+          attachments: []
+        },
+        {
+          id: " movep",
+          name: "MOVEP",
+          logo: "/imagens/MOVEP.png",
+          role: "Coordinator",
+          comment: "IT support transformed our operation.",
+          person: "Nelson Paulo",
+          service: "pmo",
+          description: "IT assistance and support for MOVEP.",
+          attachments: []
+        }
+      ]
     }
   }
 };

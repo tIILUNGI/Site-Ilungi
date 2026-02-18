@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight, Layers, Target, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import ReferenceCard from '../components/ReferenceCard';
 
 interface ServiceDetailProps {
   type: 'risk' | 'procurement' | 'pmo';
@@ -86,6 +87,28 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
             </div>
           ))}
         </div>
+
+        {/* References Section */}
+        {(t.references?.clients || []).filter((ref: any) => ref.service === type).length > 0 && (
+          <div className="mt-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-[#1B3C2B] mb-4">
+                {t.references?.title || (isPt ? 'Nossas Referências' : 'Our References')}
+              </h2>
+              <p className="text-slate-500">
+                {t.references?.subtitle || (isPt ? 'Empresas que confiaram nos nossos serviços' : 'Companies that trusted our services')}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {t.references?.clients
+                .filter((ref: any) => ref.service === type)
+                .slice(0, 3)
+                .map((ref: any, i: number) => (
+                  <ReferenceCard key={ref.id} reference={ref} index={i} />
+                ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
