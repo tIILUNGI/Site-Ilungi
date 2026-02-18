@@ -51,6 +51,15 @@ const Home: React.FC = () => {
         : "Integrated solutions to boost your company's competitiveness and sustainability."
     },
     {
+      src: "/Silde.jpg",
+      title: "ILUNGI",
+      subtitle: isPt ? "Excel\u00eancia em Consultoria" : "Consulting Excellence",
+      heroTitle: isPt ? "Consultoria de Excel\u00eancia" : "Excellence Consulting",
+      heroSubtitle: isPt
+        ? "Solu\u00e7\u00f5es integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
+        : "Integrated solutions to boost your company's competitiveness and sustainability."
+    },
+    {
       src: "/imagens/ISO.png",
       title: "ISO 9001",
       subtitle: isPt ? "Gest\u00e3o da Qualidade" : "Quality Management",
