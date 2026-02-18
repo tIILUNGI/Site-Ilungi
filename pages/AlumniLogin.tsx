@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppContext } from '../App';
 
 const AlumniLogin: React.FC = () => {
+  const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +23,7 @@ const AlumniLogin: React.FC = () => {
       localStorage.setItem('alumni_email', email);
       navigate('/academia/alumni');
     } else {
-      setError('Credenciais inválidas. Acesso restrito.');
+      setError(isPt ? 'Credenciais inválidas. Acesso restrito.' : 'Invalid credentials. Restricted access.');
     }
   };
 
@@ -36,7 +39,7 @@ const AlumniLogin: React.FC = () => {
           <Link to="/" className="inline-flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-16 w-auto" />
           </Link>
-          <p className="mt-4 text-slate-500">Portal Alumni ILUNGI</p>
+          <p className="mt-4 text-slate-500">{isPt ? 'Portal Alumni ILUNGI' : 'ILUNGI Alumni Portal'}</p>
         </div>
 
         {/* Login Card */}
@@ -45,8 +48,8 @@ const AlumniLogin: React.FC = () => {
             <div className="w-16 h-16 bg-[#1B3C2B] rounded-2xl flex items-center justify-center mx-auto mb-4">
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-[#1B3C2B]">Bem-vindo Alumni</h1>
-            <p className="text-slate-500 text-sm mt-2">Aceda à sua área exclusiva</p>
+            <h1 className="text-2xl font-bold text-[#1B3C2B]">{t.alumni.login.title}</h1>
+            <p className="text-slate-500 text-sm mt-2">{t.alumni.login.subtitle}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -56,7 +59,7 @@ const AlumniLogin: React.FC = () => {
               </div>
             )}
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Email</label>
+              <label className="text-sm font-bold text-slate-700">{t.alumni.login.email}</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input 
@@ -71,7 +74,7 @@ const AlumniLogin: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Palavra-passe</label>
+              <label className="text-sm font-bold text-slate-700">{t.alumni.login.password}</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input 
@@ -95,29 +98,29 @@ const AlumniLogin: React.FC = () => {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center">
                 <input type="checkbox" className="rounded border-slate-300 text-[#6a00a3] focus:ring-[#6a00a3]" />
-                <span className="ml-2 text-slate-500">Lembrar-me</span>
+                <span className="ml-2 text-slate-500">{t.alumni.login.remember}</span>
               </label>
-              <a href="#" className="text-[#6a00a3] hover:underline">Esqueci a palavra-passe</a>
+              <a href="#" className="text-[#6a00a3] hover:underline">{t.alumni.login.forgot}</a>
             </div>
 
             <button 
               type="submit"
               className="w-full py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/20"
             >
-              Aceder
+              {t.alumni.login.button}
             </button>
           </form>
 
           <div className="mt-8 text-center">
             <p className="text-slate-500 text-sm">
-              Ainda não tens conta? <Link to="/academia/alumni" className="text-[#6a00a3] font-bold hover:underline">Regista-te aqui</Link>
+              {t.alumni.login.noAccount} <Link to="/academia/alumni" className="text-[#6a00a3] font-bold hover:underline">{t.alumni.login.register}</Link>
             </p>
           </div>
         </div>
 
         {/* Footer */}
         <p className="mt-8 text-center text-slate-400 text-xs">
-          © {new Date().getFullYear()} ILUNGI Academy. Todos os direitos reservados.
+          © {new Date().getFullYear()} ILUNGI Academy. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
         </p>
       </motion.div>
     </div>

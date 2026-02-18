@@ -1,12 +1,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle2, Cpu, Cloud, Globe } from 'lucide-react';
+import { useAppContext } from '../App';
 
 interface ProductDemoProps {
   productName: string;
 }
 
 const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
+  const { lang } = useAppContext();
+  const isPt = lang === 'pt';
+  const productHeadline = isPt
+    ? productName === 'Salya'
+      ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
+      : productName === 'SICLIC'
+        ? 'Compliance Intelligence e Gest\u00e3o Normativa'
+        : 'Governan\u00e7a Corporativa e Compliance 360'
+    : productName === 'Salya'
+      ? 'Payroll and Human Resources'
+      : productName === 'SICLIC'
+        ? 'Compliance Intelligence and Regulatory Management'
+        : 'Corporate Governance and Compliance 360';
+
+  const featureItems = isPt ? [
+    {
+      title: 'Interface Adaptativa',
+      desc: 'Design focado na experi\u00eancia do usu\u00e1rio para m\u00e1xima produtividade e efici\u00eancia operacional.'
+    },
+    {
+      title: 'Compliance Autom\u00e1tico',
+      desc: 'Alertas em tempo real sobre desvios normativos e prazos legais com intelig\u00eancia preditiva.'
+    },
+    {
+      title: 'Integra\u00e7\u00e3o API',
+      desc: 'Conecte seus sistemas existentes (ERP, CRM, RH) de forma transparente e segura.'
+    }
+  ] : [
+    {
+      title: 'Adaptive Interface',
+      desc: 'UX-first design for maximum productivity and operational efficiency.'
+    },
+    {
+      title: 'Automated Compliance',
+      desc: 'Real-time alerts for regulatory deviations and legal deadlines with predictive intelligence.'
+    },
+    {
+      title: 'API Integration',
+      desc: 'Connect your existing systems (ERP, CRM, HR) securely and seamlessly.'
+    }
+  ];
+
+  const enterpriseFeatures = isPt
+    ? ['Suporte 24/7', 'Utilizadores Ilimitados', 'Personaliza\u00e7\u00e3o Total', 'SLA Garantido']
+    : ['24/7 Support', 'Unlimited Users', 'Full Customization', 'Guaranteed SLA'];
   // Imagens específicas para cada produto
   const getProductImages = () => {
     switch(productName) {
@@ -109,7 +155,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6a00a3]/20 relative"
           >
-            ILUNGI DIGITAL SOLUTIONS
+            {isPt ? 'SOLU\u00c7\u00d5ES DIGITAIS ILUNGI' : 'ILUNGI DIGITAL SOLUTIONS'}
           </motion.span>
           
           <motion.h1 
@@ -129,7 +175,9 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             transition={{ delay: 0.2 }}
             className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
           >
-            A plataforma SaaS definitiva para {productName === 'Salya' ? 'Gestão de Salários e Recursos Humanos' : productName === 'SICLIC' ? 'Compliance Intelligence e Gestão Normativa' : 'Governança Corporativa e Compliance 360'}.
+            {isPt
+              ? `A plataforma SaaS definitiva para ${productHeadline}.`
+              : `The ultimate SaaS platform for ${productHeadline}.`}
           </motion.p>
         </div>
 
@@ -169,7 +217,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <motion.img 
                 src={productImages.dashboard} 
                 className="w-full h-auto rounded-b-2xl relative z-10"
-                alt="Product Interface"
+                alt={isPt ? 'Interface do Produto' : 'Product Interface'}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5 }}
               />
@@ -190,7 +238,9 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-50"></div>
                 </div>
-                <span className="text-xs text-white font-medium">Sistema Online</span>
+                <span className="text-xs text-white font-medium">
+                  {isPt ? 'Sistema Online' : 'System Online'}
+                </span>
               </div>
             </div>
           </div>
@@ -198,23 +248,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
 
         {/* Features Grid - COM IMAGENS CORPORATIVAS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-          {[
-            { 
-              title: "Interface Adaptativa", 
-              desc: "Design focado na experiência do usuário para máxima produtividade e eficiência operacional.",
-              image: productImages.features[0]
-            },
-            { 
-              title: "Compliance Automático", 
-              desc: "Alertas em tempo real sobre desvios normativos e prazos legais com inteligência preditiva.",
-              image: productImages.features[1]
-            },
-            { 
-              title: "Integração API", 
-              desc: "Conecte seus sistemas existentes (ERP, CRM, RH) de forma transparente e segura.",
-              image: productImages.features[2]
-            },
-          ].map((f, i) => (
+          {featureItems.map((f, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, y: 30 }}
@@ -225,7 +259,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             >
               <div className="relative h-48 overflow-hidden">
                 <motion.img 
-                  src={f.image} 
+                  src={productImages.features[i]} 
                   alt={f.title}
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.1 }}
@@ -280,7 +314,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               viewport={{ once: true }}
               className="text-3xl font-bold mb-10"
             >
-              Planos & Demonstração
+              {isPt ? 'Planos & Demonstração' : 'Plans & Demo'}
             </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -292,9 +326,11 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#1B3C2B] to-[#2E7D5E] rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <h4 className="font-bold text-slate-400 uppercase text-xs mb-4 tracking-wider">Enterprise</h4>
-                <p className="text-4xl font-black mb-6 text-[#1B3C2B]">Sob Consulta</p>
+                <p className="text-4xl font-black mb-6 text-[#1B3C2B]">
+                  {isPt ? 'Sob Consulta' : 'On Request'}
+                </p>
                 <ul className="text-left space-y-3 mb-8">
-                  {["Suporte 24/7", "Utilizadores Ilimitados", "Personalização Total", "SLA Garantido"].map(l => (
+                  {enterpriseFeatures.map(l => (
                     <li key={l} className="flex items-center space-x-2 text-sm text-slate-600">
                       <CheckCircle2 className="w-4 h-4 text-green-500" />
                       <span>{l}</span>
@@ -302,7 +338,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                   ))}
                 </ul>
                 <button className="w-full py-3 bg-[#1B3C2B] text-white rounded-xl font-bold hover:bg-black transition-all transform hover:scale-105">
-                  Solicitar Proposta
+                  {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
                 </button>
               </motion.div>
               
@@ -314,9 +350,11 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">Trial</h4>
-                <p className="text-4xl font-black mb-6">Grátis (14 dias)</p>
+                <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (14 dias)' : 'Free (14 days)'}</p>
                 <p className="mb-8 text-white/80 text-sm leading-relaxed">
-                  Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.
+                  {isPt
+                    ? 'Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.'
+                    : 'Try all core features with no commitment. Includes email support and access to documentation.'}
                 </p>
                 
                 {/* Indicador de disponibilidade */}
@@ -325,11 +363,13 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                     <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-50"></div>
                   </div>
-                  <span className="text-xs text-white/80">Demo disponível imediatamente</span>
+                  <span className="text-xs text-white/80">
+                    {isPt ? 'Demo disponível imediatamente' : 'Demo available immediately'}
+                  </span>
                 </div>
                 
                 <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
-                  Iniciar Demo Gratuita
+                  {isPt ? 'Iniciar Demo Gratuita' : 'Start Free Demo'}
                 </button>
               </motion.div>
             </div>
@@ -342,7 +382,9 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
             >
               <Cpu className="w-4 h-4 text-[#6a00a3]" />
-              <span className="text-xs font-medium text-slate-600">Cloud SaaS • Implementação em 24h</span>
+              <span className="text-xs font-medium text-slate-600">
+                {isPt ? 'Cloud SaaS • Implementação em 24h' : 'Cloud SaaS • 24h Setup'}
+              </span>
               <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </motion.div>
           </div>
@@ -359,10 +401,10 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
           ></motion.div>
         </div>
         <div className="flex justify-between mt-2 text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>Descoberta</span>
-          <span>Configuração</span>
-          <span>Integração</span>
-          <span>Operação</span>
+          <span>{isPt ? 'Descoberta' : 'Discovery'}</span>
+          <span>{isPt ? 'Configuração' : 'Configuration'}</span>
+          <span>{isPt ? 'Integração' : 'Integration'}</span>
+          <span>{isPt ? 'Operação' : 'Operations'}</span>
         </div>
       </div>
     </div>

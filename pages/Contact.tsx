@@ -17,6 +17,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
 
 const Contact: React.FC = () => {
   const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,28 +49,44 @@ const Contact: React.FC = () => {
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         // Se Formspree não estiver configurado, usa mailto como backup
-        const emailBody = `
+        const emailBody = isPt
+          ? `
 Nome: ${formData.name}
 Email: ${formData.email}
 Assunto: ${formData.subject}
 Mensagem:
 ${formData.message}
-        `;
-        const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`Contacto: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
+          `
+          : `
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+Message:
+${formData.message}
+          `;
+        const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       }
     } catch (error) {
       // Se houver erro, usa mailto como backup
-      const emailBody = `
+      const emailBody = isPt
+        ? `
 Nome: ${formData.name}
 Email: ${formData.email}
 Assunto: ${formData.subject}
 Mensagem:
 ${formData.message}
-      `;
-      const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`Contacto: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
+        `
+        : `
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+Message:
+${formData.message}
+        `;
+      const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -90,7 +107,7 @@ ${formData.message}
                         <Phone className="w-6 h-6" />
                     </div>
                     <div>
-                        <h4 className="font-bold text-lg mb-1">{lang === 'pt' ? 'Telefone' : 'Phone'}</h4>
+                        <h4 className="font-bold text-lg mb-1">{isPt ? 'Telefone' : 'Phone'}</h4>
                         <p className="text-slate-500">+244 935 793 270</p>
                         <p className="text-slate-400 text-sm mt-1">{t.contact.phoneDesc}</p>
                     </div>
@@ -113,7 +130,9 @@ ${formData.message}
                     </div>
                     <div>
                         <h4 className="font-bold text-lg mb-1">{t.contact.location}</h4>
-                        <p className="text-slate-500 leading-relaxed">Projeto Nova Vida, Prédio E209</p>
+                        <p className="text-slate-500 leading-relaxed">
+                          {isPt ? 'Projeto Nova Vida, Prédio E209' : 'Nova Vida Project, Building E209'}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -137,13 +156,13 @@ ${formData.message}
                 {status === 'success' && (
                     <div className="p-4 bg-green-50 text-green-700 rounded-xl flex items-center space-x-2">
                         <CheckCircle className="w-5 h-5" />
-                        <span>Mensagem enviada com sucesso!</span>
+                        <span>{isPt ? 'Mensagem enviada com sucesso!' : 'Message sent successfully!'}</span>
                     </div>
                 )}
                 {status === 'error' && (
                     <div className="p-4 bg-red-50 text-red-700 rounded-xl flex items-center space-x-2">
                         <AlertCircle className="w-5 h-5" />
-                        <span>Erro ao enviar. Tente novamente.</span>
+                        <span>{isPt ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Please try again.'}</span>
                     </div>
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -155,7 +174,7 @@ ${formData.message}
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                             required
-                            placeholder="Seu nome completo"
+                            placeholder={isPt ? 'Seu nome completo' : 'Your full name'}
                             className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]" 
                         />
                     </div>
@@ -167,7 +186,7 @@ ${formData.message}
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                             required
-                            placeholder="seu@email.com"
+                            placeholder={isPt ? 'seu@email.com' : 'you@email.com'}
                             className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]" 
                         />
                     </div>
@@ -179,15 +198,15 @@ ${formData.message}
                         name="subject"
                         value={formData.subject}
                         onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                        required
-                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]">
-                        <option value="">Selecione um assunto</option>
-                        <option value="Consultoria ISO">{lang === 'pt' ? 'Consultoria ISO' : 'ISO Consulting'}</option>
-                        <option value="Gestão de Projectos">{lang === 'pt' ? 'Gestão de Projectos' : 'Project Management'}</option>
-                        <option value="Academia & Cursos">{lang === 'pt' ? 'Academia & Cursos' : 'Academy & Courses'}</option>
-                        <option value="Soluções Digitais">{lang === 'pt' ? 'Soluções Digitais' : 'Digital Solutions'}</option>
-                        <option value="Outros">{lang === 'pt' ? 'Outros' : 'Others'}</option>
-                    </select>
+                        className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"
+                    >
+                        <option value="">{isPt ? 'Selecione um assunto' : 'Select a subject'}</option>
+                        <option value={isPt ? 'Consultoria ISO' : 'ISO Consulting'}>{isPt ? 'Consultoria ISO' : 'ISO Consulting'}</option>
+                        <option value={isPt ? 'Gestão de Projectos' : 'Project Management'}>{isPt ? 'Gestão de Projectos' : 'Project Management'}</option>
+                        <option value={isPt ? 'Academia & Cursos' : 'Academy & Courses'}>{isPt ? 'Academia & Cursos' : 'Academy & Courses'}</option>
+                        <option value={isPt ? 'Soluções Digitais' : 'Digital Solutions'}>{isPt ? 'Soluções Digitais' : 'Digital Solutions'}</option>
+                        <option value={isPt ? 'Outros' : 'Others'}>{isPt ? 'Outros' : 'Others'}</option>
+                        </select>
                 </div>
 
                 <div className="space-y-2">
@@ -198,7 +217,7 @@ ${formData.message}
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         required
-                        placeholder="Como podemos ajudar?"
+                        placeholder={isPt ? 'Como podemos ajudar?' : 'How can we help?'}
                         className="w-full px-5 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-[#6a00a3]"></textarea>
                 </div>
 
@@ -208,7 +227,7 @@ ${formData.message}
                     className="w-full py-4 bg-[#1B3C2B] text-white rounded-xl font-bold flex items-center justify-center space-x-2 hover:bg-[#142d20] shadow-xl shadow-green-900/10 transition-all disabled:opacity-50"
                 >
                     {status === 'sending' ? (
-                        <span>Enviando...</span>
+                        <span>{isPt ? 'Enviando...' : 'Sending...'}</span>
                     ) : (
                         <>
                             <span>{t.contact.formSubmit}</span>

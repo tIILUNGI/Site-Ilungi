@@ -6,6 +6,7 @@ import { useAppContext } from '../App';
 
 const Consulting: React.FC = () => {
   const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
 
   const areas = [
     {
@@ -60,7 +61,7 @@ const Consulting: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Áreas de Consultoria - COM IMAGENS ESPECÍFICAS */}
+        {/* Áreas de Consultoria */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
           {areas.map((area, i) => (
             <motion.div 
@@ -104,7 +105,7 @@ const Consulting: React.FC = () => {
                         className="text-xs px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium inline-flex items-center"
                         style={{ border: `1px solid ${area.color}60` }}
                       >
-                        Explorar área
+                        {isPt ? 'Explorar área' : 'Explore area'}
                         <ChevronRight className="w-3 h-3 ml-1" />
                       </span>
                     </div>
@@ -141,7 +142,7 @@ const Consulting: React.FC = () => {
                     className="mt-4 inline-flex items-center space-x-1 font-semibold text-sm"
                     style={{ color: area.color }}
                   >
-                    <span>Saber mais</span>
+                    <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
                     <ChevronRight className="w-4 h-4" />
                   </motion.div>
                 </motion.div>
@@ -215,7 +216,7 @@ const Consulting: React.FC = () => {
                 {t.consulting.cta}
               </Link>
               <p className="text-sm text-white/60 mt-3">
-                Consultoria personalizada para o seu negócio
+                {isPt ? 'Consultoria personalizada para o seu negócio' : 'Tailored consulting for your business'}
               </p>
             </motion.div>
           </div>
@@ -230,19 +231,19 @@ const Consulting: React.FC = () => {
         >
           <div className="text-center p-6 bg-slate-50 rounded-2xl">
             <div className="text-3xl font-bold text-[#1B3C2B] mb-2">50+</div>
-            <div className="text-sm text-slate-500">Projetos Entregues</div>
+            <div className="text-sm text-slate-500">{isPt ? 'Projetos Entregues' : 'Projects Delivered'}</div>
           </div>
           <div className="text-center p-6 bg-slate-50 rounded-2xl">
             <div className="text-3xl font-bold text-[#1B3C2B] mb-2">100%</div>
-            <div className="text-sm text-slate-500">Certificações ISO</div>
+            <div className="text-sm text-slate-500">{isPt ? 'Certificações ISO' : 'ISO Certifications'}</div>
           </div>
           <div className="text-center p-6 bg-slate-50 rounded-2xl">
             <div className="text-3xl font-bold text-[#1B3C2B] mb-2">15+</div>
-            <div className="text-sm text-slate-500">Especialistas</div>
+            <div className="text-sm text-slate-500">{isPt ? 'Especialistas' : 'Specialists'}</div>
           </div>
           <div className="text-center p-6 bg-slate-50 rounded-2xl">
             <div className="text-3xl font-bold text-[#1B3C2B] mb-2">24/7</div>
-            <div className="text-sm text-slate-500">Suporte Contínuo</div>
+            <div className="text-sm text-slate-500">{isPt ? 'Suporte Contínuo' : 'Continuous Support'}</div>
           </div>
         </motion.div>
       </div>

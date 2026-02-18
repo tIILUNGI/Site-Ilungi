@@ -9,10 +9,10 @@ export const translations: Record<'pt' | 'en', any> = {
       solutions: "Soluções",
       partners: "Parceiros",
       contact: "Contacto",
-      iso: "Sistemas de Gestão ISO",
-      risk: "Notação de Risco",
+      iso: "Consultoria de Sistemas de gestão e projectos",
+      risk: "Serviço de notação de risco",
       procurement: "Procurement",
-      pmo: "Gestão de Projectos",
+      pmo: "Assistência e suporte de TI",
       alumni: "Alumni ILUNGI",
       courses: "Cursos",
       verify: "Verificar Certificado",
@@ -87,20 +87,20 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Sistemas de Gestão ISO",
-        desc: "Implementação, auditoria e certificação completa em normas globais como ISO 9001, 27001 e 14001."
+        title: "Consultoria de Sistemas de gestão e projectos",
+        desc: "Implementação de sistemas de gestão e condução de projectos de melhoria com foco em padrões e eficiência operacional."
       },
       risk: {
-        title: "Notação de Risco",
-        desc: "Análise quantitativa e qualitativa de riscos corporativos para suporte à decisão estratégica."
+        title: "Serviço de notação de risco",
+        desc: "Classificação e análise de riscos corporativos para suporte à decisão estratégica."
       },
       procurement: {
         title: "Procurement",
         desc: "Otimização da cadeia de suprimentos, redução de custos e compliance em compras."
       },
       pmo: {
-        title: "Gestão de Projectos",
-        desc: "Estruturação de escritórios de projectos (PMO) e gestão de grandes infraestruturas."
+        title: "Assistência e suporte de TI",
+        desc: "Suporte técnico contínuo para operação, infraestrutura e continuidade dos serviços de TI."
       }
     },
     academy: {
@@ -164,9 +164,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "Notação de Risco Corporativo",
-        desc: "Metodologias avançadas para identificar, avaliar e mitigar riscos estratégicos, operacionais e financeiros.",
-        content: "A nossa abordagem combina análise quantitativa de dados com a experiência prática de mercado para oferecer uma visão clara do seu perfil de risco."
+        title: "Serviço de notação de risco",
+        desc: "Avaliação estruturada de riscos corporativos para apoiar decisões e conformidade.",
+        content: "Combinamos métricas, dados e análise especializada para classificar riscos e orientar ações de mitigação."
       },
       procurement: {
         title: "Consultoria em Procurement",
@@ -174,9 +174,9 @@ export const translations: Record<'pt' | 'en', any> = {
         content: "Implementamos processos de compras estratégicas, qualificação de fornecedores e compliance em procurement para garantir agilidade e transparência."
       },
       pmo: {
-        title: "Gestão de Projectos (PMO)",
-        desc: "Governance e gestão estratégica de portfólios para garantir que seus projectos sejam entregues no prazo e orçamento.",
-        content: "Utilizamos frameworks globais (PMBOK, Agile, Prince2) para estruturar escritórios de projectos que geram valor real para o negócio."
+        title: "Assistência e suporte de TI",
+        desc: "Suporte técnico contínuo para manter sistemas, redes e utilizadores a funcionar sem interrupções.",
+        content: "Atuamos com helpdesk, manutenção preventiva, monitorização e resposta rápida a incidentes."
       }
     },
     alumni: {
@@ -211,8 +211,8 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "Sistemas de Gestão ISO: Excelência Global",
-      subtitle: "Não apenas implementamos normas, transformamos a cultura da sua organização para que o compliance seja um diferencial competitivo de mercado.",
+      title: "Consultoria de Sistemas de Gestão e Projectos",
+      subtitle: "Apoiamos a implementação de sistemas de gestão baseados em normas internacionais e a condução de projectos de certificação.",
       stats: {
         certified: "Várias Empresas Certificadas",
         rate: "Taxa de Aprovação",
@@ -238,10 +238,10 @@ export const translations: Record<'pt' | 'en', any> = {
       solutions: "Solutions",
       partners: "Partners",
       contact: "Contact",
-      iso: "ISO Management Systems",
-      risk: "Risk Rating",
+      iso: "Management Systems and Projects Consulting",
+      risk: "Risk Rating Service",
       procurement: "Procurement",
-      pmo: "Project Management",
+      pmo: "IT Assistance and Support",
       alumni: "ILUNGI Alumni",
       courses: "Courses",
       verify: "Verify Certificate",
@@ -316,20 +316,20 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "ISO Management Systems",
-        desc: "Implementation, audit, and complete certification in global standards like ISO 9001, 27001, and 14001."
+        title: "Management Systems and Projects Consulting",
+        desc: "Consulting for management systems implementation and project delivery focused on standards and operational efficiency."
       },
       risk: {
-        title: "Risk Rating",
-        desc: "Quantitative and qualitative analysis of corporate risks for strategic decision support."
+        title: "Risk Rating Service",
+        desc: "Risk classification and analysis to support strategic decision-making."
       },
       procurement: {
         title: "Procurement",
         desc: "Supply chain optimization, cost reduction, and procurement compliance."
       },
       pmo: {
-        title: "Project Management",
-        desc: "Structuring project offices (PMO) and managing large infrastructures."
+        title: "IT Assistance and Support",
+        desc: "Ongoing technical support for operations, infrastructure, and IT service continuity."
       }
     },
     academy: {
@@ -393,9 +393,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "Corporate Risk Rating",
-        desc: "Advanced methodologies to identify, assess, and mitigate strategic, operational, and financial risks.",
-        content: "Our approach combines quantitative data analysis with practical market experience to offer a clear view of your risk profile."
+        title: "Risk Rating Service",
+        desc: "Structured risk assessment to support decisions and compliance.",
+        content: "We combine metrics, data, and expert analysis to classify risks and guide mitigation actions."
       },
       procurement: {
         title: "Procurement Consulting",
@@ -403,9 +403,9 @@ export const translations: Record<'pt' | 'en', any> = {
         content: "We implement strategic sourcing processes, vendor qualification, and procurement compliance to ensure agility and transparency."
       },
       pmo: {
-        title: "Project Management (PMO)",
-        desc: "Governance and strategic portfolio management to ensure your projects are delivered on time and budget.",
-        content: "We use global frameworks (PMBOK, Agile, Prince2) to structure project offices that generate real business value."
+        title: "IT Assistance and Support",
+        desc: "Continuous technical support to keep systems, networks, and users running without interruption.",
+        content: "We provide helpdesk, preventive maintenance, monitoring, and fast incident response."
       }
     },
     alumni: {
@@ -440,8 +440,8 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "ISO Management Systems: Global Excellence",
-      subtitle: "We don't just implement standards, we transform your organization's culture so that compliance becomes a competitive market advantage.",
+      title: "Management Systems and Projects Consulting",
+      subtitle: "We support the implementation of management systems based on international standards and the delivery of certification projects.",
       stats: {
         certified: "Several Certified Companies",
         rate: "Approval Rate",

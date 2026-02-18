@@ -5,7 +5,8 @@ import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react
 import { useAppContext } from '../App';
 
 const Footer: React.FC = () => {
-  const { t } = useAppContext();
+  const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
@@ -15,8 +16,13 @@ const Footer: React.FC = () => {
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
           </Link>
           <p className="text-slate-300 text-sm leading-relaxed">
-            Especialistas globais em serviços ISO, gestão de riscos e formação executiva. 
-            Transformamos desafios corporativos em excelência operacional.
+            {isPt
+              ? 'Especialistas globais em serviços ISO, gestão de riscos e formação executiva.'
+              : 'Global specialists in ISO services, risk management, and executive training.'}
+            {' '}
+            {isPt
+              ? 'Transformamos desafios corporativos em excelência operacional.'
+              : 'We turn corporate challenges into operational excellence.'}
           </p>
           <div className="flex space-x-4">
             <a href="https://www.linkedin.com/company/33236785/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
@@ -32,31 +38,33 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <h4 className="font-bold text-lg mb-6">Serviços</h4>
+          <h4 className="font-bold text-lg mb-6">{t.nav.consulting}</h4>
           <ul className="space-y-3 text-slate-300">
-            <li><Link to="/consultoria/iso" className="hover:text-white transition-colors">Sistemas ISO</Link></li>
-            <li><Link to="/consultoria/risco" className="hover:text-white transition-colors">Notação de Risco</Link></li>
-            <li><Link to="/consultoria/procurement" className="hover:text-white transition-colors">Procurement</Link></li>
-            <li><Link to="/consultoria/pmo" className="hover:text-white transition-colors">Project Management</Link></li>
+            <li><Link to="/consultoria/iso" className="hover:text-white transition-colors">{t.nav.iso}</Link></li>
+            <li><Link to="/consultoria/risco" className="hover:text-white transition-colors">{t.nav.risk}</Link></li>
+            <li><Link to="/consultoria/procurement" className="hover:text-white transition-colors">{t.nav.procurement}</Link></li>
+            <li><Link to="/consultoria/pmo" className="hover:text-white transition-colors">{t.nav.pmo}</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold text-lg mb-6">Academia</h4>
+          <h4 className="font-bold text-lg mb-6">{t.nav.academy}</h4>
           <ul className="space-y-3 text-slate-300">
-            <li><Link to="/academia/cursos" className="hover:text-white transition-colors">Catálogo de Cursos</Link></li>
-            <li><Link to="/academia/verificar" className="hover:text-white transition-colors">Validar Certificado</Link></li>
-            <li><Link to="/academia/alumni" className="hover:text-white transition-colors">Portal Alumni</Link></li>
-            <li><Link to="/academia/scr" className="hover:text-white transition-colors">School of Reputation</Link></li>
+            <li><Link to="/academia/cursos" className="hover:text-white transition-colors">{isPt ? 'Catálogo de Cursos' : 'Course Catalog'}</Link></li>
+            <li><Link to="/academia/verificar" className="hover:text-white transition-colors">{t.nav.verify}</Link></li>
+            <li><Link to="/academia/alumni" className="hover:text-white transition-colors">{isPt ? 'Portal Alumni' : 'Alumni Portal'}</Link></li>
+            <li><Link to="/academia/scr" className="hover:text-white transition-colors">{t.nav.scr}</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold text-lg mb-6">Contacto</h4>
+          <h4 className="font-bold text-lg mb-6">{t.nav.contact}</h4>
           <ul className="space-y-4 text-slate-300">
             <li className="flex items-start space-x-3">
               <MapPin className="w-5 h-5 text-[#6a00a3] shrink-0" />
-              <span className="text-sm">Luanda, Projeto Nova Vida, Prédio E209 Apt 24</span>
+              <span className="text-sm">
+                {isPt ? 'Luanda, Projeto Nova Vida, Prédio E209 Apt 24' : 'Luanda, Nova Vida Project, Building E209 Apt 24'}
+              </span>
             </li>
             <li className="flex items-center space-x-3">
               <Phone className="w-5 h-5 text-[#6a00a3] shrink-0" />
@@ -70,11 +78,11 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs">
-        <p>&copy; {new Date().getFullYear()} ILUNGI Corporate. Todos os direitos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} ILUNGI Corporate. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
         <div className="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" className="hover:text-white">Privacidade</a>
-          <a href="#" className="hover:text-white">Termos de Uso</a>
-          <a href="#" className="hover:text-white">Cookies</a>
+          <a href="#" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</a>
+          <a href="#" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</a>
+          <a href="#" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</a>
         </div>
       </div>
     </footer>

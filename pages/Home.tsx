@@ -37,70 +37,78 @@ const partners = [
   }
 ];
 
-const serviceImages = [
-  { 
-    src: "/imagens/ilungi_logo.jpg", 
-    title: "ILUNGI", 
-    subtitle: "Excelência em Consultoria",
-    heroTitle: "Consultoria de Excelência",
-    heroSubtitle: "Soluções integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
-  },
-  { 
-    src: "/imagens/ISO.png", 
-    title: "ISO 9001", 
-    subtitle: "Gestão da Qualidade",
-    heroTitle: "Excelência em Consultoria",
-    heroSubtitle: "Transformamos desafios em oportunidades de crescimento sustentável para sua empresa."
-  },
-  { 
-    src: "/imagens/Notação de Risco.jpg", 
-    title: "Gestão de Risco", 
-    subtitle: "Análise Estratégica",
-    heroTitle: "Gestão de Riscos Corporativos",
-    heroSubtitle: "Identificamos e mitigamos riscos para proteger o futuro do seu negócio."
-  },
-  { 
-    src: "/imagens/Gestão de Projecto.jpg", 
-    title: "PMO", 
-    subtitle: "Gestão de Projetos",
-    heroTitle: "Gestão de Projetos Estratégicos",
-    heroSubtitle: "Impulsionamos a execução de projetos com metodologia comprovada e resultados mensuráveis."
-  },
-];
-
-const services = [
-  { 
-    title: "Consultoria ISO", 
-    desc: "Implementação e certificação de normas ISO. Garantia de conformidade, eficiência operacional e reconhecimento internacional.",
-    image: "/imagens/Consultoria.png",
-    color: "#1B3C2B",
-    path: "/consultoria/iso"
-  },
-  { 
-    title: "Gestão de Projectos", 
-    desc: "Metodologias ágeis e tradicionais para entregar resultados com excelência. Planeamento, execução e controlo de projetos complexos.",
-    image: "https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    color: "#6a00a3",
-    path: "/consultoria/pmo"
-  },
-  { 
-    title: "SaaS & Tech", 
-    desc: "Soluções tecnológicas escaláveis para transformar digitalmente o seu negócio. Desenvolvimento de software, cloud computing e arquitetura de sistemas.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    color: "#0A4D8C",
-    path: "/solucoes"
-  },
-  { 
-    title: "Academia ILUNGI", 
-    desc: "Formação executiva e capacitação profissional. Cursos certificados nas áreas de gestão, tecnologia e desenvolvimento de lideranças.",
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    color: "#B31B1B",
-    path: "/academia"
-  },
-];
-
 const Home: React.FC = () => {
   const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
+  const serviceImages = [
+    {
+      src: "/imagens/ilungi_logo.jpg",
+      title: "ILUNGI",
+      subtitle: isPt ? "Excel\u00eancia em Consultoria" : "Consulting Excellence",
+      heroTitle: isPt ? "Consultoria de Excel\u00eancia" : "Excellence Consulting",
+      heroSubtitle: isPt
+        ? "Solu\u00e7\u00f5es integradas para impulsionar a competitividade e sustentabilidade da sua empresa."
+        : "Integrated solutions to boost your company's competitiveness and sustainability."
+    },
+    {
+      src: "/imagens/ISO.png",
+      title: "ISO 9001",
+      subtitle: isPt ? "Gest\u00e3o da Qualidade" : "Quality Management",
+      heroTitle: isPt ? "Excel\u00eancia em Consultoria" : "Excellence Consulting",
+      heroSubtitle: isPt
+        ? "Transformamos desafios em oportunidades de crescimento sustent\u00e1vel para sua empresa."
+        : "We turn challenges into sustainable growth opportunities for your company."
+    },
+    {
+      src: "/imagens/Nota\u00e7\u00e3o de Risco.jpg",
+      title: isPt ? "Gest\u00e3o de Risco" : "Risk Management",
+      subtitle: isPt ? "An\u00e1lise Estrat\u00e9gica" : "Strategic Analysis",
+      heroTitle: isPt ? "Gest\u00e3o de Riscos Corporativos" : "Corporate Risk Management",
+      heroSubtitle: isPt
+        ? "Identificamos e mitigamos riscos para proteger o futuro do seu neg\u00f3cio."
+        : "We identify and mitigate risks to protect your business future."
+    },
+    {
+      src: "/imagens/Gest\u00e3o de Projecto.jpg",
+      title: "PMO",
+      subtitle: isPt ? "Gest\u00e3o de Projetos" : "Project Management",
+      heroTitle: isPt ? "Gest\u00e3o de Projetos Estrat\u00e9gicos" : "Strategic Project Management",
+      heroSubtitle: isPt
+        ? "Impulsionamos a execu\u00e7\u00e3o de projetos com metodologia comprovada e resultados mensur\u00e1veis."
+        : "We accelerate project delivery with proven methods and measurable results."
+    },
+  ];
+
+  const services = [
+    {
+      title: t.home.services.iso,
+      desc: t.home.services.isoDesc,
+      image: "/imagens/Consultoria.png",
+      color: "#1B3C2B",
+      path: "/consultoria/iso"
+    },
+    {
+      title: t.home.services.projects,
+      desc: t.home.services.projectsDesc,
+      image: "https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      color: "#6a00a3",
+      path: "/consultoria/pmo"
+    },
+    {
+      title: t.home.services.tech,
+      desc: t.home.services.techDesc,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      color: "#0A4D8C",
+      path: "/solucoes"
+    },
+    {
+      title: t.home.services.academy,
+      desc: t.home.services.academyDesc,
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      color: "#B31B1B",
+      path: "/academia"
+    },
+  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hoveredPartner, setHoveredPartner] = useState<number | null>(null);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
@@ -184,7 +192,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-sm uppercase tracking-[0.2em] text-[#6a00a3] font-semibold"
             >
-              Nossas Competências
+              {isPt ? 'Nossas Competências' : 'Our Capabilities'}
             </motion.span>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -193,7 +201,7 @@ const Home: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-black text-[#1B3C2B] mt-4 mb-6"
             >
-              Soluções Integradas
+              {isPt ? 'Soluções Integradas' : 'Integrated Solutions'}
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -202,7 +210,9 @@ const Home: React.FC = () => {
               transition={{ delay: 0.2 }}
               className="max-w-2xl mx-auto text-lg text-slate-500 font-light"
             >
-              Da estratégia à execução, entregamos excelência em cada projeto
+              {isPt
+                ? 'Da estratégia à execução, entregamos excelência em cada projeto'
+                : 'From strategy to execution, we deliver excellence in every project'}
             </motion.p>
           </div>
 
@@ -256,7 +266,7 @@ const Home: React.FC = () => {
                         <span 
                           className="text-xs px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white inline-block"
                         >
-                          Saber mais
+                          {isPt ? 'Saber mais' : 'Learn more'}
                         </span>
                       </motion.div>
                     </div>
@@ -288,7 +298,7 @@ const Home: React.FC = () => {
                             className="inline-flex items-center text-sm font-semibold"
                             style={{ color: service.color }}
                           >
-                            Ver serviço
+                            {isPt ? 'Ver serviço' : 'View service'}
                             <motion.span
                               animate={{ x: [0, 5, 0] }}
                               transition={{ repeat: Infinity, duration: 1.5 }}
@@ -332,7 +342,7 @@ const Home: React.FC = () => {
               {t.home.partners}
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-white mt-4 mb-4">
-              Parceiros Estratégicos
+              {isPt ? 'Parceiros Estratégicos' : 'Strategic Partners'}
             </h2>
             <div className="w-20 h-1.5 bg-[#6a00a3] mx-auto rounded-full"></div>
           </motion.div>
@@ -432,7 +442,7 @@ const Home: React.FC = () => {
                               className="text-xs font-medium uppercase tracking-wider"
                               style={{ color: partner.color }}
                             >
-                              Visitar
+                              {isPt ? 'Visitar' : 'Visit'}
                             </span>
                             <ExternalLink 
                               size={14} 
@@ -475,7 +485,7 @@ const Home: React.FC = () => {
           </div>
           <div>
             <span className="text-[#6a00a3] font-bold uppercase tracking-widest text-sm mb-4 block">
-              {lang === 'pt' ? 'Tecnologia & inovação' : 'Technology & Innovation'}
+              {isPt ? 'Tecnologia & inovação' : 'Technology & Innovation'}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-800 mb-6 leading-tight">
               {t.home.solutions.title}

@@ -6,8 +6,9 @@ import { useAppContext } from '../App';
 
 const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   
-  const isoKeys = ["9001", "14001", "45001", "27001", "37001"] as const;
+  const isoKeys = ["9001", "14001", "45001"] as const;
 
   return (
     <div className="py-20 bg-white">
@@ -15,7 +16,7 @@ const ISOPage: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16 mb-24">
             <div className="flex-1">
                 <span className="text-[#6a00a3] font-black tracking-widest uppercase text-sm mb-4 block">
-                    {lang === 'pt' ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
+                    {isPt ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
                 </span>
                 <h1 className="text-5xl font-black text-[#1B3C2B] mb-8 leading-tight">{t.iso.title}</h1>
                 <p className="text-xl text-slate-500 font-light leading-relaxed mb-8">
@@ -33,16 +34,12 @@ const ISOPage: React.FC = () => {
                 </div>
             </div>
             <div className="flex-1 relative">
-                <img src="/imagens/ISO.png" className="rounded-3xl shadow-2xl" alt="Consultoria ISO" />
-                <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl border border-white/20 shadow-xl max-w-xs">
-                    <p className="italic text-slate-600 text-sm">"{t.iso.testimonial}"</p>
-                    <p className="mt-4 font-bold text-slate-800 text-xs">{t.iso.testimonialAuthor}</p>
-                </div>
+                <img src="/imagens/ISO.png" className="rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
             </div>
         </div>
 
         <h2 className="text-3xl font-bold mb-12 text-center">
-          {lang === 'pt' ? 'Normas que Implementamos' : 'Standards We Implement'}
+          {isPt ? 'Normas que Implementamos' : 'Standards We Implement'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
             {isoKeys.map((key, i) => (
@@ -59,6 +56,9 @@ const ISOPage: React.FC = () => {
                 </div>
             ))}
         </div>
+        <p className="text-center text-sm text-slate-500 mb-24">
+          {isPt ? 'Estas e muitas mais.' : 'These and many more.'}
+        </p>
 
         <div className="bg-[#1B3C2B] rounded-[3rem] p-12 lg:p-20 text-white flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1">

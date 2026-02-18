@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
 
 const AlumniPortal: React.FC = () => {
-  const { t } = useAppContext();
+  const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const navigate = useNavigate();
   
   // Verificar se está logado (simulado)
@@ -24,16 +25,16 @@ const AlumniPortal: React.FC = () => {
       <aside className="w-64 border-r border-white/10 p-6 flex flex-col hidden lg:flex">
         <div className="mb-10 flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-8 w-auto" />
-            <span className="font-bold text-lg tracking-tight">Alumni Portal</span>
+            <span className="font-bold text-lg tracking-tight">{isPt ? 'Portal Alumni' : 'Alumni Portal'}</span>
         </div>
         
         <nav className="flex-1 space-y-2">
             {[
-                { icon: <LayoutDashboard className="w-5 h-5" />, label: "Dashboard", active: true },
-                { icon: <BookOpen className="w-5 h-5" />, label: "Meus Cursos" },
-                { icon: <Award className="w-5 h-5" />, label: "Certificados" },
-                { icon: <History className="w-5 h-5" />, label: "Histórico" },
-                { icon: <MessageCircle className="w-5 h-5" />, label: "Suporte" },
+                { icon: <LayoutDashboard className="w-5 h-5" />, label: t.alumni.portal.dashboard, active: true },
+                { icon: <BookOpen className="w-5 h-5" />, label: t.alumni.portal.courses },
+                { icon: <Award className="w-5 h-5" />, label: t.alumni.portal.certificates },
+                { icon: <History className="w-5 h-5" />, label: t.alumni.portal.history },
+                { icon: <MessageCircle className="w-5 h-5" />, label: t.alumni.portal.support },
             ].map((item, i) => (
                 <div key={i} className={`flex items-center space-x-3 px-4 py-3 rounded-xl cursor-pointer transition-all ${item.active ? 'bg-[#6a00a3] text-white shadow-lg shadow-purple-900/40' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}>
                     {item.icon}
@@ -52,7 +53,7 @@ const AlumniPortal: React.FC = () => {
               className="flex items-center space-x-3 text-slate-400 hover:text-red-400 cursor-pointer w-full"
             >
                 <LogOut className="w-5 h-5" />
-                <span className="font-medium">Sair</span>
+                <span className="font-medium">{t.alumni.portal.logout}</span>
             </button>
         </div>
       </aside>
@@ -61,8 +62,8 @@ const AlumniPortal: React.FC = () => {
       <main className="flex-1 p-8 lg:p-12 overflow-y-auto mt-20 lg:mt-0">
         <header className="flex justify-between items-center mb-10">
             <div>
-                <h1 className="text-3xl font-bold">Olá, André Manuel</h1>
-                <p className="text-slate-400 mt-1">Bem-vindo de volta ao seu portal de excelência.</p>
+                <h1 className="text-3xl font-bold">{t.alumni.portal.welcome}, André Manuel</h1>
+                <p className="text-slate-400 mt-1">{t.alumni.portal.welcomeDesc}</p>
             </div>
             <div className="flex items-center space-x-4">
                 <div className="relative p-2 bg-white/5 rounded-full cursor-pointer hover:bg-white/10">
@@ -76,9 +77,9 @@ const AlumniPortal: React.FC = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
-                { label: "Cursos Ativos", value: "02", color: "bg-blue-500" },
-                { label: "Certificados", value: "05", color: "bg-purple-500" },
-                { label: "Carga Horária", value: "128h", color: "bg-green-500" },
+                { label: t.alumni.portal.stats.active, value: "02", color: "bg-blue-500" },
+                { label: t.alumni.portal.stats.certs, value: "05", color: "bg-purple-500" },
+                { label: t.alumni.portal.stats.hours, value: "128h", color: "bg-green-500" },
             ].map((stat, i) => (
                 <motion.div 
                     key={i} 
@@ -92,7 +93,7 @@ const AlumniPortal: React.FC = () => {
         </div>
 
         {/* Course Card */}
-        <h2 className="text-xl font-bold mb-6">Em Andamento</h2>
+        <h2 className="text-xl font-bold mb-6">{t.alumni.portal.inProgress}</h2>
         <div className="grid grid-cols-1 gap-6">
             <div className="p-6 rounded-3xl bg-white/5 border border-white/10 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
                 <div className="w-full md:w-48 h-28 bg-slate-800 rounded-2xl overflow-hidden">
@@ -100,13 +101,19 @@ const AlumniPortal: React.FC = () => {
                 </div>
                 <div className="flex-1 w-full">
                     <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-lg font-bold uppercase tracking-tight">Especialista em ISO 27001 - Segurança da Informação</h4>
-                        <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold uppercase">65% concluído</span>
+                        <h4 className="text-lg font-bold uppercase tracking-tight">
+                          {isPt ? 'Especialista em ISO 27001 - Segurança da Informação' : 'ISO 27001 Information Security Specialist'}
+                        </h4>
+                        <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold uppercase">
+                          65% {t.alumni.portal.completed}
+                        </span>
                     </div>
                     <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-4">
                         <div className="h-full bg-[#6a00a3]" style={{ width: '65%' }}></div>
                     </div>
-                    <button className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all">Continuar Aula</button>
+                    <button className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all">
+                      {t.alumni.portal.continue}
+                    </button>
                 </div>
             </div>
         </div>

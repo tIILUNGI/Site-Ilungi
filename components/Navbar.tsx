@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 15 }}
-                      className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] glass p-8 rounded-2xl mega-menu-shadow border border-slate-200"
+                      className={`absolute top-20 left-1/2 -translate-x-1/2 w-[700px] ${isDark ? 'glass-menu-dark border-slate-700/40' : 'glass-menu border-slate-200'} p-8 rounded-2xl mega-menu-shadow border`}
                     >
                       <div className="grid grid-cols-2 gap-8">
                         {item.mega.map((sub, idx) => (
@@ -111,15 +111,6 @@ const Navbar: React.FC = () => {
                                   <h4 className="font-bold text-slate-800 flex items-center">
                                     {sub.title}
                                   </h4>
-                                  {sub.subItems && (
-                                    <ul className="mt-2 space-y-1">
-                                      {sub.subItems.map((si, sidx) => (
-                                        <li key={sidx} className="text-sm text-slate-500 hover:text-[#6a00a3] cursor-pointer transition-colors">
-                                          • {si}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  )}
                                 </div>
                               </Link>
                             )}
@@ -136,20 +127,29 @@ const Navbar: React.FC = () => {
 
         {/* Right Controls */}
         <div className="flex items-center space-x-3">
+          {/* Translate Button */}
           <button 
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full border border-slate-200 hover:bg-slate-100 transition-colors"
-            aria-label="Toggle dark mode"
+            onClick={toggleLang} 
+            className={`flex items-center space-x-2 px-3 py-2 rounded-full font-bold text-sm border transition-all ${
+              isDark 
+                ? 'border-purple-400/50 hover:border-purple-400 text-purple-300 hover:text-purple-200' 
+                : 'border-slate-300 hover:border-slate-400 text-slate-600 hover:text-slate-800'
+            }`}
           >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <Globe className="w-4 h-4" />
+            <span>{lang.toUpperCase()}</span>
           </button>
           
           <button 
-            onClick={toggleLang} 
-            className="flex items-center space-x-1 px-3 py-2 rounded-full border border-slate-200 hover:bg-slate-100 transition-colors"
+            onClick={toggleDarkMode}
+            className={`p-2.5 rounded-full border-2 transition-all transform hover:scale-110 ${
+              isDark 
+                ? 'border-yellow-400/50 hover:border-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20' 
+                : 'border-slate-300 hover:border-slate-400 bg-slate-100 hover:bg-slate-200'
+            }`}
+            aria-label="Toggle dark mode"
           >
-            <Globe className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">{lang}</span>
+            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-600" />}
           </button>
           
           <Link to="/contacto" className="hidden sm:block px-6 py-2.5 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20">
@@ -169,7 +169,7 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t border-slate-200 overflow-hidden"
+            className={`lg:hidden ${isDark ? 'glass-dark border-slate-700/40' : 'glass border-slate-200'} border-t overflow-hidden`}
           >
             <div className="p-4 space-y-4">
               {menuItems.map(item => (

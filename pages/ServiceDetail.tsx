@@ -10,7 +10,8 @@ interface ServiceDetailProps {
 }
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
-  const { t } = useAppContext();
+  const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const content = t.services[type];
 
   const icons = {
@@ -44,7 +45,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               
               <div className="pt-8">
                 <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
-                  Solicitar Proposta
+                  {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -67,11 +68,15 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {[
+          {(isPt ? [
             { title: "Metodologia ILUNGI", desc: "Processos refinados por anos de prática no mercado Angolano e Internacional." },
             { title: "Diferenciais", desc: "Abordagem focada em resultados práticos e redução de desperdícios." },
             { title: "Sectores Atendidos", desc: "Experiência em Petróleo & Gás, Finanças, Construção e Sector Público." }
-          ].map((item, i) => (
+          ] : [
+            { title: "ILUNGI Methodology", desc: "Refined processes built through years of practice in Angolan and international markets." },
+            { title: "Differentials", desc: "An approach focused on practical results and waste reduction." },
+            { title: "Sectors Served", desc: "Experience in Oil & Gas, Finance, Construction, and Public Sector." }
+          ]).map((item, i) => (
             <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
               <h4 className="text-xl font-bold mb-4 flex items-center">
                 <CheckCircle className="w-5 h-5 text-[#6a00a3] mr-2" />

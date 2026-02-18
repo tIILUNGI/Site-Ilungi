@@ -49,19 +49,27 @@ const App: React.FC = () => {
     const saved = localStorage.getItem('ilungi_lang');
     return (saved as Language) || 'pt';
   });
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    const saved = localStorage.getItem('ilungi_dark');
+    return saved === 'true';
+  });
 
   const setLang = (l: Language) => {
     setLangState(l);
     localStorage.setItem('ilungi_lang', l);
   };
 
+  const handleSetIsDark = (d: boolean) => {
+    setIsDark(d);
+    localStorage.setItem('ilungi_dark', d ? 'true' : 'false');
+  };
+
   const t = translations[lang];
 
   return (
-    <AppContext.Provider value={{ lang, setLang, isDark, setIsDark, t }}>
+    <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t }}>
       <Router>
-        <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-900 text-white' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'theme-dark bg-gray-900 text-white' : 'theme-light bg-slate-50 text-slate-900'}`}>
           <ScrollToTop />
           <Navbar />
           <main className="pt-20">
@@ -85,6 +93,22 @@ const App: React.FC = () => {
               </Routes>
             </AnimatePresence>
           </main>
+          
+          {/* Floating WhatsApp Button */}
+          <a 
+            href="https://wa.me/244935793270" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="fixed bottom-6 right-6 z-50 transition-all transform hover:scale-110 animate-bounce"
+            aria-label="WhatsApp"
+          >
+            <img 
+              src="/imagens/whatsapp-icon.jpg" 
+              alt="WhatsApp" 
+              className="w-16 h-16 rounded-full shadow-2xl hover:shadow-green-500/50"
+            />
+          </a>
+          
           <Footer />
         </div>
       </Router>

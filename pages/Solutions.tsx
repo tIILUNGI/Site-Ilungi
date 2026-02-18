@@ -6,12 +6,15 @@ import { useAppContext } from '../App';
 
 const Solutions: React.FC = () => {
   const { t, lang } = useAppContext();
+  const isPt = lang === 'pt';
 
   const products = [
     {
       name: "Salya",
-      tagline: "Gestão de Salários & RH",
-      desc: "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos. Automatização de folhas de pagamento, benefícios e compliance trabalhista.",
+      tagline: isPt ? "Gest\u00e3o de Sal\u00e1rios & RH" : "Payroll & HR Management",
+      desc: isPt
+        ? "Plataforma para gest\u00e3o e emiss\u00e3o de recibos de sal\u00e1rio e controle completo de recursos humanos. Automatiza\u00e7\u00e3o de folhas de pagamento, benef\u00edcios e compliance trabalhista."
+        : "Platform for payroll management, payslip issuance, and complete HR control. Automation of payroll, benefits, and labor compliance.",
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       path: "/solucoes/salya",
       color: "from-purple-600 to-purple-800",
@@ -19,8 +22,10 @@ const Solutions: React.FC = () => {
     },
     {
       name: "SICLIC",
-      tagline: "Compliance Intelligence",
-      desc: "Sistema inteligente para gestão de compliance legal, contratual e normativo em tempo real. Monitoramento contínuo de obrigações legais e normativas.",
+      tagline: isPt ? "Intelig\u00eancia de Compliance" : "Compliance Intelligence",
+      desc: isPt
+        ? "Sistema inteligente para gest\u00e3o de compliance legal, contratual e normativo em tempo real. Monitoramento cont\u00ednuo de obriga\u00e7\u00f5es legais e normativas."
+        : "Smart system for real-time legal, contractual, and regulatory compliance management. Continuous monitoring of legal and regulatory obligations.",
       image: "/imagens/SICLIC.png",
       url: "https://siclic.ao/",
       color: "from-[#1B3C2B] to-[#2E7D5E]",
@@ -28,8 +33,10 @@ const Solutions: React.FC = () => {
     },
     {
       name: "Tocomply360",
-      tagline: "Governance Framework",
-      desc: "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de compliance e integridade.",
+      tagline: isPt ? "Framework de Governan\u00e7a" : "Governance Framework",
+      desc: isPt
+        ? "Solu\u00e7\u00e3o 360 graus para governan\u00e7a corporativa, integrando \u00e9tica, risco e transpar\u00eancia. Framework completo para gest\u00e3o de compliance e integridade."
+        : "360-degree solution for corporate governance, integrating ethics, risk, and transparency. Complete framework for compliance and integrity management.",
       image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       path: "/solucoes/tocomply",
       color: "from-blue-600 to-blue-800",
@@ -91,7 +98,7 @@ const Solutions: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6a00a3]/20 relative"
           >
-            {lang === 'pt' ? 'Ecossistema Digital ILUNGI' : 'ILUNGI Digital Ecosystem'}
+            {isPt ? 'Ecossistema Digital ILUNGI' : 'ILUNGI Digital Ecosystem'}
           </motion.span>
           
           <motion.h1 
@@ -226,7 +233,7 @@ const Solutions: React.FC = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
-                      <span>Visitar SICLIC</span>
+                      <span>{isPt ? 'Visitar SICLIC' : 'Visit SICLIC'}</span>
                       <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
                     </a>
                   ) : (
@@ -234,7 +241,7 @@ const Solutions: React.FC = () => {
                       to={product.path || '#'}
                       className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
-                      <span>{lang === 'pt' ? 'Solicitar Demo' : 'Request Demo'}</span>
+                      <span>{isPt ? 'Solicitar Demo' : 'Request Demo'}</span>
                       <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   )}
@@ -276,7 +283,7 @@ const Solutions: React.FC = () => {
               viewport={{ once: true }}
               className="text-4xl font-black text-[#1B3C2B] mb-8 leading-tight relative"
             >
-              {lang === 'pt' ? 'Implementação Ágil & Suporte Especializado' : 'Agile Implementation & Specialized Support'}
+              {isPt ? 'Implementação Ágil & Suporte Especializado' : 'Agile Implementation & Specialized Support'}
               {/* Linha decorativa tecnológica */}
               <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
             </motion.h2>
@@ -284,18 +291,18 @@ const Solutions: React.FC = () => {
             <div className="space-y-8">
               {[
                 { 
-                  title: lang === 'pt' ? "Segurança de Dados" : "Data Security", 
-                  desc: lang === 'pt' ? "Infraestrutura em nuvem com criptografia de ponta a ponta e compliance ISO 27001." : "Cloud infrastructure with end-to-end encryption and ISO 27001 compliance.",
+                  title: isPt ? "Segurança de Dados" : "Data Security", 
+                  desc: isPt ? "Infraestrutura em nuvem com criptografia de ponta a ponta e compliance ISO 27001." : "Cloud infrastructure with end-to-end encryption and ISO 27001 compliance.",
                   image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 },
                 { 
-                  title: lang === 'pt' ? "Customização" : "Customization", 
-                  desc: lang === 'pt' ? "Módulos adaptáveis aos processos específicos da sua indústria." : "Modules adaptable to your industry's specific processes.",
+                  title: isPt ? "Customização" : "Customization", 
+                  desc: isPt ? "Módulos adaptáveis aos processos específicos da sua indústria." : "Modules adaptable to your industry's specific processes.",
                   image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 },
                 { 
-                  title: lang === 'pt' ? "Escalabilidade" : "Scalability", 
-                  desc: lang === 'pt' ? "Cresça sua operação sem preocupações com performance ou limites técnicos." : "Grow your operation without worrying about performance or technical limits.",
+                  title: isPt ? "Escalabilidade" : "Scalability", 
+                  desc: isPt ? "Cresça sua operação sem preocupações com performance ou limites técnicos." : "Grow your operation without worrying about performance or technical limits.",
                   image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 }
               ].map((item, i) => (
@@ -329,7 +336,9 @@ const Solutions: React.FC = () => {
             {/* Badge tecnológico */}
             <div className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100">
               <Cpu className="w-4 h-4 text-[#6a00a3]" />
-              <span className="text-xs font-medium text-slate-600">Tecnologia cloud-native</span>
+              <span className="text-xs font-medium text-slate-600">
+                {isPt ? 'Tecnologia cloud-native' : 'Cloud-native technology'}
+              </span>
               <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </div>
           </div>
@@ -372,7 +381,9 @@ const Solutions: React.FC = () => {
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping opacity-50"></div>
               </div>
-              <span className="text-sm font-medium text-slate-600">+50 empresas confiam</span>
+              <span className="text-sm font-medium text-slate-600">
+                {isPt ? '+50 empresas confiam' : '50+ companies trust'}
+              </span>
             </div>
             <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center space-x-2">
@@ -380,7 +391,9 @@ const Solutions: React.FC = () => {
                 <div className="w-2 h-2 bg-[#6a00a3] rounded-full"></div>
                 <div className="absolute inset-0 w-2 h-2 bg-[#6a00a3] rounded-full animate-ping opacity-50"></div>
               </div>
-              <span className="text-sm font-medium text-slate-600">ISO 27001 Certified</span>
+              <span className="text-sm font-medium text-slate-600">
+                {isPt ? 'ISO 27001 Certificado' : 'ISO 27001 Certified'}
+              </span>
             </div>
             <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center space-x-2">
@@ -388,7 +401,9 @@ const Solutions: React.FC = () => {
                 <div className="w-2 h-2 bg-[#1B3C2B] rounded-full"></div>
                 <div className="absolute inset-0 w-2 h-2 bg-[#1B3C2B] rounded-full animate-ping opacity-50"></div>
               </div>
-              <span className="text-sm font-medium text-slate-600">Suporte 24/7</span>
+              <span className="text-sm font-medium text-slate-600">
+                {isPt ? 'Suporte 24/7' : '24/7 Support'}
+              </span>
             </div>
           </div>
         </motion.div>
@@ -404,10 +419,10 @@ const Solutions: React.FC = () => {
           ></motion.div>
         </div>
         <div className="flex justify-between mt-2 text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>Inovação</span>
-          <span>Segurança</span>
-          <span>Escalabilidade</span>
-          <span>Performance</span>
+          <span>{isPt ? 'Inovação' : 'Innovation'}</span>
+          <span>{isPt ? 'Segurança' : 'Security'}</span>
+          <span>{isPt ? 'Escalabilidade' : 'Scalability'}</span>
+          <span>{isPt ? 'Performance' : 'Performance'}</span>
         </div>
       </div>
     </div>
