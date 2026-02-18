@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
           </Link>
           <p className="text-slate-300 text-sm leading-relaxed">
-            Especialistas globais em consultoria ISO, gestão de riscos e formação executiva. 
+            Especialistas globais em serviços ISO, gestão de riscos e formação executiva. 
             Transformamos desafios corporativos em excelência operacional.
           </p>
           <div className="flex space-x-4">
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <h4 className="font-bold text-lg mb-6">Consultoria</h4>
+          <h4 className="font-bold text-lg mb-6">Serviços</h4>
           <ul className="space-y-3 text-slate-300">
             <li><Link to="/consultoria/iso" className="hover:text-white transition-colors">Sistemas ISO</Link></li>
             <li><Link to="/consultoria/risco" className="hover:text-white transition-colors">Notação de Risco</Link></li>

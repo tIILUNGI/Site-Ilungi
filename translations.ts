@@ -4,7 +4,7 @@ import { Translation } from './types';
 export const translations: Record<'pt' | 'en', any> = {
   pt: {
     nav: {
-      consulting: "Consultoria",
+      consulting: "Serviços",
       academy: "Academia",
       solutions: "Soluções",
       partners: "Parceiros",
@@ -233,7 +233,7 @@ export const translations: Record<'pt' | 'en', any> = {
   },
   en: {
     nav: {
-      consulting: "Consulting",
+      consulting: "Services",
       academy: "Academy",
       solutions: "Solutions",
       partners: "Partners",
