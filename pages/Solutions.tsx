@@ -45,7 +45,7 @@ const Solutions: React.FC = () => {
   ];
 
   return (
-    <div className="py-20 bg-slate-50 relative overflow-hidden">
+    <div className="py-20 bg-white relative overflow-hidden">
       {/* ELEMENTOS TECNOLÓGICOS DE FUNDO - APENAS DECORATIVOS */}
       
       {/* Grade de circuito digital */}
@@ -88,15 +88,13 @@ const Solutions: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        {/* Header com brilho tecnológico */}
-        <div className="text-center mb-24 relative">
-          {/* Efeito de brilho no header */}
-          <div className="absolute -inset-20 bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
+        {/* Header */}
+        <div className="text-center mb-24">
           
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-black uppercase mb-6 tracking-wider backdrop-blur-sm border border-[#6a00a3]/20 relative"
+            className="inline-block px-4 py-1.5 bg-slate-100 text-slate-600 rounded-full text-sm font-black uppercase mb-6 tracking-wider"
           >
             {isPt ? 'Ecossistema Digital ILUNGI' : 'ILUNGI Digital Ecosystem'}
           </motion.span>
@@ -108,8 +106,8 @@ const Solutions: React.FC = () => {
             className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-8 relative"
           >
             {t.solutions.title}
-            {/* Linha decorativa tecnológica */}
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
+            {/* Linha decorativa simples */}
+            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-slate-300 rounded-full"></span>
           </motion.h1>
           
           <motion.p 
@@ -133,8 +131,8 @@ const Solutions: React.FC = () => {
               whileHover={{ y: -10 }}
               className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-500"
             >
-              {/* Efeito de borda tecnológica no hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3]/0 via-[#6a00a3]/0 to-[#1B3C2B]/0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+              {/* Efeito de borda simples no hover */}
+              <div className="absolute -inset-0.5 bg-slate-200 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               {/* Container da imagem */}
               <div className="relative h-56 overflow-hidden">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, ExternalLink } from 'lucide-react';
+import { Quote, ExternalLink, Award } from 'lucide-react';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ interface Reference {
   person: string;
   service: string;
   description?: string;
-  attachments?: { name: string; url: string }[];
+  attachments?: string[];
 }
 
 interface ReferenceCardProps {
@@ -69,6 +69,23 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
           <p className={`text-xs mt-3 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
             — {reference.person}
           </p>
+          
+          {/* Certificate thumbnails */}
+          {reference.attachments && reference.attachments.length > 0 && (
+            <div className="mt-3 flex items-center gap-2">
+              <Award className={`w-4 h-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+              <div className="flex gap-2">
+                {reference.attachments.map((cert: string, idx: number) => (
+                  <img 
+                    key={idx}
+                    src={cert} 
+                    alt={isPt ? 'Certificado' : 'Certificate'}
+                    className="w-12 h-12 object-contain rounded border border-slate-200 dark:border-slate-600"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       

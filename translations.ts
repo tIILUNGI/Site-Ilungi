@@ -104,8 +104,9 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     academy: {
-      title: "Academia ILUNGI",
-      subtitle: "Formando os líderes de amanhã com metodologias internacionais e instrutores com vasta experiência de mercado.",
+      title: "FORMAÇÕES E EDUCAÇÃO CORPORATIVA",
+      subtitle: "Reconhecendo as especificidades de cada empresa, desenhamos soluções formativas personalizadas. Disponibilizamos todo o auxílio necessário na gestão integrada do plano de formação, para que as empresas possam alcançar, eficiente e eficazmente, os seus objetivos.",
+      description: "A educação corporativa, neste contexto de serviço, uma estratégia de acompanhamento voltada para a gestão de pessoas da sua empresa, em que habilidades devem ser desenvolvidas em favor do contexto organizacional. Isso significa que a prática vai muito além de oferecermos treinamentos ou simplesmente qualificar a mão de obra.",
       features: {
         cert: "Certificação Int.",
         certDesc: "Certificados válidos globalmente.",
@@ -143,7 +144,7 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Tecnologia de ponta para gestão eficiente do seu negócio.",
       sicloc: {
         title: "SICLIC",
-        desc: "Solução cloud para gestão do relacionamento com o cliente baseada em 4 conceitos: Potencial cliente, cliente, contrato e relatório.",
+        desc: "Solução cloud para gestão do relacionamento com o cliente baseada em 4 conceitos: Potencial cliente, cliente, contrato e relatório. As relações são entre pessoas, e o SICLIC auxilia na gestão e fidelização do consumidor.\nwww.siclic.ao | contacto@siclic.ao",
       },
       tocomply: {
         title: "ToComply360º",
@@ -152,8 +153,9 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "Especialistas em Certificação ISO",
-        desc: "Guiamos sua empresa rumo à excelência operacional através das normas internacionais mais respeitadas do mundo.",
+        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+        desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
+        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
           "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Melhoria contínua e satisfação total do cliente." },
           "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Sustentabilidade e conformidade legal verde." },
@@ -168,19 +170,19 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "Serviço de notação de risco",
-        desc: "Avaliação estruturada de riscos corporativos para apoiar decisões e conformidade.",
-        content: "Combinamos métricas, dados e análise especializada para classificar riscos e orientar ações de mitigação."
+        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
+        desc: "Serviço de notação de risco pela ILUNGI",
+        content: "Em processo de regularização pela CMC\nO Serviço de Notação de Risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de Notação de Risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
       },
       procurement: {
-        title: "Consultoria em Procurement",
-        desc: "Maximize a eficiência da sua cadeia de suprimentos e reduza custos operacionais significativos.",
-        content: "Implementamos processos de compras estratégicas, qualificação de fornecedores e compliance em procurement para garantir agilidade e transparência."
+        title: "Procurement",
+        desc: "Serviço completo de procurement para sua empresa.",
+        content: "O nosso serviço de procurement tem como objectivo possibilitar que o cliente tenha tempo para focar seus esforços em outros assuntos ligados a sua empresa. Ante a necessidade de serviços, ferramentas ou equipamentos essenciais que a sua empresa esteja a necessitar, nós compramos para si dentro e for a de Angola. Podemos cuidar de tudo, desde notificação de serviços, especificações e certificados de serviço, monitoramento de faturas de vários fornecedores – a preços competitivos e com preços fixos globalmente e a partir de um único ponto de contacto"
       },
       pmo: {
-        title: "Assistência e suporte de TI",
-        desc: "Suporte técnico contínuo para manter sistemas, redes e utilizadores a funcionar sem interrupções.",
-        content: "Atuamos com helpdesk, manutenção preventiva, monitorização e resposta rápida a incidentes."
+        title: "ASSISTÊNCIA E SUPORTE DE T.I",
+        desc: "Serviços de assistência e suporte de TI",
+        content: "Se você busca reduzir/controlar custos na área de tecnologia, saiba que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
       }
     },
     alumni: {
@@ -215,8 +217,8 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "Consultoria de Sistemas de Gestão e Projectos",
-      subtitle: "Apoiamos a implementação de sistemas de gestão baseados em normas internacionais e a condução de projectos de certificação.",
+      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
         rate: "Taxa de Aprovação",
@@ -240,223 +242,146 @@ export const translations: Record<'pt' | 'en', any> = {
       viewDetails: "Ver Detalhes",
       clients: [
         {
-          id: "angLOBAL",
-          name: "ANGLOBAL",
-          logo: "/Nossas Refeências/ANGLOBAL.png",
-          role: "",
-          comment: "",
-          person: "",
+          id: "aguiasSul",
+          name: "Aguias do Sul",
+          logo: "/Nossas Refeências/Aguias do Sul.png",
+          role: "Implementação ISO 9001",
+          comment: "A ILUNGI foi fundamental na transformação dos nossos processos de gestão. A certificação ISO 9001 trouxe maior eficiência e credibilidade.",
+          person: "Director Geral",
           service: "iso",
-          description: "",
+          description: "Consultoria e implementação de sistema de gestão da qualidade ISO 9001",
+          attachments: []
+        },
+        {
+          id: "imobias",
+          name: "IMOVIAS",
+          logo: "/Nossas Refeências/Imovias.png",
+          role: "Implementação ISO 14001",
+          comment: "Excelente trabalho da ILUNGI na implementação da ISO 14001. A equipa demonstrou profissionalismo e conhecimento técnico.",
+          person: "Director de Operações",
+          service: "iso",
+          description: "Consultoria e implementação de sistema de gestão ambiental ISO 14001",
+          attachments: []
+        },
+        {
+          id: "interSeguros",
+          name: "Inter Seguros",
+          logo: "/Nossas Refeências/Inter Seguros.png",
+          role: "Implementação ISO 27001",
+          comment: "A ILUNGI realizou um trabalho excepcional na implementação da ISO 27001. A segurança da nossa informação está agora garantida.",
+          person: "Director de Tecnologia",
+          service: "iso",
+          description: "Consultoria e implementação de sistema de gestão de segurança da informação ISO 27001",
+          attachments: []
+        },
+        {
+          id: "aClean",
+          name: "A Clean",
+          logo: "/Nossas Refeências/A Clean.jpg",
+          role: "Implementação ISO 22000",
+          comment: "Graças à ILUNGI, obtivemos a certificação ISO 22000 com sucesso. O processo foi rigoroso e bem estruturado.",
+          person: "Director Geral",
+          service: "iso",
+          description: "Consultoria e implementação de sistema de gestão de segurança alimentar ISO 22000 / HACCP",
+          attachments: []
+        },
+        {
+          id: "velonet",
+          name: "Velonet",
+          logo: "/Nossas Refeências/Velonet.png",
+          role: "Implementação ISO 45001",
+          comment: "A ILUNGI ajudou-nos a implementar a ISO 45001 de forma eficiente. O ambiente de trabalho tornou-se muito mais seguro.",
+          person: "Director de Recursos Humanos",
+          service: "iso",
+          description: "Consultoria e implementação de sistema de gestão de saúde e segurança ocupacional ISO 45001",
+          attachments: []
+        },
+        {
+          id: "cmc",
+          name: "CMC",
+          logo: "/Nossas Refeências/CMC.png",
+          role: "Serviço de Notação de Risco",
+          comment: "A ILUNGI oferece um serviço de notação de risco com elevados padrões de rigor e impartialidade.",
+          person: "Director Geral",
+          service: "risk",
+          description: "Serviço de notação de risco em processo de regularização pela CMC",
           attachments: []
         },
         {
           id: "anpg",
           name: "ANPG",
           logo: "/Nossas Refeências/ANPG.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "aurea",
-          name: "AUREA",
-          logo: "/Nossas Refeências/AUREA.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "bio",
-          name: "BIO",
-          logo: "/Nossas Refeências/BIO.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
+          role: "Serviço de Procurement",
+          comment: "A ILUNGI fornecer-nos os melhores equipamentos e serviços com eficiência e profissionalismo.",
+          person: "Director de Compras",
+          service: "procurement",
+          description: "Serviços de procurement de equipamentos e ferramentas",
+          attachments: ["/Nossas Refeências/cerANPG.png"]
         },
         {
           id: "brill",
           name: "BRILL",
           logo: "/Nossas Refeências/BRILL.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "cfa",
-          name: "CFA",
-          logo: "/Nossas Refeências/CFA.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "cpd",
-          name: "CPD",
-          logo: "/Nossas Refeências/CPD.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "ensa",
-          name: "ENSA",
-          logo: "/Nossas Refeências/ENSA.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "epn",
-          name: "EPN",
-          logo: "/Nossas Refeências/EPN.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "fbl",
-          name: "FBL",
-          logo: "/Nossas Refeências/FBL.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "fcks",
-          name: "FCKS",
-          logo: "/Nossas Refeências/FCKS.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Procurement",
+          comment: "Excelente serviço de procurement. A ILUNGI sempre entregou no prazo e com qualidade.",
+          person: "Director de Operações",
           service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "inacon",
-          name: "INACON",
-          logo: "/Nossas Refeências/INACON.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "inefop",
-          name: "INEFOP",
-          logo: "/Nossas Refeências/INEFOP.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "kyros",
-          name: "KYROS",
-          logo: "/Nossas Refeências/KYROS.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "lsg",
-          name: "LSG",
-          logo: "/Nossas Refeências/LSG.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
+          description: "Serviços de procurement de materiais e equipamentos",
+          attachments: ["/Nossas Refeências/cerBRILL.png"]
         },
         {
           id: "petromar",
           name: "PetroMar",
           logo: "/Nossas Refeências/PetroMar.jpg",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "A ILUNGI proporcionou-nos um suporte técnico de excelência. O serviço de TI melhorou significativamente as nossas operações.",
+          person: "Director de Sistemas",
           service: "pmo",
-          description: "",
+          description: "Serviços de assistência e suporte de TI para operações de petróleo e gás",
           attachments: []
         },
         {
           id: "pmo",
           name: "PMO",
           logo: "/Nossas Refeências/PMO.jpg",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "Excelente apoio técnico. A ILUNGI respondeu rapidamente às nossas necessidades de TI.",
+          person: "Director de Operações",
           service: "pmo",
-          description: "",
+          description: "Serviços de gestão de projetos e suporte de TI",
           attachments: []
         },
         {
           id: "porto-do-lubito",
           name: "Porto do Lubito",
           logo: "/Nossas Refeências/Porto do Lubito.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "O suporte de TI da ILUNGI foi fundamental para a modernização dos nossos sistemas.",
+          person: "Director de Tecnologia",
           service: "pmo",
-          description: "",
+          description: "Serviços de assistência e suporte de TI para infraestrutura portuária",
           attachments: []
         },
         {
           id: "rnt",
           name: "RNT",
           logo: "/Nossas Refeências/RNT.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "Serviço profissional e eficiente. A ILUNGI sempre manteve os nossos sistemas a funcionar.",
+          person: "Director de Infraestrutura",
           service: "pmo",
-          description: "",
+          description: "Serviços de suporte técnico e infraestrutura de TI",
           attachments: []
         },
         {
           id: "tsco",
           name: "TSCO",
           logo: "/Nossas Refeências/TSCO.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "A ILUNGI oferece um suporte técnico de alta qualidade. Recomendamos os seus serviços.",
+          person: "Director Geral",
           service: "pmo",
-          description: "",
+          description: "Serviços de outsourcing de TI e suporte técnico",
           attachments: []
         }
       ]
@@ -547,25 +472,26 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Management Systems and Projects Consulting",
+        title: "Consulting and Audit in Management Systems & Projects",
         desc: "Consulting for management systems implementation and project delivery focused on standards and operational efficiency."
       },
       risk: {
-        title: "Risk Rating Service",
-        desc: "Risk classification and analysis to support strategic decision-making."
+        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
+        desc: "Serviço de notação de risco"
       },
       procurement: {
         title: "Procurement",
-        desc: "Supply chain optimization, cost reduction, and procurement compliance."
+        desc: "Serviço completo de procurement para sua empresa."
       },
       pmo: {
-        title: "IT Assistance and Support",
-        desc: "Ongoing technical support for operations, infrastructure, and IT service continuity."
+        title: "ASSISTÊNCIA E SUPORTE DE T.I",
+        desc: "Serviços de assistência e suporte de TI"
       }
     },
     academy: {
-      title: "ILUNGI Academy",
-      subtitle: "Training tomorrow's leaders with international methodologies and instructors with extensive market experience.",
+      title: "TRAINING AND CORPORATE EDUCATION",
+      subtitle: "Recognizing the specificities of each company, we design customized training solutions. We provide all the necessary assistance in the integrated management of the training plan, so that companies can efficiently and effectively achieve their objectives.",
+      description: "Corporate education, in this service context, is a follow-up strategy aimed at people management in your company, where skills must be developed in favor of the organizational context. This means that the practice goes far beyond just offering training or simply qualifying the workforce.",
       features: {
         cert: "Int. Certification",
         certDesc: "Globally valid certificates.",
@@ -603,7 +529,7 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Cutting-edge technology for efficient business management.",
       sicloc: {
         title: "SICLIC",
-        desc: "Cloud solution for customer relationship management based on 4 concepts: Potential client, client, contract and report.",
+        desc: "Cloud solution for customer relationship management based on 4 concepts: Potential client, client, contract and report. Relationships are between people, and SICLIC helps manage and loyalize consumers.\nwww.siclic.ao | contacto@siclic.ao",
       },
       tocomply: {
         title: "ToComply360º",
@@ -612,35 +538,36 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "ISO Certification Experts",
-        desc: "We guide your company towards operational excellence through the world's most respected international standards.",
+        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+        desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
+        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
-          "9001": { title: "ISO 9001 - Quality Management", benefit: "Continuous improvement and total customer satisfaction." },
-          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Sustainability and green legal compliance." },
-          "45001": { title: "ISO 45001 - Occupational Health & Safety", benefit: "Safe working environment and accident reduction." },
-          "27001": { title: "ISO 27001 - Information Security", benefit: "Protection of digital assets and data trust." },
-          "22301": { title: "ISO 22301 - Business Continuity", benefit: "Resilience in face of crises and interruptions." },
-          "37001": { title: "ISO 37001 - Anti-bribery Management", benefit: "Ethical culture and corporate transparency." },
-          "37301": { title: "ISO 37301 - Compliance", benefit: "Compliance management system." },
-          "31000": { title: "ISO 31000 - Risk Management", benefit: "Identification and mitigation of business risks." },
-          "22000": { title: "ISO 22000 - Food Safety", benefit: "Food safety assurance and HACCP." },
-          "13485": { title: "ISO 13485 - Healthcare", benefit: "Quality management systems for medical devices." }
+          "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Melhoria contínua e satisfação total do cliente." },
+          "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Sustentabilidade e conformidade legal verde." },
+          "45001": { title: "ISO 45001 - Saúde e Segurança Ocupacional", benefit: "Ambiente de trabalho seguro e redução de acidentes." },
+          "27001": { title: "ISO 27001 - Gestão de Informação", benefit: "Proteção de ativos digitais e confiança de dados." },
+          "22301": { title: "ISO 22301 - Gestão de Continuidade", benefit: "Resiliência face a crises e interrupções." },
+          "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Cultura ética e transparência corporativa." },
+          "37301": { title: "ISO 37301 - Compliance", benefit: "Sistema de gestão de conformidade." },
+          "31000": { title: "ISO 31000 - Gestão de Risco", benefit: "Identificação e mitigação de riscos empresariais." },
+          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Garantia de segurança alimentar e HACCP." },
+          "13485": { title: "ISO 13485 - Saúde", benefit: "Sistemas de gestão para dispositivos médicos." }
         }
       },
       risk: {
-        title: "Risk Rating Service",
-        desc: "Structured risk assessment to support decisions and compliance.",
-        content: "We combine metrics, data, and expert analysis to classify risks and guide mitigation actions."
+        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
+        desc: "Serviço de notação de risco pela ILUNGI",
+        content: "Em processo de regularização pela CMC\nO Serviço de Notação de Risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de Notação de Risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
       },
       procurement: {
-        title: "Procurement Consulting",
-        desc: "Maximize your supply chain efficiency and significantly reduce operational costs.",
-        content: "We implement strategic sourcing processes, vendor qualification, and procurement compliance to ensure agility and transparency."
+        title: "Procurement",
+        desc: "Serviço completo de procurement para sua empresa.",
+        content: "O nosso serviço de procurement tem como objectivo possibilitar que o cliente tenha tempo para focar seus esforços em outros assuntos ligados a sua empresa. Ante a necessidade de serviços, ferramentas ou equipamentos essenciais que a sua empresa esteja a necessitar, nós compramos para si dentro e for a de Angola. Podemos cuidar de tudo, desde notificação de serviços, especificações e certificados de serviço, monitoramento de faturas de vários fornecedores – a preços competitivos e com preços fixos globalmente e a partir de um único ponto de contacto"
       },
       pmo: {
-        title: "IT Assistance and Support",
-        desc: "Continuous technical support to keep systems, networks, and users running without interruption.",
-        content: "We provide helpdesk, preventive maintenance, monitoring, and fast incident response."
+        title: "ASSISTÊNCIA E SUPORTE DE T.I",
+        desc: "Serviços de assistência e suporte de TI",
+        content: "Se você busca reduzir/controlar custos na área de tecnologia, saiba que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
       }
     },
     alumni: {
@@ -675,23 +602,23 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "Management Systems and Projects Consulting",
-      subtitle: "We support the implementation of management systems based on international standards and the delivery of certification projects.",
+      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.",
       stats: {
-        certified: "Several Certified Companies",
-        rate: "Approval Rate",
+        certified: "Várias Empresas Certificadas",
+        rate: "Taxa de Aprovação",
       },
-      methodology: "Our Implementation Methodology",
+      methodology: "Nossa Metodologia de Implementação",
       steps: {
-        gap: "GAP Assessment",
-        gapDesc: "In-depth analysis of current state vs. standard requirements.",
-        planning: "Planning & Audit",
-        planningDesc: "Personalized strategy and rigorous internal verification.",
-        certification: "Final Certification",
-        certificationDesc: "Full support during external audit.",
+        gap: "Diagnóstico GAP",
+        gapDesc: "Análise profunda do estado atual vs requisitos da norma.",
+        planning: "Planeamento & Auditoria",
+        planningDesc: "Estratégia personalizada e verificação interna rigorosa.",
+        certification: "Certificação Final",
+        certificationDesc: "Acompanhamento total durante a auditoria externa.",
       },
-      cta: "Talk to Senior Consultant",
-      testimonial: "ILUNGI was fundamental for our international expansion through ISO 9001.",
+      cta: "Falar com Consultor Senior",
+      testimonial: "A ILUNGI foi fundamental para nossa expansão internacional através da ISO 9001.",
       testimonialAuthor: "",
     },
     references: {
@@ -699,228 +626,152 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Companies that trusted our services",
       viewDetails: "View Details",
       clients: [
-        // ISO References (5)
+        // ISO References
         {
-          id: "angLOBAL",
-          name: "ANGLOBAL",
-          logo: "/Nossas Refeências/ANGLOBAL.png",
-          role: "",
-          comment: "",
-          person: "",
+          id: "aguiasSul",
+          name: "Aguias do Sul",
+          logo: "/Nossas Refeências/Aguias do Sul.png",
+          role: "ISO 9001 Implementation",
+          comment: "ILUNGI was fundamental in transforming our management processes. ISO 9001 certification brought greater efficiency and credibility.",
+          person: "General Director",
           service: "iso",
-          description: "",
+          description: "Consulting and implementation of ISO 9001 quality management system",
           attachments: []
         },
+        {
+          id: "imobias",
+          name: "IMOVIAS",
+          logo: "/Nossas Refeências/Imobias.png",
+          role: "ISO 14001 Implementation",
+          comment: "Excellent work by ILUNGI in implementing ISO 14001. The team demonstrated professionalism and technical knowledge.",
+          person: "Operations Director",
+          service: "iso",
+          description: "Consulting and implementation of ISO 14001 environmental management system",
+          attachments: []
+        },
+        {
+          id: "interSeguros",
+          name: "Inter Seguros",
+          logo: "/Nossas Refeências/Inter Seguros.png",
+          role: "ISO 27001 Implementation",
+          comment: "ILUNGI did an exceptional job implementing ISO 27001. Our information security is now guaranteed.",
+          person: "Technology Director",
+          service: "iso",
+          description: "Consulting and implementation of ISO 27001 information security management system",
+          attachments: []
+        },
+        {
+          id: "aClean",
+          name: "A Clean",
+          logo: "/Nossas Refeências/A Clean.jpg",
+          role: "ISO 22000 Implementation",
+          comment: "Thanks to ILUNGI, we obtained ISO 22000 certification successfully. The process was rigorous and well structured.",
+          person: "General Director",
+          service: "iso",
+          description: "Consulting and implementation of ISO 22000 / HACCP food safety management system",
+          attachments: []
+        },
+        {
+          id: "velonet",
+          name: "Velonet",
+          logo: "/Nossas Refeências/Velonet.png",
+          role: "ISO 45001 Implementation",
+          comment: "ILUNGI helped us implement ISO 45001 efficiently. The workplace has become much safer.",
+          person: "Human Resources Director",
+          service: "iso",
+          description: "Consulting and implementation of ISO 45001 occupational health and safety management system",
+          attachments: []
+        },
+        // Risk References
+        // Risk References
+        {
+          id: "cmc",
+          name: "CMC",
+          logo: "/Nossas Refeências/CMC.png",
+          role: "Risk Rating Service",
+          comment: "ILUNGI offers a risk rating service with high standards of rigor and impartiality.",
+          person: "General Director",
+          service: "risk",
+          description: "Risk rating service under regularization process by CMC",
+          attachments: []
+        },
+        // Procurement References
         {
           id: "anpg",
           name: "ANPG",
           logo: "/Nossas Refeências/ANPG.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "aurea",
-          name: "AUREA",
-          logo: "/Nossas Refeências/AUREA.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "bio",
-          name: "BIO",
-          logo: "/Nossas Refeências/BIO.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
+          role: "Procurement Service",
+          comment: "ILUNGI provided us with the best equipment and services efficiently and professionally.",
+          person: "Procurement Director",
+          service: "procurement",
+          description: "Procurement services for equipment and tools",
+          attachments: ["/Nossas Refeências/cerANPG.png"]
         },
         {
           id: "brill",
           name: "BRILL",
           logo: "/Nossas Refeências/BRILL.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "iso",
-          description: "",
-          attachments: []
-        },
-        // Risk References (5)
-        {
-          id: "cfa",
-          name: "CFA",
-          logo: "/Nossas Refeências/CFA.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "cpd",
-          name: "CPD",
-          logo: "/Nossas Refeências/CPD.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "ensa",
-          name: "ENSA",
-          logo: "/Nossas Refeências/ENSA.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "epn",
-          name: "EPN",
-          logo: "/Nossas Refeências/EPN.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "fbl",
-          name: "FBL",
-          logo: "/Nossas Refeências/FBL.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "risk",
-          description: "",
-          attachments: []
-        },
-        // Procurement References (5)
-        {
-          id: "fcks",
-          name: "FCKS",
-          logo: "/Nossas Refeências/FCKS.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "Procurement Service",
+          comment: "Excellent procurement service. ILUNGI always delivered on time and with quality.",
+          person: "Operations Director",
           service: "procurement",
-          description: "",
-          attachments: []
+          description: "Procurement services for materials and equipment",
+          attachments: ["/Nossas Refeências/cerBRILL.png"]
         },
-        {
-          id: "inacon",
-          name: "INACON",
-          logo: "/Nossas Refeências/INACON.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "inefop",
-          name: "INEFOP",
-          logo: "/Nossas Refeências/INEFOP.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "kyros",
-          name: "KYROS",
-          logo: "/Nossas Refeências/KYROS.png",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        {
-          id: "lsg",
-          name: "LSG",
-          logo: "/Nossas Refeências/LSG.jpg",
-          role: "",
-          comment: "",
-          person: "",
-          service: "procurement",
-          description: "",
-          attachments: []
-        },
-        // TI/PMO References (5)
+        // TI/PMO References
         {
           id: "petromar",
           name: "PetroMar",
           logo: "/Nossas Refeências/PetroMar.jpg",
-          role: "",
-          comment: "",
-          person: "",
+          role: "IT Assistance and Support Service",
+          comment: "ILUNGI provided us with excellent technical support. The IT service significantly improved our operations.",
+          person: "Systems Director",
           service: "pmo",
-          description: "",
+          description: "IT assistance and support services for oil and gas operations",
           attachments: []
         },
         {
           id: "pmo",
           name: "PMO",
           logo: "/Nossas Refeências/PMO.jpg",
-          role: "",
-          comment: "",
-          person: "",
+          role: "IT Assistance and Support Service",
+          comment: "Excellent technical support. ILUNGI quickly responded to our IT needs.",
+          person: "Operations Director",
           service: "pmo",
-          description: "",
+          description: "Project management and IT support services",
           attachments: []
         },
         {
           id: "porto-do-lubito",
           name: "Porto do Lubito",
           logo: "/Nossas Refeências/Porto do Lubito.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "IT Assistance and Support Service",
+          comment: "ILUNGI's IT support was fundamental for modernizing our systems.",
+          person: "Technology Director",
           service: "pmo",
-          description: "",
+          description: "IT assistance and support services for port infrastructure",
           attachments: []
         },
         {
           id: "rnt",
           name: "RNT",
           logo: "/Nossas Refeências/RNT.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "IT Assistance and Support Service",
+          comment: "Professional and efficient service. ILUNGI always kept our systems running.",
+          person: "Infrastructure Director",
           service: "pmo",
-          description: "",
+          description: "Technical support and IT infrastructure services",
           attachments: []
         },
         {
           id: "tsco",
           name: "TSCO",
           logo: "/Nossas Refeências/TSCO.png",
-          role: "",
-          comment: "",
-          person: "",
+          role: "IT Assistance and Support Service",
+          comment: "ILUNGI offers high-quality technical support. We recommend their services.",
+          person: "General Director",
           service: "pmo",
-          description: "",
+          description: "IT outsourcing and technical support services",
           attachments: []
         }
       ]

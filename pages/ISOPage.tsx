@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Shield, Book, CheckCircle, Search, ClipboardList } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, Book, CheckCircle, Search, ClipboardList, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
@@ -8,8 +8,10 @@ import ReferenceCard from '../components/ReferenceCard';
 const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
+  const [showAllStandards, setShowAllStandards] = useState(false);
   
-  const isoKeys = ["9001", "14001", "45001"] as const;
+  const allIsoKeys = ["9001", "14001", "45001", "27001", "22301", "37001", "37301", "31000", "22000", "13485"] as const;
+  const displayedIsoKeys = showAllStandards ? allIsoKeys : allIsoKeys.slice(0, 3);
 
   return (
     <div className="py-20 bg-white">
@@ -20,7 +22,7 @@ const ISOPage: React.FC = () => {
                     {isPt ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
                 </span>
                 <h1 className="text-5xl font-black text-[#1B3C2B] mb-8 leading-tight">{t.iso.title}</h1>
-                <p className="text-xl text-slate-500 font-light leading-relaxed mb-8">
+                <p className="text-xl text-slate-500 font-light leading-relaxed mb-8 text-justify">
                     {t.iso.subtitle}
                 </p>
                 <div className="grid grid-cols-2 gap-4">
@@ -43,7 +45,7 @@ const ISOPage: React.FC = () => {
           {isPt ? 'Normas que Implementamos' : 'Standards We Implement'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-            {isoKeys.map((key, i) => (
+            {displayedIsoKeys.map((key, i) => (
                 <div key={i} className="p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#6a00a3]/20 transition-all">
                     <div className="w-12 h-12 bg-[#6a00a3]/10 text-[#6a00a3] rounded-xl flex items-center justify-center mb-6">
                         <Shield className="w-6 h-6" />
@@ -57,9 +59,15 @@ const ISOPage: React.FC = () => {
                 </div>
             ))}
         </div>
-        <p className="text-center text-sm text-slate-500 mb-24">
-          {isPt ? 'Estas e muitas mais.' : 'These and many more.'}
-        </p>
+        <div className="text-center mb-24">
+          <button 
+            onClick={() => setShowAllStandards(!showAllStandards)}
+            className="text-sm font-bold text-[#6a00a3] hover:text-[#520b7d] flex items-center justify-center mx-auto transition-colors"
+          >
+            {isPt ? (showAllStandards ? 'Ver menos' : 'Estas e muitas mais.') : (showAllStandards ? 'Show less' : 'These and many more.')}
+            {showAllStandards ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
+          </button>
+        </div>
 
         {/* References Section */}
         {(t.references?.clients || []).length > 0 && (

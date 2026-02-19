@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, FileText, Download, Calendar, User, Building } from 'lucide-react';
+import { ArrowLeft, FileText, Download, Calendar, User, Building, X, ZoomIn } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppContext } from '../App';
 
@@ -8,6 +8,7 @@ const ReferenceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { t, isDark } = useAppContext();
   const isPt = t.nav.home === 'Início';
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   const references = t.references?.clients || [];
   const reference = references.find((ref: any) => ref.id === id);
@@ -96,35 +97,55 @@ const ReferenceDetail: React.FC = () => {
           {reference.attachments && reference.attachments.length > 0 && (
             <div>
               <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                {isPt ? 'Anexos' : 'Attachments'}
+                {isPt ? 'Certificados' : 'Certificates'}
               </h2>
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {reference.attachments.map((attachment: any, index: number) => (
-                  <a 
+                  <div 
                     key={index}
-                    href={attachment.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center p-4 rounded-xl border transition-all ${
-                      isDark 
-                        ? 'border-slate-600 hover:border-purple-500 bg-slate-700' 
-                        : 'border-slate-200 hover:border-purple-300 bg-slate-50'
-                    }`}
+                    className={`relative rounded-xl overflow-hidden cursor-pointer group ${isDark ? 'bg-slate-700' : 'bg-slate-50'}`}
+                    onClick={() => setSelectedImage(attachment)}
                   >
-                    <FileText className={`w-8 h-8 mr-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-                    <div className="flex-1">
-                      <p className={`font-medium ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                        {attachment.name}
-                      </p>
+                    <img 
+                      src={attachment} 
+                      alt={isPt ? 'Certificado' : 'Certificate'}
+                      className="w-full h-48 object-contain p-2"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center">
+                      <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                    <Download className={`w-5 h-5 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
           )}
         </motion.div>
       </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white hover:text-purple-400 transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <motion.img 
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            src={selectedImage} 
+            alt={isPt ? 'Certificado' : 'Certificate'}
+            className="max-w-full max-h-full object-contain rounded-lg"
+          />
+        </motion.div>
+      )}
     </div>
   );
 };

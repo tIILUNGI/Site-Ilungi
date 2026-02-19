@@ -42,7 +42,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               </div>
               <h1 className="text-5xl font-black text-[#1B3C2B] leading-tight">{content.title}</h1>
               <p className="text-xl text-slate-500 font-light leading-relaxed">{content.desc}</p>
-              <p className="text-lg text-slate-600 leading-relaxed">{content.content}</p>
+              <p className="text-lg text-slate-600 leading-relaxed text-justify">{content.content}</p>
               
               <div className="pt-8">
                 <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
