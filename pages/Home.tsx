@@ -185,6 +185,7 @@ const Home: React.FC = () => {
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
+              title={`Slide ${i + 1}`}
               className={`w-3 h-3 rounded-full transition-all ${i === currentSlide ? 'bg-white w-8' : 'bg-white/50'}`}
             />
           ))}
@@ -291,8 +292,7 @@ const Home: React.FC = () => {
                           transition={{ duration: 0.3 }}
                         >
                           <h3 
-                            className="text-2xl font-bold mb-3"
-                            style={{ color: service.color }}
+                            className="text-2xl font-bold mb-3 service-title"
                           >
                             {service.title}
                           </h3>
@@ -417,11 +417,7 @@ const Home: React.FC = () => {
                           <img 
                             src={partner.logo} 
                             alt={partner.name} 
-                            className="w-full h-full object-contain transition-all duration-500 p-1"
-                            style={{
-                              filter: isHovered ? 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))' : 'none',
-                              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-                            }}
+                            className="w-full h-full object-contain transition-all duration-500 p-1 partner-logo"
                           />
                         </div>
                       </div>
@@ -447,16 +443,10 @@ const Home: React.FC = () => {
                             exit={{ opacity: 0, y: 5 }}
                             transition={{ duration: 0.2 }}
                           >
-                            <span 
-                              className="text-xs font-medium uppercase tracking-wider"
-                              style={{ color: partner.color }}
-                            >
+                            <span className="text-xs font-medium uppercase tracking-wider partner-link-text">
                               {isPt ? 'Visitar' : 'Visit'}
                             </span>
-                            <ExternalLink 
-                              size={14} 
-                              style={{ color: partner.color }}
-                              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            <ExternalLink size={14} className="partner-link-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             />
                           </motion.div>
                         )}
@@ -464,10 +454,7 @@ const Home: React.FC = () => {
 
                       {/* Overlay gradiente sutil no hover */}
                       <motion.div 
-                        className="absolute inset-0 pointer-events-none"
-                        style={{
-                          background: `radial-gradient(circle at center, ${partner.color}15 0%, transparent 70%)`
-                        }}
+                        className="absolute inset-0 pointer-events-none partner-overlay"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: isHovered ? 1 : 0 }}
                         transition={{ duration: 0.4 }}

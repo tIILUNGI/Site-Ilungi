@@ -133,6 +133,7 @@ const ReferenceDetail: React.FC = () => {
         >
           <button 
             className="absolute top-4 right-4 text-white hover:text-purple-400 transition-colors"
+            title={isPt ? 'Fechar' : 'Close'}
             onClick={() => setSelectedImage(null)}
           >
             <X className="w-8 h-8" />

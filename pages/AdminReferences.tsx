@@ -200,6 +200,7 @@ const AdminReferences: React.FC = () => {
                 <select
                   value={formData.service}
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  title={isPt ? 'Selecione um serviço' : 'Select a service'}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                 >
                   <option value="iso">ISO</option>
@@ -275,12 +276,14 @@ const AdminReferences: React.FC = () => {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleEdit(ref)}
+                    title={isPt ? 'Editar' : 'Edit'}
                     className={`p-2 rounded-lg ${isDark ? 'hover:bg-slate-700' : 'hover:bg-slate-100'} transition-all`}
                   >
                     <Edit className={`w-5 h-5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`} />
                   </button>
                   <button
                     onClick={() => handleDelete(ref.id)}
+                    title={isPt ? 'Eliminar' : 'Delete'}
                     className={`p-2 rounded-lg ${isDark ? 'hover:bg-slate-700' : 'hover:bg-slate-100'} transition-all`}
                   >
                     <Trash2 className="w-5 h-5 text-red-500" />

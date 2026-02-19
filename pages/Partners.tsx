@@ -176,8 +176,7 @@ const Partners: React.FC = () => {
                       >
                         {/* Borda completa com cor do parceiro */}
                         <div 
-                          className="absolute inset-0 border-2 rounded-xl"
-                          style={{ borderColor: p.color }}
+                          className="absolute inset-0 border-2 rounded-xl partner-border"
                         />
                         
                         {/* Container da imagem */}
@@ -185,11 +184,7 @@ const Partners: React.FC = () => {
                           <img 
                             src={p.logo} 
                             alt={p.name} 
-                            className="w-full h-full object-contain transition-all duration-500"
-                            style={{
-                              filter: isHovered ? 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))' : 'none',
-                              transform: isHovered ? 'scale(1.02)' : 'scale(1)'
-                            }}
+                            className="w-full h-full object-contain transition-all duration-500 partner-logo"
                           />
                         </div>
                       </motion.div>
@@ -259,16 +254,10 @@ const Partners: React.FC = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <div className="flex items-center gap-1">
-                          <span 
-                            className="text-[10px] font-medium uppercase tracking-wider"
-                            style={{ color: p.color }}
-                          >
+                          <span className="text-[10px] font-medium uppercase tracking-wider partner-link-text">
                             Visitar
                           </span>
-                          <ExternalLink 
-                            size={14} 
-                            style={{ color: p.color }}
-                            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          <ExternalLink size={14} className="partner-link-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                           />
                         </div>
                       </motion.div>
@@ -276,10 +265,7 @@ const Partners: React.FC = () => {
 
                     {/* Overlay gradiente */}
                     <motion.div 
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(circle at center, ${p.color}08 0%, transparent 70%)`
-                      }}
+                      className="absolute inset-0 pointer-events-none partner-overlay"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: isHovered ? 1 : 0 }}
                       transition={{ duration: 0.4 }}
