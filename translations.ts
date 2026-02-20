@@ -9,7 +9,7 @@ export const translations: Record<'pt' | 'en', any> = {
       solutions: "Soluções",
       partners: "Parceiros",
       contact: "Contacto",
-      iso: "Consultoria de Sistemas de gestão e projectos",
+      iso: "Consultoria de Sistemas de gestão & projectos",
       risk: "Serviço de notação de risco",
       procurement: "Procurement",
       pmo: "Assistência e suporte de TI",
@@ -87,7 +87,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Consultoria de Sistemas de gestão e projectos",
+        title: "Consultoria de Sistemas de gestão & projectos",
         desc: "Implementação de sistemas de gestão e condução de projectos de melhoria com foco em padrões e eficiência operacional."
       },
       risk: {
@@ -218,7 +218,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     iso: {
       title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
-      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.",
+      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
         rate: "Taxa de Aprovação",

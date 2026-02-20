@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield, Book, CheckCircle, Search, ClipboardList, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
@@ -9,9 +9,19 @@ const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const [showAllStandards, setShowAllStandards] = useState(false);
+  const [references, setReferences] = useState<any[]>([]);
   
   const allIsoKeys = ["9001", "14001", "45001", "27001", "22301", "37001", "37301", "31000", "22000", "13485"] as const;
   const displayedIsoKeys = showAllStandards ? allIsoKeys : allIsoKeys.slice(0, 3);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_references_data');
+    if (saved) {
+      setReferences(JSON.parse(saved));
+    } else {
+      setReferences(t.references?.clients || []);
+    }
+  }, [t.references?.clients]);
 
   return (
     <div className="py-20 bg-white">
@@ -25,16 +35,6 @@ const ISOPage: React.FC = () => {
                 <p className="text-xl text-slate-500 font-light leading-relaxed mb-8 text-justify">
                     {t.iso.subtitle}
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-50 rounded-2xl">
-                        <p className="text-2xl font-black text-[#1B3C2B]">{t.iso.stats.certified}</p>
-                        <p className="text-xs text-slate-400 font-bold uppercase">{t.iso.stats.certified}</p>
-                    </div>
-                    <div className="p-4 bg-slate-50 rounded-2xl">
-                        <p className="text-2xl font-black text-[#1B3C2B]">100%</p>
-                        <p className="text-xs text-slate-400 font-bold uppercase">{t.iso.stats.rate}</p>
-                    </div>
-                </div>
             </div>
             <div className="flex-1 relative">
                 <img src="/imagens/ISO.png" className="rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
@@ -70,7 +70,7 @@ const ISOPage: React.FC = () => {
         </div>
 
         {/* References Section */}
-        {(t.references?.clients || []).length > 0 && (
+        {references.length > 0 && (
           <div className="mb-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-[#1B3C2B] mb-4">
@@ -81,7 +81,7 @@ const ISOPage: React.FC = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {t.references?.clients
+              {references
                 .filter((ref: any) => ref.service === 'iso')
                 .slice(0, 3)
                 .map((ref: any, i: number) => (

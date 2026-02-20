@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight, Layers, Target, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,17 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
     procurement: "/imagens/procurement.png",
     pmo: "/imagens/Gestão de Projecto.jpg"
   };
+
+  const [references, setReferences] = useState<any[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_references_data');
+    if (saved) {
+      setReferences(JSON.parse(saved));
+    } else {
+      setReferences(t.references?.clients || []);
+    }
+  }, [t.references?.clients]);
 
   return (
     <div className="py-20 bg-white">
@@ -89,7 +100,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
         </div>
 
         {/* References Section */}
-        {(t.references?.clients || []).filter((ref: any) => ref.service === type).length > 0 && (
+        {references.filter((ref: any) => ref.service === type).length > 0 && (
           <div className="mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-[#1B3C2B] mb-4">
@@ -100,7 +111,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {t.references?.clients
+              {references
                 .filter((ref: any) => ref.service === type)
                 .slice(0, 3)
                 .map((ref: any, i: number) => (

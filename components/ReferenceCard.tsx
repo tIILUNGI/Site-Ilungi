@@ -38,12 +38,11 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
       }`}
     >
       <div className="flex items-start space-x-4">
-        {/* Company Logo */}
-        <div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 flex items-center justify-center shrink-0">
+        <div className="w-20 h-20 rounded-xl overflow-hidden bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0">
           <img 
             src={reference.logo} 
             alt={reference.name}
-            className="w-full h-full object-contain p-2"
+            className="w-[85%] h-[85%] object-contain"
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">' + reference.name.charAt(0) + '</text></svg>';
             }}

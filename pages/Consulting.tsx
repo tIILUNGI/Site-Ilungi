@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,9 @@ const Consulting: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
 
-  const areas = [
+  const defaultAreas = [
     {
+      id: "iso",
       title: t.consultingAreas.iso.title,
       desc: t.consultingAreas.iso.desc,
       image: "/imagens/ISO.png",
@@ -17,6 +18,7 @@ const Consulting: React.FC = () => {
       color: "#1B3C2B"
     },
     {
+      id: "risk",
       title: t.consultingAreas.risk.title,
       desc: t.consultingAreas.risk.desc,
       image: "/imagens/Notação de Risco.jpg",
@@ -24,6 +26,7 @@ const Consulting: React.FC = () => {
       color: "#6a00a3"
     },
     {
+      id: "procurement",
       title: t.consultingAreas.procurement.title,
       desc: t.consultingAreas.procurement.desc,
       image: "/imagens/procurement.png",
@@ -31,6 +34,7 @@ const Consulting: React.FC = () => {
       color: "#0A4D8C"
     },
     {
+      id: "pmo",
       title: t.consultingAreas.pmo.title,
       desc: t.consultingAreas.pmo.desc,
       image: "/imagens/Gestão de Projecto.jpg",
@@ -38,6 +42,17 @@ const Consulting: React.FC = () => {
       color: "#B31B1B"
     }
   ];
+
+  const [areas, setAreas] = useState(defaultAreas);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_services_data');
+    if (saved) {
+      setAreas(JSON.parse(saved));
+    } else {
+      setAreas(defaultAreas);
+    }
+  }, [t.consultingAreas]);
 
   return (
     <div className="py-20 bg-white">
@@ -222,30 +237,7 @@ const Consulting: React.FC = () => {
           </div>
         </div>
 
-        {/* Estatísticas */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          <div className="text-center p-6 bg-slate-50 rounded-2xl">
-            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">50+</div>
-            <div className="text-sm text-slate-500">{isPt ? 'Projetos Entregues' : 'Projects Delivered'}</div>
-          </div>
-          <div className="text-center p-6 bg-slate-50 rounded-2xl">
-            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">100%</div>
-            <div className="text-sm text-slate-500">{isPt ? 'Certificações ISO' : 'ISO Certifications'}</div>
-          </div>
-          <div className="text-center p-6 bg-slate-50 rounded-2xl">
-            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">15+</div>
-            <div className="text-sm text-slate-500">{isPt ? 'Especialistas' : 'Specialists'}</div>
-          </div>
-          <div className="text-center p-6 bg-slate-50 rounded-2xl">
-            <div className="text-3xl font-bold text-[#1B3C2B] mb-2">24/7</div>
-            <div className="text-sm text-slate-500">{isPt ? 'Suporte Contínuo' : 'Continuous Support'}</div>
-          </div>
-        </motion.div>
+
       </div>
     </div>
   );

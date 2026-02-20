@@ -19,6 +19,13 @@ import ServiceDetail from './pages/ServiceDetail';
 import Partners from './pages/Partners';
 import ReferenceDetail from './pages/ReferenceDetail';
 import AdminReferences from './pages/AdminReferences';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminSolutions from './pages/AdminSolutions';
+import AdminPartners from './pages/AdminPartners';
+import AdminServices from './pages/AdminServices';
+import AdminBlog from './pages/AdminBlog';
+import AdminConfig from './pages/AdminConfig';
+import Certifications from './pages/Certifications';
 import { AnimatePresence } from 'framer-motion';
 
 // Context for Language and Dark Mode
@@ -93,7 +100,14 @@ const App: React.FC = () => {
                 <Route path="/parceiros" element={<Partners />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/referencia/:id" element={<ReferenceDetail />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/solucoes" element={<AdminSolutions />} />
+                <Route path="/admin/parceiros" element={<AdminPartners />} />
+                <Route path="/admin/servicos" element={<AdminServices />} />
+                <Route path="/admin/blog" element={<AdminBlog />} />
+                <Route path="/admin/configuracoes" element={<AdminConfig />} />
                 <Route path="/admin/referencias" element={<AdminReferences />} />
+                <Route path="/certificacoes" element={<Certifications />} />
               </Routes>
             </AnimatePresence>
           </main>

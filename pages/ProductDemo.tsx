@@ -64,8 +64,8 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
           ],
-          color: "purple-600",
-          gradient: "from-purple-600 to-purple-800"
+          color: "bg-[#1B3C2B]",
+          gradient: "from-[#1B3C2B] to-[#2E7D5E]"
         };
       case 'SICLIC':
         return {
@@ -75,8 +75,8 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
           ],
-          color: "emerald-700",
-          gradient: "from-[#1B3C2B] to-[#2E7D5E]"
+          color: "bg-[#6a00a3]",
+          gradient: "from-[#6a00a3] to-[#8000c4]"
         };
       case 'Tocomply360':
         return {
@@ -86,8 +86,8 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
           ],
-          color: "blue-600",
-          gradient: "from-blue-600 to-blue-800"
+          color: "bg-slate-800",
+          gradient: "from-slate-700 to-slate-900"
         };
       default:
         return {
@@ -103,46 +103,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
 
   return (
     <div className="py-20 bg-slate-50 relative overflow-hidden">
-      {/* ELEMENTOS TECNOLÓGICOS DE FUNDO */}
-      
-      {/* Grade de circuito digital */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid-demo" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6a00a3" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid-demo)" />
-        </svg>
-      </div>
-      
-      {/* Linhas de conexão tecnológicas */}
-      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
-      <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/30 to-transparent"></div>
-      
-      {/* Pontos de dados flutuantes */}
-      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
-      <div className="absolute top-60 left-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-60 right-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      
-      {/* Círculos concêntricos tecnológicos */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6a00a3]/10 rounded-full"></div>
-      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6a00a3]/5 rounded-full"></div>
-      <div className="absolute bottom-1/4 -right-20 w-64 h-64 border border-[#1B3C2B]/10 rounded-full"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 border border-[#1B3C2B]/5 rounded-full"></div>
-      
-      {/* Ícones tecnológicos sutis */}
-      <div className="absolute top-20 right-[20%] text-[#6a00a3]/5 rotate-12">
-        <Cpu size={80} />
-      </div>
-      <div className="absolute bottom-20 left-[20%] text-[#1B3C2B]/5 -rotate-12">
-        <Cloud size={80} />
-      </div>
-      <div className="absolute top-1/2 left-[5%] text-[#6a00a3]/5">
-        <Globe size={60} />
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Hero Section */}
@@ -182,41 +143,25 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         </div>
 
         {/* Mockup Simulation - COM IMAGEM CORPORATIVA */}
-        <div className="relative max-w-5xl mx-auto mb-24">
+        <div className="relative max-w-lg mx-auto mb-24">
           <div className="absolute -inset-10 bg-gradient-to-tr from-[#6a00a3]/10 via-transparent to-[#1B3C2B]/10 rounded-full blur-3xl opacity-50"></div>
           
-          {/* Anel tecnológico ao redor do mockup */}
-          <div className="absolute -inset-4 border-2 border-[#6a00a3]/20 rounded-[2rem]"></div>
-          <div className="absolute -inset-2 border border-[#1B3C2B]/10 rounded-[2rem]"></div>
-          
           <div className={`relative bg-gradient-to-br ${productImages.gradient} rounded-3xl p-4 shadow-2xl border border-white/20 overflow-hidden group`}>
-            {/* Overlay de circuito digital */}
-            <div className="absolute inset-0 opacity-10 mix-blend-overlay">
-              <svg width="100%" height="100%">
-                <pattern id="circuit-demo" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <path d="M10 10 L30 10 M40 20 L20 20 M30 30 L10 30" stroke="white" strokeWidth="0.5" fill="none"/>
-                  <circle cx="15" cy="15" r="1" fill="white"/>
-                  <circle cx="35" cy="25" r="1" fill="white"/>
-                </pattern>
-                <rect width="100%" height="100%" fill="url(#circuit-demo)"/>
-              </svg>
-            </div>
             
             <div className="flex items-center space-x-2 px-4 py-2 border-b border-white/10 bg-white/5 backdrop-blur-sm relative z-10">
               <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
               <div className="flex-1"></div>
-              <div className="px-4 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] text-white/80 border border-white/20">
-                https://{productName.toLowerCase()}.ilungi.ao/dashboard
+              <div className="px-4 py-1 bg-white border border-slate-200 rounded-full text-[10px] text-slate-500 line-clamp-1 w-24 sm:w-auto">
+                {productName.toLowerCase()}.ilungi.ao
               </div>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse ml-2"></div>
             </div>
             
-            <div className="relative">
+            <div className="relative h-48 overflow-hidden rounded-b-2xl">
               <motion.img 
                 src={productImages.dashboard} 
-                className="w-full h-auto rounded-b-2xl relative z-10"
+                className="w-full h-full object-cover relative z-10"
                 alt={isPt ? 'Interface do Produto' : 'Product Interface'}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5 }}
@@ -226,18 +171,15 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-b-2xl"></div>
               
               {/* Badge do produto */}
-              <div className="absolute top-4 left-4 z-20">
-                <div className={`bg-gradient-to-r ${productImages.gradient} px-4 py-2 rounded-xl shadow-lg border border-white/30 backdrop-blur-sm`}>
-                  <span className="text-white font-black text-sm">{productName} DEMO</span>
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+                <div className={`bg-white px-8 py-3 rounded-full shadow-lg border border-slate-100`}>
+                  <span className="text-slate-800 font-black text-sm">{productName} DEMO</span>
                 </div>
               </div>
               
               {/* Indicador de sistema ativo */}
-              <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-2 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                <div className="relative">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-50"></div>
-                </div>
+              <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                 <span className="text-xs text-white font-medium">
                   {isPt ? 'Sistema Online' : 'System Online'}
                 </span>
@@ -276,7 +218,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
                   {f.title}
-                  <span className="ml-2 w-1.5 h-1.5 bg-[#6a00a3] rounded-full animate-pulse"></span>
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
               </div>
@@ -297,15 +238,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
 
         {/* Pricing Mockup */}
         <div className="relative bg-slate-50 p-12 rounded-3xl text-center overflow-hidden">
-          {/* Elementos tecnológicos de fundo */}
-          <div className="absolute inset-0 opacity-5">
-            <svg width="100%" height="100%">
-              <pattern id="pricing-grid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                <path d="M30 0 L0 0 0 30" fill="none" stroke="#6a00a3" strokeWidth="0.3"/>
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#pricing-grid)"/>
-            </svg>
-          </div>
+
           
           <div className="relative z-10">
             <motion.h2 
@@ -359,10 +292,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                 
                 {/* Indicador de disponibilidade */}
                 <div className="flex items-center justify-center space-x-2 mb-4">
-                  <div className="relative">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-50"></div>
-                  </div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   <span className="text-xs text-white/80">
                     {isPt ? 'Demo disponível imediatamente' : 'Demo available immediately'}
                   </span>

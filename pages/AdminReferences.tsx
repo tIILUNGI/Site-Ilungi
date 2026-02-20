@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, Upload, Building } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -19,18 +19,32 @@ const AdminReferences: React.FC = () => {
   const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
   
-  const [references, setReferences] = useState<ReferenceForm[]>(
-    (t.references?.clients || []).map((ref: any) => ({
-      id: ref.id,
-      name: ref.name,
-      logo: ref.logo,
-      role: ref.role,
-      comment: ref.comment,
-      person: ref.person,
-      service: ref.service,
-      description: ref.description || ''
-    }))
-  );
+  const defaultReferences = (t.references?.clients || []).map((ref: any) => ({
+    id: ref.id,
+    name: ref.name,
+    logo: ref.logo,
+    role: ref.role,
+    comment: ref.comment,
+    person: ref.person,
+    service: ref.service,
+    description: ref.description || ''
+  }));
+
+  const [references, setReferences] = useState<ReferenceForm[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_references_data');
+    if (saved) {
+      setReferences(JSON.parse(saved));
+    } else {
+      setReferences(defaultReferences);
+    }
+  }, [lang]);
+
+  const saveToStorage = (newData: ReferenceForm[]) => {
+    setReferences(newData);
+    localStorage.setItem('ilungi_references_data', JSON.stringify(newData));
+  };
   
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -47,10 +61,10 @@ const AdminReferences: React.FC = () => {
 
   const handleSave = () => {
     if (editingId) {
-      setReferences(references.map(ref => ref.id === editingId ? formData : ref));
+      saveToStorage(references.map(ref => ref.id === editingId ? formData : ref));
       setEditingId(null);
     } else if (isAdding) {
-      setReferences([...references, { ...formData, id: `ref-${Date.now()}` }]);
+      saveToStorage([...references, { ...formData, id: `ref-${Date.now()}` }]);
       setIsAdding(false);
     }
     setFormData({
@@ -67,7 +81,7 @@ const AdminReferences: React.FC = () => {
 
   const handleDelete = (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure you want to delete?')) {
-      setReferences(references.filter(ref => ref.id !== id));
+      saveToStorage(references.filter(ref => ref.id !== id));
     }
   };
 
@@ -111,8 +125,11 @@ const AdminReferences: React.FC = () => {
     <div className={`min-h-screen pt-32 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>
+            <a href="/admin" className={`inline-flex items-center text-sm font-bold mb-4 hover:underline ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-[#1B3C2B]'}`}>
+              Voltar ao Painel
+            </a>
             <h1 className={`text-3xl font-black mb-2 ${isDark ? 'text-white' : 'text-slate-800'}`}>
               {isPt ? 'Admin - Nossas Referências' : 'Admin - Our References'}
             </h1>

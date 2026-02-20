@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Handshake, ArrowRight, Star, Shield, TrendingUp, Users, ChevronRight } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -62,6 +62,14 @@ const Partners: React.FC = () => {
   const isPt = lang === 'pt';
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   const [isHoveringCTA, setIsHoveringCTA] = React.useState(false);
+  const [partnerList, setPartnerList] = useState(partners);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_partners_data');
+    if (saved) {
+      setPartnerList(JSON.parse(saved));
+    }
+  }, []);
 
   // Função para truncar texto com elegância
   const truncateText = (text: string, maxLength: number = 90) => {
@@ -124,7 +132,7 @@ const Partners: React.FC = () => {
 
         {/* Grid de Parceiros */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-24">
-          {partners.map((p, i) => {
+          {partnerList.map((p, i) => {
             const isHovered = hoveredIndex === i;
             const isNovaSelect = p.name === "Nova Select";
             

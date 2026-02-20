@@ -95,18 +95,12 @@ const Navbar: React.FC = () => {
                           <div key={idx} className="space-y-3">
                             {sub.href ? (
                               <a href={sub.href} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group/sub">
-                                <div className="p-2 bg-slate-100 rounded-lg group-hover/sub:bg-[#6a00a3] group-hover/sub:text-white transition-all">
-                                  {sub.icon}
-                                </div>
                                 <h4 className="font-bold text-slate-800 flex items-center">
                                   {sub.title}
                                 </h4>
                               </a>
                             ) : (
                               <Link to={sub.path} className="flex items-center space-x-3 group/sub">
-                                <div className="p-2 bg-slate-100 rounded-lg group-hover/sub:bg-[#6a00a3] group-hover/sub:text-white transition-all">
-                                  {sub.icon}
-                                </div>
                                 <div>
                                   <h4 className="font-bold text-slate-800 flex items-center">
                                     {sub.title}

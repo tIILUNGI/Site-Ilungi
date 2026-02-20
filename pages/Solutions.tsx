@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Layout, Cpu, Globe, Cloud } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,41 +8,50 @@ const Solutions: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
 
-  const products = [
+  const defaultProducts = [
     {
       name: "Salya",
-      tagline: isPt ? "Gest\u00e3o de Sal\u00e1rios & RH" : "Payroll & HR Management",
+      tagline: isPt ? "Gestão de Salários & RH" : "Payroll & HR Management",
       desc: isPt
-        ? "Plataforma para gest\u00e3o e emiss\u00e3o de recibos de sal\u00e1rio e controle completo de recursos humanos. Automatiza\u00e7\u00e3o de folhas de pagamento, benef\u00edcios e compliance trabalhista."
+        ? "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos. Automatização de folhas de pagamento, benefícios e compliance trabalhista."
         : "Platform for payroll management, payslip issuance, and complete HR control. Automation of payroll, benefits, and labor compliance.",
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       path: "/solucoes/salya",
-      color: "from-purple-600 to-purple-800",
-      bgColor: "bg-purple-600"
-    },
-    {
-      name: "SICLIC",
-      tagline: isPt ? "Intelig\u00eancia de Compliance" : "Compliance Intelligence",
-      desc: isPt
-        ? "Sistema inteligente para gest\u00e3o de compliance legal, contratual e normativo em tempo real. Monitoramento cont\u00ednuo de obriga\u00e7\u00f5es legais e normativas."
-        : "Smart system for real-time legal, contractual, and regulatory compliance management. Continuous monitoring of legal and regulatory obligations.",
-      image: "/imagens/SICLIC.png",
-      url: "https://siclic.ao/",
       color: "from-[#1B3C2B] to-[#2E7D5E]",
       bgColor: "bg-[#1B3C2B]"
     },
     {
-      name: "Tocomply360",
-      tagline: isPt ? "Framework de Governan\u00e7a" : "Governance Framework",
+      name: "SICLIC",
+      tagline: isPt ? "Inteligência de Compliance" : "Compliance Intelligence",
       desc: isPt
-        ? "Solu\u00e7\u00e3o 360 graus para governan\u00e7a corporativa, integrando \u00e9tica, risco e transpar\u00eancia. Framework completo para gest\u00e3o de compliance e integridade."
+        ? "Sistema inteligente para gestão de compliance legal, contratual e normativo em tempo real. Monitoramento contínuo de obrigações legais e normativas."
+        : "Smart system for real-time legal, contractual, and regulatory compliance management. Continuous monitoring of legal and regulatory obligations.",
+      image: "/imagens/SICLIC.png",
+      url: "https://siclic.ao/",
+      color: "from-[#6a00a3] to-[#8000c4]",
+      bgColor: "bg-[#6a00a3]"
+    },
+    {
+      name: "Tocomply360",
+      tagline: isPt ? "Framework de Governança" : "Governance Framework",
+      desc: isPt
+        ? "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de compliance e integridade."
         : "360-degree solution for corporate governance, integrating ethics, risk, and transparency. Complete framework for compliance and integrity management.",
       image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       path: "/solucoes/tocomply",
-      color: "from-blue-600 to-blue-800",
-      bgColor: "bg-blue-600"
+      color: "from-slate-700 to-slate-900",
+      bgColor: "bg-slate-800"
     }
   ];
+
+  const [products, setProducts] = useState(defaultProducts);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ilungi_solutions_data');
+    if (saved) {
+      setProducts(JSON.parse(saved));
+    }
+  }, []);
 
   return (
     <div className="py-20 bg-white relative overflow-hidden">
@@ -64,28 +73,7 @@ const Solutions: React.FC = () => {
       <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
       <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/30 to-transparent"></div>
       
-      {/* Pontos de dados flutuantes */}
-      <div className="absolute top-40 left-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
-      <div className="absolute top-60 left-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-[#6a00a3]/40 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-60 right-[15%] w-1.5 h-1.5 bg-[#1B3C2B]/40 rounded-full animate-ping opacity-30"></div>
-      
-      {/* Círculos concêntricos tecnológicos */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 border border-[#6a00a3]/10 rounded-full"></div>
-      <div className="absolute top-1/4 -left-20 w-96 h-96 border border-[#6a00a3]/5 rounded-full"></div>
-      <div className="absolute bottom-1/4 -right-20 w-64 h-64 border border-[#1B3C2B]/10 rounded-full"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 border border-[#1B3C2B]/5 rounded-full"></div>
-      
-      {/* Ícones tecnológicos sutis */}
-      <div className="absolute top-20 right-[20%] text-[#6a00a3]/5 rotate-12">
-        <Cpu size={80} />
-      </div>
-      <div className="absolute bottom-20 left-[20%] text-[#1B3C2B]/5 -rotate-12">
-        <Cloud size={80} />
-      </div>
-      <div className="absolute top-1/2 left-[5%] text-[#6a00a3]/5">
-        <Globe size={60} />
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header */}
@@ -170,19 +158,9 @@ const Solutions: React.FC = () => {
                   className="absolute top-6 left-6 z-20"
                   whileHover={{ scale: 1.05 }}
                 >
-                  {product.name === "SICLIC" ? (
-                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/30 shadow-xl">
-                      <img 
-                        src="/imagens/SICLIC.png" 
-                        alt="SICLIC" 
-                        className="h-10 w-auto brightness-0 invert"
-                      />
-                    </div>
-                  ) : (
-                    <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
-                      <span className="text-white font-black text-xl">{product.name}</span>
-                    </div>
-                  )}
+                  <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
+                    <span className="text-white font-black text-xl">{product.name}</span>
+                  </div>
                 </motion.div>
 
                 {/* Tagline sobre a imagem */}
@@ -195,13 +173,7 @@ const Solutions: React.FC = () => {
                   </span>
                 </motion.div>
 
-                {/* Indicador tecnológico (pulso) */}
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="relative">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-50"></div>
-                  </div>
-                </div>
+
               </div>
 
               {/* Conteúdo do card */}
@@ -211,12 +183,7 @@ const Solutions: React.FC = () => {
                 
                 <h3 className="text-2xl font-black text-slate-800 mb-3 flex items-center">
                   {product.name}
-                  {/* Ícone de verificação tecnológica */}
-                  <span className="ml-2 w-5 h-5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </span>
+
                 </h3>
                 <p className="text-slate-500 leading-relaxed mb-6 text-sm">
                   {product.desc}
@@ -244,12 +211,7 @@ const Solutions: React.FC = () => {
                     </Link>
                   )}
                   
-                  {/* Indicador de tecnologia */}
-                  <div className="flex items-center space-x-1">
-                    <div className={`w-2 h-2 rounded-full ${product.bgColor} animate-pulse`}></div>
-                    <div className={`w-2 h-2 rounded-full ${product.bgColor} animate-pulse delay-75`}></div>
-                    <div className={`w-2 h-2 rounded-full ${product.bgColor} animate-pulse delay-150`}></div>
-                  </div>
+
                 </div>
               </div>
 
@@ -318,7 +280,6 @@ const Solutions: React.FC = () => {
                   <div>
                     <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
                       {item.title}
-                      <span className="ml-2 w-1.5 h-1.5 bg-[#6a00a3] rounded-full animate-pulse"></span>
                     </h4>
                     <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
                   </div>
@@ -361,31 +322,19 @@ const Solutions: React.FC = () => {
           
           <div className="relative inline-flex flex-wrap items-center justify-center gap-6 p-6 bg-white/80 backdrop-blur-md rounded-full shadow-lg border border-slate-100">
             <div className="flex items-center space-x-2">
-              <div className="relative">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping opacity-50"></div>
-              </div>
-              <span className="text-sm font-medium text-slate-600">
-                {isPt ? '+50 empresas confiam' : '50+ companies trust'}
+              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
+                {isPt ? '+50 Empresas Confiam' : '50+ Companies Trust'}
               </span>
             </div>
             <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center space-x-2">
-              <div className="relative">
-                <div className="w-2 h-2 bg-[#6a00a3] rounded-full"></div>
-                <div className="absolute inset-0 w-2 h-2 bg-[#6a00a3] rounded-full animate-ping opacity-50"></div>
-              </div>
-              <span className="text-sm font-medium text-slate-600">
+              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
                 {isPt ? 'ISO 27001 Certificado' : 'ISO 27001 Certified'}
               </span>
             </div>
             <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center space-x-2">
-              <div className="relative">
-                <div className="w-2 h-2 bg-[#1B3C2B] rounded-full"></div>
-                <div className="absolute inset-0 w-2 h-2 bg-[#1B3C2B] rounded-full animate-ping opacity-50"></div>
-              </div>
-              <span className="text-sm font-medium text-slate-600">
+              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
                 {isPt ? 'Suporte 24/7' : '24/7 Support'}
               </span>
             </div>
