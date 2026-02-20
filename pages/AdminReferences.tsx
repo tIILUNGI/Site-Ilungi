@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, Upload, Building } from 'lucide-react';
 import { useAppContext } from '../App';
 import { translations } from '../translations';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 interface ReferenceForm {
   id: string;
@@ -33,17 +34,14 @@ const AdminReferences: React.FC = () => {
   const [references, setReferences] = useState<ReferenceForm[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_references_data');
-    if (saved) {
-      setReferences(JSON.parse(saved));
-    } else {
-      setReferences(defaultReferences);
-    }
+    loadData('references', 'ilungi_references_data', defaultReferences).then(data => {
+      setReferences(data);
+    });
   }, [lang]);
 
   const saveToStorage = (newData: ReferenceForm[]) => {
     setReferences(newData);
-    localStorage.setItem('ilungi_references_data', JSON.stringify(newData));
+    saveDataAdmin('references', 'ilungi_references_data', newData);
   };
   
   const [editingId, setEditingId] = useState<string | null>(null);

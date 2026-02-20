@@ -35,6 +35,8 @@ interface AppContextType {
   isDark: boolean;
   setIsDark: (d: boolean) => void;
   t: typeof translations.pt;
+  isEditing: boolean;
+  setIsEditing: (d: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -62,6 +64,14 @@ const App: React.FC = () => {
     const saved = localStorage.getItem('ilungi_dark');
     return saved === 'true';
   });
+  const [isEditing, setIsEditing] = useState<boolean>(() => {
+    return localStorage.getItem('ilungi_editing') === 'true';
+  });
+
+  const handleSetIsEditing = (e: boolean) => {
+    setIsEditing(e);
+    localStorage.setItem('ilungi_editing', e ? 'true' : 'false');
+  };
 
   const setLang = (l: Language) => {
     setLangState(l);
@@ -76,7 +86,7 @@ const App: React.FC = () => {
   const t = translations[lang];
 
   return (
-    <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t }}>
+    <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t, isEditing, setIsEditing: handleSetIsEditing }}>
       <Router>
         <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'theme-dark bg-gray-900 text-white' : 'theme-light bg-slate-50 text-slate-900'}`}>
           <ScrollToTop />

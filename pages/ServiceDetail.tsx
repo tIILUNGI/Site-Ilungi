@@ -5,6 +5,7 @@ import { CheckCircle, ArrowRight, Layers, Target, Activity } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
+import { loadData } from '../lib/dataSync';
 
 interface ServiceDetailProps {
   type: 'risk' | 'procurement' | 'pmo';
@@ -30,12 +31,9 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   const [references, setReferences] = useState<any[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_references_data');
-    if (saved) {
-      setReferences(JSON.parse(saved));
-    } else {
-      setReferences(t.references?.clients || []);
-    }
+    loadData('references', 'ilungi_references_data', t.references?.clients || []).then(data => {
+      setReferences(data);
+    });
   }, [t.references?.clients]);
 
   return (

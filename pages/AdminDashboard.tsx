@@ -99,27 +99,6 @@ const AdminDashboard: React.FC = () => {
           ))}
         </div>
         
-        {/* Caixa de Aviso Provisório */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 p-6 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-4"
-        >
-          <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
-            <Settings className="w-5 h-5 text-amber-600" />
-          </div>
-          <div>
-            <h4 className="text-amber-800 font-bold mb-1">
-              {isPt ? 'Aviso de Arquitetura (Modo Protótipo)' : 'Architecture Notice (Prototype Mode)'}
-            </h4>
-            <p className="text-amber-700/80 text-sm leading-relaxed">
-              {isPt 
-                ? 'Neste momento, o sistema de edição está a usar a memória local do seu navegador (Local Storage) para simular instantaneamente a gravação e alteração do conteúdo e verificar como funcionaria na prática. Para que as modificações fiquem acessíveis de forma pública a todos os clientes na internet (e noutros aparelhos), o programador precisará de conectar estes formulários a uma Base de Dados em Nuvem (como Firebase, Supabase ou Sanity CMS).' 
-                : 'At this moment, the editing system is using your browser local memory (Local Storage) to instantly simulate saving and changing content and see how it works in practice. For the modifications to be publicly accessible to all clients on the internet (and on other devices), the developer will need to connect these forms to a Cloud Database (like Firebase, Supabase, or Sanity CMS).'}
-            </p>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

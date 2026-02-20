@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Save, ArrowLeft, Settings, Globe, MapPin, Phone, Mail, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadConfig, saveConfigAdmin } from '../lib/dataSync';
 
 interface SiteConfig {
   companyName: string;
@@ -34,16 +35,13 @@ const AdminConfig: React.FC = () => {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_global_config');
-    if (saved) {
-      setConfig({ ...defaultData, ...JSON.parse(saved) });
-    } else {
-      setConfig(defaultData);
-    }
+    loadConfig('ilungi_global_config', defaultData).then(data => {
+      setConfig(data);
+    });
   }, []);
 
   const saveToStorage = () => {
-    localStorage.setItem('ilungi_global_config', JSON.stringify(config));
+    saveConfigAdmin('ilungi_global_config', config);
     
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);

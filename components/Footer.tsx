@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
 import { useAppContext } from '../App';
+import { loadConfig } from '../lib/dataSync';
 
 const Footer: React.FC = () => {
-  const { t, lang } = useAppContext();
+  const { t, lang, isEditing, setIsEditing } = useAppContext();
   const isPt = lang === 'pt';
   
   const defaultConfig = {
@@ -20,14 +21,9 @@ const Footer: React.FC = () => {
   const [config, setConfig] = useState(defaultConfig);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_global_config');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      setConfig({
-        ...defaultConfig,
-        ...parsed
-      });
-    }
+    loadConfig('ilungi_global_config', defaultConfig).then(data => {
+      setConfig(data);
+    });
   }, [lang]);
 
   return (
@@ -101,7 +97,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs">
         <p>
-          &copy; {new Date().getFullYear()} <Link to="/admin" className="cursor-default hover:text-white transition-colors">{config.companyName || 'ILUNGI'}</Link>. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
+          &copy; {new Date().getFullYear()} <Link to="/admin" className="cursor-default hover:text-white transition-colors" title="Área Reservada">{config.companyName || 'ILUNGI'}</Link>. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
           <Link to="/certificacoes" className="hover:text-white font-bold">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 interface PartnerForm {
   id: string;
@@ -33,17 +34,14 @@ const AdminPartners: React.FC = () => {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_partners_data');
-    if (saved) {
-      setPartners(JSON.parse(saved));
-    } else {
-      setPartners(defaultPartners);
-    }
+    loadData('partners', 'ilungi_partners_data', defaultPartners).then(data => {
+      setPartners(data);
+    });
   }, []);
 
   const saveToStorage = (newData: PartnerForm[]) => {
     setPartners(newData);
-    localStorage.setItem('ilungi_partners_data', JSON.stringify(newData));
+    saveDataAdmin('partners', 'ilungi_partners_data', newData);
   };
 
   const handleSave = () => {
@@ -79,7 +77,7 @@ const AdminPartners: React.FC = () => {
   const handleAddNew = () => {
     setIsAdding(true);
     setEditingId(null);
-    resetForm();
+    setFormData({ id: '', name: '', url: '', desc: { pt: '', en: '' }, logo: '', color: '#6a00a3' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

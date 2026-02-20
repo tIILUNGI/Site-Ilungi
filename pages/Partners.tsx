@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Handshake, ArrowRight, Star, Shield, TrendingUp, Users, ChevronRight } from 'lucide-react';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
+import { loadData } from '../lib/dataSync';
 
 const partners = [
   { 
@@ -65,10 +66,9 @@ const Partners: React.FC = () => {
   const [partnerList, setPartnerList] = useState(partners);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_partners_data');
-    if (saved) {
-      setPartnerList(JSON.parse(saved));
-    }
+    loadData('partners', 'ilungi_partners_data', partners).then(data => {
+      setPartnerList(data);
+    });
   }, []);
 
   // Função para truncar texto com elegância

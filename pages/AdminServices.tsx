@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 interface ServiceForm {
   id: string;
@@ -32,17 +33,14 @@ const AdminServices: React.FC = () => {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_services_data');
-    if (saved) {
-      setServices(JSON.parse(saved));
-    } else {
-      setServices(defaultAreas);
-    }
+    loadData('services', 'ilungi_services_data', defaultAreas).then(data => {
+      setServices(data);
+    });
   }, [lang]);
 
   const saveToStorage = (newData: ServiceForm[]) => {
     setServices(newData);
-    localStorage.setItem('ilungi_services_data', JSON.stringify(newData));
+    saveDataAdmin('services', 'ilungi_services_data', newData);
   };
 
   const handleSave = () => {
@@ -78,7 +76,7 @@ const AdminServices: React.FC = () => {
   const handleAddNew = () => {
     setIsAdding(true);
     setEditingId(null);
-    resetForm();
+    setFormData({ id: '', title: '', desc: '', image: '', path: '', color: '#1B3C2B' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

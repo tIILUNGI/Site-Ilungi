@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, FileText, Image as ImageIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 interface BlogPost {
   id: string;
@@ -42,17 +43,14 @@ const AdminBlog: React.FC = () => {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_blog_data');
-    if (saved) {
-      setPosts(JSON.parse(saved));
-    } else {
-      setPosts(defaultPosts);
-    }
+    loadData('blog_posts', 'ilungi_blog_data', defaultPosts).then(data => {
+      setPosts(data);
+    });
   }, []);
 
   const saveToStorage = (newData: BlogPost[]) => {
     setPosts(newData);
-    localStorage.setItem('ilungi_blog_data', JSON.stringify(newData));
+    saveDataAdmin('blog_posts', 'ilungi_blog_data', newData);
   };
 
   const handleSave = () => {
@@ -90,7 +88,9 @@ const AdminBlog: React.FC = () => {
   const handleAddNew = () => {
     setIsAdding(true);
     setEditingId(null);
-    resetForm();
+    setFormData({
+      id: '', title: '', excerpt: '', content: '', author: 'Equipa ILUNGI', date: new Date().toISOString().split('T')[0], category: 'Geral', image: '', status: 'draft'
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

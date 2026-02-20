@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, PackageSearch } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 interface SolutionForm {
   id: string;
@@ -62,17 +63,14 @@ const AdminSolutions: React.FC = () => {
 
   // Carregar as solucções guardadas ou defaut
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_solutions_data');
-    if (saved) {
-      setSolutions(JSON.parse(saved));
-    } else {
-      setSolutions(defaultProducts);
-    }
+    loadData('solutions', 'ilungi_solutions_data', defaultProducts).then(data => {
+      setSolutions(data);
+    });
   }, []);
 
   const saveToStorage = (newData: SolutionForm[]) => {
     setSolutions(newData);
-    localStorage.setItem('ilungi_solutions_data', JSON.stringify(newData));
+    saveDataAdmin('solutions', 'ilungi_solutions_data', newData);
   };
 
   const handleSave = () => {
@@ -110,7 +108,9 @@ const AdminSolutions: React.FC = () => {
   const handleAddNew = () => {
     setIsAdding(true);
     setEditingId(null);
-    resetForm();
+    setFormData({
+      id: '', name: '', tagline: '', desc: '', image: '', path: '', url: '', color: 'from-[#1B3C2B] to-[#2E7D5E]', bgColor: 'bg-[#1B3C2B]'
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -279,51 +279,91 @@ const AdminSolutions: React.FC = () => {
 
         {/* Lista Existente */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {solutions.map((sol) => (
-            <motion.div
+          {solutions.map((sol, i) => (
+            <motion.div 
               key={sol.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`rounded-2xl overflow-hidden ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'} shadow-lg border relative group`}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -10 }}
+              className={`group relative ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-100'} rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border hover:shadow-2xl transition-all duration-500`}
             >
-              <div className="h-40 overflow-hidden relative">
-                <img src={sol.image} alt={sol.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/40"></div>
+              <div className="absolute -inset-0.5 bg-slate-200 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative h-56 overflow-hidden">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"
+                  initial={{ opacity: 0.6 }}
+                  whileHover={{ opacity: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                />
                 
-                {/* Ações de Edição sobre a imagem */}
-                <div className="absolute top-4 right-4 flex gap-2 z-10">
+                <div className="absolute inset-0 z-5 opacity-20 mix-blend-overlay">
+                  <svg width="100%" height="100%">
+                    <pattern id={`circuit-${i}`} x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                      <path d="M10 10 L30 10 M40 20 L20 20 M30 30 L10 30" stroke="white" strokeWidth="0.3" fill="none"/>
+                      <circle cx="15" cy="15" r="1" fill="white"/>
+                      <circle cx="35" cy="25" r="1" fill="white"/>
+                    </pattern>
+                    <rect width="100%" height="100%" fill={`url(#circuit-${i})`}/>
+                  </svg>
+                </div>
+                
+                <motion.img 
+                  src={sol.image} 
+                  alt={sol.name}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                />
+                
+                {/* Ações de Edição sobre a imagem - MODO ADMIN */}
+                <div className="absolute top-4 right-4 flex gap-2 z-30">
                   <button
                     onClick={() => handleEdit(sol)}
-                    className="p-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white text-slate-800 transition-all shadow-lg"
+                    className="p-3 bg-white/90 backdrop-blur-md rounded-xl hover:bg-white text-slate-800 transition-all shadow-xl hover:scale-110"
                   >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => handleDelete(sol.id)}
-                    className="p-2 bg-red-500/90 backdrop-blur-sm rounded-lg hover:bg-red-500 text-white transition-all shadow-lg"
+                    className="p-3 bg-red-500/90 backdrop-blur-md rounded-xl hover:bg-red-500 text-white transition-all shadow-xl hover:scale-110"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-5 h-5" />
                   </button>
                 </div>
 
-                <div className="absolute bottom-4 left-4">
-                  <div className={`px-4 py-1.5 rounded-lg text-white font-bold text-sm bg-gradient-to-r ${sol.color} shadow-lg border border-white/20 inline-block`}>
-                    {sol.name}
+                <motion.div className="absolute top-6 left-6 z-20" whileHover={{ scale: 1.05 }}>
+                  <div className={`bg-gradient-to-r ${sol.color || 'from-[#1B3C2B] to-[#2E7D5E]'} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
+                    <span className="text-white font-black text-xl">{sol.name}</span>
                   </div>
-                </div>
+                </motion.div>
+
+                <motion.div className="absolute bottom-6 left-6 z-20" whileHover={{ y: -3 }}>
+                  <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium inline-block border border-white/30 shadow-lg">
+                    {sol.tagline}
+                  </span>
+                </motion.div>
               </div>
-              
-              <div className="p-6">
-                <h3 className={`font-bold text-sm mb-2 ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
-                  {sol.tagline}
+
+              <div className={`p-8 ${isDark ? 'bg-slate-800' : 'bg-white'} relative`}>
+                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
+                
+                <h3 className={`text-2xl font-black ${isDark ? 'text-white' : 'text-slate-800'} mb-3`}>
+                  {sol.name}
                 </h3>
-                <p className={`text-sm line-clamp-3 mb-4 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                <p className={`${isDark ? 'text-slate-400' : 'text-slate-500'} leading-relaxed mb-6 text-sm line-clamp-3`}>
                   {sol.desc}
                 </p>
-                <div className="text-xs font-mono text-slate-400 p-2 bg-slate-100 dark:bg-slate-700 rounded-lg break-all">
-                  {sol.path ? `Internal Route: ${sol.path}` : `External URL: ${sol.url}`}
-                </div>
               </div>
+
+              <motion.div 
+                className="absolute bottom-0 left-0 h-2 bg-gradient-to-r"
+                style={{ backgroundImage: `linear-gradient(to right, ${sol.bgColor?.replace('bg-', '') || '#1B3C2B'}, #6a00a3, ${sol.bgColor?.replace('bg-', '') || '#1B3C2B'})` }}
+                initial={{ width: 0 }}
+                whileHover={{ width: '100%' }}
+                transition={{ duration: 0.4 }}
+              />
             </motion.div>
           ))}
         </div>

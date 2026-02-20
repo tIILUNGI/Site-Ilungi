@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Layout, Cpu, Globe, Cloud } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Edit, Plus, Trash2, Save, Image as ImageIcon } from 'lucide-react';
 import { useAppContext } from '../App';
+import { loadData, saveDataAdmin } from '../lib/dataSync';
 
 const Solutions: React.FC = () => {
-  const { t, lang } = useAppContext();
+  const { t, lang, isEditing } = useAppContext();
   const isPt = lang === 'pt';
 
   const defaultProducts = [
@@ -47,11 +49,44 @@ const Solutions: React.FC = () => {
   const [products, setProducts] = useState(defaultProducts);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_solutions_data');
-    if (saved) {
-      setProducts(JSON.parse(saved));
-    }
+    loadData('solutions', 'ilungi_solutions_data', defaultProducts).then(data => {
+      setProducts(data);
+    });
   }, []);
+
+  const handleProductChange = (index: number, field: string, value: string) => {
+    const updated = [...products];
+    updated[index] = { ...updated[index], [field]: value };
+    setProducts(updated);
+    saveDataAdmin('solutions', 'ilungi_solutions_data', updated);
+  };
+
+  const handleAddProduct = () => {
+    const newProduct = {
+      id: `sol-${Date.now()}`,
+      name: "Nova Solução",
+      tagline: "Slogan",
+      desc: "Descrição curta",
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3",
+      path: "",
+      url: "",
+      color: "from-[#6a00a3] to-[#8000c4]",
+      bgColor: "bg-[#6a00a3]"
+    };
+    const updated = [...products, newProduct];
+    setProducts(updated);
+    saveDataAdmin('solutions', 'ilungi_solutions_data', updated);
+  };
+
+  const handleDeleteProduct = (index: number) => {
+    if (window.confirm("Atenção: Eliminar solução?")) {
+      const updated = products.filter((_, i) => i !== index);
+      setProducts(updated);
+      saveDataAdmin('solutions', 'ilungi_solutions_data', updated);
+    }
+  };
+
+  const editStyles = isEditing ? "hover:outline hover:outline-2 hover:outline-dashed hover:outline-[#6a00a3] hover:bg-white/50 cursor-text transition-all rounded p-1 -m-1" : "";
 
   return (
     <div className="py-20 bg-white relative overflow-hidden">
@@ -159,7 +194,14 @@ const Solutions: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
-                    <span className="text-white font-black text-xl">{product.name}</span>
+                    <span 
+                      className={`text-white font-black text-xl ${isEditing ? 'hover:outline hover:outline-2 outline-white rounded px-1' : ''}`}
+                      contentEditable={isEditing} 
+                      suppressContentEditableWarning
+                      onBlur={(e) => handleProductChange(i, 'name', e.currentTarget.textContent || '')}
+                    >
+                      {product.name}
+                    </span>
                   </div>
                 </motion.div>
 
@@ -168,7 +210,12 @@ const Solutions: React.FC = () => {
                   className="absolute bottom-6 left-6 z-20"
                   whileHover={{ y: -3 }}
                 >
-                  <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium inline-block border border-white/30 shadow-lg">
+                  <span 
+                    className={`text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium inline-block border border-white/30 shadow-lg ${isEditing ? 'hover:outline hover:outline-2 outline-white cursor-text' : ''}`}
+                    contentEditable={isEditing}
+                    suppressContentEditableWarning
+                    onBlur={(e) => handleProductChange(i, 'tagline', e.currentTarget.textContent || '')}
+                  >
                     {product.tagline}
                   </span>
                 </motion.div>
@@ -181,11 +228,20 @@ const Solutions: React.FC = () => {
                 {/* Linha tecnológica superior */}
                 <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
                 
-                <h3 className="text-2xl font-black text-slate-800 mb-3 flex items-center">
+                <h3 
+                  className={`text-2xl font-black text-slate-800 mb-3 flex items-center ${editStyles}`}
+                  contentEditable={isEditing}
+                  suppressContentEditableWarning
+                  onBlur={(e) => handleProductChange(i, 'name', e.currentTarget.textContent || '')}
+                >
                   {product.name}
-
                 </h3>
-                <p className="text-slate-500 leading-relaxed mb-6 text-sm">
+                <p 
+                  className={`text-slate-500 leading-relaxed mb-6 text-sm ${editStyles}`}
+                  contentEditable={isEditing}
+                  suppressContentEditableWarning
+                  onBlur={(e) => handleProductChange(i, 'desc', e.currentTarget.textContent || '')}
+                >
                   {product.desc}
                 </p>
                 
@@ -225,8 +281,46 @@ const Solutions: React.FC = () => {
                 whileHover={{ width: '100%' }}
                 transition={{ duration: 0.4 }}
               />
+              {/* TOOLS DE EDIÇÃO (APENAS EM MODO ADMIN) */}
+              {isEditing && (
+                <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      const newImg = prompt("Insira a URL da nova Imagem:", product.image);
+                      if(newImg) handleProductChange(i, 'image', newImg);
+                    }}
+                    className="p-3 bg-white/90 backdrop-blur-md shadow-xl text-slate-800 rounded-xl hover:bg-[#6a00a3] hover:text-white transition-all scale-90"
+                    title="Alterar Imagem"
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteProduct(i)}
+                    className="p-3 bg-red-500/90 backdrop-blur-md shadow-xl text-white rounded-xl hover:bg-red-600 transition-all scale-90"
+                    title="Eliminar Solução"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </motion.div>
           ))}
+          
+          {/* BOTÃO ADICIONAR NOVO (MODO EDIÇÃO) */}
+          {isEditing && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              onClick={handleAddProduct}
+              className="group relative bg-[#6a00a3]/5 rounded-[2.5rem] overflow-hidden shadow-none border-2 border-dashed border-[#6a00a3]/30 hover:bg-[#6a00a3]/10 hover:border-[#6a00a3]/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[400px] cursor-pointer"
+            >
+              <div className="w-16 h-16 bg-[#6a00a3] rounded-full flex items-center justify-center text-white mb-4 group-hover:scale-110 shadow-lg shadow-[#6a00a3]/30 transition-transform">
+                <Plus className="w-8 h-8" />
+              </div>
+              <span className="font-bold text-[#6a00a3] text-lg">Nova Solução</span>
+              <p className="text-slate-500 text-sm mt-2 text-center px-8">Clique aqui para criar um novo card de SaaS diretamente no site.</p>
+            </motion.div>
+          )}
         </div>
 
         {/* Implementação & Suporte */}

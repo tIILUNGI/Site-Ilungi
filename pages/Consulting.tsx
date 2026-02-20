@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData } from '../lib/dataSync';
 
 const Consulting: React.FC = () => {
   const { t, lang } = useAppContext();
@@ -46,12 +47,9 @@ const Consulting: React.FC = () => {
   const [areas, setAreas] = useState(defaultAreas);
 
   useEffect(() => {
-    const saved = localStorage.getItem('ilungi_services_data');
-    if (saved) {
-      setAreas(JSON.parse(saved));
-    } else {
-      setAreas(defaultAreas);
-    }
+    loadData('services', 'ilungi_services_data', defaultAreas).then(data => {
+      setAreas(data);
+    });
   }, [t.consultingAreas]);
 
   return (
