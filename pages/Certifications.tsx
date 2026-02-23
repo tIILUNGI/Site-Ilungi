@@ -9,21 +9,33 @@ const Certifications: React.FC = () => {
 
   const certs = [
     {
-      title: isPt ? 'ISO 9001 - Gestão da Qualidade' : 'ISO 9001 - Quality Management',
+      title: isPt ? 'ISO 9001:2015 - Gestão da Qualidade' : 'ISO 9001:2015 - Quality Management',
       desc: isPt ? 'Certificação internacional que garante a excelência dos nossos processos e a satisfação dos nossos clientes.' : 'International certification that guarantees the excellence of our processes and customer satisfaction.',
       icon: <Award className="w-8 h-8 text-[#6a00a3]" />,
-      date: '2023',
+      date: '2024',
     },
     {
-      title: isPt ? 'ISO 27001 - Segurança da Informação' : 'ISO 27001 - Information Security',
-      desc: isPt ? 'Comprometimento total com a segurança, integridade e confidencialidade dos dados dos nossos parceiros.' : 'Full commitment to the security, integrity, and confidentiality of our partners data.',
+      title: isPt ? 'ANPG - Indústria Petrolífera' : 'ANPG - Petroleum Industry',
+      desc: isPt ? 'Certificação pela ANPG para prestação de serviços à indústria petrolífera.' : 'ANPG certification for petroleum industry services.',
       icon: <Shield className="w-8 h-8 text-[#6a00a3]" />,
       date: '2024',
     },
     {
-      title: isPt ? 'Certificação CMC' : 'CMC Certification',
-      desc: isPt ? 'Certificação da Comissão de Mercado de Capitais para Serviços de Notação de Risco.' : 'Capital Market Commission Certification for Risk Rating Services.',
+      title: isPt ? 'INEFOP - Acreditação' : 'INEFOP - Accreditation',
+      desc: isPt ? 'Acreditação pelo INEFOP para prestação de serviços de formação profissional.' : 'INEFOP accreditation for professional training services.',
       icon: <CheckCircle className="w-8 h-8 text-[#6a00a3]" />,
+      date: '2024',
+    },
+    {
+      title: isPt ? 'CPD UK - Cursos Profissionais' : 'CPD UK - Professional Courses',
+      desc: isPt ? 'Acreditação pelo CPD UK para ministração de cursos profissionais no Reino Unido.' : 'CPD UK accreditation for professional courses in the United Kingdom.',
+      icon: <Award className="w-8 h-8 text-[#6a00a3]" />,
+      date: '2024',
+    },
+    {
+      title: isPt ? 'INIQ - Sistemas de Gestão de Qualidade' : 'INIQ - Quality Management Systems',
+      desc: isPt ? 'Certificação e formação em sistemas de gestão de qualidade.' : 'Certification and training in quality management systems.',
+      icon: <Shield className="w-8 h-8 text-[#6a00a3]" />,
       date: '2024',
     }
   ];

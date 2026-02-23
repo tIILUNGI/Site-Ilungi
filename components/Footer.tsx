@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
           &copy; {new Date().getFullYear()} <Link to="/admin" className="cursor-default hover:text-white transition-colors" title="Área Reservada">{config.companyName || 'ILUNGI'}</Link>. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
-          <Link to="/certificacoes" className="hover:text-white font-bold">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
+          <Link to="/certificacoes" className="hover:text-white font-bold text-white bg-[#6a00a3] px-4 py-2 rounded-lg transition-all">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
           <a href="#" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</a>
           <a href="#" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</a>
           <a href="#" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</a>
