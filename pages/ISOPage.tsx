@@ -44,8 +44,6 @@ const ISOPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
             {displayedIsoKeys.map((key, i) => (
                 <div key={i} className="p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#6a00a3]/20 transition-all">
-                    <div className="w-12 h-12 bg-[#6a00a3]/10 text-[#6a00a3] rounded-xl flex items-center justify-center mb-6">
-                    </div>
                     <h4 className="text-xs font-black text-[#6a00a3] uppercase mb-1">{key}</h4>
                     <h3 className="text-xl font-bold mb-4">{t.services.iso.items[key].title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed mb-6">{t.services.iso.items[key].benefit}</p>
@@ -96,7 +94,6 @@ const ISOPage: React.FC = () => {
                         { title: t.iso.steps.certification, desc: t.iso.steps.certificationDesc }
                     ].map((step, i) => (
                         <div key={i} className="flex space-x-4">
-                            <div className="shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-[#6a00a3]"></div>
                             <div>
                                 <h4 className="font-bold">{step.title}</h4>
                                 <p className="text-slate-300 text-sm">{step.desc}</p>

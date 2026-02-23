@@ -19,7 +19,7 @@ interface SiteConfig {
 const defaultData: SiteConfig = {
   companyName: "ILUNGI Lda",
   taglineText: "O Melhor e Verdadeiro Parceiro Nacional.",
-  address: "Edifício Belas Business Park, Talatona, Luanda",
+  address: "Projeto Nova Vida, Prédio E209, Apartamento 24",
   phone: "+244 935 793 270",
   email: "geral@ilungi.ao",
   linkedinBaseUrl: "https://www.linkedin.com/company/ilungi",

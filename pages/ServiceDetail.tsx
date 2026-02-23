@@ -68,25 +68,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {(isPt ? [
-            { title: "Metodologia ILUNGI", desc: "Processos refinados por anos de prática no mercado Angolano e Internacional." },
-            { title: "Diferenciais", desc: "Abordagem focada em resultados práticos e redução de desperdícios." },
-            { title: "Sectores Atendidos", desc: "Experiência em Petróleo & Gás, Finanças, Construção e Sector Público." }
-          ] : [
-            { title: "ILUNGI Methodology", desc: "Refined processes built through years of practice in Angolan and international markets." },
-            { title: "Differentials", desc: "An approach focused on practical results and waste reduction." },
-            { title: "Sectors Served", desc: "Experience in Oil & Gas, Finance, Construction, and Public Sector." }
-          ]).map((item, i) => (
-            <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
-              <h4 className="text-xl font-bold mb-4">
-                {item.title}
-              </h4>
-              <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
         {/* References Section */}
         {references.filter((ref: any) => ref.service === type).length > 0 && (
           <div className="mt-24">
