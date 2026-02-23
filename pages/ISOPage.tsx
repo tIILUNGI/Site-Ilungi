@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import { Shield, Book, CheckCircle, Search, ClipboardList, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
@@ -46,13 +45,12 @@ const ISOPage: React.FC = () => {
             {displayedIsoKeys.map((key, i) => (
                 <div key={i} className="p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#6a00a3]/20 transition-all">
                     <div className="w-12 h-12 bg-[#6a00a3]/10 text-[#6a00a3] rounded-xl flex items-center justify-center mb-6">
-                        <Shield className="w-6 h-6" />
                     </div>
                     <h4 className="text-xs font-black text-[#6a00a3] uppercase mb-1">{key}</h4>
                     <h3 className="text-xl font-bold mb-4">{t.services.iso.items[key].title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed mb-6">{t.services.iso.items[key].benefit}</p>
-                    <Link to="/contacto" className="text-sm font-bold text-[#1B3C2B] hover:text-[#6a00a3] flex items-center">
-                        {t.home.ctaPrimary} <CheckCircle className="w-4 h-4 ml-2" />
+                    <Link to="/contacto" className="text-sm font-bold text-[#1B3C2B] hover:text-[#6a00a3]">
+                        {t.home.ctaPrimary}
                     </Link>
                 </div>
             ))}
@@ -63,7 +61,6 @@ const ISOPage: React.FC = () => {
             className="text-sm font-bold text-[#6a00a3] hover:text-[#520b7d] flex items-center justify-center mx-auto transition-colors"
           >
             {isPt ? (showAllStandards ? 'Ver menos' : 'Estas e muitas mais.') : (showAllStandards ? 'Show less' : 'These and many more.')}
-            {showAllStandards ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
           </button>
         </div>
 
@@ -94,12 +91,12 @@ const ISOPage: React.FC = () => {
                 <h2 className="text-4xl font-bold mb-6">{t.iso.methodology}</h2>
                 <div className="space-y-6">
                     {[
-                        { title: t.iso.steps.gap, desc: t.iso.steps.gapDesc, icon: <Search /> },
-                        { title: t.iso.steps.planning, desc: t.iso.steps.planningDesc, icon: <ClipboardList /> },
-                        { title: t.iso.steps.certification, desc: t.iso.steps.certificationDesc, icon: <Book /> }
+                        { title: t.iso.steps.gap, desc: t.iso.steps.gapDesc },
+                        { title: t.iso.steps.planning, desc: t.iso.steps.planningDesc },
+                        { title: t.iso.steps.certification, desc: t.iso.steps.certificationDesc }
                     ].map((step, i) => (
                         <div key={i} className="flex space-x-4">
-                            <div className="shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-[#6a00a3]">{step.icon}</div>
+                            <div className="shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-[#6a00a3]"></div>
                             <div>
                                 <h4 className="font-bold">{step.title}</h4>
                                 <p className="text-slate-300 text-sm">{step.desc}</p>

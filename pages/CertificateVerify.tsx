@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { Search, ShieldCheck, ShieldAlert, Download, QrCode } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../App';
 
@@ -50,7 +49,7 @@ const CertificateVerify: React.FC = () => {
         <div className="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mb-8">
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                 <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg">🔍</span>
                     <input 
                         type="text" 
                         value={certId}
@@ -80,7 +79,6 @@ const CertificateVerify: React.FC = () => {
                         <div className="space-y-6">
                             <div className="flex items-center space-x-4">
                                 <div className="p-3 bg-green-100 text-green-600 rounded-2xl">
-                                    <ShieldCheck className="w-10 h-10" />
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-slate-800">
@@ -111,18 +109,15 @@ const CertificateVerify: React.FC = () => {
 
                             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
                                 <button className="flex-1 flex items-center justify-center space-x-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all">
-                                    <Download className="w-5 h-5" />
                                     <span>{isPt ? 'Baixar PDF' : 'Download PDF'}</span>
                                 </button>
                                 <div className="p-2 border border-slate-200 rounded-2xl flex items-center justify-center">
-                                    <QrCode className="w-10 h-10 text-slate-400" />
                                 </div>
                             </div>
                         </div>
                     ) : (
                         <div className="text-center py-6">
                             <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <ShieldAlert className="w-8 h-8" />
                             </div>
                             <h3 className="text-xl font-bold text-red-700">{isPt ? 'Certificado n\u00e3o encontrado' : 'Certificate not found'}</h3>
                             <p className="text-red-500 mt-2">{isPt ? 'O c\u00f3digo informado n\u00e3o corresponde a nenhum registro v\u00e1lido em nossa base de dados.' : 'The provided code does not match any valid record in our database.'}</p>

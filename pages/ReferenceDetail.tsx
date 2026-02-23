@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, FileText, Download, Calendar, User, Building, X, ZoomIn } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppContext } from '../App';
 
@@ -36,7 +35,6 @@ const ReferenceDetail: React.FC = () => {
           to="/consultoria" 
           className={`inline-flex items-center mb-8 font-medium ${isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'}`}
         >
-          <ArrowLeft className="w-5 h-5 mr-2" />
           {isPt ? 'Voltar aos serviços' : 'Back to services'}
         </Link>
 
@@ -112,7 +110,7 @@ const ReferenceDetail: React.FC = () => {
                       className="w-full h-48 object-contain p-2"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center">
-                      <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-bold">+</span>
                     </div>
                   </div>
                 ))}
@@ -129,14 +127,13 @@ const ReferenceDetail: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
         >
           <button 
             className="absolute top-4 right-4 text-white hover:text-purple-400 transition-colors"
             title={isPt ? 'Fechar' : 'Close'}
             onClick={() => setSelectedImage(null)}
           >
-            <X className="w-8 h-8" />
+            <span className="text-2xl font-bold">×</span>
           </button>
           <motion.img 
             initial={{ scale: 0.8 }}
@@ -144,6 +141,7 @@ const ReferenceDetail: React.FC = () => {
             src={selectedImage} 
             alt={isPt ? 'Certificado' : 'Certificate'}
             className="max-w-full max-h-full object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
           />
         </motion.div>
       )}

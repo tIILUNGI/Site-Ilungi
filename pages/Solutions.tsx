@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Layout, Cpu, Globe, Cloud } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Edit, Plus, Trash2, Save, Image as ImageIcon } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -9,6 +8,7 @@ import { loadData, saveDataAdmin } from '../lib/dataSync';
 const Solutions: React.FC = () => {
   const { t, lang, isEditing } = useAppContext();
   const isPt = lang === 'pt';
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const defaultProducts = [
     {
@@ -53,6 +53,14 @@ const Solutions: React.FC = () => {
       setProducts(data);
     });
   }, []);
+
+  // Auto-rotate solutions
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % products.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [products.length]);
 
   const handleProductChange = (index: number, field: string, value: string) => {
     const updated = [...products];
@@ -143,8 +151,8 @@ const Solutions: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Products Grid - COM IMAGENS CORPORATIVAS */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-32">
+        {/* Products Carousel - UM DE CADA VEZ */}
+        <div className="mb-32">
           {products.map((product, i) => (
             <motion.div 
               key={i}
@@ -255,7 +263,6 @@ const Solutions: React.FC = () => {
                       className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
                       <span>{isPt ? 'Visitar SICLIC' : 'Visit SICLIC'}</span>
-                      <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
                     </a>
                   ) : (
                     <Link 
@@ -263,7 +270,6 @@ const Solutions: React.FC = () => {
                       className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
                     >
                       <span>{isPt ? 'Solicitar Demo' : 'Request Demo'}</span>
-                      <ChevronRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   )}
                   

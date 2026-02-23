@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadConfig } from '../lib/dataSync';
 
@@ -51,6 +51,9 @@ const Footer: React.FC = () => {
             </a>
             <a href="https://www.facebook.com/op.ilungi" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Facebook className="w-5 h-5" />
+            </a>
+            <a href={`https://wa.me/${config.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
+              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
         </div>

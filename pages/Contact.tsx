@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { useAppContext } from '../App';
 
 const teamMembers = [
@@ -154,14 +154,12 @@ ${formData.message}
             <div className="absolute -inset-4 bg-[#6a00a3]/5 rounded-3xl blur-2xl"></div>
             <form onSubmit={handleSubmit} className="relative bg-white p-10 rounded-3xl shadow-2xl border border-slate-100 space-y-6">
                 {status === 'success' && (
-                    <div className="p-4 bg-green-50 text-green-700 rounded-xl flex items-center space-x-2">
-                        <CheckCircle className="w-5 h-5" />
+                    <div className="p-4 bg-green-50 text-green-700 rounded-xl">
                         <span>{isPt ? 'Mensagem enviada com sucesso!' : 'Message sent successfully!'}</span>
                     </div>
                 )}
                 {status === 'error' && (
-                    <div className="p-4 bg-red-50 text-red-700 rounded-xl flex items-center space-x-2">
-                        <AlertCircle className="w-5 h-5" />
+                    <div className="p-4 bg-red-50 text-red-700 rounded-xl">
                         <span>{isPt ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Please try again.'}</span>
                     </div>
                 )}
@@ -230,10 +228,7 @@ ${formData.message}
                     {status === 'sending' ? (
                         <span>{isPt ? 'Enviando...' : 'Sending...'}</span>
                     ) : (
-                        <>
-                            <span>{t.contact.formSubmit}</span>
-                            <Send className="w-5 h-5" />
-                        </>
+                        <span>{t.contact.formSubmit}</span>
                     )}
                 </button>
 

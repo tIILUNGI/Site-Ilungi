@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { loadData } from '../lib/dataSync';
 
 const Consulting: React.FC = () => {
-  const { t, lang } = useAppContext();
+  const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
 
   const defaultAreas = [
@@ -53,7 +52,7 @@ const Consulting: React.FC = () => {
   }, [t.consultingAreas]);
 
   return (
-    <div className="py-20 bg-white">
+    <div className={`py-20 ${isDark ? 'bg-slate-900' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-20">
@@ -83,7 +82,7 @@ const Consulting: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5 }}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg shadow-slate-200/40 hover:shadow-2xl transition-all duration-500"
+              className={`group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${isDark ? 'bg-slate-800 shadow-slate-900/50' : 'bg-white shadow-slate-200/40'}`}
             >
               <Link to={area.path} className="block">
                 {/* Container da imagem - quadrado perfeito */}
@@ -119,7 +118,6 @@ const Consulting: React.FC = () => {
                         style={{ border: `1px solid ${area.color}60` }}
                       >
                         {isPt ? 'Explorar área' : 'Explore area'}
-                        <ChevronRight className="w-3 h-3 ml-1" />
                       </span>
                     </div>
                   </motion.div>
@@ -156,7 +154,6 @@ const Consulting: React.FC = () => {
                     style={{ color: area.color }}
                   >
                     <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
-                    <ChevronRight className="w-4 h-4" />
                   </motion.div>
                 </motion.div>
 
@@ -199,17 +196,11 @@ const Consulting: React.FC = () => {
                       transition={{ delay: i * 0.1 }}
                       className="flex items-center space-x-4"
                     >
-                      <div className="w-7 h-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-4 h-4" />
-                      </div>
                       <span className="text-base md:text-lg font-medium text-slate-200">{item}</span>
                     </motion.div>
                   ))
                 ) : (
                   <div className="flex items-center space-x-4">
-                    <div className="w-7 h-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
                     <span className="text-base md:text-lg font-medium text-slate-200">{t.consulting.features}</span>
                   </div>
                 )}

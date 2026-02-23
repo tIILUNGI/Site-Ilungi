@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, CheckCircle2, Cpu, Cloud, Globe } from 'lucide-react';
 import { useAppContext } from '../App';
 
 interface ProductDemoProps {
@@ -264,8 +263,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                 </p>
                 <ul className="text-left space-y-3 mb-8">
                   {enterpriseFeatures.map(l => (
-                    <li key={l} className="flex items-center space-x-2 text-sm text-slate-600">
-                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                    <li key={l} className="text-sm text-slate-600">
                       <span>{l}</span>
                     </li>
                   ))}
@@ -311,11 +309,9 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               viewport={{ once: true }}
               className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
             >
-              <Cpu className="w-4 h-4 text-[#6a00a3]" />
               <span className="text-xs font-medium text-slate-600">
                 {isPt ? 'Cloud SaaS • Implementação em 24h' : 'Cloud SaaS • 24h Setup'}
               </span>
-              <Cloud className="w-4 h-4 text-[#1B3C2B] ml-2" />
             </motion.div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, ExternalLink, Award } from 'lucide-react';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
 
@@ -59,8 +58,7 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
           
           {/* Comment */}
           <div className="relative mt-3">
-            <Quote className={`w-5 h-5 absolute -top-1 -left-1 ${isDark ? 'text-purple-500/30' : 'text-purple-200'}`} />
-            <p className={`text-sm leading-relaxed pl-4 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+            <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
               "{reference.comment}"
             </p>
           </div>
@@ -72,7 +70,6 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
           {/* Certificate thumbnails */}
           {reference.attachments && reference.attachments.length > 0 && (
             <div className="mt-3 flex items-center gap-2">
-              <Award className={`w-4 h-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
               <div className="flex gap-2">
                 {reference.attachments.map((cert: string, idx: number) => (
                   <img 
@@ -91,12 +88,11 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
       {/* View Details Link */}
       <Link 
         to={`/referencia/${reference.id}`}
-        className={`mt-4 inline-flex items-center text-sm font-semibold ${
+        className={`mt-4 inline-flex text-sm font-semibold ${
           isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
         }`}
       >
         {t.references?.viewDetails || (isPt ? 'Ver Detalhes' : 'View Details')}
-        <ExternalLink className="w-4 h-4 ml-1" />
       </Link>
     </motion.div>
   );

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Handshake, ArrowRight, Star, Shield, TrendingUp, Users, ChevronRight } from 'lucide-react';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
 import { loadData } from '../lib/dataSync';
@@ -79,10 +78,10 @@ const Partners: React.FC = () => {
 
   // Benefícios de ser parceiro
   const benefits = [
-    { icon: <TrendingUp className="w-5 h-5" />, title: "Crescimento Mútuo", desc: "Expanda seu portfólio com nossas soluções" },
-    { icon: <Shield className="w-5 h-5" />, title: "Certificação Oficial", desc: "Torne-se um parceiro certificado ILUNGI" },
-    { icon: <Users className="w-5 h-5" />, title: "Rede Exclusiva", desc: "Acesso a eventos e networking estratégico" },
-    { icon: <Star className="w-5 h-5" />, title: "Suporte Prioritário", desc: "Equipe dedicada para parceiros" }
+    { title: "Crescimento Mútuo", desc: "Expanda seu portfólio com nossas soluções" },
+    { title: "Certificação Oficial", desc: "Torne-se um parceiro certificado ILUNGI" },
+    { title: "Rede Exclusiva", desc: "Acesso a eventos e networking estratégico" },
+    { title: "Suporte Prioritário", desc: "Equipe dedicada para parceiros" }
   ];
 
   return (
@@ -265,8 +264,6 @@ const Partners: React.FC = () => {
                           <span className="text-[10px] font-medium uppercase tracking-wider partner-link-text">
                             Visitar
                           </span>
-                          <ExternalLink size={14} className="partner-link-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          />
                         </div>
                       </motion.div>
                     </div>
@@ -352,7 +349,6 @@ const Partners: React.FC = () => {
                 transition={{ delay: 0.2 }}
               >
                 <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30 mb-8">
-                  <Handshake className="w-4 h-4 text-white" />
                   <span className="text-xs font-medium text-white uppercase tracking-wider">
                     {lang === 'pt' ? 'OPORTUNIDADE EXCLUSIVA' : 'EXCLUSIVE OPPORTUNITY'}
                   </span>
@@ -381,7 +377,6 @@ const Partners: React.FC = () => {
                     >
                       <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shrink-0">
                         <div className="text-white">
-                          {benefit.icon}
                         </div>
                       </div>
                       <div>
@@ -399,21 +394,12 @@ const Partners: React.FC = () => {
                     whileTap={{ scale: 0.95 }}
                     className="group relative px-10 py-5 bg-white rounded-full shadow-2xl overflow-hidden"
                   >
-                    {/* Efeito de brilho no hover */}
                     <motion.div 
                       className="absolute inset-0 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     />
                     
-                    <span className="relative z-10 flex items-center space-x-3">
-                      <span className="text-lg font-black text-[#1B3C2B] group-hover:text-white transition-colors duration-500">
-                        {lang === 'pt' ? 'QUERO SER PARCEIRO' : 'BECOME A PARTNER'}
-                      </span>
-                      <motion.div
-                        animate={{ x: isHoveringCTA ? [0, 5, 0] : 0 }}
-                        transition={{ duration: 1.5, repeat: isHoveringCTA ? Infinity : 0 }}
-                      >
-                        <ArrowRight className="w-6 h-6 text-[#1B3C2B] group-hover:text-white transition-colors duration-500" />
-                      </motion.div>
+                    <span className="relative z-10 flex items-center space-x-3 text-lg font-black text-[#1B3C2B] group-hover:text-white transition-colors duration-500">
+                      {lang === 'pt' ? 'QUERO SER PARCEIRO' : 'BECOME A PARTNER'}
                     </span>
                   </motion.button>
                 </Link>
@@ -435,8 +421,7 @@ const Partners: React.FC = () => {
               >
                 {/* Card de estatísticas */}
                 <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
-                  <h3 className="text-white font-bold text-xl mb-6 flex items-center">
-                    <Star className="w-5 h-5 mr-2 text-yellow-300 fill-yellow-300" />
+                  <h3 className="text-white font-bold text-xl mb-6">
                     {lang === 'pt' ? 'Impacto da Rede' : 'Network Impact'}
                   </h3>
                   
@@ -457,30 +442,6 @@ const Partners: React.FC = () => {
                       <div className="text-3xl font-black text-white">24/7</div>
                       <div className="text-white/60 text-sm">{lang === 'pt' ? 'Suporte VIP' : 'VIP Support'}</div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Depoimento/Chamada secundária */}
-                <div className="bg-gradient-to-br from-[#6a00a3]/30 to-[#1B3C2B]/30 backdrop-blur-md rounded-3xl p-8 border border-white/20">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white/90 text-sm italic mb-2">
-                        "A parceria com ILUNGI transformou nosso portfólio e abriu novas oportunidades de negócio."
-                      </p>
-                      <p className="text-white font-bold text-xs">— Parceiro Certificado</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6 pt-6 border-t border-white/20">
-                    <Link to="/contacto" className="flex items-center justify-between group/link">
-                      <span className="text-white font-medium text-sm">
-                        {lang === 'pt' ? 'Saiba mais sobre o programa' : 'Learn more about the program'}
-                      </span>
-                      <ChevronRight className="w-5 h-5 text-white group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
                   </div>
                 </div>
 

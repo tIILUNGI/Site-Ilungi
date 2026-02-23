@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, BookOpen, UserCheck, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 
@@ -47,15 +46,12 @@ const Academy: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
             {[
-                { icon: <GraduationCap />, title: t.academy.features.cert, desc: t.academy.features.certDesc },
-                { icon: <Award />, title: t.academy.features.mentoria, desc: t.academy.features.mentoriaDesc },
-                { icon: <BookOpen />, title: t.academy.features.material, desc: t.academy.features.materialDesc },
-                { icon: <UserCheck />, title: t.academy.features.networking, desc: t.academy.features.networkingDesc },
+                { title: t.academy.features.cert, desc: t.academy.features.certDesc },
+                { title: t.academy.features.mentoria, desc: t.academy.features.mentoriaDesc },
+                { title: t.academy.features.material, desc: t.academy.features.materialDesc },
+                { title: t.academy.features.networking, desc: t.academy.features.networkingDesc },
             ].map((box, i) => (
                 <div key={i} className="bg-white p-8 rounded-3xl shadow-lg shadow-slate-200/50 text-center">
-                    <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-[#6a00a3] mx-auto mb-6">
-                        {box.icon}
-                    </div>
                     <h3 className="font-bold text-lg mb-2">{box.title}</h3>
                     <p className="text-sm text-slate-500">{box.desc}</p>
                 </div>
@@ -67,8 +63,8 @@ const Academy: React.FC = () => {
                 <h2 className="text-3xl font-bold">{t.academy.coursesTitle}</h2>
                 <p className="text-slate-500">{t.academy.coursesDesc}</p>
             </div>
-            <Link to="/academia/cursos" className="text-[#6a00a3] font-bold flex items-center hover:underline">
-                {t.academy.viewAll} <ChevronRight className="w-5 h-5" />
+            <Link to="/academia/cursos" className="text-[#6a00a3] font-bold hover:underline">
+                {t.academy.viewAll}
             </Link>
         </div>
 

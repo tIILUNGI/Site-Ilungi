@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, ArrowRight, Layers, Target, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
@@ -15,12 +14,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const content = t.services[type];
-
-  const icons = {
-    risk: <Activity className="w-12 h-12" />,
-    procurement: <Layers className="w-12 h-12" />,
-    pmo: <Target className="w-12 h-12" />
-  };
 
   const images = {
     risk: "/imagens/Notação de Risco.jpg",
@@ -47,7 +40,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               className="space-y-6"
             >
               <div className="p-3 bg-purple-100 text-[#6a00a3] rounded-2xl w-fit">
-                {icons[type]}
               </div>
               <h1 className="text-5xl font-black text-[#1B3C2B] leading-tight">{content.title}</h1>
               <p className="text-xl text-slate-500 font-light leading-relaxed">{content.desc}</p>
@@ -56,7 +48,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               <div className="pt-8">
                 <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all inline-flex items-center group">
                   {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </motion.div>
@@ -88,8 +79,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
             { title: "Sectors Served", desc: "Experience in Oil & Gas, Finance, Construction, and Public Sector." }
           ]).map((item, i) => (
             <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
-              <h4 className="text-xl font-bold mb-4 flex items-center">
-                <CheckCircle className="w-5 h-5 text-[#6a00a3] mr-2" />
+              <h4 className="text-xl font-bold mb-4">
                 {item.title}
               </h4>
               <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
