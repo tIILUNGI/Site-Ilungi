@@ -1,4 +1,3 @@
-i
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Globe, Menu, X } from 'lucide-react';
