@@ -52,22 +52,35 @@ const Consulting: React.FC = () => {
   }, [t.consultingAreas]);
 
   return (
-    <div className={`py-20 ${isDark ? 'bg-slate-900' : 'bg-white'}`}>
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+      {/* Elementos decorativos de fundo */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
+      <div className="absolute top-20 left-0 w-64 h-64 bg-[#6a00a3]/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-0 w-96 h-96 bg-[#1B3C2B]/5 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block px-4 py-1.5 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-black uppercase mb-6 tracking-wider"
+          >
+            {isPt ? 'Especialidades ILUNGI' : 'ILUNGI Specialties'}
+          </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-6"
+            className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-6 relative"
           >
             {t.consulting.title}
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#6a00a3] rounded-full"></span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="max-w-3xl mx-auto text-xl text-slate-500 font-light"
+            className="max-w-3xl mx-auto text-xl text-slate-500 font-light mt-8"
           >
             {t.consulting.subtitle}
           </motion.p>
@@ -81,9 +94,12 @@ const Consulting: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -5 }}
-              className={`group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${isDark ? 'bg-slate-800 shadow-slate-900/50' : 'bg-white shadow-slate-200/40'}`}
+              whileHover={{ y: -8 }}
+              className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
             >
+              {/* Borda colorida no hover */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative bg-white rounded-[22px] m-0.5">
               <Link to={area.path} className="block">
                 {/* Container da imagem - quadrado perfeito */}
                 <div className="relative aspect-square overflow-hidden">
@@ -166,14 +182,16 @@ const Consulting: React.FC = () => {
                   transition={{ duration: 0.4 }}
                 />
               </Link>
+              </div>
             </motion.div>
           ))}
         </div>
 
         {/* CTA Section - Porqué a ILUNGI */}
-        <div className="relative bg-[#1B3C2B] rounded-[2.5rem] overflow-hidden p-12 lg:p-20 text-white">
+        <div className="relative bg-gradient-to-r from-[#1B3C2B] via-[#2E7D5E] to-[#1B3C2B] rounded-[3rem] overflow-hidden p-12 lg:p-20 text-white">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-[#6a00a3]/20 blur-3xl rounded-full"></div>
           <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-[#6a00a3]/10 blur-3xl rounded-full"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-transparent via-transparent to-black/20"></div>
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -181,9 +199,10 @@ const Consulting: React.FC = () => {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="text-4xl font-bold mb-8"
+                className="text-4xl font-bold mb-8 relative"
               >
                 {t.consulting.whyTitle}
+                <span className="absolute -bottom-3 left-0 w-20 h-1 bg-[#6a00a3] rounded-full"></span>
               </motion.h2>
               <div className="space-y-5">
                 {Array.isArray(t.consulting.features) ? (
@@ -196,11 +215,13 @@ const Consulting: React.FC = () => {
                       transition={{ delay: i * 0.1 }}
                       className="flex items-center space-x-4"
                     >
+                      <div className="w-2 h-2 bg-[#6a00a3] rounded-full"></div>
                       <span className="text-base md:text-lg font-medium text-slate-200">{item}</span>
                     </motion.div>
                   ))
                 ) : (
                   <div className="flex items-center space-x-4">
+                    <div className="w-2 h-2 bg-[#6a00a3] rounded-full"></div>
                     <span className="text-base md:text-lg font-medium text-slate-200">{t.consulting.features}</span>
                   </div>
                 )}
