@@ -42,7 +42,7 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       solutions: {
         title: "Soluções Digitais sob medida para sua Gestão",
-        desc: "Desenvolvemos ecossistemas tecnológicos que simplificam o compliance, a auditoria e o acompanhamento estratégico. Conheça as plataformas Salya e Tocomply360.",
+        desc: "Impulsionamos a transformação digital da sua empresa com plataformas inovadoras. Automatize processos, fortaleça a governança e tome decisões baseadas em dados.",
         feature1: "Dashboards em Tempo Real",
         feature2: "Segurança da Informação de Ponta",
         feature3: "Interface Intuitiva & Mobile",

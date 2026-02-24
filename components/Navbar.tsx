@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { useAppContext } from '../App';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const menuVariants = {
-  hidden: { opacity: 0, y: -10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3 }
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    transition: { duration: 0.2 }
-  }
-};
 
 const Navbar: React.FC = () => {
   const { lang, setLang, t, isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const isPt = lang === 'pt';
+  const navigate = useNavigate();
 
   const toggleLang = () => setLang(lang === 'pt' ? 'en' : 'pt');
 
@@ -30,112 +18,155 @@ const Navbar: React.FC = () => {
       label: t.nav.consulting,
       id: 'consulting',
       path: '/consultoria',
+      description: isPt ? 'Consultoria especializada para o seu negócio' : 'Specialized consulting for your business',
       mega: [
-        { title: t.nav.iso, path: '/consultoria/iso' },
-        { title: t.nav.risk, path: '/consultoria/risco' },
-        { title: t.nav.procurement, path: '/consultoria/procurement' },
-        { title: t.nav.pmo, path: '/consultoria/pmo' },
+        { title: t.nav.iso, desc: isPt ? 'Certificação e implementação de normas ISO' : 'Certification and implementation of ISO standards', path: '/consultoria/iso' },
+        { title: t.nav.risk, desc: isPt ? 'Gestão e mitigação de riscos corporativos' : 'Corporate risk management and mitigation', path: '/consultoria/risco' },
+        { title: t.nav.procurement, desc: isPt ? 'Otimização de processos de aquisição' : 'Optimization of procurement processes', path: '/consultoria/procurement' },
+        { title: t.nav.pmo, desc: isPt ? 'Gestão estratégica de projetos' : 'Strategic project management', path: '/consultoria/pmo' },
       ]
     },
     {
       label: t.nav.academy,
       id: 'academy',
       path: '/academia',
+      description: isPt ? 'Formação e certificação profissional' : 'Professional training and certification',
       mega: [
-        { title: t.nav.alumni, path: '/academia/alumni' },
-        { title: "GPMOi (Cursos)", href: "https://gpmoi.org/" },
-        { title: t.nav.verify, path: '/academia/verificar' },
-        { title: "School of Reputation", href: "https://scr.ilungi.ao/" },
+        { title: t.nav.alumni, desc: isPt ? 'Portal de ex-alunos e certificações' : 'Alumni portal and certifications', path: '/academia/alumni' },
+        { title: "GPMOi (Cursos)", desc: isPt ? 'Cursos online e formação contínua' : 'Online courses and continuing education', href: "https://gpmoi.org/" },
+        { title: t.nav.verify, desc: isPt ? 'Verifique a autenticidade de certificados' : 'Verify certificate authenticity', path: '/academia/verificar' },
+        { title: "School of Reputation", desc: isPt ? 'Formação em gestão de reputação' : 'Reputation management training', href: "https://scr.ilungi.ao/" },
       ]
     },
     {
       label: t.nav.solutions,
       id: 'solutions',
       path: '/solucoes',
+      description: isPt ? 'Tecnologia para a sua gestão' : 'Technology for your management',
       mega: [
-        { title: "Salya (GRC Platform)", path: '/solucoes/salya' },
-        { title: "SICLIC (Compliance)", href: "https://siclic.ao/" },
-        { title: "Tocomply360", path: '/solucoes/tocomply' },
+        { title: "Salya", desc: isPt ? 'Plataforma de gestão e compliance' : 'Management and compliance platform', path: '/solucoes/salya' },
+        { title: "SICLIC", desc: isPt ? 'Sistema de compliance legal' : 'Legal compliance system', href: "https://siclic.ao/" },
+        { title: "Tocomply360", desc: isPt ? 'Framework de governança corporativa' : 'Corporate governance framework', path: '/solucoes/tocomply' },
       ]
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },
     { label: t.nav.contact, id: 'contact', path: '/contacto' },
   ];
 
+  const handleClick = (e: React.MouseEvent, item: any) => {
+    if (item.mega) {
+      e.preventDefault();
+      navigate(item.path);
+      setActiveMenu(null);
+    }
+  };
+
+  const handleMouseEnter = (id: string) => {
+    setActiveMenu(id);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveMenu(null);
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 glass ${isDark ? 'glass-dark text-white' : 'text-slate-900'} border-b border-slate-200/50`}>
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-slate-900/95' : 'bg-white/95'} backdrop-blur-xl border-b ${isDark ? 'border-slate-700/50' : 'border-slate-200/50'}`}>
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center">
           <motion.img 
             src="/imagens/ilungi_logo.jpg" 
             alt="ILUNGI Logo" 
-            className="h-16 w-auto"
+            className="h-14 w-auto"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           />
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-6">
-          <Link to="/" className="font-medium hover:text-[#6a00a3] transition-colors relative">
+        <div className="hidden lg:flex items-center h-20">
+          <Link to="/" className="font-medium px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
             {t.nav.home}
-            <motion.span 
-              className="absolute -bottom-1 left-0 h-0.5 bg-[#6a00a3]"
-              initial={{ width: 0 }}
-              whileHover={{ width: '100%' }}
-              transition={{ duration: 0.3 }}
-            />
           </Link>
+          
           {menuItems.map((item) => (
             <div 
               key={item.id} 
-              className="relative group h-20 flex items-center"
-              onMouseEnter={() => setActiveMenu(item.id)}
-              onMouseLeave={() => setActiveMenu(null)}
+              className="relative h-full"
+              onMouseEnter={() => handleMouseEnter(item.id)}
+              onMouseLeave={handleMouseLeave}
             >
-              <Link to={item.path || '#'} className="flex items-center space-x-1 font-medium hover:text-[#6a00a3] transition-colors relative">
-                <span>{item.label}</span>
-                {item.mega && <ChevronDown className="w-4 h-4" />}
-                <motion.span 
-                  className="absolute -bottom-1 left-0 h-0.5 bg-[#6a00a3]"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
+              {item.mega ? (
+                <Link 
+                  to={item.path}
+                  onClick={(e) => handleClick(e, item)}
+                  className={`flex items-center gap-1 font-medium px-4 py-2 h-full ${activeMenu === item.id ? 'text-[#6a00a3]' : ''} hover:text-[#6a00a3] transition-colors cursor-pointer`}
+                >
+                  <span>{item.label}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${activeMenu === item.id ? 'rotate-180' : ''}`} />
+                </Link>
+              ) : (
+                <Link 
+                  to={item.path}
+                  className="flex items-center gap-1 font-medium px-4 py-2 h-full hover:text-[#6a00a3] transition-colors"
+                >
+                  <span>{item.label}</span>
+                </Link>
+              )}
 
               {/* Mega Menu */}
               {item.mega && (
                 <AnimatePresence>
                   {activeMenu === item.id && (
                     <motion.div 
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      transition={{ duration: 0.3 }}
-                      className={`absolute top-20 left-1/2 -translate-x-1/2 w-[700px] ${isDark ? 'glass-menu-dark border-slate-700/40' : 'glass-menu border-slate-200'} p-8 rounded-2xl mega-menu-shadow border`}
+                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-4"
                     >
-                      <div className="grid grid-cols-2 gap-8">
-                        {item.mega.map((sub, idx) => (
-                          <div key={idx} className="space-y-3">
-                            {sub.href ? (
-                              <a href={sub.href} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group/sub">
-                                <h4 className="font-bold text-slate-800 flex items-center">
-                                  {sub.title}
-                                </h4>
-                              </a>
-                            ) : (
-                              <Link to={sub.path} className="flex items-center space-x-3 group/sub">
-                                <div>
-                                  <h4 className="font-bold text-slate-800 flex items-center">
-                                    {sub.title}
-                                  </h4>
-                                </div>
-                              </Link>
-                            )}
+                      <div className={`w-[600px] ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-2xl border overflow-hidden`}>
+                        {/* Header Description */}
+                        <div className={`px-6 py-4 ${isDark ? 'bg-slate-800/50' : 'bg-slate-50'} border-b ${isDark ? 'border-slate-700' : 'border-slate-100'}`}>
+                          <p className={`font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</p>
+                        </div>
+                        
+                        {/* Menu Items */}
+                        <div className="p-3">
+                          <div className="grid grid-cols-2 gap-1">
+                            {item.mega.map((sub: any, idx) => (
+                              <div key={idx}>
+                                {sub.href ? (
+                                  <a 
+                                    href={sub.href} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className={`flex flex-col p-4 rounded-xl transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
+                                  >
+                                    <span className={`font-bold text-lg mb-1 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                      {sub.title}
+                                    </span>
+                                    <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                      {sub.desc}
+                                    </span>
+                                  </a>
+                                ) : (
+                                  <Link 
+                                    to={sub.path} 
+                                    className={`flex flex-col p-4 rounded-xl transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
+                                  >
+                                    <span className={`font-bold text-lg mb-1 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                      {sub.title}
+                                    </span>
+                                    <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                      {sub.desc}
+                                    </span>
+                                  </Link>
+                                )}
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        </div>
                       </div>
                     </motion.div>
                   )}
@@ -146,14 +177,14 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Right Controls */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-3">
           {/* Translate Button */}
           <motion.button 
             onClick={toggleLang}
-            className={`flex items-center space-x-2 px-3 py-2 rounded-full font-bold text-sm border transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm border transition-all ${
               isDark 
-                ? 'border-purple-400/50 hover:border-purple-400 text-purple-300 hover:text-purple-200' 
-                : 'border-slate-300 hover:border-slate-400 text-slate-600 hover:text-slate-800'
+                ? 'border-slate-600 hover:border-[#6a00a3] text-slate-300 hover:text-[#6a00a3]' 
+                : 'border-slate-300 hover:border-[#6a00a3] text-slate-600 hover:text-[#6a00a3]'
             }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -162,21 +193,18 @@ const Navbar: React.FC = () => {
             <span>{lang.toUpperCase()}</span>
           </motion.button>
           
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Link to="/contacto" className="hidden sm:block px-6 py-2.5 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/20">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+            <Link to="/contacto" className="hidden sm:block px-6 py-2.5 bg-[#6a00a3] text-white rounded-full font-semibold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/25">
               {t.home.ctaPrimary}
             </Link>
           </motion.div>
 
           <motion.button 
-            className="lg:hidden"
+            className="lg:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.9 }}
           >
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
         </div>
       </div>
@@ -188,13 +216,36 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className={`lg:hidden ${isDark ? 'glass-dark border-slate-700/40' : 'glass border-slate-200'} border-t overflow-hidden`}
+            transition={{ duration: 0.2 }}
+            className={`lg:hidden ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} border-t overflow-hidden`}
           >
-            <div className="p-4 space-y-4">
+            <div className="px-6 py-4 space-y-2">
               {menuItems.map(item => (
-                <div key={item.id}>
-                  <Link to={item.path || '#'} onClick={() => setIsOpen(false)} className="block font-bold text-lg py-2 border-b border-slate-100">{item.label}</Link>
+                <div key={item.id} className="border-b border-slate-200/10 pb-2">
+                  <Link 
+                    to={item.path || '#'} 
+                    onClick={() => setIsOpen(false)} 
+                    className={`block font-semibold text-lg py-3 ${isDark ? 'text-white' : 'text-slate-800'}`}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.mega && (
+                    <div className="ml-4 mt-1 space-y-1 pb-2">
+                      {item.mega.map((sub: any, idx) => (
+                        <div key={idx}>
+                          {sub.href ? (
+                            <a href={sub.href} target="_blank" rel="noopener noreferrer" className={`block py-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                              {sub.title}
+                            </a>
+                          ) : (
+                            <Link to={sub.path} onClick={() => setIsOpen(false)} className={`block py-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                              {sub.title}
+                            </Link>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
