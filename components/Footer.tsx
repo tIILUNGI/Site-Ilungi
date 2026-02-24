@@ -1,13 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadConfig } from '../lib/dataSync';
 
 const Footer: React.FC = () => {
-  const { t, lang, isEditing, setIsEditing } = useAppContext();
+  const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
+  const navigate = useNavigate();
   
   const defaultConfig = {
     companyName: "ILUNGI Lda",
@@ -25,6 +25,10 @@ const Footer: React.FC = () => {
       setConfig(data);
     });
   }, [lang]);
+
+  const handleAdminClick = () => {
+    navigate('/admin');
+  };
 
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
@@ -83,9 +87,7 @@ const Footer: React.FC = () => {
           <ul className="space-y-4 text-slate-300">
             <li className="flex items-start space-x-3">
               <MapPin className="w-5 h-5 text-[#6a00a3] shrink-0" />
-              <span className="text-sm">
-                {config.address}
-              </span>
+              <span className="text-sm">{config.address}</span>
             </li>
             <li className="flex items-center space-x-3">
               <Phone className="w-5 h-5 text-[#6a00a3] shrink-0" />
@@ -98,9 +100,17 @@ const Footer: React.FC = () => {
           </ul>
         </div>
       </div>
+      
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs">
         <p>
-          &copy; {new Date().getFullYear()} <Link to="/admin" className="cursor-default hover:text-white transition-colors" title="Área Reservada">{config.companyName || 'ILUNGI'}</Link>. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
+          &copy; {new Date().getFullYear()} 
+          <button 
+            onClick={handleAdminClick}
+            className="cursor-pointer hover:text-white transition-colors ml-1"
+            title={isPt ? 'Área de Administração' : 'Administration Area'}
+          >
+            {config.companyName || 'ILUNGI'}
+          </button>. {isPt ? 'Todos os direitos reservados.' : 'All rights reserved.'}
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
           <Link to="/certificacoes" className="hover:text-white font-bold text-white bg-[#6a00a3] px-4 py-2 rounded-lg transition-all">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
