@@ -1,9 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Edit, Plus, Trash2, Save, Image as ImageIcon } from 'lucide-react';
+import { Edit, Plus, Trash2, Save, Image as ImageIcon, ArrowRight, CheckCircle, Shield, Zap } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadData, saveDataAdmin } from '../lib/dataSync';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: i * 0.15, duration: 0.6 }
+  })
+};
 
 const Solutions: React.FC = () => {
   const { t, lang, isEditing } = useAppContext();
@@ -54,7 +81,6 @@ const Solutions: React.FC = () => {
     });
   }, []);
 
-  // Auto-rotate solutions
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % products.length);
@@ -97,213 +123,171 @@ const Solutions: React.FC = () => {
   const editStyles = isEditing ? "hover:outline hover:outline-2 hover:outline-dashed hover:outline-[#6a00a3] hover:bg-white/50 cursor-text transition-all rounded p-1 -m-1" : "";
 
   return (
-    <div className="py-20 bg-white relative overflow-hidden">
-      {/* ELEMENTOS TECNOLÓGICOS DE FUNDO - APENAS DECORATIVOS */}
-      
-      {/* Grade de circuito digital */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6a00a3" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-      
-      {/* Linhas de conexão tecnológicas */}
-      <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
-      <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/30 to-transparent"></div>
-      
-
+    <div className="py-24 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
+      <motion.div 
+        animate={{ x: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-20 left-0 w-64 h-64 bg-[#6a00a3]/5 rounded-full blur-3xl"
+      />
+      <motion.div 
+        animate={{ x: [0, -30, 0], opacity: [0.2, 0.3, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute bottom-20 right-0 w-96 h-96 bg-[#1B3C2B]/5 rounded-full blur-3xl"
+      />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-24">
-          
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 bg-slate-100 text-slate-600 rounded-full text-sm font-black uppercase mb-6 tracking-wider"
+            transition={{ delay: 0.2 }}
+            className="inline-block px-6 py-2 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-bold uppercase mb-6 tracking-widest"
           >
             {isPt ? 'Ecossistema Digital ILUNGI' : 'ILUNGI Digital Ecosystem'}
           </motion.span>
           
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-8 relative"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-6"
           >
             {t.solutions.title}
-            {/* Linha decorativa simples */}
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-slate-300 rounded-full"></span>
           </motion.h1>
           
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="max-w-3xl mx-auto text-xl text-slate-500 font-light"
           >
             {t.solutions.subtitle}
           </motion.p>
-        </div>
+        </motion.div>
 
-        {/* Products Carousel - UM DE CADA VEZ */}
-        <div className="mb-32">
+        {/* Products Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
+        >
           {products.map((product, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-500"
+              variants={cardVariants}
+              custom={i}
+              whileHover={{ y: -12 }}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
             >
-              {/* Efeito de borda simples no hover */}
-              <div className="absolute -inset-0.5 bg-slate-200 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/* Gradient border on hover */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
-              {/* Container da imagem */}
-              <div className="relative h-56 overflow-hidden">
-                {/* Overlay gradiente com efeito tecnológico */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"
-                  initial={{ opacity: 0.6 }}
-                  whileHover={{ opacity: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                />
-                
-                {/* Overlay de circuito digital na imagem */}
-                <div className="absolute inset-0 z-5 opacity-20 mix-blend-overlay">
-                  <svg width="100%" height="100%">
-                    <pattern id={`circuit-${i}`} x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                      <path d="M10 10 L30 10 M40 20 L20 20 M30 30 L10 30" stroke="white" strokeWidth="0.3" fill="none"/>
-                      <circle cx="15" cy="15" r="1" fill="white"/>
-                      <circle cx="35" cy="25" r="1" fill="white"/>
-                    </pattern>
-                    <rect width="100%" height="100%" fill={`url(#circuit-${i})`}/>
-                  </svg>
-                </div>
-                
-                {/* Imagem corporativa */}
-                <motion.img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                />
-                
-                {/* Logo/Badge sobre a imagem com efeito glassmorphism */}
-                <motion.div 
-                  className="absolute top-6 left-6 z-20"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
-                    <span 
-                      className={`text-white font-black text-xl ${isEditing ? 'hover:outline hover:outline-2 outline-white rounded px-1' : ''}`}
-                      contentEditable={isEditing} 
-                      suppressContentEditableWarning
-                      onBlur={(e) => handleProductChange(i, 'name', e.currentTarget.textContent || '')}
-                    >
-                      {product.name}
+              <div className="relative bg-white rounded-[22px] m-0.5">
+                {/* Image Container */}
+                <div className="relative h-56 overflow-hidden rounded-t-[22px]">
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10"
+                    initial={{ opacity: 0.5 }}
+                    whileHover={{ opacity: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  
+                  <motion.img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                  
+                  {/* Badge */}
+                  <motion.div 
+                    className="absolute top-5 left-5 z-20"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-xl shadow-lg border border-white/20`}>
+                      <span className="text-white font-black text-lg">
+                        {product.name}
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Tagline */}
+                  <div className="absolute bottom-5 left-5 z-20">
+                    <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium border border-white/30">
+                      {product.tagline}
                     </span>
                   </div>
-                </motion.div>
-
-                {/* Tagline sobre a imagem */}
-                <motion.div 
-                  className="absolute bottom-6 left-6 z-20"
-                  whileHover={{ y: -3 }}
-                >
-                  <span 
-                    className={`text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium inline-block border border-white/30 shadow-lg ${isEditing ? 'hover:outline hover:outline-2 outline-white cursor-text' : ''}`}
-                    contentEditable={isEditing}
-                    suppressContentEditableWarning
-                    onBlur={(e) => handleProductChange(i, 'tagline', e.currentTarget.textContent || '')}
-                  >
-                    {product.tagline}
-                  </span>
-                </motion.div>
-
-
-              </div>
-
-              {/* Conteúdo do card */}
-              <div className="p-8 bg-white relative">
-                {/* Linha tecnológica superior */}
-                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
-                
-                <h3 
-                  className={`text-2xl font-black text-slate-800 mb-3 flex items-center ${editStyles}`}
-                  contentEditable={isEditing}
-                  suppressContentEditableWarning
-                  onBlur={(e) => handleProductChange(i, 'name', e.currentTarget.textContent || '')}
-                >
-                  {product.name}
-                </h3>
-                <p 
-                  className={`text-slate-500 leading-relaxed mb-6 text-sm ${editStyles}`}
-                  contentEditable={isEditing}
-                  suppressContentEditableWarning
-                  onBlur={(e) => handleProductChange(i, 'desc', e.currentTarget.textContent || '')}
-                >
-                  {product.desc}
-                </p>
-                
-                {/* Call to action com efeito tecnológico */}
-                <div className="flex items-center justify-between">
-                  {product.url ? (
-                    <a 
-                      href={product.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
-                    >
-                      <span>{isPt ? 'Visitar SICLIC' : 'Visit SICLIC'}</span>
-                    </a>
-                  ) : (
-                    <Link 
-                      to={product.path || '#'}
-                      className="inline-flex items-center space-x-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors group/link"
-                    >
-                      <span>{isPt ? 'Solicitar Demo' : 'Request Demo'}</span>
-                    </Link>
-                  )}
-                  
-
                 </div>
+
+                {/* Content */}
+                <div className="p-7 bg-white">
+                  <p className="text-slate-500 leading-relaxed mb-6 text-sm line-clamp-3">
+                    {product.desc}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    {product.url ? (
+                      <motion.a 
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ x: 5 }}
+                        className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
+                      >
+                        <span>{isPt ? 'Visitar' : 'Visit'}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.a>
+                    ) : (
+                      <motion.div whileHover={{ x: 5 }}>
+                        <Link 
+                          to={product.path || '#'}
+                          className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
+                        >
+                          <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Decorative line */}
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1"
+                  style={{ background: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3)` }}
+                  initial={{ width: 0 }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.4 }}
+                />
               </div>
 
-              {/* Linha decorativa com gradiente tecnológico */}
-              <motion.div 
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r"
-                style={{ 
-                  backgroundImage: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3, ${product.bgColor.replace('bg-', '')})` 
-                }}
-                initial={{ width: 0 }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.4 }}
-              />
-              {/* TOOLS DE EDIÇÃO (APENAS EM MODO ADMIN) */}
+              {/* Admin Tools */}
               {isEditing && (
                 <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
                   <button
                     onClick={() => {
-                      const newImg = prompt("Insira a URL da nova Imagem:", product.image);
+                      const newImg = prompt("URL da Imagem:", product.image);
                       if(newImg) handleProductChange(i, 'image', newImg);
                     }}
-                    className="p-3 bg-white/90 backdrop-blur-md shadow-xl text-slate-800 rounded-xl hover:bg-[#6a00a3] hover:text-white transition-all scale-90"
+                    className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
                     title="Alterar Imagem"
                   >
                     <ImageIcon className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDeleteProduct(i)}
-                    className="p-3 bg-red-500/90 backdrop-blur-md shadow-xl text-white rounded-xl hover:bg-red-600 transition-all scale-90"
-                    title="Eliminar Solução"
+                    className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
+                    title="Eliminar"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -312,77 +296,66 @@ const Solutions: React.FC = () => {
             </motion.div>
           ))}
           
-          {/* BOTÃO ADICIONAR NOVO (MODO EDIÇÃO) */}
+          {/* Add New Button (Admin) */}
           {isEditing && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               onClick={handleAddProduct}
-              className="group relative bg-[#6a00a3]/5 rounded-[2.5rem] overflow-hidden shadow-none border-2 border-dashed border-[#6a00a3]/30 hover:bg-[#6a00a3]/10 hover:border-[#6a00a3]/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[400px] cursor-pointer"
+              className="group relative bg-[#6a00a3]/5 rounded-3xl border-2 border-dashed border-[#6a00a3]/30 hover:bg-[#6a00a3]/10 hover:border-[#6a00a3]/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[400px] cursor-pointer"
             >
               <div className="w-16 h-16 bg-[#6a00a3] rounded-full flex items-center justify-center text-white mb-4 group-hover:scale-110 shadow-lg shadow-[#6a00a3]/30 transition-transform">
                 <Plus className="w-8 h-8" />
               </div>
               <span className="font-bold text-[#6a00a3] text-lg">Nova Solução</span>
-              <p className="text-slate-500 text-sm mt-2 text-center px-8">Clique aqui para criar um novo card de SaaS diretamente no site.</p>
             </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        {/* Implementação & Suporte */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative">
-          {/* Elemento tecnológico de fundo */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
-            <div className="w-full h-full bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
-          </div>
-          
-          <div className="order-2 lg:order-1 relative">
+        {/* Features Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+        >
+          <div>
             <motion.h2 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-4xl font-black text-[#1B3C2B] mb-8 leading-tight relative"
+              className="text-4xl font-black text-[#1B3C2B] mb-8"
             >
               {isPt ? 'Implementação Ágil & Suporte Especializado' : 'Agile Implementation & Specialized Support'}
-              {/* Linha decorativa tecnológica */}
-              <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
             </motion.h2>
             
             <div className="space-y-8">
               {[
                 { 
                   title: isPt ? "Segurança de Dados" : "Data Security", 
-                  desc: isPt ? "Infraestrutura em nuvem com criptografia de ponta a ponta e compliance ISO 27001." : "Cloud infrastructure with end-to-end encryption and ISO 27001 compliance.",
-                  image: ""
+                  desc: isPt ? "Infraestrutura em nuvem com criptografia de ponta a ponta e compliance ISO 27001." : "Cloud infrastructure with end-to-end encryption and ISO 27001 compliance."
                 },
                 { 
                   title: isPt ? "Customização" : "Customization", 
-                  desc: isPt ? "Módulos adaptáveis aos processos específicos da sua indústria." : "Modules adaptable to your industry's specific processes.",
-                  image: ""
+                  desc: isPt ? "Módulos adaptáveis aos processos específicos da sua indústria." : "Modules adaptable to your industry's specific processes."
                 },
                 { 
                   title: isPt ? "Escalabilidade" : "Scalability", 
-                  desc: isPt ? "Cresça sua operação sem preocupações com performance ou limites técnicos." : "Grow your operation without worrying about performance or technical limits.",
-                  image: ""
+                  desc: isPt ? "Cresça sua operação sem preocupações com performance ou limites técnicos." : "Grow your operation without worrying about performance or technical limits."
                 }
               ].map((item, i) => (
                 <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-start space-x-5 group"
+                  className="relative pl-8"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#6a00a3] to-[#1B3C2B] flex items-center justify-center shrink-0 shadow-lg">
-                    <span className="text-white font-bold text-xl">{i + 1}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
-                      {item.title}
-                    </h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
+                  <div className="absolute left-0 top-0 w-2 h-2 bg-[#6a00a3] rounded-full mt-2"></div>
+                  <h4 className="text-lg font-bold text-slate-800 mb-2">{item.title}</h4>
+                  <p className="text-slate-500">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -392,71 +365,32 @@ const Solutions: React.FC = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="order-1 lg:order-2 relative"
+            className="relative"
           >
-            {/* Anel tecnológico ao redor da imagem */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-[#6a00a3]/20 to-[#1B3C2B]/20 rounded-[3rem] blur-2xl animate-pulse"></div>
-            <div className="absolute -inset-1 border-2 border-[#6a00a3]/20 rounded-[3rem]"></div>
-            <div className="absolute -inset-2 border border-[#1B3C2B]/10 rounded-[3rem]"></div>
-            
+            <div className="absolute -inset-6 bg-gradient-to-r from-[#6a00a3]/10 to-[#1B3C2B]/10 rounded-3xl blur-2xl"></div>
             <img 
               src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              className="relative z-10 rounded-[2.5rem] shadow-2xl border-8 border-white w-full h-auto object-cover" 
-              alt="Technology dashboard"
+              className="relative z-10 rounded-3xl shadow-2xl w-full h-auto" 
+              alt="Technology"
             />
-            
-            {/* Overlay tecnológico na imagem */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#6a00a3]/10 via-transparent to-[#1B3C2B]/10 rounded-[2.5rem] pointer-events-none"></div>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Trust Indicators com estilo tecnológico */}
+        {/* Trust Indicators */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 text-center relative"
+          className="mt-20"
         >
-          {/* Fundo tecnológico */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#6a00a3]/5 via-transparent to-[#1B3C2B]/5 blur-3xl rounded-full"></div>
-          
-          <div className="relative inline-flex flex-wrap items-center justify-center gap-6 p-6 bg-white/80 backdrop-blur-md rounded-full shadow-lg border border-slate-100">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
-                {isPt ? '+50 Empresas Confiam' : '50+ Companies Trust'}
-              </span>
-            </div>
-            <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
-                {isPt ? 'ISO 27001 Certificado' : 'ISO 27001 Certified'}
-              </span>
-            </div>
-            <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-bold text-[#1B3C2B] uppercase">
-                {isPt ? 'Suporte 24/7' : '24/7 Support'}
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-8 p-8 bg-white rounded-3xl shadow-lg border border-slate-100">
+            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? '+50 Empresas' : '50+ Companies'}</span>
+            <div className="w-px h-8 bg-slate-200 hidden sm:block"></div>
+            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? 'ISO 27001' : 'ISO 27001'}</span>
+            <div className="w-px h-8 bg-slate-200 hidden sm:block"></div>
+            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? 'Suporte 24/7' : '24/7 Support'}</span>
           </div>
         </motion.div>
-        
-        {/* Barra de progresso tecnológica animada */}
-        <div className="mt-16 h-1 w-full bg-slate-200 rounded-full overflow-hidden">
-          <motion.div 
-            className="h-full bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B]"
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          ></motion.div>
-        </div>
-        <div className="flex justify-between mt-2 text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>{isPt ? 'Inovação' : 'Innovation'}</span>
-          <span>{isPt ? 'Segurança' : 'Security'}</span>
-          <span>{isPt ? 'Escalabilidade' : 'Scalability'}</span>
-          <span>{isPt ? 'Performance' : 'Performance'}</span>
-        </div>
       </div>
     </div>
   );

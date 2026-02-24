@@ -1,4 +1,3 @@
-
 import { Translation } from './types';
 
 export const translations: Record<'pt' | 'en', any> = {
@@ -144,7 +143,7 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Tecnologia de ponta para gestão eficiente do seu negócio.",
       sicloc: {
         title: "SICLIC",
-        desc: "Solução cloud para gestão do relacionamento com o cliente baseada em 4 conceitos: Potencial cliente, cliente, contrato e relatório. As relações são entre pessoas, e o SICLIC auxilia na gestão e fidelização do consumidor.\nwww.siclic.ao | contacto@siclic.ao",
+        desc: "Solução cloud para gestão do relacionamento com o cliente baseada em 4 conceitos: Potencial cliente, cliente, contrato e relatório. As relações são entre pessoas, e o SICLIC auxiliar na gestão e fidelização do consumidor.\nwww.siclic.ao | contacto@siclic.ao",
       },
       tocomply: {
         title: "ToComply360º",
@@ -182,7 +181,7 @@ export const translations: Record<'pt' | 'en', any> = {
       pmo: {
         title: "ASSISTÊNCIA E SUPORTE DE T.I",
         desc: "Serviços de assistência e suporte de TI",
-        content: "Se você busca reduzir/controlar custos na área de tecnologia, saiba que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
+        content: "Se você busca reduzir/controlar custos na área de tecnologia, sabe que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
       }
     },
     alumni: {
@@ -255,7 +254,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imobias",
           name: "IMOVIAS",
-          logo: "/Nossas Refeências/Imovias.png",
+          logo: "/Nossas Refeências/Imobias.png",
           role: "Implementação ISO 14001",
           comment: "Excelente trabalho da ILUNGI na implementação da ISO 14001. A equipa demonstrou profissionalismo e conhecimento técnico.",
           person: "Director de Operações",
@@ -290,7 +289,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Velonet",
           logo: "/Nossas Refeências/Velonet.png",
           role: "Implementação ISO 45001",
-          comment: "A ILUNGI ajudou-nos a implementar a ISO 45001 de forma eficiente. O ambiente de trabalho tornou-se muito mais seguro.",
+          comment: "A ILUNGI ajudámos a implementar a ISO 45001 de forma eficiente. O ambiente de trabalho tornou-se muito mais seguro.",
           person: "Director de Recursos Humanos",
           service: "iso",
           description: "Consultoria e implementação de sistema de gestão de saúde e segurança ocupacional ISO 45001",
@@ -407,7 +406,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     home: {
       heroTitle: "Excellence in Consulting and Digital Solutions",
-      heroSubtitle: "Transforming compliance and management into strategic value for global companies.",
+      heroSubtitle: "We transform compliance and management into strategic value for global companies.",
       ctaPrimary: "Request Proposal",
       ctaSecondary: "Learn More",
       services: {
@@ -472,20 +471,20 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Consulting and Audit in Management Systems & Projects",
-        desc: "Consulting for management systems implementation and project delivery focused on standards and operational efficiency."
+        title: "Management Systems and Projects Consulting",
+        desc: "Implementation of management systems and improvement projects focused on standards and operational efficiency."
       },
       risk: {
-        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
-        desc: "Serviço de notação de risco"
+        title: "Risk Rating Service",
+        desc: "Corporate risk classification and analysis to support strategic decision-making."
       },
       procurement: {
         title: "Procurement",
-        desc: "Serviço completo de procurement para sua empresa."
+        desc: "Supply chain optimization, cost reduction, and procurement compliance."
       },
       pmo: {
-        title: "ASSISTÊNCIA E SUPORTE DE T.I",
-        desc: "Serviços de assistência e suporte de TI"
+        title: "IT Assistance and Support",
+        desc: "Continuous technical support for operations, infrastructure, and IT services continuity."
       }
     },
     academy: {
@@ -538,36 +537,36 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
-        desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
-        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
+        title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
+        desc: "Specialists in ISO management systems implementation and auditing.",
+        content: "We act in the surgical and tailored implementation of management systems based on ISO standards. We accompany our partners up to the certification audit, as well as carry out internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
         items: {
-          "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Melhoria contínua e satisfação total do cliente." },
-          "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Sustentabilidade e conformidade legal verde." },
-          "45001": { title: "ISO 45001 - Saúde e Segurança Ocupacional", benefit: "Ambiente de trabalho seguro e redução de acidentes." },
-          "27001": { title: "ISO 27001 - Gestão de Informação", benefit: "Proteção de ativos digitais e confiança de dados." },
-          "22301": { title: "ISO 22301 - Gestão de Continuidade", benefit: "Resiliência face a crises e interrupções." },
-          "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Cultura ética e transparência corporativa." },
-          "37301": { title: "ISO 37301 - Compliance", benefit: "Sistema de gestão de conformidade." },
-          "31000": { title: "ISO 31000 - Gestão de Risco", benefit: "Identificação e mitigação de riscos empresariais." },
-          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Garantia de segurança alimentar e HACCP." },
-          "13485": { title: "ISO 13485 - Saúde", benefit: "Sistemas de gestão para dispositivos médicos." }
+          "9001": { title: "ISO 9001 - Quality Management", benefit: "Continuous improvement and total customer satisfaction." },
+          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Sustainability and green legal compliance." },
+          "45001": { title: "ISO 45001 - Occupational Health and Safety", benefit: "Safe workplace and accident reduction." },
+          "27001": { title: "ISO 27001 - Information Management", benefit: "Digital asset protection and data confidence." },
+          "22301": { title: "ISO 22301 - Continuity Management", benefit: "Resilience against crises and interruptions." },
+          "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Ethical culture and corporate transparency." },
+          "37301": { title: "ISO 37301 - Compliance", benefit: "Compliance management system." },
+          "31000": { title: "ISO 31000 - Risk Management", benefit: "Identification and mitigation of business risks." },
+          "22000": { title: "ISO 22000 - Food Safety", benefit: "Food safety assurance and HACCP." },
+          "13485": { title: "ISO 13485 - Healthcare", benefit: "Management systems for medical devices." }
         }
       },
       risk: {
-        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
-        desc: "Serviço de notação de risco pela ILUNGI",
-        content: "Em processo de regularização pela CMC\nO Serviço de Notação de Risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de Notação de Risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
+        title: "RISK RATING SERVICE",
+        desc: "Risk rating service by ILUNGI",
+        content: "Under regularization process by CMC\nILUNGI's Risk Rating Service aims to contribute to market transparency, credibility, and efficiency through independent assessment of the ability to meet financial obligations by entities and financial instruments.\nThe Risk Rating Service is exercised with high standards of rigor, impartiality, confidentiality, and institutional responsibility, subject to internal control mechanisms, compliance supervision, and continuous monitoring."
       },
       procurement: {
-        title: "Procurement",
-        desc: "Serviço completo de procurement para sua empresa.",
-        content: "O nosso serviço de procurement tem como objectivo possibilitar que o cliente tenha tempo para focar seus esforços em outros assuntos ligados a sua empresa. Ante a necessidade de serviços, ferramentas ou equipamentos essenciais que a sua empresa esteja a necessitar, nós compramos para si dentro e for a de Angola. Podemos cuidar de tudo, desde notificação de serviços, especificações e certificados de serviço, monitoramento de faturas de vários fornecedores – a preços competitivos e com preços fixos globalmente e a partir de um único ponto de contacto"
+        title: "PROCUREMENT",
+        desc: "Complete procurement service for your company.",
+        content: "Our procurement service aims to enable the client to have time to focus their efforts on other matters related to their company. Faced with the need for services, tools, or essential equipment that your company may need, we buy for you inside and outside Angola. We can take care of everything, from service notification, specifications, and service certificates, monitoring invoices from various suppliers - at competitive prices and with globally fixed prices and from a single point of contact."
       },
       pmo: {
-        title: "ASSISTÊNCIA E SUPORTE DE T.I",
-        desc: "Serviços de assistência e suporte de TI",
-        content: "Se você busca reduzir/controlar custos na área de tecnologia, saiba que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
+        title: "IT ASSISTANCE AND SUPPORT",
+        desc: "IT assistance and support services",
+        content: "If you want to reduce/control costs in the technology area, know that hiring IT outsourcing is an effective way to save resources, while enabling quality and efficiency in the service provided. It is also possible to optimize your company's operations, increase flexibility, and productivity of deliveries. Not to mention accountability, which is also a favorable condition through the contracting instrument.\nWe offer different IT technical support outsourcing plans."
       }
     },
     alumni: {
@@ -602,23 +601,23 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
-      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.",
+      title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
+      subtitle: "We act in the surgical and tailored implementation of management systems based on ISO standards. We accompany our partners up to the certification audit, as well as carry out internal and supplier audits.",
       stats: {
-        certified: "Várias Empresas Certificadas",
-        rate: "Taxa de Aprovação",
+        certified: "Several Certified Companies",
+        rate: "Approval Rate",
       },
-      methodology: "Nossa Metodologia de Implementação",
+      methodology: "Our Implementation Methodology",
       steps: {
-        gap: "Diagnóstico GAP",
-        gapDesc: "Análise profunda do estado atual vs requisitos da norma.",
-        planning: "Planeamento & Auditoria",
-        planningDesc: "Estratégia personalizada e verificação interna rigorosa.",
-        certification: "Certificação Final",
-        certificationDesc: "Acompanhamento total durante a auditoria externa.",
+        gap: "GAP Diagnosis",
+        gapDesc: "Deep analysis of current state vs. standard requirements.",
+        planning: "Planning & Auditing",
+        planningDesc: "Customized strategy and rigorous internal verification.",
+        certification: "Final Certification",
+        certificationDesc: "Total support during external audit.",
       },
-      cta: "Falar com Consultor Senior",
-      testimonial: "A ILUNGI foi fundamental para nossa expansão internacional através da ISO 9001.",
+      cta: "Talk to Senior Consultant",
+      testimonial: "ILUNGI was fundamental for our international expansion through ISO 9001.",
       testimonialAuthor: "",
     },
     references: {
@@ -626,7 +625,6 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Companies that trusted our services",
       viewDetails: "View Details",
       clients: [
-        // ISO References
         {
           id: "aguiasSul",
           name: "Aguias do Sul",
@@ -682,8 +680,6 @@ export const translations: Record<'pt' | 'en', any> = {
           description: "Consulting and implementation of ISO 45001 occupational health and safety management system",
           attachments: []
         },
-        // Risk References
-        // Risk References
         {
           id: "cmc",
           name: "CMC",
@@ -695,7 +691,6 @@ export const translations: Record<'pt' | 'en', any> = {
           description: "Risk rating service under regularization process by CMC",
           attachments: []
         },
-        // Procurement References
         {
           id: "anpg",
           name: "ANPG",
@@ -718,7 +713,6 @@ export const translations: Record<'pt' | 'en', any> = {
           description: "Procurement services for materials and equipment",
           attachments: ["/Nossas Refeências/cerBRILL.png"]
         },
-        // TI/PMO References
         {
           id: "petromar",
           name: "PetroMar",

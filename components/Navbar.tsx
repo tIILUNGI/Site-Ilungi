@@ -4,6 +4,20 @@ import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { useAppContext } from '../App';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const menuVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3 }
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: { duration: 0.2 }
+  }
+};
+
 const Navbar: React.FC = () => {
   const { lang, setLang, t, isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -53,13 +67,25 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-16 w-auto" />
+          <motion.img 
+            src="/imagens/ilungi_logo.jpg" 
+            alt="ILUNGI Logo" 
+            className="h-16 w-auto"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          />
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center space-x-6">
-          <Link to="/" className="font-medium hover:text-[#6a00a3] transition-colors">
+          <Link to="/" className="font-medium hover:text-[#6a00a3] transition-colors relative">
             {t.nav.home}
+            <motion.span 
+              className="absolute -bottom-1 left-0 h-0.5 bg-[#6a00a3]"
+              initial={{ width: 0 }}
+              whileHover={{ width: '100%' }}
+              transition={{ duration: 0.3 }}
+            />
           </Link>
           {menuItems.map((item) => (
             <div 
@@ -68,9 +94,15 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => setActiveMenu(item.id)}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <Link to={item.path || '#'} className="flex items-center space-x-1 font-medium hover:text-[#6a00a3] transition-colors">
+              <Link to={item.path || '#'} className="flex items-center space-x-1 font-medium hover:text-[#6a00a3] transition-colors relative">
                 <span>{item.label}</span>
                 {item.mega && <ChevronDown className="w-4 h-4" />}
+                <motion.span 
+                  className="absolute -bottom-1 left-0 h-0.5 bg-[#6a00a3]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.3 }}
+                />
               </Link>
 
               {/* Mega Menu */}
@@ -81,6 +113,7 @@ const Navbar: React.FC = () => {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 15 }}
+                      transition={{ duration: 0.3 }}
                       className={`absolute top-20 left-1/2 -translate-x-1/2 w-[700px] ${isDark ? 'glass-menu-dark border-slate-700/40' : 'glass-menu border-slate-200'} p-8 rounded-2xl mega-menu-shadow border`}
                     >
                       <div className="grid grid-cols-2 gap-8">
@@ -115,25 +148,36 @@ const Navbar: React.FC = () => {
         {/* Right Controls */}
         <div className="flex items-center space-x-3">
           {/* Translate Button */}
-          <button 
-            onClick={toggleLang} 
+          <motion.button 
+            onClick={toggleLang}
             className={`flex items-center space-x-2 px-3 py-2 rounded-full font-bold text-sm border transition-all ${
               isDark 
                 ? 'border-purple-400/50 hover:border-purple-400 text-purple-300 hover:text-purple-200' 
                 : 'border-slate-300 hover:border-slate-400 text-slate-600 hover:text-slate-800'
             }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Globe className="w-4 h-4" />
             <span>{lang.toUpperCase()}</span>
-          </button>
+          </motion.button>
           
-          <Link to="/contacto" className="hidden sm:block px-6 py-2.5 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20">
-            {t.home.ctaPrimary}
-          </Link>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Link to="/contacto" className="hidden sm:block px-6 py-2.5 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-500/20">
+              {t.home.ctaPrimary}
+            </Link>
+          </motion.div>
 
-          <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+          <motion.button 
+            className="lg:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.9 }}
+          >
             {isOpen ? <X /> : <Menu />}
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -144,6 +188,7 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
             className={`lg:hidden ${isDark ? 'glass-dark border-slate-700/40' : 'glass border-slate-200'} border-t overflow-hidden`}
           >
             <div className="p-4 space-y-4">

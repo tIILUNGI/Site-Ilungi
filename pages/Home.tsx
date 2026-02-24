@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
 
@@ -36,9 +36,55 @@ const partners = [
   }
 ];
 
+// Animation variants for professional transitions
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { delay: i * 0.15, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }
+  })
+};
+
+const heroTextVariants = {
+  hidden: { opacity: 0, y: 100 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }
+  }
+};
+
 const Home: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   const serviceImages = [
     {
       src: "/imagens/ilungi_logo.jpg",
@@ -130,135 +176,241 @@ const Home: React.FC = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero Section with Service Slider */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
-        <div className="absolute inset-0 z-0">
+      {/* Hero Section with Parallax and Enhanced Animations */}
+      <section ref={heroRef} className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-[#1B3C2B]">
+        {/* Animated Background Elements */}
+        <motion.div 
+          style={{ y }}
+          className="absolute inset-0 z-0"
+        >
           <AnimatePresence mode='wait'>
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0 flex items-center justify-center"
+              initial={{ opacity: 0, scale: 1.15 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0"
             >
               <img 
                 src={serviceImages[currentSlide].src} 
-                className="w-full h-full object-cover opacity-30"
+                className="w-full h-full object-cover opacity-25"
                 alt={serviceImages[currentSlide].title}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1B3C2B] via-[#1B3C2B]/70 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1B3C2B] via-[#1B3C2B]/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1B3C2B] via-transparent to-transparent"></div>
             </motion.div>
           </AnimatePresence>
-        </div>
+          
+          {/* Floating decorative elements */}
+          <motion.div 
+            animate={{ y: [-10, 10, -10] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-10 w-32 h-32 bg-[#6a00a3]/20 rounded-full blur-3xl"
+          />
+          <motion.div 
+            animate={{ y: [10, -10, 10] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 right-10 w-48 h-48 bg-[#1B3C2B]/30 rounded-full blur-3xl"
+          />
+        </motion.div>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 text-white text-center w-full">
+        {/* Content */}
+        <motion.div style={{ opacity }} className="relative z-20 max-w-7xl mx-auto px-4 text-white text-center w-full">
           <motion.div
             key={currentSlide}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            <motion.h1 
+              variants={heroTextVariants}
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-6 tracking-tight"
+            >
               {serviceImages[currentSlide].heroTitle}
-            </h1>
-            <p className="text-lg text-slate-300 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+            </motion.h1>
+            <motion.p 
+              variants={heroTextVariants}
+              className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed font-light max-w-3xl mx-auto"
+            >
               {serviceImages[currentSlide].heroSubtitle}
-            </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
-              <Link to="/contacto" className="px-10 py-4 bg-[#6a00a3] rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all transform hover:scale-105 shadow-2xl shadow-purple-900/40">
-                {t.home.ctaPrimary}
-              </Link>
-              <Link to="/consultoria" className="px-10 py-4 border border-white/30 backdrop-blur-md rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center space-x-2">
-                <span>{t.home.ctaSecondary}</span>
-              </Link>
-            </div>
+            </motion.p>
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(106, 0, 163, 0.5)" }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link to="/contacto" className="inline-block px-12 py-5 bg-[#6a00a3] rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all shadow-2xl shadow-purple-900/40 btn-shine">
+                  {t.home.ctaPrimary}
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link to="/consultoria" className="inline-block px-12 py-5 border border-white/30 backdrop-blur-md rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center space-x-2">
+                  <span>{t.home.ctaSecondary}</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >→</motion.span>
+                </Link>
+              </motion.div>
+            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Slide indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        {/* Enhanced Slide indicators */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3"
+        >
           {serviceImages.map((_, i) => (
-            <button
+            <motion.button
               key={i}
               onClick={() => setCurrentSlide(i)}
               title={`Slide ${i + 1}`}
-              className={`w-3 h-3 rounded-full transition-all ${i === currentSlide ? 'bg-white w-8' : 'bg-white/50'}`}
+              className={`rounded-full transition-all ${i === currentSlide ? 'bg-white w-12' : 'bg-white/40 w-3 hover:bg-white/70'}`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
             />
           ))}
-        </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-10 right-10 z-20 hidden lg:block"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/50 text-sm font-medium"
+          >
+            <span className="block text-center mb-2">Scroll</span>
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+              <motion.div 
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-1.5 h-1.5 bg-white/70 rounded-full"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Services Section - COM IMAGENS REAIS */}
-      <section className="py-20 bg-white">
+      {/* Services Section - Enhanced with Professional Cards */}
+      <section className="py-28 bg-white relative">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
+        <div className="absolute top-20 -left-32 w-64 h-64 bg-[#6a00a3]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 -right-32 w-96 h-96 bg-[#1B3C2B]/5 rounded-full blur-3xl"></div>
+        
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
             <motion.span 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-sm uppercase tracking-[0.2em] text-[#6a00a3] font-semibold"
+              transition={{ delay: 0.1 }}
+              className="inline-block px-6 py-2 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-bold uppercase mb-6 tracking-widest"
             >
               {isPt ? 'Nossas Competências' : 'Our Capabilities'}
             </motion.span>
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-black text-[#1B3C2B] mt-4 mb-6"
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-5xl md:text-6xl font-black text-[#1B3C2B] mt-4 mb-6"
             >
               {isPt ? 'Soluções Integradas' : 'Integrated Solutions'}
             </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="max-w-2xl mx-auto text-lg text-slate-500 font-light"
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="max-w-2xl mx-auto text-xl text-slate-500 font-light"
             >
               {isPt
                 ? 'Da estratégia à execução, entregamos excelência em cada projeto'
                 : 'From strategy to execution, we deliver excellence in every project'}
             </motion.p>
-          </div>
+          </motion.div>
 
           <div className="max-w-6xl mx-auto px-4">
-            {/* Stacking Cards Effect - Scroll Triggered */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5 }}
+                  custom={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={cardVariants}
                 >
                   <Link to={service.path} className="block group">
-                    <div className="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                      <div className="relative h-48 lg:h-56">
-                        <img 
+                    <motion.div 
+                      className="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl professional-card bg-white"
+                      whileHover={{ y: -12 }}
+                    >
+                      {/* Image container with reveal effect */}
+                      <div className="relative h-56 lg:h-64 img-hover-zoom">
+                        <motion.img 
                           src={service.image}
                           alt={service.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-cover"
+                          whileHover={{ scale: 1.15 }}
+                          transition={{ duration: 0.7 }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-                          <span className="text-xs font-bold uppercase tracking-wider text-white/70 mb-2 block">
-                            {isPt ? 'Solução' : 'Solution'} {index + 1} / {services.length}
-                          </span>
-                          <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">
+                        
+                        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
+                          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
                             {service.title}
                           </h3>
-                          <p className="text-white/90 text-sm leading-relaxed line-clamp-2 mb-4">
+                          <p className="text-white/90 text-base leading-relaxed line-clamp-2 mb-5">
                             {service.desc}
                           </p>
-                          <span className="inline-block px-4 py-2 bg-[#6a00a3] text-white rounded-lg font-semibold text-sm">
-                            {isPt ? 'Saber mais' : 'Learn more'} →
-                          </span>
+                          <motion.div 
+                            whileHover={{ x: 8 }}
+                            className="inline-flex items-center space-x-2"
+                          >
+                            <span className="inline-block px-6 py-3 bg-[#6a00a3] text-white rounded-xl font-bold text-sm">
+                              {isPt ? 'Saber mais' : 'Learn more'}
+                            </span>
+                            <motion.span 
+                              className="text-white text-xl"
+                              animate={{ x: [0, 5, 0] }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                            >→</motion.span>
+                          </motion.div>
                         </div>
                       </div>
-                    </div>
+
+                      {/* Decorative line */}
+                      <motion.div 
+                        className="absolute bottom-0 left-0 h-1"
+                        style={{ backgroundColor: service.color }}
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </motion.div>
                   </Link>
                 </motion.div>
               ))}
@@ -267,48 +419,72 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-        {/* Partners Section - TAMANHO PEQUENO COM EFEITO DE LINHA */}
-      <section className="py-16 bg-[#1B3C2B]">
-        <div className="max-w-7xl mx-auto px-4">
+      {/* Partners Section - Enhanced */}
+      <section className="py-24 bg-[#1B3C2B] relative overflow-hidden">
+        {/* Background effects */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-0 right-0 w-96 h-96 bg-[#6a00a3]/20 rounded-full blur-3xl"
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.1, 0.15, 0.1]
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute bottom-0 left-0 w-80 h-80 bg-[#1B3C2B]/50 rounded-full blur-3xl"
+        />
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <span className="text-sm uppercase tracking-[0.2em] text-white/60 font-semibold">
+            <span className="text-sm uppercase tracking-[0.3em] text-white/50 font-semibold">
               {t.home.partners}
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mt-4 mb-4">
+            <h2 className="text-4xl md:text-5xl font-black text-white mt-6 mb-6">
               {isPt ? 'Parceiros Estratégicos' : 'Strategic Partners'}
             </h2>
-            <div className="w-20 h-1.5 bg-[#6a00a3] mx-auto rounded-full"></div>
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: 120 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="h-1.5 bg-[#6a00a3] mx-auto rounded-full"
+            />
           </motion.div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {partners.map((partner, i) => {
               const isHovered = hoveredPartner === i;
               
               return (
                 <motion.div 
                   key={i}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
                   onHoverStart={() => setHoveredPartner(i)}
                   onHoverEnd={() => setHoveredPartner(null)}
                   className="relative"
                 >
-                  {/* Linha da esquerda para direita */}
+                  {/* Animated line */}
                   <motion.div 
-                    className="absolute bottom-0 left-0 h-[2px] bg-current z-10"
+                    className="absolute bottom-0 left-0 h-[3px] z-10"
                     style={{ color: partner.color }}
                     initial={{ width: 0 }}
                     animate={{ 
                       width: isHovered ? '100%' : 0
                     }}
-                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                    transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                   />
                   
                   <motion.a 
@@ -317,43 +493,46 @@ const Home: React.FC = () => {
                     rel="noopener noreferrer"
                     className="block w-full group"
                     animate={{
-                      y: isHovered ? -5 : 0
+                      y: isHovered ? -8 : 0
                     }}
                     transition={{
                       type: "spring",
-                      stiffness: 400,
-                      damping: 25
+                      stiffness: 300,
+                      damping: 20
                     }}
                   >
-                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center relative overflow-hidden border border-white/10 hover:bg-white/10 transition-colors">
-                      
-                      {/* Quadrado com foto de lado - estilo revista */}
-                      <div className="w-28 h-28 mb-4 relative flex items-center justify-center">
-                        {/* Borda animada que aparece no hover */}
+                    <motion.div 
+                      className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 flex flex-col items-center relative overflow-hidden border border-white/10 hover:bg-white/15 transition-colors"
+                      whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+                    >
+                      {/* Logo container with glow effect */}
+                      <motion.div 
+                        className="w-32 h-32 mb-6 relative flex items-center justify-center"
+                        whileHover={{ scale: 1.05 }}
+                      >
                         <motion.div 
-                          className="absolute inset-0 border-2 rounded-xl"
+                          className="absolute inset-0 border-2 rounded-2xl"
                           style={{ borderColor: partner.color }}
-                          initial={{ opacity: 0, scale: 0.95 }}
+                          initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ 
                             opacity: isHovered ? 1 : 0,
-                            scale: isHovered ? 1 : 0.95
+                            scale: isHovered ? 1 : 0.9
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.4 }}
                         />
                         
-                        {/* Container da imagem com fundo branco suave */}
-                        <div className="w-full h-full relative z-10 bg-white rounded-xl overflow-hidden">
+                        <div className="w-full h-full relative z-10 bg-white rounded-2xl overflow-hidden p-3">
                           <img 
                             src={partner.logo} 
                             alt={partner.name} 
-                            className="w-full h-full object-contain transition-all duration-500 p-1 partner-logo"
+                            className="w-full h-full object-contain"
                           />
                         </div>
-                      </div>
+                      </motion.div>
 
-                      {/* Nome do parceiro */}
+                      {/* Name */}
                       <motion.h3 
-                        className="text-lg font-bold text-white/90 text-center mb-2"
+                        className="text-lg font-bold text-white/90 text-center"
                         animate={{ 
                           color: isHovered ? partner.color : 'rgba(255,255,255,0.9)'
                         }}
@@ -362,31 +541,27 @@ const Home: React.FC = () => {
                         {partner.name}
                       </motion.h3>
                       
-                      {/* Ícone de external link animado */}
+                      {/* Visit link */}
                       <AnimatePresence>
                         {isHovered && (
                           <motion.div 
-                            className="inline-flex items-center gap-1 mt-1"
-                            initial={{ opacity: 0, y: 5 }}
+                            className="flex items-center gap-1 mt-2"
+                            initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 5 }}
-                            transition={{ duration: 0.2 }}
+                            exit={{ opacity: 0, y: 8 }}
+                            transition={{ duration: 0.3 }}
                           >
-                            <span className="text-xs font-medium uppercase tracking-wider partner-link-text">
+                            <span className="text-xs font-medium uppercase tracking-wider" style={{ color: partner.color }}>
                               {isPt ? 'Visitar' : 'Visit'}
                             </span>
+                            <motion.span
+                              animate={{ x: [0, 4, 0] }}
+                              transition={{ duration: 1, repeat: Infinity }}
+                            >→</motion.span>
                           </motion.div>
                         )}
                       </AnimatePresence>
-
-                      {/* Overlay gradiente sutil no hover */}
-                      <motion.div 
-                        className="absolute inset-0 pointer-events-none partner-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: isHovered ? 1 : 0 }}
-                        transition={{ duration: 0.4 }}
-                      />
-                    </div>
+                    </motion.div>
                   </motion.a>
                 </motion.div>
               );
@@ -395,40 +570,115 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Digital Solutions with Image */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-[#6a00a3]/10 rounded-full blur-3xl"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" 
-              className="relative z-10 rounded-2xl shadow-xl w-full h-auto" 
-              alt="ILUNGI Solutions"
-            />
-          </div>
-          <div>
-            <span className="text-[#6a00a3] font-bold uppercase tracking-widest text-sm mb-4 block">
+      {/* Digital Solutions Section - Enhanced */}
+      <section className="py-28 bg-slate-50 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/10 to-transparent"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Image with reveal animation */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative"
+          >
+            <motion.div 
+              animate={{ 
+                boxShadow: ["0 0 0 rgba(106, 0, 163, 0)", "0 0 40px rgba(106, 0, 163, 0.2)", "0 0 0 rgba(106, 0, 163, 0)"]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="relative"
+            >
+              <div className="absolute -inset-6 bg-[#6a00a3]/10 rounded-full blur-3xl"></div>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <motion.img 
+                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" 
+                  className="w-full h-auto"
+                  alt="ILUNGI Solutions"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.7 }}
+                />
+              </div>
+            </motion.div>
+            
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-[#6a00a3] font-bold uppercase tracking-widest text-sm mb-6 block"
+            >
               {isPt ? 'Tecnologia & inovação' : 'Technology & Innovation'}
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-800 mb-6 leading-tight">
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-8 leading-tight"
+            >
               {t.home.solutions.title}
-            </h2>
-            <p className="text-slate-600 mb-8 leading-relaxed text-base">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-slate-600 mb-10 leading-relaxed text-lg"
+            >
               {t.home.solutions.desc}
-            </p>
-            <div className="space-y-3 mb-8">
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="space-y-5 mb-10"
+            >
               {[t.home.solutions.feature1, t.home.solutions.feature2, t.home.solutions.feature3].map((item, i) => (
-                <div key={i} className="flex items-center space-x-3">
-                  <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
-                  </div>
-                  <span className="font-semibold text-slate-700">{item}</span>
-                </div>
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + i * 0.1 }}
+                  className="flex items-center space-x-4"
+                >
+                  <motion.div 
+                    whileHover={{ scale: 1.2 }}
+                    className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0"
+                  >
+                    <span className="text-green-600 text-sm">✓</span>
+                  </motion.div>
+                  <span className="font-semibold text-slate-700 text-lg">{item}</span>
+                </motion.div>
               ))}
-            </div>
-            <Link to="/solucoes" className="px-8 py-3 bg-[#1B3C2B] text-white rounded-full font-bold hover:bg-[#142d20] transition-all inline-block">
-              {t.home.solutions.cta}
-            </Link>
-          </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link to="/solucoes" className="inline-block px-10 py-4 bg-[#1B3C2B] text-white rounded-full font-bold hover:bg-[#142d20] transition-all shadow-xl hover:shadow-2xl">
+                {t.home.solutions.cta}
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>
