@@ -209,7 +209,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Only main tabs, no sub-menus */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -219,34 +219,23 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.2 }}
             className={`lg:hidden ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} border-t overflow-hidden`}
           >
-            <div className="px-6 py-4 space-y-2">
+            <div className="px-6 py-4 space-y-1">
+              <Link 
+                to="/" 
+                onClick={() => setIsOpen(false)} 
+                className={`block font-semibold text-lg py-3 ${isDark ? 'text-white' : 'text-slate-800'}`}
+              >
+                {t.nav.home}
+              </Link>
               {menuItems.map(item => (
-                <div key={item.id} className="border-b border-slate-200/10 pb-2">
-                  <Link 
-                    to={item.path || '#'} 
-                    onClick={() => setIsOpen(false)} 
-                    className={`block font-semibold text-lg py-3 ${isDark ? 'text-white' : 'text-slate-800'}`}
-                  >
-                    {item.label}
-                  </Link>
-                  {item.mega && (
-                    <div className="ml-4 mt-1 space-y-1 pb-2">
-                      {item.mega.map((sub: any, idx) => (
-                        <div key={idx}>
-                          {sub.href ? (
-                            <a href={sub.href} target="_blank" rel="noopener noreferrer" className={`block py-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                              {sub.title}
-                            </a>
-                          ) : (
-                            <Link to={sub.path} onClick={() => setIsOpen(false)} className={`block py-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                              {sub.title}
-                            </Link>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <Link 
+                  key={item.id}
+                  to={item.path || '#'} 
+                  onClick={() => setIsOpen(false)} 
+                  className={`block font-semibold text-lg py-3 border-b border-slate-200/10 ${isDark ? 'text-white' : 'text-slate-800'}`}
+                >
+                  {item.label}
+                </Link>
               ))}
             </div>
           </motion.div>
