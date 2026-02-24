@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Award } from 'lucide-react';
+import { ArrowRight, ChevronRight, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock } from 'lucide-react';
 
 const partners = [
   { name: "GPMOi", url: "https://gpmoi.org/", logo: "/imagens/GPMoi.png", color: "#4c0253" },
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
   const heroSlides = [
     { bg: "/imagens/ilungi_logo.jpg", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
     { bg: "/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
-    { bg: "/imagens/ISO.png", title: isPt ? "Certificação ISO" : "ISO Certification", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
+    { bg: "/imagens/ISO.png", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
     { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "Gestão de Projetos" : "Project Management", subtitle: isPt ? "Resultados mensuráveis e eficiência" : "Measurable results and efficiency" }
   ];
 
@@ -51,6 +51,14 @@ const Home: React.FC = () => {
     { title: t.home.services.academy, desc: t.home.services.academyDesc, image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", color: "#B31B1B", path: "/academia" }
   ];
 
+  // Digital solutions features
+  const digitalFeatures = [
+    { title: isPt ? "Gestão Integrada" : "Integrated Management", desc: isPt ? "Plataforma unificada para todos os processos" : "Unified platform for all processes" },
+    { title: isPt ? "Automação Inteligente" : "Smart Automation", desc: isPt ? "Simplifique operações complexas" : "Simplify complex operations" },
+    { title: isPt ? "Analytics Avançado" : "Advanced Analytics", desc: isPt ? "Decisões baseadas em dados" : "Data-driven decisions" },
+    { title: isPt ? "Segurança Total" : "Total Security", desc: isPt ? "Proteção de dados garantida" : "Guaranteed data protection" }
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 7000);
     return () => clearInterval(interval);
@@ -58,7 +66,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* ULTRA MODERN HERO SECTION */}
+      {/* HERO SECTION */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0f1a]">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
           <AnimatePresence mode='wait'>
@@ -170,7 +178,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="inline-block px-4 py-2 bg-[#6a00a3]/20 text-[#6a00a3] rounded-full text-sm font-bold uppercase tracking-widest mb-4">{isPt ? 'Porquê escolher a ILUNGI' : 'Why choose ILUNGI'}</span>
+              <span className="inline-block px-4 py-2 bg-[#6a00a3]/20 text-white rounded-full text-sm font-bold uppercase tracking-widest mb-4">{isPt ? 'Porquê escolher a ILUNGI' : 'Why choose ILUNGI'}</span>
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6">{t.consulting.whyTitle}</h2>
               <div className="space-y-6">
                 {t.consulting.features.map((feature: string, i: number) => (
@@ -178,7 +186,7 @@ const Home: React.FC = () => {
                     <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-green-500 text-sm">✓</span>
                     </div>
-                    <span className="text-slate-300 text-lg">{feature}</span>
+                    <span className="text-white text-lg">{feature}</span>
                   </motion.div>
                 ))}
               </div>
@@ -211,96 +219,163 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* DIGITAL SOLUTIONS SECTION - CREATIVE DESIGN */}
-      <section className="py-32 bg-[#0a0f1a] relative overflow-hidden">
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#6a00a3] rounded-full blur-[150px]" />
-        <motion.div animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 10, repeat: Infinity }} className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#1B3C2B] rounded-full blur-[120px]" />
-        
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6a00a3]/30 to-transparent"></div>
-        
+      {/* DIGITAL SOLUTIONS - SUPER PROFESSIONAL SECTION */}
+      <section className="py-40 bg-[#050a14] relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <motion.div 
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.2, 1]
+            }} 
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-[800px] h-[800px] bg-gradient-to-br from-[#6a00a3]/10 to-transparent rounded-full blur-3xl"
+          />
+          <motion.div 
+            animate={{ 
+              rotate: [360, 0],
+              scale: [1, 1.3, 1]
+            }} 
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-[#1B3C2B]/10 to-transparent rounded-full blur-3xl"
+          />
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }}></div>
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#6a00a3]/20 border border-[#6a00a3]/40 rounded-full text-[#6a00a3] font-semibold text-sm mb-4">
-              <Award className="w-4 h-4" />
-              {isPt ? 'Tecnologia & Inovação' : 'Technology & Innovation'}
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">{t.home.solutions.title}</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">{t.home.solutions.desc}</p>
+          {/* Premium Header */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
+            {/* Animated badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-3 mb-8"
+            >
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#6a00a3]"></div>
+              <span className="text-[#6a00a3] font-semibold text-sm uppercase tracking-[0.3em]">
+                {isPt ? 'Transformação Digital' : 'Digital Transformation'}
+              </span>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#6a00a3]"></div>
+            </motion.div>
+
+            {/* Main title with gradient */}
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-5xl md:text-7xl font-black mb-6"
+            >
+              <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                {isPt ? 'Soluções Digitais' : 'Digital Solutions'}
+              </span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6a00a3] to-[#a855f7]">
+                {isPt ? 'sob medida para sua Gestão' : 'tailored to your Management'}
+              </span>
+            </motion.h2>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed"
+            >
+              {isPt 
+                ? 'Technologias de ponta que transformam a forma como você gestiona o seu negócio, trazendo eficiência e inovação para cada processo.'
+                : 'Cutting-edge technologies that transform how you manage your business, bringing efficiency and innovation to every process.'}
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-2 lg:order-1">
-              <div className="space-y-6">
-                {[t.home.solutions.feature1, t.home.solutions.feature2, t.home.solutions.feature3].map((item, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.15 }}
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-5 p-5 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-[#6a00a3]/30 transition-all cursor-pointer group"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6a00a3] to-[#1B3C2B] flex items-center justify-center flex-shrink-0">
-                      <span className="text-white font-bold text-lg">{i + 1}</span>
-                    </div>
-                    <span className="font-semibold text-slate-200 text-lg group-hover:text-white transition-colors">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
-              
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="mt-10">
-                <Link to="/solucoes" className="group inline-flex items-center gap-3 px-10 py-5 bg-[#6a00a3] text-white rounded-full font-bold text-lg hover:bg-[#520b7d] transition-all shadow-2xl shadow-purple-900/30">
-                  {t.home.solutions.cta}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2 relative">
-              <div className="absolute -inset-8">
-                <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-10 left-0 w-24 h-24 bg-[#6a00a3]/30 rounded-2xl rotate-12 blur-sm" />
-                <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-10 right-0 w-32 h-32 bg-[#1B3C2B]/30 rounded-2xl -rotate-12 blur-sm" />
-              </div>
-              
-              <motion.div 
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
+          {/* Feature Cards - Premium Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {digitalFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative"
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl blur-2xl opacity-50"></div>
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                  <img 
-                    src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" 
-                    className="w-full h-[400px] object-cover" 
-                    alt="ILUNGI Solutions" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-transparent to-transparent"></div>
-                  
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex gap-4">
-                      <motion.div 
-                        whileHover={{ scale: 1.05 }}
-                        className="flex-1 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center"
-                      >
-                        <div className="text-2xl font-black text-white">Salya</div>
-                        <div className="text-xs text-slate-300">GRC Platform</div>
-                      </motion.div>
-                      <motion.div 
-                        whileHover={{ scale: 1.05 }}
-                        className="flex-1 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center"
-                      >
-                        <div className="text-2xl font-black text-white">Tocomply</div>
-                        <div className="text-xs text-slate-300">Compliance 360</div>
-                      </motion.div>
-                    </div>
+                {/* Card glow effect */}
+                <div className="absolute -inset-px bg-gradient-to-br from-[#6a00a3]/30 to-[#1B3C2B]/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+                
+                <div className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-8 border border-white/10 group-hover:border-[#6a00a3]/30 transition-all duration-500">
+                  {/* Number indicator */}
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#6a00a3] to-[#1B3C2B] flex items-center justify-center mb-6 shadow-lg">
+                    <span className="text-white font-bold text-lg">{String(index + 1).padStart(2, '0')}</span>
                   </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#a855f7] transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {feature.desc}
+                  </p>
+
+                  {/* Animated line */}
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#6a00a3] to-[#a855f7] rounded-full"
+                  />
                 </div>
               </motion.div>
-            </motion.div>
+            ))}
           </div>
+
+          {/* CTA Button - Premium Style */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="text-center"
+          >
+            <Link 
+              to="/solucoes" 
+              className="group relative inline-flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-[#6a00a3] to-[#7c3aed] text-white rounded-full font-bold text-lg overflow-hidden"
+            >
+              <span className="relative z-10">{t.home.solutions.cta}</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              {/* Shine effect */}
+              <motion.div 
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '200%' }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
+              />
+            </Link>
+          </motion.div>
+
+          {/* Floating elements decoration */}
+          <motion.div 
+            animate={{ y: [-10, 10, -10] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-32 left-20 w-20 h-20 border border-[#6a00a3]/20 rounded-2xl rotate-12 opacity-50"
+          />
+          <motion.div 
+            animate={{ y: [15, -15, 15] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-32 right-20 w-16 h-16 border border-white/10 rounded-full opacity-30"
+          />
         </div>
       </section>
 

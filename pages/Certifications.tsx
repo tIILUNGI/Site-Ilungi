@@ -9,10 +9,10 @@ const Certifications: React.FC = () => {
   const certs = [
     {
       title: 'ISO 9001:2015',
-      subtitle: isPt ? 'Gestão da Qualidade' : 'Quality Management',
+      subtitle: isPt ? 'Sistema de Gestão ISO' : 'ISO Management System',
       desc: isPt ? 'Certificação internacional que garante a excelência dos nossos processos e a satisfação dos nossos clientes.' : 'International certification that guarantees the excellence of our processes and customer satisfaction.',
       date: '2024',
-      org: isPt ? 'Bureau Veritas' : 'Bureau Veritas',
+      validity: '2028',
       color: '#1B3C2B',
       badge: isPt ? 'Certificado' : 'Certified'
     },
@@ -21,45 +21,45 @@ const Certifications: React.FC = () => {
       subtitle: isPt ? 'Indústria Petrolífera' : 'Petroleum Industry',
       desc: isPt ? 'Certificação pela ANPG para prestação de serviços à indústria petrolífera.' : 'ANPG certification for petroleum industry services.',
       date: '2024',
-      org: isPt ? 'Agência Nacional de Petróleo e Gás' : 'National Petroleum and Gas Agency',
+      validity: '2028',
       color: '#6a00a3',
-      badge: isPt ? 'Acreditado' : 'Accredited'
+      badge: isPt ? 'Certificado' : 'Certified'
     },
     {
       title: 'INEFOP',
-      subtitle: isPt ? 'Acreditação' : 'Accreditation',
-      desc: isPt ? 'Acreditação pelo INEFOP para prestação de serviços de formação profissional.' : 'INEFOP accreditation for professional training services.',
+      subtitle: isPt ? 'Formação Profissional' : 'Professional Training',
+      desc: isPt ? 'Licença pelo INEFOP para prestação de serviços de formação profissional.' : 'INEFOP license for professional training services.',
       date: '2024',
-      org: isPt ? 'Instituto Nacional de Emprego e Formação Profissional' : 'National Employment and Vocational Training Institute',
+      validity: '2028',
       color: '#0A4D8C',
-      badge: isPt ? 'Acreditado' : 'Accredited'
+      badge: isPt ? 'Licença' : 'License'
     },
     {
       title: 'CPD UK',
       subtitle: isPt ? 'Cursos Profissionais' : 'Professional Courses',
-      desc: isPt ? 'Acreditação pelo CPD UK para ministração de cursos profissionais no Reino Unido.' : 'CPD UK accreditation for professional courses in the United Kingdom.',
+      desc: isPt ? 'Registo pelo CPD UK para ministração de cursos profissionais no Reino Unido.' : 'CPD UK registration for professional courses in the United Kingdom.',
       date: '2024',
-      org: isPt ? 'Continuing Professional Development' : 'Continuing Professional Development',
+      validity: '2028',
       color: '#B31B1B',
-      badge: isPt ? 'Acreditado' : 'Accredited'
+      badge: isPt ? 'Registo' : 'Registered'
     },
     {
       title: 'INIQ',
       subtitle: isPt ? 'Sistemas de Gestão de Qualidade' : 'Quality Management Systems',
-      desc: isPt ? 'Certificação e formação em sistemas de gestão de qualidade.' : 'Certification and training in quality management systems.',
+      desc: isPt ? 'Registo e formação em sistemas de gestão de qualidade.' : 'Registration and training in quality management systems.',
       date: '2024',
-      org: isPt ? 'Instituto Nacional de Qualidade' : 'National Quality Institute',
+      validity: '2028',
       color: '#dc6516',
-      badge: isPt ? 'Certificado' : 'Certified'
+      badge: isPt ? 'Registo' : 'Registered'
     },
     {
       title: 'GPMOi',
       subtitle: isPt ? 'Formação Profissional' : 'Professional Training',
       desc: isPt ? 'Parceria estratégica para cursos de formação profissional e certificação.' : 'Strategic partnership for professional training courses and certification.',
       date: '2024',
-      org: isPt ? 'GPMOi - Gestão de Projectos do Ministério das Obras Públicas' : 'PMO - Public Works Projects Management',
+      validity: '2028',
       color: '#4c0253',
-      badge: isPt ? 'Parceiro' : 'Partner'
+      badge: isPt ? 'Acreditado' : 'Accredited'
     }
   ];
 
@@ -181,21 +181,19 @@ const Certifications: React.FC = () => {
                     {cert.desc}
                   </p>
 
-                  {/* Certificate Details */}
-                  <div className="pt-4 border-t border-slate-100 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-400 uppercase">
+                  {/* Certificate Details - Ano e Validade */}
+                  <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <div className="text-center">
+                      <span className="text-xs font-bold text-slate-400 uppercase block">
                         {isPt ? 'Ano' : 'Year'}
                       </span>
                       <span className="text-sm font-black text-slate-700">{cert.date}</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-400 uppercase">
-                        {isPt ? 'Organismo' : 'Issuer'}
+                    <div className="text-center">
+                      <span className="text-xs font-bold text-slate-400 uppercase block">
+                        {isPt ? 'Validade' : 'Validity'}
                       </span>
-                      <span className="text-sm font-semibold text-slate-700 text-right max-w-[160px] leading-tight">
-                        {cert.org}
-                      </span>
+                      <span className="text-sm font-black" style={{ color: cert.color }}>{cert.validity}</span>
                     </div>
                   </div>
                 </div>
