@@ -22,6 +22,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminSolutions from './pages/AdminSolutions';
 import AdminPartners from './pages/AdminPartners';
 import AdminServices from './pages/AdminServices';
+import AdminCourses from './pages/AdminCourses';
 import AdminBlog from './pages/AdminBlog';
 import AdminConfig from './pages/AdminConfig';
 import Certifications from './pages/Certifications';
@@ -115,6 +116,7 @@ const App: React.FC = () => {
                 <Route path="/admin/solucoes" element={<AdminSolutions />} />
                 <Route path="/admin/parceiros" element={<AdminPartners />} />
                 <Route path="/admin/servicos" element={<AdminServices />} />
+                <Route path="/admin/cursos" element={<AdminCourses />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/configuracoes" element={<AdminConfig />} />
                 <Route path="/admin/referencias" element={<AdminReferences />} />

@@ -1,73 +1,21 @@
-﻿import React, { useMemo, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import { useAppContext } from '../App';
+import { loadData } from '../lib/dataSync';
+import { Course, defaultCourses } from '../lib/courseCatalogData';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
-
-type Course = {
-  code: string;
-  name: string;
-  area: string;
-  hours: string;
-  modality: string;
-  agenda: string;
-};
-
-type CourseSeed = {
-  name: string;
-  area: string;
-};
-
-const courseSeeds: CourseSeed[] = [
-  { name: 'Interpretação e Auditor Interno normas ISO 37001 e ISO 37301', area: 'Compliance & Antissuborno' },
-  { name: 'Interpretação e Implementação da ISO/UNDP PAS 53002:2024', area: 'Compliance & Antissuborno' },
-  { name: 'Gestão de Riscos com base na Norma ISO 31008:2018', area: 'Gestão de Riscos' },
-  { name: 'Auditoria e Investigações Internas com base nas normas ISO 19011 e 37008', area: 'Auditoria & Investigações' },
-  { name: 'Framework Princípios ESG ISO IW48:2024', area: 'ESG' },
-  { name: 'Curso Avançado de ESG de Impacto Reputacional', area: 'ESG & Reputação' },
-  { name: 'Gestão de Risco de Fraude', area: 'Risco & Fraude' },
-  { name: 'Curso Executivo: Direito e Finanças Para Gestores', area: 'Direito & Finanças' },
-  { name: 'Curso Executivo: Governança, Risco, Compliance e Reputação Empresarial', area: 'Governança & Compliance' },
-  { name: 'Implementação e Gestão de Escritórios de Projectos (PMO)', area: 'Projectos (PMO)' },
-  { name: 'Gestão da Mudança', area: 'Mudança Organizacional' },
-  { name: 'Curso Global Gestão Financeira e Controlo de Gestão', area: 'Finanças & Controlo' },
-  { name: 'Análise de Investimento Custo-Benefício', area: 'Finanças & Investimentos' },
-  { name: 'Ética nas Negociações e Contratações', area: 'Ética & Contratações' },
-  { name: 'Gestão de Tesouraria', area: 'Tesouraria' },
-  { name: 'Gestão de Património', area: 'Património' },
-  { name: 'Segurança da Informação e Risco Cibernético', area: 'Segurança da Informação' },
-  { name: 'Regulamentação e Compliance no Mercado de Capitais', area: 'Mercado de Capitais & Compliance' },
-  { name: 'Prevenção e Combate à Procrastinação, Sedentarismo e Esgotamento Mental', area: 'Bem-estar & Produtividade' },
-  { name: 'Curso de Especialização em Prevenção e Combate à Corrupção, Branqueamento de Capitais e Contrabando de Produtos Petrolíferos em Angola', area: 'Compliance & Anticorrupção' },
-  { name: 'Green Compliance', area: 'Compliance Ambiental' },
-  { name: 'Compliance Officer', area: 'Compliance Profissional' },
-  { name: 'Governance Officer', area: 'Governança Profissional' },
-  { name: 'Auditoria Contabilística e Financeira', area: 'Auditoria & Contabilidade' },
-  { name: 'Secretariado Executivo', area: 'Administração' },
-  { name: 'Gestão de Tempo, Foco e Produtividade', area: 'Produtividade' },
-  { name: 'Liderança e Gestão de Equipas', area: 'Liderança' },
-  { name: 'Gestão de Carreiras e Plano de Sucessão', area: 'Gestão de Pessoas' },
-  { name: 'Curso Global Avançado Governança Corporativa e Compliance', area: 'Governança Corporativa' },
-  { name: 'Fundamentos em Gestão de Projectos', area: 'Projectos' },
-  { name: 'Balanced ScoreCard + OKR Master', area: 'Estratégia & Performance' },
-  { name: 'Gestão de Fundo Social / Caixa de Previdência', area: 'Previdência' },
-  { name: 'Contabilidade para Instituições Financeiras: IFRS e regulação específica', area: 'Contabilidade & IFRS' },
-  { name: 'Administração de Contas a Pagar e a Receber', area: 'Finanças Operacionais' },
-];
 
 const CourseCatalog: React.FC = () => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';
+  const [courses, setCourses] = useState<Course[]>(defaultCourses);
 
-  const courses = useMemo<Course[]>(() => {
-    return courseSeeds.map((course, idx) => ({
-      code: `CC-${String(idx + 1).padStart(3, '0')}`,
-      hours: 'A definir',
-      modality: 'A definir',
-      agenda: 'On-demand',
-      ...course,
-    }));
+  useEffect(() => {
+    loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
+      setCourses(data);
+    });
   }, []);
 
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
@@ -198,7 +146,7 @@ const CourseCatalog: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {courses.map((course) => (
-                  <tr key={course.code} className="hover:bg-slate-50/60 transition-colors">
+                  <tr key={course.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{course.code}</td>
                     <td className="px-6 py-4 text-sm font-semibold text-slate-800">{course.name}</td>
                     <td className="px-6 py-4 text-sm text-slate-600">{course.area}</td>

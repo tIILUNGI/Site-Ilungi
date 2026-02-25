@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, Building } from 'lucide-react';
+import { LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, Building, GraduationCap } from 'lucide-react';
 import { useAppContext } from '../App';
 
 const AdminDashboard: React.FC = () => {
@@ -22,6 +22,13 @@ const AdminDashboard: React.FC = () => {
       icon: <Briefcase className="w-8 h-8 mb-4 text-[#1B3C2B]" />,
       path: '/admin/servicos',
       color: 'bg-[#1B3C2B]/10 border-[#1B3C2B]/20'
+    },
+    {
+      title: isPt ? 'Gerir Cursos' : 'Manage Courses',
+      desc: isPt ? 'Catálogo de cursos e informações.' : 'Course catalog and details.',
+      icon: <GraduationCap className="w-8 h-8 mb-4 text-[#6a00a3]" />,
+      path: '/admin/cursos',
+      color: 'bg-[#6a00a3]/10 border-[#6a00a3]/20'
     },
     {
       title: isPt ? 'Referências de Clientes' : 'Client References',
