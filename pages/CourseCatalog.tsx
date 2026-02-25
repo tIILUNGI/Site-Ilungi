@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -11,12 +11,33 @@ const CourseCatalog: React.FC = () => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';
   const [courses, setCourses] = useState<Course[]>(defaultCourses);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [areaFilter, setAreaFilter] = useState('all');
 
   useEffect(() => {
     loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
       setCourses(data);
     });
   }, []);
+
+  const areas = useMemo(() => {
+    const uniqueAreas = Array.from(new Set(courses.map((course) => course.area).filter(Boolean)));
+    return ['all', ...uniqueAreas];
+  }, [courses]);
+
+  const filteredCourses = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+    return courses.filter((course) => {
+      const matchesArea = areaFilter === 'all' || course.area === areaFilter;
+      if (!matchesArea) return false;
+      if (!term) return true;
+      return (
+        course.name.toLowerCase().includes(term) ||
+        course.code.toLowerCase().includes(term) ||
+        course.area.toLowerCase().includes(term)
+      );
+    });
+  }, [courses, searchTerm, areaFilter]);
 
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -131,13 +152,45 @@ const CourseCatalog: React.FC = () => {
         </motion.div>
 
         <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
-          <div className="overflow-x-auto">
+          <div className="p-6 border-b border-slate-100">
+            <div className="flex flex-col md:flex-row md:items-end gap-4">
+              <div className="flex-1">
+                <label className="block text-sm font-bold text-slate-700 mb-2">
+                  {isPt ? "Pesquisar curso" : "Search course"}
+                </label>
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder={isPt ? "Digite o nome, código ou área..." : "Type name, code, or area..."}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
+                />
+              </div>
+              <div className="w-full md:w-64">
+                <label className="block text-sm font-bold text-slate-700 mb-2">
+                  {isPt ? "Filtrar por área" : "Filter by area"}
+                </label>
+                <select
+                  value={areaFilter}
+                  onChange={(e) => setAreaFilter(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
+                >
+                  {areas.map((area) => (
+                    <option key={area} value={area}>
+                      {area === "all" ? (isPt ? "Todas as áreas" : "All areas") : area}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="hidden md:block overflow-x-auto">
             <table className="min-w-[1100px] w-full">
               <thead className="bg-slate-50">
                 <tr className="text-left text-sm font-bold text-slate-600">
                   <th className="px-6 py-4">Código</th>
                   <th className="px-6 py-4">Nome do Curso</th>
-                  <th className="px-6 py-4">Especialidade / Área</th>
+                  <th className="px-6 py-4">Especialidade / área</th>
                   <th className="px-6 py-4">Carga Horária</th>
                   <th className="px-6 py-4">Modalidade</th>
                   <th className="px-6 py-4">Agenda</th>
@@ -145,7 +198,7 @@ const CourseCatalog: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {courses.map((course) => (
+                {filteredCourses.map((course) => (
                   <tr key={course.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{course.code}</td>
                     <td className="px-6 py-4 text-sm font-semibold text-slate-800">{course.name}</td>
@@ -167,6 +220,52 @@ const CourseCatalog: React.FC = () => {
                 ))}
               </tbody>
             </table>
+            {filteredCourses.length === 0 && (
+              <div className="px-6 py-10 text-center text-slate-500">
+                {isPt ? 'Nenhum curso encontrado.' : 'No courses found.'}
+              </div>
+            )}
+          </div>
+          <div className="md:hidden divide-y divide-slate-100">
+            {filteredCourses.length === 0 ? (
+              <div className="p-6 text-center text-slate-500">
+                {isPt ? 'Nenhum curso encontrado.' : 'No courses found.'}
+              </div>
+            ) : (
+              filteredCourses.map((course) => (
+                <div key={course.id} className="p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-bold text-[#6a00a3] uppercase tracking-widest">{course.code}</p>
+                      <h3 className="text-lg font-bold text-slate-800 mt-2">{course.name}</h3>
+                      <p className="text-sm text-slate-500 mt-1">{course.area}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                    <div className="rounded-xl bg-slate-50 p-3">
+                      <p className="text-xs uppercase font-semibold text-slate-400">Carga Horária</p>
+                      <p className="font-semibold text-slate-700 mt-1">{course.hours}</p>
+                    </div>
+                    <div className="rounded-xl bg-slate-50 p-3">
+                      <p className="text-xs uppercase font-semibold text-slate-400">Modalidade</p>
+                      <p className="font-semibold text-slate-700 mt-1">{course.modality}</p>
+                    </div>
+                    <div className="rounded-xl bg-slate-50 p-3 col-span-2">
+                      <p className="text-xs uppercase font-semibold text-slate-400">Agenda</p>
+                      <p className="font-semibold text-slate-700 mt-1">{course.agenda}</p>
+                    </div>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => openForm(course)}
+                    className="mt-5 w-full px-4 py-3 bg-[#6a00a3] text-white text-sm font-bold rounded-full hover:bg-[#520b7d] transition-all"
+                  >
+                    Saber mais
+                  </motion.button>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -184,7 +283,7 @@ const CourseCatalog: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 30, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-100"
+              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-100 max-h-[90vh] overflow-hidden"
             >
               <div className="flex items-start justify-between p-6 border-b border-slate-100">
                 <div>
@@ -201,7 +300,7 @@ const CourseCatalog: React.FC = () => {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
                 {status === 'success' && (
                   <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl">
                     Mensagem enviada com sucesso!
