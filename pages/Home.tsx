@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock } from 'lucide-react';
+import { ArrowRight, ChevronRight, ChevronLeft, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock } from 'lucide-react';
 
 const partners = [
   { name: "GPMOi", url: "https://gpmoi.org/", logo: "/imagens/GPMoi.png", color: "#4c0253" },
@@ -31,12 +31,13 @@ const Home: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const heroRef = useRef<HTMLDivElement>(null);
+  const servicesRowRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const heroSlides = [
-    { bg: "/imagens/ilungi_logo.jpg", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
+    { bg: "/imagens/Logo Slide.png", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
     { bg: "/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
     { bg: "/imagens/ISO.png", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
     { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "Gestão de Projetos" : "Project Management", subtitle: isPt ? "Resultados mensuráveis e eficiência" : "Measurable results and efficiency" }
@@ -45,9 +46,9 @@ const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const services = [
-    { title: t.home.services.iso, desc: t.home.services.isoDesc, image: "/imagens/Consultoria.png", color: "#1B3C2B", path: "/consultoria/iso" },
-    { title: t.home.services.projects, desc: t.home.services.projectsDesc, image: "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&q=80", color: "#6a00a3", path: "/consultoria/pmo" },
-    { title: t.home.services.tech, desc: t.home.services.techDesc, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80", color: "#0A4D8C", path: "/solucoes" },
+    { title: t.home.services.iso, desc: t.home.services.isoDesc, image: "/Consultoria.png", color: "#1B3C2B", path: "/consultoria/iso" },
+    { title: t.home.services.projects, desc: t.home.services.projectsDesc, image: "/Gestão.png", color: "#6a00a3", path: "/consultoria/pmo" },
+    { title: t.home.services.tech, desc: t.home.services.techDesc, image: "/SsaSS.png", color: "#0A4D8C", path: "/solucoes" },
     { title: t.home.services.academy, desc: t.home.services.academyDesc, image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", color: "#B31B1B", path: "/academia" }
   ];
 
@@ -56,13 +57,23 @@ const Home: React.FC = () => {
     { title: isPt ? "Gestão Integrada" : "Integrated Management", desc: isPt ? "Plataforma unificada para todos os processos" : "Unified platform for all processes" },
     { title: isPt ? "Automação Inteligente" : "Smart Automation", desc: isPt ? "Simplifique operações complexas" : "Simplify complex operations" },
     { title: isPt ? "Analytics Avançado" : "Advanced Analytics", desc: isPt ? "Decisões baseadas em dados" : "Data-driven decisions" },
-    { title: isPt ? "Segurança Total" : "Total Security", desc: isPt ? "Proteção de dados garantida" : "Guaranteed data protection" }
+    { title: isPt ? "Segurança Total" : "Total Security", desc: isPt ? "Protecção de dados garantida" : "Guaranteed data protection" }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 7000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleServicesScroll = (direction: 'prev' | 'next') => {
+    const row = servicesRowRef.current;
+    if (!row) return;
+    const firstCard = row.querySelector<HTMLElement>('[data-service-card]');
+    const gap = 24;
+    const cardWidth = firstCard?.offsetWidth ?? 320;
+    const amount = cardWidth + gap;
+    row.scrollBy({ left: direction === 'next' ? amount : -amount, behavior: 'smooth' });
+  };
 
   return (
     <div className="overflow-hidden">
@@ -94,7 +105,7 @@ const Home: React.FC = () => {
         <motion.div style={{ opacity }} className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <motion.div key={currentSlide} variants={staggerContainer} initial="hidden" animate="visible">
             <motion.div variants={scaleIn} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#6a00a3]/20 border border-[#6a00a3]/40 rounded-full text-[#6a00a3] font-semibold text-sm">
+              <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#6a00a3]/20 border border-[#6a00a3]/40 rounded-full text-white font-semibold text-sm">
                 <Award className="w-4 h-4" />
                 {isPt ? 'Consultoria de Excelência' : 'Excellence Consulting'}
               </span>
@@ -145,24 +156,49 @@ const Home: React.FC = () => {
             <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projeto' : 'From strategy to execution, we deliver excellence in every project'}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex items-center justify-end gap-2 mb-6">
+            <button
+              type="button"
+              onClick={() => handleServicesScroll('prev')}
+              className="h-10 w-10 rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 transition-colors"
+              aria-label={isPt ? 'Recuar' : 'Previous'}
+            >
+              <ChevronLeft className="w-5 h-5 mx-auto" />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleServicesScroll('next')}
+              className="h-10 w-10 rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 transition-colors"
+              aria-label={isPt ? 'Avançar' : 'Next'}
+            >
+              <ChevronRight className="w-5 h-5 mx-auto" />
+            </button>
+          </div>
+
+          <div
+            ref={servicesRowRef}
+            className="flex gap-6 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory"
+          >
             {services.map((service, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }} whileHover={{ y: -8 }}>
-                <Link to={service.path} className="block group">
-                  <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <div className="relative h-64 overflow-hidden">
-                      <motion.img whileHover={{ scale: 1.1 }} transition={{ duration: 0.6 }} src={service.image} alt={service.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+              <motion.div
+                key={index}
+                data-service-card
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex-shrink-0 w-[85%] sm:w-[70%] md:w-[48%] lg:w-[28%] snap-start"
+              >
+                <Link to={service.path} className="block group h-full">
+                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
+                    <div className="p-6 text-white" style={{ backgroundColor: service.color }}>
+                      <div className="text-sm font-bold opacity-80">{String(index + 1).padStart(2, '0')}</div>
+                      <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                      <p className="text-sm text-white/85 leading-relaxed line-clamp-4">{service.desc}</p>
                     </div>
-                    <div className="p-8">
-                      <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-[#6a00a3] transition-colors">{service.title}</h3>
-                      <p className="text-slate-500 mb-6 leading-relaxed">{service.desc}</p>
-                      <div className="flex items-center gap-2 font-bold text-[#6a00a3]">
-                        <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                      </div>
+                    <div className="h-40 bg-white">
+                      <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
                     </div>
-                    <motion.div className="absolute bottom-0 left-0 h-1" style={{ backgroundColor: service.color }} initial={{ width: 0 }} whileHover={{ width: '100%' }} transition={{ duration: 0.4 }} />
                   </div>
                 </Link>
               </motion.div>

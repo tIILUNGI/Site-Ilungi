@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/10 pb-12 mb-10">
         <div className="space-y-6">
           <Link to="/" className="flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
@@ -81,6 +81,13 @@ const Footer: React.FC = () => {
             <li><Link to="/academia/scr" className="hover:text-white transition-colors">{t.nav.scr}</Link></li>
           </ul>
         </div>
+        <div>
+          <h4 className="font-bold text-lg mb-6">{isPt ? 'Politicas' : 'Policies'}</h4>
+          <ul className="space-y-3 text-slate-300">
+            <li><a href="#" className="hover:text-white transition-colors">{isPt ? 'Politica de Qualidade' : 'Quality Policy'}</a></li>
+            <li><a href="#" className="hover:text-white transition-colors">{isPt ? 'Politica de Compliance' : 'Compliance Policy'}</a></li>
+          </ul>
+        </div>
 
         <div>
           <h4 className="font-bold text-lg mb-6">{t.nav.contact}</h4>
@@ -124,3 +131,5 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+

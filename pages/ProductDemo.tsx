@@ -9,6 +9,7 @@ interface ProductDemoProps {
 const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';
+  const isPreRelease = productName === 'Salya' || productName === 'Tocomply360';
   const productHeadline = isPt
     ? productName === 'Salya'
       ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
@@ -57,11 +58,11 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
     switch(productName) {
       case 'Salya':
         return {
-          dashboard: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+          dashboard: "/imagens/Salya.png",
           features: [
-            "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            "/imagens/Salya.png",
+            "/imagens/Salya.png",
+            "/imagens/Salya.png"
           ],
           color: "bg-[#1B3C2B]",
           gradient: "from-[#1B3C2B] to-[#2E7D5E]"
@@ -79,11 +80,11 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         };
       case 'Tocomply360':
         return {
-          dashboard: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+          dashboard: "/imagens/Tocomply360.png",
           features: [
-            "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            "/imagens/Tocomply360.png",
+            "/imagens/Tocomply360.png",
+            "/imagens/Tocomply360.png"
           ],
           color: "bg-slate-800",
           gradient: "from-slate-700 to-slate-900"
@@ -136,8 +137,12 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
           >
             {isPt
-              ? `A plataforma SaaS definitiva para ${productHeadline}.`
-              : `The ultimate SaaS platform for ${productHeadline}.`}
+              ? isPreRelease
+                ? `Solu\u00e7\u00e3o em desenvolvimento para ${productHeadline}.`
+                : `A plataforma SaaS definitiva para ${productHeadline}.`
+              : isPreRelease
+                ? `Solution in development for ${productHeadline}.`
+                : `The ultimate SaaS platform for ${productHeadline}.`}
           </motion.p>
         </div>
 
@@ -177,12 +182,14 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               </div>
               
               {/* Indicador de sistema ativo */}
-              <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                <span className="text-xs text-white font-medium">
-                  {isPt ? 'Sistema Online' : 'System Online'}
-                </span>
-              </div>
+              {!isPreRelease && (
+                <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-xs text-white font-medium">
+                    {isPt ? 'Sistema Online' : 'System Online'}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -303,16 +310,18 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             </div>
             
             {/* Badge tecnológico */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
-            >
-              <span className="text-xs font-medium text-slate-600">
-                {isPt ? 'Cloud SaaS • Implementação em 24h' : 'Cloud SaaS • 24h Setup'}
-              </span>
-            </motion.div>
+            {!isPreRelease && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mt-8 inline-flex items-center space-x-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
+              >
+                <span className="text-xs font-medium text-slate-600">
+                  {isPt ? 'Cloud SaaS • Implementação em 24h' : 'Cloud SaaS • 24h Setup'}
+                </span>
+              </motion.div>
+            )}
           </div>
         </div>
         

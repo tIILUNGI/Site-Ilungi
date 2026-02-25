@@ -44,7 +44,7 @@ const Solutions: React.FC = () => {
       desc: isPt
         ? "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos. Automatização de folhas de pagamento, benefícios e compliance trabalhista."
         : "Platform for payroll management, payslip issuance, and complete HR control. Automation of payroll, benefits, and labor compliance.",
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/imagens/Salya.png",
       path: "/solucoes/salya",
       color: "from-[#1B3C2B] to-[#2E7D5E]",
       bgColor: "bg-[#1B3C2B]"
@@ -66,7 +66,7 @@ const Solutions: React.FC = () => {
       desc: isPt
         ? "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de compliance e integridade."
         : "360-degree solution for corporate governance, integrating ethics, risk, and transparency. Complete framework for compliance and integrity management.",
-      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/imagens/Tocomply360.png",
       path: "/solucoes/tocomply",
       color: "from-slate-700 to-slate-900",
       bgColor: "bg-slate-800"
@@ -77,7 +77,49 @@ const Solutions: React.FC = () => {
 
   useEffect(() => {
     loadData('solutions', 'ilungi_solutions_data', defaultProducts).then(data => {
-      setProducts(data);
+      const normalizeText = (value: any) => {
+        if (!value) return "";
+        return String(value)
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+      };
+      let changed = false;
+      const normalized = data.map((product: any) => {
+        const name = normalizeText(product.name);
+        const tagline = normalizeText(product.tagline);
+        const desc = normalizeText(product.desc);
+        const path = normalizeText(product.path);
+
+        const isSalyaProduct =
+          name.includes("salya") ||
+          tagline.includes("gestao de salarios") ||
+          tagline.includes("payroll") ||
+          desc.includes("folhas de pagamento") ||
+          desc.includes("payroll") ||
+          path.includes("salya");
+
+        const isTocomplyProduct =
+          name.includes("tocomply") ||
+          tagline.includes("governanca") ||
+          desc.includes("governanca") ||
+          desc.includes("compliance 360") ||
+          path.includes("tocomply");
+
+        if (isSalyaProduct && product.image !== "/imagens/Salya.png") {
+          changed = true;
+          return { ...product, image: "/imagens/Salya.png" };
+        }
+        if (isTocomplyProduct && product.image !== "/imagens/Tocomply360.png") {
+          changed = true;
+          return { ...product, image: "/imagens/Tocomply360.png" };
+        }
+        return product;
+      });
+      setProducts(normalized);
+      if (changed) {
+        saveDataAdmin('solutions', 'ilungi_solutions_data', normalized);
+      }
     });
   }, []);
 
@@ -180,121 +222,148 @@ const Solutions: React.FC = () => {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
         >
-          {products.map((product, i) => (
-            <motion.div
-              key={i}
-              variants={cardVariants}
-              custom={i}
-              whileHover={{ y: -12 }}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
-            >
-              {/* Gradient border on hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="relative bg-white rounded-[22px] m-0.5">
-                {/* Image Container */}
-                <div className="relative h-56 overflow-hidden rounded-t-[22px]">
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10"
-                    initial={{ opacity: 0.5 }}
-                    whileHover={{ opacity: 0.8 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  
-                  <motion.img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  />
-                  
-                  {/* Badge */}
-                  <motion.div 
-                    className="absolute top-5 left-5 z-20"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-xl shadow-lg border border-white/20`}>
-                      <span className="text-white font-black text-lg">
-                        {product.name}
-                      </span>
-                    </div>
-                  </motion.div>
-
-                  {/* Tagline */}
-                  <div className="absolute bottom-5 left-5 z-20">
-                    <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium border border-white/30">
-                      {product.tagline}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-7 bg-white">
-                  <p className="text-slate-500 leading-relaxed mb-6 text-sm line-clamp-3">
-                    {product.desc}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    {product.url ? (
-                      <motion.a 
-                        href={product.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ x: 5 }}
-                        className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
-                      >
-                        <span>{isPt ? 'Visitar' : 'Visit'}</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.a>
-                    ) : (
-                      <motion.div whileHover={{ x: 5 }}>
-                        <Link 
-                          to={product.path || '#'}
-                          className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
+          {products.map((product, i) => {
+            const isSiclic = product.name === "SICLIC";
+            const isSalya = product.name === "Salya";
+            return (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                custom={i}
+                whileHover={{ y: isSiclic ? -8 : -12 }}
+                className={`group relative bg-white rounded-3xl overflow-hidden shadow-xl transition-all duration-500 ${isSiclic ? 'hover:shadow-[0_24px_60px_-30px_rgba(106,0,163,0.45)]' : 'hover:shadow-2xl'}`}
+              >
+                {/* Gradient border on hover */}
+                {!isSiclic && (
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                )}
+                
+                <div className="relative bg-white rounded-[22px] m-0.5">
+                  {isSiclic ? (
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="SICLIC"
+                      className="block relative h-56 sm:h-64 rounded-[22px] bg-white overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.08),transparent_60%)]"></div>
+                      <motion.img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="relative z-10 w-full h-full object-contain"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.6 }}
+                      />
+                    </a>
+                  ) : (
+                    <>
+                      {/* Image Container */}
+                      <div className="relative h-44 overflow-hidden rounded-t-[22px]">
+                        <motion.div 
+                          className={`absolute inset-0 ${isSalya ? 'bg-gradient-to-t from-black/40 via-black/10 to-transparent' : 'bg-gradient-to-t from-black/70 via-black/30 to-transparent'} z-10`}
+                          initial={{ opacity: 0.5 }}
+                          whileHover={{ opacity: 0.8 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        
+                        <motion.img 
+                          src={product.image} 
+                          alt={product.name}
+                          className={`w-full h-full ${isSalya ? 'object-contain p-5 bg-white' : 'object-cover'}`}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        />
+                        
+                        {/* Badge */}
+                        <motion.div 
+                          className="absolute top-5 left-5 z-20"
+                          whileHover={{ scale: 1.05 }}
                         >
-                          <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </motion.div>
-                    )}
+                          <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-xl shadow-lg border border-white/20`}>
+                            <span className="text-white font-black text-lg">
+                              {product.name}
+                            </span>
+                          </div>
+                        </motion.div>
+
+                        {/* Tagline */}
+                        <div className="absolute bottom-5 left-5 z-20">
+                          <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium border border-white/30">
+                            {product.tagline}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                    <div className="p-5 bg-white">
+                        <p className="text-slate-500 leading-relaxed mb-6 text-sm line-clamp-3">
+                          {product.desc}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          {product.url ? (
+                            <motion.a 
+                              href={product.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              whileHover={{ x: 5 }}
+                              className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
+                            >
+                              <span>{isPt ? 'Visitar' : 'Visit'}</span>
+                              <ArrowRight className="w-4 h-4" />
+                            </motion.a>
+                          ) : (
+                            <motion.div whileHover={{ x: 5 }}>
+                              <Link 
+                                to={product.path || '#'}
+                                className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
+                              >
+                                <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
+                                <ArrowRight className="w-4 h-4" />
+                              </Link>
+                            </motion.div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Decorative line */}
+                      <motion.div 
+                        className="absolute bottom-0 left-0 h-1"
+                        style={{ background: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3)` }}
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </>
+                  )}
+                </div>
+
+                {/* Admin Tools */}
+                {isEditing && (
+                  <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
+                    <button
+                      onClick={() => {
+                        const newImg = prompt("URL da Imagem:", product.image);
+                        if(newImg) handleProductChange(i, 'image', newImg);
+                      }}
+                      className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
+                      title="Alterar Imagem"
+                    >
+                      <ImageIcon className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(i)}
+                      className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
+                      title="Eliminar"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
-                </div>
-
-                {/* Decorative line */}
-                <motion.div 
-                  className="absolute bottom-0 left-0 h-1"
-                  style={{ background: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3)` }}
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.4 }}
-                />
-              </div>
-
-              {/* Admin Tools */}
-              {isEditing && (
-                <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
-                  <button
-                    onClick={() => {
-                      const newImg = prompt("URL da Imagem:", product.image);
-                      if(newImg) handleProductChange(i, 'image', newImg);
-                    }}
-                    className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
-                    title="Alterar Imagem"
-                  >
-                    <ImageIcon className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteProduct(i)}
-                    className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
-                    title="Eliminar"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          ))}
+                )}
+              </motion.div>
+            );
+          })}
           
           {/* Add New Button (Admin) */}
           {isEditing && (
