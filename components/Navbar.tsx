@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
                         
                         {/* Menu Items */}
                         <div className="p-3">
-                          <div className="grid grid-cols-2 gap-1">
+                          <div className="grid grid-cols-1 gap-1">
                             {item.mega.map((sub: any, idx) => (
                               <div key={idx}>
                                 {sub.href ? (

@@ -311,12 +311,12 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="group relative"
+                className="group relative h-full"
               >
                 {/* Card glow effect */}
                 <div className="absolute -inset-px bg-gradient-to-br from-[#6a00a3]/30 to-[#1B3C2B]/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
                 
-                <div className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-8 border border-white/10 group-hover:border-[#6a00a3]/30 transition-all duration-500">
+                <div className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-8 border border-white/10 group-hover:border-[#6a00a3]/30 transition-all duration-500 h-full flex flex-col">
                   {/* Number indicator */}
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#6a00a3] to-[#1B3C2B] flex items-center justify-center mb-6 shadow-lg">
                     <span className="text-white font-bold text-lg">{String(index + 1).padStart(2, '0')}</span>
@@ -326,7 +326,7 @@ const Home: React.FC = () => {
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#a855f7] transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-400 text-sm leading-relaxed flex-1">
                     {feature.desc}
                   </p>
 

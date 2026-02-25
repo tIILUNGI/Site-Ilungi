@@ -1,4 +1,4 @@
-import { Translation } from './types';
+﻿import { Translation } from './types';
 
 export const translations: Record<'pt' | 'en', any> = {
   pt: {
@@ -76,10 +76,10 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Soluções integradas de governança, risco e compliance para empresas que buscam liderança e sustentabilidade no mercado global.",
       whyTitle: "Por que escolher a ILUNGI?",
       features: [
-        "Metodologia internacional adaptada ao mercado local",
-        "Consultores seniores com certificações globais",
-        "Foco em resultados mensuráveis e eficiência",
-        "Suporte completo do diagnóstico à certificação"
+        "Metodologias internacionais adaptadas ao mercado local",
+        "Consultores Especializados",
+        "Foco em Resultados mensuráveis",
+        "Suporte completo do diagnóstico à Eficiência"
       ],
       explore: "Explorar Soluções",
       cta: "Agendar Reunião Técnica",
@@ -103,7 +103,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     academy: {
-      title: "FORMAÇÕES E EDUCAÇÃO CORPORATIVA",
+      title: "FORMAÇÕES E EDUCAÇÝO CORPORATIVA",
       subtitle: "Reconhecendo as especificidades de cada empresa, desenhamos soluções formativas personalizadas. Disponibilizamos todo o auxílio necessário na gestão integrada do plano de formação, para que as empresas possam alcançar, eficiente e eficazmente, os seus objetivos.",
       description: "A educação corporativa, neste contexto de serviço, uma estratégia de acompanhamento voltada para a gestão de pessoas da sua empresa, em que habilidades devem ser desenvolvidas em favor do contexto organizacional. Isso significa que a prática vai muito além de oferecermos treinamentos ou simplesmente qualificar a mão de obra.",
       features: {
@@ -152,9 +152,9 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÝO & PROJECTOS",
         desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
-        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
+        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÝO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
           "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Melhoria contínua e satisfação total do cliente." },
           "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Sustentabilidade e conformidade legal verde." },
@@ -169,9 +169,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
+        title: "SERVIÇO DE NOTAÇÝO DE RISCO",
         desc: "Serviço de notação de risco pela ILUNGI",
-        content: "Em processo de regularização pela CMC\nO Serviço de Notação de Risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de Notação de Risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
+        content: "Em processo de regularização pela CMC\nO Serviço de notação de risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de notação de risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
       },
       procurement: {
         title: "Procurement",
@@ -180,7 +180,7 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       pmo: {
         title: "ASSISTÊNCIA E SUPORTE DE T.I",
-        desc: "Serviços de assistência e suporte de TI",
+        desc: "Serviços de Assistência e suporte de TI",
         content: "Se você busca reduzir/controlar custos na área de tecnologia, sabe que contratar outsourcing de TI é uma forma eficaz de economizar recursos, além de possibilitar qualidade e eficiência no serviço prestado. Também é possível otimizar as operações da sua empresa, aumentar a flexibilidade e a produtividade das entregas. Sem falar na prestação de contas, que também é uma condição favorável através do instrumento de contratação.\nOferecemos diferentes planos de terceirização de suporte técnico de TI."
       }
     },
@@ -216,7 +216,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÝO & PROJECTOS",
       subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
@@ -299,8 +299,8 @@ export const translations: Record<'pt' | 'en', any> = {
           id: "cmc",
           name: "CMC",
           logo: "/Nossas Refeências/CMC.png",
-          role: "Serviço de Notação de Risco",
-          comment: "A ILUNGI oferece um serviço de notação de risco com elevados padrões de rigor e impartialidade.",
+          role: "Serviço de notação de risco",
+          comment: "A ILUNGI oferece um Serviço de notação de risco com elevados padrões de rigor e impartialidade.",
           person: "Director Geral",
           service: "risk",
           description: "Serviço de notação de risco em processo de regularização pela CMC",
@@ -336,7 +336,7 @@ export const translations: Record<'pt' | 'en', any> = {
           comment: "A ILUNGI proporcionou-nos um suporte técnico de excelência. O serviço de TI melhorou significativamente as nossas operações.",
           person: "Director de Sistemas",
           service: "pmo",
-          description: "Serviços de assistência e suporte de TI para operações de petróleo e gás",
+          description: "Serviços de Assistência e suporte de TI para operações de petróleo e gás",
           attachments: []
         },
         {
@@ -358,7 +358,7 @@ export const translations: Record<'pt' | 'en', any> = {
           comment: "O suporte de TI da ILUNGI foi fundamental para a modernização dos nossos sistemas.",
           person: "Director de Tecnologia",
           service: "pmo",
-          description: "Serviços de assistência e suporte de TI para infraestrutura portuária",
+          description: "Serviços de Assistência e suporte de TI para infraestrutura portuária",
           attachments: []
         },
         {
@@ -772,3 +772,7 @@ export const translations: Record<'pt' | 'en', any> = {
     }
   }
 };
+
+
+
+

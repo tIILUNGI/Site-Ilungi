@@ -25,6 +25,7 @@ import AdminServices from './pages/AdminServices';
 import AdminBlog from './pages/AdminBlog';
 import AdminConfig from './pages/AdminConfig';
 import Certifications from './pages/Certifications';
+import CourseCatalog from './pages/CourseCatalog';
 import { AnimatePresence } from 'framer-motion';
 
 // Context for Language and Dark Mode
@@ -103,6 +104,7 @@ const App: React.FC = () => {
                 <Route path="/academia/alumni" element={<AlumniPortal />} />
                 <Route path="/academia/login" element={<AlumniLogin />} />
                 <Route path="/academia/verificar" element={<CertificateVerify />} />
+                <Route path="/academia/cursos" element={<CourseCatalog />} />
                 <Route path="/solucoes" element={<Solutions />} />
                 <Route path="/solucoes/salya" element={<ProductDemo productName="Salya" />} />
                 <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
