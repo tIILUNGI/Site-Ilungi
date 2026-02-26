@@ -214,7 +214,6 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="block text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">{isPt ? 'Porquê escolher a ILUNGI' : 'Why choose ILUNGI'}</span>
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6">{t.consulting.whyTitle}</h2>
               <div className="space-y-6">
                 {t.consulting.features.map((feature: string, i: number) => (
@@ -237,16 +236,16 @@ const Home: React.FC = () => {
                     <div className="text-sm text-slate-400">{isPt ? 'Certificação' : 'Certification'}</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white mb-2">100%</div>
+                    <div className="text-4xl font-black text-white mb-2">88%</div>
                     <div className="text-sm text-slate-400">{isPt ? 'Satisfação' : 'Satisfaction'}</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white mb-2">Global</div>
-                    <div className="text-sm text-slate-400">{isPt ? 'Presença' : 'Presence'}</div>
+                    <div className="text-4xl font-black text-white mb-2">ISO 37301</div>
+                    <div className="text-sm text-slate-400">{isPt ? 'Certificação' : 'Certification'}</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white mb-2">24/7</div>
-                    <div className="text-sm text-slate-400">{isPt ? 'Suporte' : 'Support'}</div>
+                    <div className="text-4xl font-black text-white mb-2">360°</div>
+                    <div className="text-sm text-slate-400">{isPt ? 'Acompanhamento' : 'Follow-up'}</div>
                   </div>
                 </div>
               </div>

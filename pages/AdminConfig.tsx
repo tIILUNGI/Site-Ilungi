@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, RotateCcw, Download, Upload, Trash2, Edit3, Globe, Palette, FileText, Users, Briefcase, Monitor } from 'lucide-react';
 import { useAppContext } from '../App';
-import { getContent, saveContent, resetContent, exportContent, importContent, resetAllContent } from '../lib/contentManager';
+import { getContent, saveContent, resetContent, exportContent, importContent, resetAllContent, syncContentFromRemote } from '../lib/contentManager';
 
 const AdminConfig: React.FC = () => {
   const { lang, setLang, isDark, setIsDark, t } = useAppContext();
@@ -11,11 +11,22 @@ const AdminConfig: React.FC = () => {
   const [content, setContent] = useState<any>(null);
   const [editedContent, setEditedContent] = useState<any>(null);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'synced' | 'error'>('idle');
 
   useEffect(() => {
-    const data = getContent(lang);
-    setContent(data);
-    setEditedContent(data);
+    const localData = getContent(lang);
+    setContent(localData);
+    setEditedContent(localData);
+    let isMounted = true;
+    syncContentFromRemote().then((updated) => {
+      if (!isMounted || !updated) return;
+      const data = getContent(lang);
+      setContent(data);
+      setEditedContent(data);
+    });
+    return () => {
+      isMounted = false;
+    };
   }, [lang]);
 
   const handleSave = () => {
@@ -23,10 +34,30 @@ const AdminConfig: React.FC = () => {
     try {
       saveContent(lang, editedContent);
       setContent(editedContent);
+      window.dispatchEvent(new Event('ilungi-content-updated'));
       setTimeout(() => setSaveStatus('saved'), 500);
       setTimeout(() => setSaveStatus('idle'), 2000);
     } catch (e) {
       setSaveStatus('error');
+    }
+  };
+
+  const handleSyncNow = async () => {
+    setSyncStatus('syncing');
+    try {
+      const updated = await syncContentFromRemote();
+      if (updated) {
+        const data = getContent(lang);
+        setContent(data);
+        setEditedContent(data);
+        setSyncStatus('synced');
+      } else {
+        setSyncStatus('error');
+      }
+    } catch (e) {
+      setSyncStatus('error');
+    } finally {
+      setTimeout(() => setSyncStatus('idle'), 2000);
     }
   };
 
@@ -36,6 +67,7 @@ const AdminConfig: React.FC = () => {
       const data = getContent(lang);
       setContent(data);
       setEditedContent(data);
+      window.dispatchEvent(new Event('ilungi-content-updated'));
     }
   };
 
@@ -60,6 +92,7 @@ const AdminConfig: React.FC = () => {
           const data = getContent(lang);
           setContent(data);
           setEditedContent(data);
+          window.dispatchEvent(new Event('ilungi-content-updated'));
           alert(isPt ? 'Conteúdo importado com sucesso!' : 'Content imported successfully!');
         } catch (err) {
           alert(isPt ? 'Erro ao importar conteúdo.' : 'Error importing content.');
@@ -154,6 +187,23 @@ const AdminConfig: React.FC = () => {
               </div>
               
               <div className="flex items-center gap-2">
+                <motion.button
+                  onClick={handleSyncNow}
+                  disabled={syncStatus === 'syncing'}
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold transition-colors disabled:opacity-50 ${
+                    syncStatus === 'error'
+                      ? 'bg-red-500 text-white hover:bg-red-600'
+                      : 'bg-[#6a00a3] text-white hover:bg-[#520b7d]'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  {syncStatus === 'syncing' ? (isPt ? 'A sincronizar...' : 'Syncing...') :
+                   syncStatus === 'synced' ? (isPt ? 'Sincronizado!' : 'Synced!') :
+                   syncStatus === 'error' ? (isPt ? 'Erro ao sincronizar' : 'Sync error') :
+                   (isPt ? 'Sincronizar' : 'Sync')}
+                </motion.button>
                 <motion.button
                   onClick={handleSave}
                   disabled={saveStatus === 'saving'}

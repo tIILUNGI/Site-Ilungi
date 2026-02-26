@@ -8,10 +8,10 @@ export const translations: Record<'pt' | 'en', any> = {
       solutions: "Soluções",
       partners: "Parceiros",
       contact: "Contacto",
-      iso: "Consultoria de Sistemas de gestão & projectos",
-      risk: "Serviço de notação de risco",
+      iso: "Consultoria de Sistemas de Gestão & Projectos",
+      risk: "Serviço de Notação de Risco",
       procurement: "Procurement",
-      pmo: "Assistência e suporte de TI",
+      pmo: "Assistência e Suporte de TI",
       alumni: "Alumni ILUNGI",
       courses: "Cursos",
       verify: "Verificar Certificado",
@@ -76,21 +76,21 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Soluções integradas de governança, risco e compliance para empresas que buscam liderança e sustentabilidade no mercado global.",
       whyTitle: "Por que escolher a ILUNGI?",
       features: [
-        "Metodologias internacionais adaptadas ao mercado local",
+        "Metodologias Internacionais Adaptadas ao Mercado Local",
         "Consultores Especializados",
-        "Foco em Resultados mensuráveis",
-        "Suporte completo do diagnóstico à Eficiência"
+        "Foco em Resultados Mensuráveis",
+        "Suporte Completo do Diagnóstico à Eficiência"
       ],
       explore: "Explorar Soluções",
       cta: "Agendar Reunião Técnica",
     },
     consultingAreas: {
       iso: {
-        title: "Consultoria de Sistemas de gestão & projectos",
+        title: "Consultoria de Sistemas de Gestão & Projectos",
         desc: "Implementação de sistemas de gestão e condução de projectos de melhoria com foco em padrões e eficiência operacional."
       },
       risk: {
-        title: "Serviço de notação de risco",
+        title: "Serviço de Notação de Risco",
         desc: "Classificação e análise de riscos corporativos para suporte à decisão estratégica."
       },
       procurement: {
@@ -103,7 +103,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     academy: {
-      title: "FORMAÇÕES E EDUCAÇÝO CORPORATIVA",
+      title: "FORMAÇÕES E EDUCAÇÃO CORPORATIVA",
       subtitle: "Reconhecendo as especificidades de cada empresa, desenhamos soluções formativas personalizadas. Disponibilizamos todo o auxílio necessário na gestão integrada do plano de formação, para que as empresas possam alcançar, eficiente e eficazmente, os seus objetivos.",
       description: "A educação corporativa, neste contexto de serviço, uma estratégia de acompanhamento voltada para a gestão de pessoas da sua empresa, em que habilidades devem ser desenvolvidas em favor do contexto organizacional. Isso significa que a prática vai muito além de oferecermos treinamentos ou simplesmente qualificar a mão de obra.",
       features: {
@@ -152,9 +152,9 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÝO & PROJECTOS",
+        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
         desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
-        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÝO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
+        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
           "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Melhoria contínua e satisfação total do cliente." },
           "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Sustentabilidade e conformidade legal verde." },
@@ -169,9 +169,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "SERVIÇO DE NOTAÇÝO DE RISCO",
-        desc: "Serviço de notação de risco pela ILUNGI",
-        content: "Em processo de regularização pela CMC\nO Serviço de notação de risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\nO Serviço de notação de risco é exercido com elevados padrões de rigor, imparcialidade, confidencialidade e responsabilidade institucional, estando sujeito a mecanismos internos de controlo, supervisão de compliance e acompanhamento contínuo."
+        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
+        desc: "Em processo de regularização pela CMC",
+        content: "\nO Serviço de notação de risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\n"
       },
       procurement: {
         title: "Procurement",
@@ -216,7 +216,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÝO & PROJECTOS",
+      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
       subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
@@ -226,10 +226,16 @@ export const translations: Record<'pt' | 'en', any> = {
       steps: {
         gap: "Diagnóstico GAP",
         gapDesc: "Análise profunda do estado atual vs requisitos da norma.",
-        planning: "Planeamento & Auditoria",
-        planningDesc: "Estratégia personalizada e verificação interna rigorosa.",
-        certification: "Certificação Final",
-        certificationDesc: "Acompanhamento total durante a auditoria externa.",
+        planning: "Planeamento & Implementação",
+        planningDesc: "Plano detalhado e implementação dos requisitos com acompanhamento contínuo.",
+        training: "Treinamento de Equipe",
+        trainingDesc: "Capacitação dos colaboradores para aplicar e manter o sistema.",
+        internalAudit: "Auditoria Interna",
+        internalAuditDesc: "Verificação interna para assegurar conformidade e corrigir desvios.",
+        report: "Elaboração de Relatório",
+        reportDesc: "Documentação de resultados, evidências e plano de melhorias.",
+        goLive: "Go-Live para Auditoria de Certificação",
+        goLiveDesc: "Preparação final e acompanhamento durante a auditoria de certificação.",
       },
       cta: "Falar com Consultor Senior",
       testimonial: "A ILUNGI foi fundamental para nossa expansão internacional através da ISO 9001.",
@@ -254,7 +260,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imobias",
           name: "IMOVIAS",
-          logo: "/Nossas Refeências/Imobias.png",
+          logo: "/Nossas Refeências/Imovias.png",
           role: "Implementação ISO 14001",
           comment: "Excelente trabalho da ILUNGI na implementação da ISO 14001. A equipa demonstrou profissionalismo e conhecimento técnico.",
           person: "Director de Operações",
@@ -293,17 +299,6 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "Director de Recursos Humanos",
           service: "iso",
           description: "Consultoria e implementação de sistema de gestão de saúde e segurança ocupacional ISO 45001",
-          attachments: []
-        },
-        {
-          id: "cmc",
-          name: "CMC",
-          logo: "/Nossas Refeências/CMC.png",
-          role: "Serviço de notação de risco",
-          comment: "A ILUNGI oferece um Serviço de notação de risco com elevados padrões de rigor e impartialidade.",
-          person: "Director Geral",
-          service: "risk",
-          description: "Serviço de notação de risco em processo de regularização pela CMC",
           attachments: []
         },
         {
@@ -393,43 +388,43 @@ export const translations: Record<'pt' | 'en', any> = {
       solutions: "Solutions",
       partners: "Partners",
       contact: "Contact",
-      iso: "Management Systems and Projects Consulting",
+      iso: "Management Systems & Projects Consulting",
       risk: "Risk Rating Service",
       procurement: "Procurement",
       pmo: "IT Assistance and Support",
       alumni: "ILUNGI Alumni",
       courses: "Courses",
       verify: "Verify Certificate",
-      scr: "School of Corp. Reputation",
+      scr: "School of Corporate Reputation",
       demo: "Demo",
       home: "Home",
     },
     home: {
       heroTitle: "Excellence in Consulting and Digital Solutions",
       heroSubtitle: "We transform compliance and management into strategic value for global companies.",
-      ctaPrimary: "Request Proposal",
+      ctaPrimary: "Request a Proposal",
       ctaSecondary: "Learn More",
       services: {
         iso: "ISO Consulting",
-        isoDesc: "Implementation and certification in international standards (9001, 27001, etc).",
+        isoDesc: "Implementation and certification of international standards (9001, 27001, etc.).",
         projects: "Project Management",
-        projectsDesc: "Strategic Governance and PMO for large infrastructures and operations.",
+        projectsDesc: "Strategic governance and PMO for large infrastructure and operations.",
         tech: "SaaS & Tech",
         techDesc: "Digital platforms for compliance, risk, and efficient management.",
         academy: "ILUNGI Academy",
-        academyDesc: "Excellence training with international certification.",
+        academyDesc: "High-level training with international certification.",
       },
       stats: {
         projects: "Projects Completed",
         clients: "Clients Served",
         students: "Certified Students",
-        experience: "Years in Market"
+        experience: "Years in the Market"
       },
       solutions: {
         title: "Digital Solutions Tailored to Your Management",
-        desc: "We develop technological ecosystems that simplify compliance, auditing, and strategic monitoring. Discover the Salya and Tocomply360 platforms.",
+        desc: "We drive your company's digital transformation with innovative platforms. Automate processes, strengthen governance, and make data-driven decisions.",
         feature1: "Real-Time Dashboards",
-        feature2: "Cutting-Edge Information Security",
+        feature2: "State-of-the-Art Information Security",
         feature3: "Intuitive & Mobile Interface",
         cta: "Discover Solutions",
       },
@@ -461,17 +456,17 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Integrated governance, risk, and compliance solutions for companies seeking leadership and sustainability in the global market.",
       whyTitle: "Why choose ILUNGI?",
       features: [
-        "International methodology adapted to the local market",
-        "Senior consultants with global certifications",
-        "Focus on measurable results and efficiency",
-        "Complete support from diagnosis to certification"
+        "International methodologies adapted to the local market",
+        "Specialized consultants",
+        "Focus on measurable results",
+        "End-to-end support from diagnosis to efficiency"
       ],
       explore: "Explore Solutions",
-      cta: "Schedule Technical Meeting",
+      cta: "Schedule a Technical Meeting",
     },
     consultingAreas: {
       iso: {
-        title: "Management Systems and Projects Consulting",
+        title: "Management Systems & Projects Consulting",
         desc: "Implementation of management systems and improvement projects focused on standards and operational efficiency."
       },
       risk: {
@@ -484,25 +479,25 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       pmo: {
         title: "IT Assistance and Support",
-        desc: "Continuous technical support for operations, infrastructure, and IT services continuity."
+        desc: "Continuous technical support for operations, infrastructure, and continuity of IT services."
       }
     },
     academy: {
       title: "TRAINING AND CORPORATE EDUCATION",
-      subtitle: "Recognizing the specificities of each company, we design customized training solutions. We provide all the necessary assistance in the integrated management of the training plan, so that companies can efficiently and effectively achieve their objectives.",
-      description: "Corporate education, in this service context, is a follow-up strategy aimed at people management in your company, where skills must be developed in favor of the organizational context. This means that the practice goes far beyond just offering training or simply qualifying the workforce.",
+      subtitle: "Recognizing the specific needs of each company, we design customized training solutions. We provide all the necessary support in the integrated management of the training plan so companies can efficiently and effectively achieve their objectives.",
+      description: "Corporate education, in this service context, is a follow-up strategy focused on people management in your company, where skills are developed in line with the organizational context. This means the practice goes far beyond offering training or simply qualifying the workforce.",
       features: {
         cert: "Int. Certification",
         certDesc: "Globally valid certificates.",
         mentoria: "Mentoring",
         mentoriaDesc: "Follow-up with specialists.",
-        material: "Premium Material",
+        material: "Premium Materials",
         materialDesc: "Lifetime access to exclusive resources.",
         networking: "Networking",
         networkingDesc: "Exclusive community of alumni.",
       },
       coursesTitle: "Featured Courses",
-      coursesDesc: "Registrations open for the next quarter.",
+      coursesDesc: "Enrollment open for the next quarter.",
       viewAll: "View all courses",
       level: {
         expert: "Expert",
@@ -520,7 +515,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     partners: {
       title: "Our Partner Network",
-      subtitle: "We collaborate with the best global institutions to deliver excellence solutions.",
+      subtitle: "We collaborate with the best global institutions to deliver excellent solutions.",
       visit: "Visit Website",
     },
     solutions: {
@@ -528,45 +523,45 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Cutting-edge technology for efficient business management.",
       sicloc: {
         title: "SICLIC",
-        desc: "Cloud solution for customer relationship management based on 4 concepts: Potential client, client, contract and report. Relationships are between people, and SICLIC helps manage and loyalize consumers.\nwww.siclic.ao | contacto@siclic.ao",
+        desc: "Cloud solution for customer relationship management based on 4 concepts: potential client, client, contract, and report. Relationships are between people, and SICLIC helps manage and build customer loyalty.\nwww.siclic.ao | contacto@siclic.ao",
       },
       tocomply: {
         title: "ToComply360º",
-        desc: "Cloud-based system that ensures flexibility and agility in business compliance process management.",
+        desc: "Cloud-based system that ensures flexibility and agility in managing corporate compliance processes.",
       },
     },
     services: {
       iso: {
         title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
-        desc: "Specialists in ISO management systems implementation and auditing.",
-        content: "We act in the surgical and tailored implementation of management systems based on ISO standards. We accompany our partners up to the certification audit, as well as carry out internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
+        desc: "Specialists in the implementation and auditing of ISO management systems.",
+        content: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit and also conduct internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Security Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
         items: {
           "9001": { title: "ISO 9001 - Quality Management", benefit: "Continuous improvement and total customer satisfaction." },
-          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Sustainability and green legal compliance." },
+          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Sustainability and environmental legal compliance." },
           "45001": { title: "ISO 45001 - Occupational Health and Safety", benefit: "Safe workplace and accident reduction." },
-          "27001": { title: "ISO 27001 - Information Management", benefit: "Digital asset protection and data confidence." },
-          "22301": { title: "ISO 22301 - Continuity Management", benefit: "Resilience against crises and interruptions." },
+          "27001": { title: "ISO 27001 - Information Security Management", benefit: "Protection of digital assets and data assurance." },
+          "22301": { title: "ISO 22301 - Business Continuity", benefit: "Resilience against crises and disruptions." },
           "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Ethical culture and corporate transparency." },
           "37301": { title: "ISO 37301 - Compliance", benefit: "Compliance management system." },
           "31000": { title: "ISO 31000 - Risk Management", benefit: "Identification and mitigation of business risks." },
           "22000": { title: "ISO 22000 - Food Safety", benefit: "Food safety assurance and HACCP." },
-          "13485": { title: "ISO 13485 - Healthcare", benefit: "Management systems for medical devices." }
+          "13485": { title: "ISO 13485 - Medical Devices", benefit: "Management systems for medical devices." }
         }
       },
       risk: {
         title: "RISK RATING SERVICE",
-        desc: "Risk rating service by ILUNGI",
-        content: "Under regularization process by CMC\nILUNGI's Risk Rating Service aims to contribute to market transparency, credibility, and efficiency through independent assessment of the ability to meet financial obligations by entities and financial instruments.\nThe Risk Rating Service is exercised with high standards of rigor, impartiality, confidentiality, and institutional responsibility, subject to internal control mechanisms, compliance supervision, and continuous monitoring."
+        desc: "Under regularization by the CMC",
+        content: "\nILUNGI's risk rating service aims to contribute to market transparency, credibility, and efficiency through the independent assessment of the ability to meet financial obligations by entities and financial instruments.\n"
       },
       procurement: {
         title: "PROCUREMENT",
         desc: "Complete procurement service for your company.",
-        content: "Our procurement service aims to enable the client to have time to focus their efforts on other matters related to their company. Faced with the need for services, tools, or essential equipment that your company may need, we buy for you inside and outside Angola. We can take care of everything, from service notification, specifications, and service certificates, monitoring invoices from various suppliers - at competitive prices and with globally fixed prices and from a single point of contact."
+        content: "Our procurement service aims to give the client time to focus their efforts on other matters related to their company. When services, tools, or essential equipment are needed, we purchase for you inside and outside Angola. We can take care of everything, from service notification, specifications, and service certificates to monitoring invoices from multiple suppliers, at competitive prices with globally fixed rates and a single point of contact."
       },
       pmo: {
         title: "IT ASSISTANCE AND SUPPORT",
         desc: "IT assistance and support services",
-        content: "If you want to reduce/control costs in the technology area, know that hiring IT outsourcing is an effective way to save resources, while enabling quality and efficiency in the service provided. It is also possible to optimize your company's operations, increase flexibility, and productivity of deliveries. Not to mention accountability, which is also a favorable condition through the contracting instrument.\nWe offer different IT technical support outsourcing plans."
+        content: "If you want to reduce or control costs in the technology area, know that hiring IT outsourcing is an effective way to save resources while ensuring quality and efficiency in the service provided. It is also possible to optimize your company's operations, increase flexibility, and improve delivery productivity. Not to mention accountability, which is also strengthened through the contracting instrument.\nWe offer different IT technical support outsourcing plans."
       }
     },
     alumni: {
@@ -577,7 +572,7 @@ export const translations: Record<'pt' | 'en', any> = {
         password: "Password",
         remember: "Remember me",
         forgot: "Forgot password",
-        button: "Access",
+        button: "Log In",
         noAccount: "Don't have an account yet?",
         register: "Register here",
       },
@@ -593,7 +588,7 @@ export const translations: Record<'pt' | 'en', any> = {
         stats: {
           active: "Active Courses",
           certs: "Certificates",
-          hours: "Hours",
+          hours: "Training Hours",
         },
         inProgress: "In Progress",
         continue: "Continue Lesson",
@@ -602,22 +597,28 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     iso: {
       title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
-      subtitle: "We act in the surgical and tailored implementation of management systems based on ISO standards. We accompany our partners up to the certification audit, as well as carry out internal and supplier audits.",
+      subtitle: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit, as well as conduct internal and supplier audits.",
       stats: {
         certified: "Several Certified Companies",
         rate: "Approval Rate",
       },
       methodology: "Our Implementation Methodology",
       steps: {
-        gap: "GAP Diagnosis",
-        gapDesc: "Deep analysis of current state vs. standard requirements.",
-        planning: "Planning & Auditing",
-        planningDesc: "Customized strategy and rigorous internal verification.",
-        certification: "Final Certification",
-        certificationDesc: "Total support during external audit.",
+        gap: "Gap Analysis",
+        gapDesc: "Deep analysis of the current state versus standard requirements.",
+        planning: "Planning & Implementation",
+        planningDesc: "Detailed plan and implementation of requirements with continuous follow-up.",
+        training: "Team Training",
+        trainingDesc: "Training teams to apply and sustain the management system.",
+        internalAudit: "Internal Audit",
+        internalAuditDesc: "Internal verification to ensure compliance and correct deviations.",
+        report: "Report Preparation",
+        reportDesc: "Documentation of results, evidence, and the improvement plan.",
+        goLive: "Go-Live for Certification Audit",
+        goLiveDesc: "Final readiness and support during the certification audit.",
       },
-      cta: "Talk to Senior Consultant",
-      testimonial: "ILUNGI was fundamental for our international expansion through ISO 9001.",
+      cta: "Talk to a Senior Consultant",
+      testimonial: "ILUNGI was fundamental to our international expansion through ISO 9001.",
       testimonialAuthor: "",
     },
     references: {
@@ -630,7 +631,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Aguias do Sul",
           logo: "/Nossas Refeências/Aguias do Sul.png",
           role: "ISO 9001 Implementation",
-          comment: "ILUNGI was fundamental in transforming our management processes. ISO 9001 certification brought greater efficiency and credibility.",
+          comment: "ILUNGI was fundamental to transforming our management processes. ISO 9001 certification brought greater efficiency and credibility.",
           person: "General Director",
           service: "iso",
           description: "Consulting and implementation of ISO 9001 quality management system",
@@ -639,7 +640,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imobias",
           name: "IMOVIAS",
-          logo: "/Nossas Refeências/Imobias.png",
+          logo: "/Nossas Refeências/Imovias.png",
           role: "ISO 14001 Implementation",
           comment: "Excellent work by ILUNGI in implementing ISO 14001. The team demonstrated professionalism and technical knowledge.",
           person: "Operations Director",
@@ -652,7 +653,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Inter Seguros",
           logo: "/Nossas Refeências/Inter Seguros.png",
           role: "ISO 27001 Implementation",
-          comment: "ILUNGI did an exceptional job implementing ISO 27001. Our information security is now guaranteed.",
+          comment: "ILUNGI did an exceptional job implementing ISO 27001. Our information security is now assured.",
           person: "Technology Director",
           service: "iso",
           description: "Consulting and implementation of ISO 27001 information security management system",
@@ -663,7 +664,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "A Clean",
           logo: "/Nossas Refeências/A Clean.jpg",
           role: "ISO 22000 Implementation",
-          comment: "Thanks to ILUNGI, we obtained ISO 22000 certification successfully. The process was rigorous and well structured.",
+          comment: "Thanks to ILUNGI, we obtained ISO 22000 certification successfully. The process was rigorous and well-structured.",
           person: "General Director",
           service: "iso",
           description: "Consulting and implementation of ISO 22000 / HACCP food safety management system",
@@ -678,17 +679,6 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "Human Resources Director",
           service: "iso",
           description: "Consulting and implementation of ISO 45001 occupational health and safety management system",
-          attachments: []
-        },
-        {
-          id: "cmc",
-          name: "CMC",
-          logo: "/Nossas Refeências/CMC.png",
-          role: "Risk Rating Service",
-          comment: "ILUNGI offers a risk rating service with high standards of rigor and impartiality.",
-          person: "General Director",
-          service: "risk",
-          description: "Risk rating service under regularization process by CMC",
           attachments: []
         },
         {
@@ -707,7 +697,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "BRILL",
           logo: "/Nossas Refeências/BRILL.png",
           role: "Procurement Service",
-          comment: "Excellent procurement service. ILUNGI always delivered on time and with quality.",
+          comment: "Excellent procurement service. ILUNGI always delivered on time and with high quality.",
           person: "Operations Director",
           service: "procurement",
           description: "Procurement services for materials and equipment",
@@ -740,7 +730,7 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Porto do Lubito",
           logo: "/Nossas Refeências/Porto do Lubito.png",
           role: "IT Assistance and Support Service",
-          comment: "ILUNGI's IT support was fundamental for modernizing our systems.",
+          comment: "ILUNGI's IT support was fundamental to modernizing our systems.",
           person: "Technology Director",
           service: "pmo",
           description: "IT assistance and support services for port infrastructure",
@@ -772,7 +762,3 @@ export const translations: Record<'pt' | 'en', any> = {
     }
   }
 };
-
-
-
-

@@ -91,7 +91,10 @@ const ISOPage: React.FC = () => {
                     {[
                         { title: t.iso.steps.gap, desc: t.iso.steps.gapDesc },
                         { title: t.iso.steps.planning, desc: t.iso.steps.planningDesc },
-                        { title: t.iso.steps.certification, desc: t.iso.steps.certificationDesc }
+                        { title: t.iso.steps.training, desc: t.iso.steps.trainingDesc },
+                        { title: t.iso.steps.internalAudit, desc: t.iso.steps.internalAuditDesc },
+                        { title: t.iso.steps.report, desc: t.iso.steps.reportDesc },
+                        { title: t.iso.steps.goLive, desc: t.iso.steps.goLiveDesc }
                     ].map((step, i) => (
                         <div key={i} className="flex space-x-4">
                             <div>

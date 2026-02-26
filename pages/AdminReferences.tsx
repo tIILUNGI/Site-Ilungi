@@ -35,7 +35,11 @@ const AdminReferences: React.FC = () => {
 
   useEffect(() => {
     loadData('references', 'ilungi_references_data', defaultReferences).then(data => {
-      setReferences(data);
+      const cleaned = (data || []).filter((ref: any) => ref.id !== 'cmc' && ref.name !== 'CMC');
+      setReferences(cleaned);
+      if ((data || []).length !== cleaned.length) {
+        saveDataAdmin('references', 'ilungi_references_data', cleaned);
+      }
     });
   }, [lang]);
 

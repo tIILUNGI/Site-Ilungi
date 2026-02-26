@@ -1,15 +1,84 @@
 import { translations } from '../translations';
 import { Language } from '../types';
+import { supabase } from './supabase';
 
 // Default content from translations
 const defaultContent = translations;
+
+const isObject = (value: any) => value && typeof value === 'object' && !Array.isArray(value);
+
+const REMOTE_TABLE = 'site_content';
+const REMOTE_ROW_ID = 1;
+
+const deepMerge = (base: any, override: any): any => {
+  if (Array.isArray(base)) {
+    return override !== undefined ? override : base;
+  }
+  if (isObject(base)) {
+    const result: any = { ...base };
+    if (isObject(override)) {
+      Object.keys(override).forEach((key) => {
+        result[key] = deepMerge(base[key], override[key]);
+      });
+    }
+    return result;
+  }
+  return override !== undefined ? override : base;
+};
+
+const getStoredContent = (lang: Language): any => {
+  try {
+    const saved = localStorage.getItem(`ilungi_content_${lang}`);
+    return saved ? JSON.parse(saved) : defaultContent[lang];
+  } catch (e) {
+    return defaultContent[lang];
+  }
+};
+
+export const syncContentFromRemote = async (): Promise<boolean> => {
+  if (!supabase) return false;
+  try {
+    const { data, error } = await supabase
+      .from(REMOTE_TABLE)
+      .select('pt,en')
+      .eq('id', REMOTE_ROW_ID)
+      .single();
+    if (error || !data) return false;
+
+    if (data.pt) {
+      localStorage.setItem('ilungi_content_pt', JSON.stringify(data.pt));
+    }
+    if (data.en) {
+      localStorage.setItem('ilungi_content_en', JSON.stringify(data.en));
+    }
+    return true;
+  } catch (e) {
+    console.error('Error loading remote content:', e);
+    return false;
+  }
+};
+
+const saveAllContentRemote = async (): Promise<void> => {
+  if (!supabase) return;
+  try {
+    const pt = getStoredContent('pt');
+    const en = getStoredContent('en');
+    await supabase.from(REMOTE_TABLE).upsert(
+      { id: REMOTE_ROW_ID, pt, en },
+      { onConflict: 'id' }
+    );
+  } catch (e) {
+    console.error('Error saving remote content:', e);
+  }
+};
 
 // Get content from localStorage or use defaults
 export const getContent = (lang: Language): any => {
   try {
     const saved = localStorage.getItem(`ilungi_content_${lang}`);
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      return deepMerge(defaultContent[lang], parsed);
     }
   } catch (e) {
     console.error('Error loading content:', e);
@@ -21,6 +90,7 @@ export const getContent = (lang: Language): any => {
 export const saveContent = (lang: Language, content: any): void => {
   try {
     localStorage.setItem(`ilungi_content_${lang}`, JSON.stringify(content));
+    void saveAllContentRemote();
   } catch (e) {
     console.error('Error saving content:', e);
   }
@@ -46,12 +116,14 @@ export const updateContentField = (lang: Language, path: string, value: string):
 // Reset content to defaults
 export const resetContent = (lang: Language): void => {
   localStorage.removeItem(`ilungi_content_${lang}`);
+  void saveAllContentRemote();
 };
 
 // Reset all content
 export const resetAllContent = (): void => {
   localStorage.removeItem('ilungi_content_pt');
   localStorage.removeItem('ilungi_content_en');
+  void saveAllContentRemote();
 };
 
 // Export content for backup

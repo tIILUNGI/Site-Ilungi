@@ -1,7 +1,9 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { translations } from './translations';
 import { Language } from './types';
+import { getContent, syncContentFromRemote } from './lib/contentManager';
+import { supabase } from './lib/supabase';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -25,6 +27,7 @@ import AdminServices from './pages/AdminServices';
 import AdminCourses from './pages/AdminCourses';
 import AdminBlog from './pages/AdminBlog';
 import AdminConfig from './pages/AdminConfig';
+import AdminLogin from './pages/AdminLogin';
 import Certifications from './pages/Certifications';
 import CourseCatalog from './pages/CourseCatalog';
 import { AnimatePresence } from 'framer-motion';
@@ -56,6 +59,55 @@ const ScrollToTop = () => {
   return null;
 };
 
+const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { lang } = useAppContext();
+  const isPt = lang === 'pt';
+  const [checking, setChecking] = useState(true);
+  const [hasSession, setHasSession] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (!supabase) {
+      setChecking(false);
+      return;
+    }
+    supabase.auth.getSession().then(({ data }) => {
+      if (!isMounted) return;
+      setHasSession(!!data.session);
+      setChecking(false);
+    });
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setHasSession(!!session);
+    });
+    return () => {
+      isMounted = false;
+      authListener?.subscription?.unsubscribe();
+    };
+  }, []);
+
+  if (!supabase) {
+    return (
+      <div className="pt-32 text-center text-slate-500">
+        {isPt ? 'Supabase não está configurado.' : 'Supabase is not configured.'}
+      </div>
+    );
+  }
+
+  if (checking) {
+    return (
+      <div className="pt-32 text-center text-slate-500">
+        {isPt ? 'A carregar...' : 'Loading...'}
+      </div>
+    );
+  }
+
+  if (!hasSession) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  return <>{children}</>;
+};
+
 const App: React.FC = () => {
   const [lang, setLangState] = useState<Language>(() => {
     const saved = localStorage.getItem('ilungi_lang');
@@ -84,7 +136,27 @@ const App: React.FC = () => {
     localStorage.setItem('ilungi_dark', d ? 'true' : 'false');
   };
 
-  const t = translations[lang];
+  const [t, setT] = useState<any>(() => getContent(lang));
+
+  useEffect(() => {
+    setT(getContent(lang));
+  }, [lang]);
+
+  useEffect(() => {
+    let isMounted = true;
+    syncContentFromRemote().then((updated) => {
+      if (!isMounted || !updated) return;
+      setT(getContent(lang));
+    });
+    const handleContentUpdate = () => {
+      setT(getContent(lang));
+    };
+    window.addEventListener('ilungi-content-updated', handleContentUpdate);
+    return () => {
+      isMounted = false;
+      window.removeEventListener('ilungi-content-updated', handleContentUpdate);
+    };
+  }, [lang]);
 
   return (
     <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t, isEditing, setIsEditing: handleSetIsEditing }}>
@@ -112,14 +184,15 @@ const App: React.FC = () => {
                 <Route path="/parceiros" element={<Partners />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/referencia/:id" element={<ReferenceDetail />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/solucoes" element={<AdminSolutions />} />
-                <Route path="/admin/parceiros" element={<AdminPartners />} />
-                <Route path="/admin/servicos" element={<AdminServices />} />
-                <Route path="/admin/cursos" element={<AdminCourses />} />
-                <Route path="/admin/blog" element={<AdminBlog />} />
-                <Route path="/admin/configuracoes" element={<AdminConfig />} />
-                <Route path="/admin/referencias" element={<AdminReferences />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
+                <Route path="/admin/solucoes" element={<RequireAdmin><AdminSolutions /></RequireAdmin>} />
+                <Route path="/admin/parceiros" element={<RequireAdmin><AdminPartners /></RequireAdmin>} />
+                <Route path="/admin/servicos" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
+                <Route path="/admin/cursos" element={<RequireAdmin><AdminCourses /></RequireAdmin>} />
+                <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
+                <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
+                <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
                 <Route path="/certificacoes" element={<Certifications />} />
               </Routes>
             </AnimatePresence>

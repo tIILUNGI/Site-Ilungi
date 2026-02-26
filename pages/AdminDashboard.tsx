@@ -1,12 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, Building, GraduationCap } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, Building, GraduationCap, LogOut } from 'lucide-react';
 import { useAppContext } from '../App';
+import { supabase } from '../lib/supabase';
 
 const AdminDashboard: React.FC = () => {
   const { lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
+    navigate('/admin/login');
+  };
 
   const menuItems = [
     {
@@ -63,8 +72,9 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className={`min-h-screen pt-32 pb-20 ${isDark ? 'bg-slate-900 border-none' : 'bg-slate-50'}`}>
       <div className="max-w-6xl mx-auto px-4">
-        <div className="mb-12">
-          <motion.h1 
+        <div className="mb-12 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div>
+            <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className={`text-4xl font-black mb-4 ${isDark ? 'text-white' : 'text-slate-800'}`}
@@ -80,7 +90,17 @@ const AdminDashboard: React.FC = () => {
             {isPt 
               ? 'Selecione abaixo o módulo que pretende editar para alterar o conteúdo do site.' 
               : 'Select the module below you wish to edit to change the website content.'}
-          </motion.p>
+            </motion.p>
+          </div>
+          <button
+            onClick={handleSignOut}
+            className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${
+              isDark ? 'bg-slate-700 text-white hover:bg-slate-600' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+            }`}
+          >
+            <LogOut className="w-4 h-4" />
+            {isPt ? 'Sair' : 'Sign Out'}
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

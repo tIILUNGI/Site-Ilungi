@@ -22,6 +22,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   };
 
   const [references, setReferences] = useState<any[]>([]);
+  const serviceReferences = references.filter((ref: any) => ref.service === type);
 
   useEffect(() => {
     loadData('references', 'ilungi_references_data', t.references?.clients || []).then(data => {
@@ -72,9 +73,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
         </div>
 
         {/* References Section */}
-        {references.filter((ref: any) => ref.service === type).length > 0 && (
-          <div className="mt-24">
-            <div className="text-center mb-12">
+        <div className="mt-24">
+          <div className="text-center mb-12">
               <span className="inline-block px-4 py-1.5 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-black uppercase mb-4 tracking-wider">
                 {t.references?.title || (isPt ? 'Nossas Referências' : 'Our References')}
               </span>
@@ -84,17 +84,15 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               <p className="text-slate-500 max-w-2xl mx-auto">
                 {t.references?.subtitle || (isPt ? 'Empresas que confiaram nos nossos serviços' : 'Companies that trusted our services')}
               </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {references
-                .filter((ref: any) => ref.service === type)
-                .slice(0, 3)
-                .map((ref: any, i: number) => (
-                  <ReferenceCard key={ref.id} reference={ref} index={i} />
-                ))}
-            </div>
           </div>
-        )}
+          {serviceReferences.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {serviceReferences.slice(0, 3).map((ref: any, i: number) => (
+                <ReferenceCard key={ref.id} reference={ref} index={i} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
