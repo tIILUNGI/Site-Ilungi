@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
 
-const AlumniPortal: React.FC = () => {
+const AILUNGIPortal: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const AlumniPortal: React.FC = () => {
       <aside className="w-64 border-r border-white/10 p-6 flex flex-col hidden lg:flex">
         <div className="mb-10 flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-8 w-auto" />
-            <span className="font-bold text-lg tracking-tight">{isPt ? 'Portal Alumni' : 'Alumni Portal'}</span>
+            <span className="font-bold text-lg tracking-tight">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</span>
         </div>
         
         <nav className="flex-1 space-y-2">
@@ -122,4 +122,4 @@ const AlumniPortal: React.FC = () => {
   );
 };
 
-export default AlumniPortal;
+export default AILUNGIPortal;

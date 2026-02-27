@@ -12,7 +12,7 @@ export const translations: Record<'pt' | 'en', any> = {
       risk: "Serviço de Notação de Risco",
       procurement: "Procurement",
       pmo: "Assistência e Suporte de TI",
-      alumni: "Alumni ILUNGI",
+      alumni: "AILUNGI",
       courses: "Cursos",
       verify: "Verificar Certificado",
       scr: "School of Corp. Reputation",
@@ -129,7 +129,7 @@ export const translations: Record<'pt' | 'en', any> = {
       banner: {
         title: "Já é nosso aluno?",
         desc: "Acesse o seu portal exclusivo para baixar certificados, materiais e interagir com outros membros.",
-        portal: "Aceder ao Portal Alumni",
+        portal: "Aceder ao Portal AILUNGI",
         verify: "Verificar Autenticidade",
       }
     },
@@ -186,7 +186,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     alumni: {
       login: {
-        title: "Bem-vindo Alumni",
+        title: "Bem-vindo AILUNGI",
         subtitle: "Aceda à sua área exclusiva",
         email: "Email",
         password: "Palavra-passe",
@@ -392,7 +392,7 @@ export const translations: Record<'pt' | 'en', any> = {
       risk: "Risk Rating Service",
       procurement: "Procurement",
       pmo: "IT Assistance and Support",
-      alumni: "ILUNGI Alumni",
+      alumni: "AILUNGI",
       courses: "Courses",
       verify: "Verify Certificate",
       scr: "School of Corporate Reputation",
@@ -509,7 +509,7 @@ export const translations: Record<'pt' | 'en', any> = {
       banner: {
         title: "Already our student?",
         desc: "Access your exclusive portal to download certificates, materials, and interact with other members.",
-        portal: "Access Alumni Portal",
+        portal: "Access AILUNGI Portal",
         verify: "Verify Authenticity",
       }
     },
@@ -566,7 +566,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     alumni: {
       login: {
-        title: "Welcome Alumni",
+        title: "Welcome AILUNGI",
         subtitle: "Access your exclusive area",
         email: "Email",
         password: "Password",

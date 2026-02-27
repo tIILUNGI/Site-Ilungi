@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
       path: '/academia',
       description: isPt ? 'Formação e certificação profissional' : 'Professional training and certification',
       mega: [
-        { title: t.nav.alumni, desc: isPt ? 'Portal de Formandos e certificações' : 'Alumni portal and certifications', path: '/academia/alumni' },
+        { title: t.nav.alumni, desc: isPt ? 'Portal de Formandos e certificações' : 'AILUNGI portal and certifications', path: '/academia/alumni' },
         { title: t.nav.verify, desc: isPt ? 'Verifique a autenticidade de certificados' : 'Verify certificate authenticity', path: '/academia/verificar' },
         { title: "GPMOi", desc: isPt ? 'Cursos e Certificação em Gestão de PMO' : 'Courses and Certification in PMO Management', href: "https://gpmoi.org/" },
         { title: "School of Corporate Reputation", desc: isPt ? 'Cursos e Certificação em Gestão de Reputação Corporativa' : 'Courses and Certification in Corporate Reputation Management', href: "https://scr.ilungi.ao/" },

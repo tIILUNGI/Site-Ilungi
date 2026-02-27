@@ -45,11 +45,28 @@ const Home: React.FC = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const services = [
-    { title: t.home.services.iso, desc: t.home.services.isoDesc, image: "/Consultoria.png", color: "#1B3C2B", path: "/consultoria/iso" },
-    { title: t.home.services.projects, desc: t.home.services.projectsDesc, image: "/Gestão.png", color: "#6a00a3", path: "/consultoria/pmo" },
-    { title: t.home.services.tech, desc: t.home.services.techDesc, image: "/SsaSS.png", color: "#0A4D8C", path: "/solucoes" },
-    { title: t.home.services.academy, desc: t.home.services.academyDesc, image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", color: "#B31B1B", path: "/academia" }
+  const integratedSolutions = [
+    { 
+      title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS & PROJECTS", 
+      desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projetos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
+      icon: "/CSG e Projecto .png", 
+      color: "#1B3C2B", 
+      path: "/consultoria/iso" 
+    },
+    { 
+      title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
+      desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade nos processos." : "Procurement and supply management of materials and services, ensuring efficiency and compliance in processes.",
+      icon: "/Procurement.png", 
+      color: "#6a00a3", 
+      path: "/consultoria/procurement" 
+    },
+    { 
+      title: isPt ? "ASSISTÊNCIA E SUPORTE DE T.I" : "IT ASSISTANCE AND SUPPORT", 
+      desc: isPt ? "Suporte técnico especializado e manutenção de sistemas de informação para garantir a continuidade dos seus negócios." : "Specialized technical support and maintenance of information systems to ensure business continuity.",
+      icon: "/Assistencia de TI.png", 
+      color: "#0A4D8C", 
+      path: "/solucoes" 
+    }
   ];
 
   // Digital solutions features
@@ -143,7 +160,7 @@ const Home: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* SERVICES SECTION */}
+      {/* INTEGRATED SOLUTIONS SECTION */}
       <section className="py-32 bg-gradient-to-b from-white to-slate-50 relative">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
         
@@ -156,54 +173,104 @@ const Home: React.FC = () => {
             <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projeto' : 'From strategy to execution, we deliver excellence in every project'}</p>
           </motion.div>
 
-          <div className="flex items-center justify-end gap-2 mb-6">
-            <button
-              type="button"
-              onClick={() => handleServicesScroll('prev')}
-              className="h-10 w-10 rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 transition-colors"
-              aria-label={isPt ? 'Recuar' : 'Previous'}
-            >
-              <ChevronLeft className="w-5 h-5 mx-auto" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleServicesScroll('next')}
-              className="h-10 w-10 rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 transition-colors"
-              aria-label={isPt ? 'Avançar' : 'Next'}
-            >
-              <ChevronRight className="w-5 h-5 mx-auto" />
-            </button>
-          </div>
-
-          <div
-            ref={servicesRowRef}
-            className="flex gap-6 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory"
-          >
-            {services.map((service, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {integratedSolutions.map((solution, index) => (
               <motion.div
                 key={index}
-                data-service-card
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex-shrink-0 w-[85%] sm:w-[70%] md:w-[48%] lg:w-[28%] snap-start"
               >
-                <Link to={service.path} className="block group h-full">
-                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
-                    <div className="p-6 text-white" style={{ backgroundColor: service.color }}>
-                      <div className="text-sm font-bold opacity-80">{String(index + 1).padStart(2, '0')}</div>
-                      <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                      <p className="text-sm text-white/85 leading-relaxed line-clamp-4">{service.desc}</p>
+                <Link to={solution.path} className="block group h-full">
+                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+                    {/* Icon at top */}
+                    <div className="p-10 pb-6" style={{ backgroundColor: solution.color }}>
+                      <div className="w-40 h-40 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-xl">
+                        <img src={solution.icon} alt={solution.title} className="w-32 h-32 object-contain p-2" />
+                      </div>
+                      <div className="text-sm font-bold opacity-80 text-white">{String(index + 1).padStart(2, '0')}</div>
+                      <h3 className="text-xl font-bold mb-2 text-white">{solution.title}</h3>
                     </div>
-                    <div className="h-40 bg-white">
-                      <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                    {/* Content at bottom */}
+                    <div className="p-6 flex-1 flex flex-col" style={{ backgroundColor: solution.color }}>
+                      <p className="text-sm text-white/90 leading-relaxed flex-1">{solution.desc}</p>
+                      <div className="mt-4 flex items-center gap-2 text-white font-semibold text-sm group-hover:gap-3 transition-all">
+                        <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
                     </div>
                   </div>
                 </Link>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CASE STUDY SECTION */}
+      <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
+              {isPt ? 'Featured' : 'Featured'}
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Estudo de Caso' : 'Case Study'}</h2>
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Descubra como ajudaros os nossos clientes a alcançar resultados extraordinários' : 'Discover how we help our clients achieve extraordinary results'}</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative bg-white rounded-3xl overflow-hidden shadow-xl"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-10 lg:p-16 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6 w-fit">
+                  <Award className="w-4 h-4" />
+                  {isPt ? 'Sucesso comprovado' : 'Proven Success'}
+                </div>
+                <h3 className="text-3xl lg:text-4xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Transformação Digital Completa' : 'Complete Digital Transformation'}</h3>
+                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                  {isPt 
+                    ? 'Ajudamos uma empresa de referência no setor industrial a implementar um sistema de gestão integrado que resultou em 45% de aumento na eficiência operacional e 30% de redução de custos.'
+                    : 'We helped a leading company in the industrial sector implement an integrated management system that resulted in 45% increase in operational efficiency and 30% cost reduction.'}
+                </p>
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-[#6a00a3]">45%</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Eficiência' : 'Efficiency'}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-[#6a00a3]">30%</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Redução de custos' : 'Cost reduction'}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-[#6a00a3]">100%</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Conformidade ISO' : 'ISO Compliance'}</div>
+                  </div>
+                </div>
+                <Link 
+                  to="/contacto" 
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all w-fit"
+                >
+                  {isPt ? 'Solicitar informações' : 'Request information'}
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+              <div className="relative h-64 lg:h-auto bg-gradient-to-br from-[#1B3C2B] to-[#6a00a3] p-8 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[url('/imagens/Consultoria.png')] bg-cover bg-center opacity-20"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-24 h-24 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <Award className="w-12 h-12 text-white" />
+                  </div>
+                  <div className="text-white font-bold text-xl">{isPt ? 'Caso de Sucesso' : 'Success Story'}</div>
+                  <div className="text-white/70 text-sm mt-2">2024</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

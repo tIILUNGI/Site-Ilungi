@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
           <ul className="space-y-3 text-slate-300">
             <li><Link to="/academia/cursos" className="hover:text-white transition-colors">{isPt ? 'Catálogo de Cursos' : 'Course Catalog'}</Link></li>
             <li><Link to="/academia/verificar" className="hover:text-white transition-colors">{t.nav.verify}</Link></li>
-            <li><Link to="/academia/alumni" className="hover:text-white transition-colors">{isPt ? 'Portal Alumni' : 'Alumni Portal'}</Link></li>
+            <li><Link to="/academia/alumni" className="hover:text-white transition-colors">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</Link></li>
             <li><Link to="/academia/scr" className="hover:text-white transition-colors">{t.nav.scr}</Link></li>
           </ul>
         </div>

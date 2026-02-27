@@ -40,6 +40,7 @@ const Contact: React.FC = () => {
     area: '',
     cv: ''
   });
+  const [cvFile, setCvFile] = useState<File | null>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [spontaneousStatus, setSpontaneousStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -88,41 +89,81 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setSpontaneousStatus('sending');
     
-    try {
-      const response = await fetch(SPONTANEOUS_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: spontaneousData.name,
-          email: spontaneousData.email,
-          phone: spontaneousData.phone,
-          area: spontaneousData.area,
-          cv: spontaneousData.cv,
-        }),
-      });
+    // Get the file input
+    const fileInput = document.querySelector('input[name="cvFile"]') as HTMLInputElement;
+    const file = fileInput?.files?.[0];
 
-      if (response.ok) {
-        setSpontaneousStatus('success');
-        setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+    try {
+      // If there's a file, use FormData to send it
+      if (file) {
+        const formData = new FormData();
+        formData.append('name', spontaneousData.name);
+        formData.append('email', spontaneousData.email);
+        formData.append('phone', spontaneousData.phone);
+        formData.append('area', spontaneousData.area);
+        formData.append('cv', spontaneousData.cv);
+        formData.append('cvFile', file);
+
+        const response = await fetch(SPONTANEOUS_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          setSpontaneousStatus('success');
+          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+          setCvFile(null);
+          if (fileInput) fileInput.value = '';
+        } else {
+          // Fallback to email
+          const emailBody = isPt
+            ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}\n\nAnexar currículo: ${file.name}`
+            : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}\n\nAttach resume: ${file.name}`;
+          const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
+          window.location.href = mailtoLink;
+          setSpontaneousStatus('success');
+          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+          setCvFile(null);
+          if (fileInput) fileInput.value = '';
+        }
       } else {
-        const emailBody = isPt
-          ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
-          : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
-        const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
-        window.location.href = mailtoLink;
-        setSpontaneousStatus('success');
-        setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+        // No file, use JSON
+        const response = await fetch(SPONTANEOUS_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: spontaneousData.name,
+            email: spontaneousData.email,
+            phone: spontaneousData.phone,
+            area: spontaneousData.area,
+            cv: spontaneousData.cv,
+          }),
+        });
+
+        if (response.ok) {
+          setSpontaneousStatus('success');
+          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+        } else {
+          const emailBody = isPt
+            ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
+            : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
+          const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
+          window.location.href = mailtoLink;
+          setSpontaneousStatus('success');
+          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+        }
       }
     } catch (error) {
       const emailBody = isPt
-        ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
-        : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
+        ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}${file ? `\n\nAnexar currículo: ${file.name}` : ''}`
+        : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}${file ? `\n\nAttach resume: ${file.name}` : ''}`;
       const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setSpontaneousStatus('success');
       setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+      setCvFile(null);
     }
   };
 
@@ -470,13 +511,25 @@ const Contact: React.FC = () => {
                       <option value="">{isPt ? 'Selecione uma área' : 'Select an area'}</option>
                       <option value={isPt ? 'Consultoria ISO' : 'ISO Consulting'}>{isPt ? 'Consultoria ISO' : 'ISO Consulting'}</option>
                       <option value={isPt ? 'Gestão de Projectos' : 'Project Management'}>{isPt ? 'Gestão de Projectos' : 'Project Management'}</option>
-                      <option value={isPt ? 'Academia & Formação' : 'Academy & Training'}>{isPt ? 'Academia & Formação' : 'Academy & Training'}</option>
-                      <option value={isPt ? 'Soluções Digitais' : 'Digital Solutions'}>{isPt ? 'Soluções Digitais' : 'Digital Solutions'}</option>
-                      <option value={isPt ? 'Administração' : 'Administration'}>{isPt ? 'Administração' : 'Administration'}</option>
+                      <option value={isPt ? 'Formação' : 'Training'}>{isPt ? 'Formação' : 'Training'}</option>
+                      <option value={isPt ? 'Soluções Tecnológicas' : 'Technological Solutions'}>{isPt ? 'Soluções Tecnológicas' : 'Technological Solutions'}</option>
+                      <option value={isPt ? 'Administrativo' : 'Administrative'}>{isPt ? 'Administrativo' : 'Administrative'}</option>
                       <option value={isPt ? 'Comercial/Vendas' : 'Commercial/Sales'}>{isPt ? 'Comercial/Vendas' : 'Commercial/Sales'}</option>
                       <option value={isPt ? 'Outros' : 'Others'}>{isPt ? 'Outros' : 'Others'}</option>
                     </select>
                   </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-sm font-bold text-slate-700">{isPt ? 'Upload de Currículo (PDF) *' : 'Upload Resume (PDF) *'}</label>
+                  <input 
+                    type="file" 
+                    name="cvFile"
+                    accept=".pdf,.doc,.docx"
+                    required
+                    title={isPt ? 'Carregar currículo' : 'Upload resume'}
+                    className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#6a00a3] file:text-white hover:file:bg-[#5a008c]"
+                  />
                 </div>
 
                 <div className="space-y-3">

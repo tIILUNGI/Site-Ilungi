@@ -10,8 +10,8 @@ import Home from './pages/Home';
 import Consulting from './pages/Consulting';
 import ISOPage from './pages/ISOPage';
 import Academy from './pages/Academy';
-import AlumniPortal from './pages/AlumniPortal';
-import AlumniLogin from './pages/AlumniLogin';
+import AILUNGIPortal from './pages/AILUNGIPortal';
+import AILUNGILogin from './pages/AILUNGILogin';
 import CertificateVerify from './pages/CertificateVerify';
 import Solutions from './pages/Solutions';
 import Contact from './pages/Contact';
@@ -174,8 +174,8 @@ const App: React.FC = () => {
                 <Route path="/consultoria/procurement" element={<ServiceDetail type="procurement" />} />
                 <Route path="/consultoria/pmo" element={<ServiceDetail type="pmo" />} />
                 <Route path="/academia" element={<Academy />} />
-                <Route path="/academia/alumni" element={<AlumniPortal />} />
-                <Route path="/academia/login" element={<AlumniLogin />} />
+                <Route path="/academia/alumni" element={<AILUNGIPortal />} />
+                <Route path="/academia/login" element={<AILUNGILogin />} />
                 <Route path="/academia/verificar" element={<CertificateVerify />} />
                 <Route path="/academia/cursos" element={<CourseCatalog />} />
                 <Route path="/solucoes" element={<Solutions />} />

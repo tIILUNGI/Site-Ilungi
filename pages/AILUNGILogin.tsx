@@ -4,7 +4,7 @@ import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
 
-const AlumniLogin: React.FC = () => {
+const AILUNGILogin: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ const AlumniLogin: React.FC = () => {
           <Link to="/" className="inline-flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-16 w-auto" />
           </Link>
-          <p className="mt-4 text-slate-500">{isPt ? 'Portal Alumni ILUNGI' : 'ILUNGI Alumni Portal'}</p>
+          <p className="mt-4 text-slate-500">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</p>
         </div>
 
         {/* Login Card */}
@@ -127,4 +127,4 @@ const AlumniLogin: React.FC = () => {
   );
 };
 
-export default AlumniLogin;
+export default AILUNGILogin;
