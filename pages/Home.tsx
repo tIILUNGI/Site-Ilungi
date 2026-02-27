@@ -56,7 +56,7 @@ const Home: React.FC = () => {
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
       desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade nos processos." : "Procurement and supply management of materials and services, ensuring efficiency and compliance in processes.",
-      icon: "/Procurement.png", 
+      icon: "/imagens/procurement.png", 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
