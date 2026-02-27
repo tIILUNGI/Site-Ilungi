@@ -29,6 +29,7 @@ const Footer: React.FC = () => {
   const handleAdminClick = () => {
     navigate('/admin');
   };
+  
 
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
@@ -37,15 +38,7 @@ const Footer: React.FC = () => {
           <Link to="/" className="flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
           </Link>
-          <p className="text-slate-300 text-sm leading-relaxed">
-            {isPt
-              ? 'Especialistas globais em serviços ISO, gestão de riscos e formação executiva.'
-              : 'Global specialists in ISO services, risk management, and executive training.'}
-            {' '}
-            {isPt
-              ? config.taglineText || 'Transformamos desafios corporativos em excelência operacional.'
-              : 'We turn corporate challenges into operational excellence.'}
-          </p>
+          
           <div className="flex space-x-4">
             <a href={config.linkedinBaseUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Linkedin className="w-5 h-5" />
@@ -84,9 +77,17 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="font-bold text-lg mb-6">{isPt ? 'Politicas' : 'Policies'}</h4>
           <ul className="space-y-3 text-slate-300">
-            <li><a href="#" className="hover:text-white transition-colors">{isPt ? 'Politica de Qualidade' : 'Quality Policy'}</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">{isPt ? 'Politica de Compliance' : 'Compliance Policy'}</a></li>
+            <li><a href="/Politica de Qualidade.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{isPt ? 'Politica de Qualidade' : 'Quality Policy'}</a></li>
+            <li><a href="/Politica de Compliance.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{isPt ? 'Politica de Compliance' : 'Compliance Policy'}</a></li>
           </ul>
+          <div className="mt-6">
+            <Link
+              to="/contacto#candidatura"
+              className="inline-flex items-center justify-center rounded-lg bg-white text-[#1B3C2B] text-xs font-bold py-2 px-4 hover:bg-white/90 transition-colors"
+            >
+              {isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}
+            </Link>
+          </div>
         </div>
 
         <div>

@@ -3,14 +3,8 @@ import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useAppContext } from '../App';
 
-const teamMembers = [
-  { name: "Amarilda", role: "Assistente Administrativa", image: "/imagens/Amarilda.png" },
-  { name: "Emanuel", role: "Tecnico de Marketing", image: "/imagens/Plinio.png" },
-  { name: "Didier", role: "Contabilista", image: "/imagens/Didier.png" },
-  { name: "Estefânio", role: "Gestor de Projetos", image: "/imagens/Estefanio.png" },
-];
-
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
+const SPONTANEOUS_ENDPOINT = 'https://formspree.io/f/xvnekvbp';
 
 // Animation variants
 const containerVariants = {
@@ -39,7 +33,15 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
+  const [spontaneousData, setSpontaneousData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    area: '',
+    cv: ''
+  });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [spontaneousStatus, setSpontaneousStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +68,7 @@ const Contact: React.FC = () => {
         const emailBody = isPt
           ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
           : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-        const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
+        const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
@@ -75,10 +77,52 @@ const Contact: React.FC = () => {
       const emailBody = isPt
         ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
         : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-      const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
+    }
+  };
+
+  const handleSpontaneousSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSpontaneousStatus('sending');
+    
+    try {
+      const response = await fetch(SPONTANEOUS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: spontaneousData.name,
+          email: spontaneousData.email,
+          phone: spontaneousData.phone,
+          area: spontaneousData.area,
+          cv: spontaneousData.cv,
+        }),
+      });
+
+      if (response.ok) {
+        setSpontaneousStatus('success');
+        setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+      } else {
+        const emailBody = isPt
+          ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
+          : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
+        const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = mailtoLink;
+        setSpontaneousStatus('success');
+        setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+      }
+    } catch (error) {
+      const emailBody = isPt
+        ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
+        : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
+      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoLink;
+      setSpontaneousStatus('success');
+      setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
     }
   };
 
@@ -143,74 +187,76 @@ const Contact: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 flex flex-col gap-4"
           >
-            {/* Contact Cards */}
-            {[
-              {
-                icon: Phone,
-                title: isPt ? 'Telefone' : 'Phone',
-                details: ['+244 935 793 270'],
-                desc: t.contact.phoneDesc,
-                color: '#6a00a3'
-              },
-              {
-                icon: Mail,
-                title: t.contact.email,
-                details: ['geral@ilungi.ao'],
-                desc: t.contact.emailDesc,
-                color: '#1B3C2B'
-              },
-              {
-                icon: MapPin,
-                title: t.contact.location,
-                details: [isPt ? 'Projeto Nova Vida, Prédio E209' : 'Nova Vida Project, Building E209'],
-                desc: 'Luanda, Angola',
-                color: '#6a00a3'
-              },
-              {
-                icon: Clock,
-                title: isPt ? 'Horário de Trabalho' : 'Working Hours',
-                details: [isPt ? 'Seg - Sex: 08:00 - 17:30' : 'Mon - Fri: 08:00 - 17:30'],
-                desc: isPt ? 'Horário de Luanda' : 'Luanda Timezone',
-                color: '#1B3C2B'
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group"
-              >
-                <div className="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${item.color}15` }}
-                  >
-                    <item.icon className="w-6 h-6" style={{ color: item.color }} />
-                  </motion.div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-lg text-slate-800 mb-1">{item.title}</h4>
-                    {item.details.map((detail, i) => (
-                      <p key={i} className="text-slate-600 font-medium">{detail}</p>
-                    ))}
-                    <p className="text-slate-400 text-sm mt-1">{item.desc}</p>
+            {/* Contact Cards - Compact Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                {
+                  icon: Phone,
+                  title: isPt ? 'Telefone' : 'Phone',
+                  details: ['+244 935 793 270'],
+                  desc: isPt ? 'Seg - Sex: 08:00 - 17:30' : 'Mon - Fri: 08:00 - 17:30',
+                  color: '#6a00a3'
+                },
+                {
+                  icon: Mail,
+                  title: t.contact.email,
+                  details: ['geral@ilungi.ao'],
+                  desc: isPt ? 'Respostas em 24h úteis' : 'Replies within 24 hours',
+                  color: '#1B3C2B'
+                },
+                {
+                  icon: MapPin,
+                  title: t.contact.location,
+                  details: [isPt ? 'Projeto Nova Vida' : 'Nova Vida Project'],
+                  desc: 'Luanda, Angola',
+                  color: '#6a00a3'
+                },
+                {
+                  icon: Clock,
+                  title: isPt ? 'Horário' : 'Hours',
+                  details: [isPt ? 'Seg - Sex: 08:00 - 17:30' : 'Mon - Fri: 08:00 - 17:30'],
+                  desc: isPt ? 'Horário de Luanda' : 'Luanda Timezone',
+                  color: '#1B3C2B'
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="group"
+                >
+                  <div className="flex items-start gap-3 p-3 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-slate-100 h-full">
+                    <motion.div 
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${item.color}15` }}
+                    >
+                      <item.icon className="w-4 h-4" style={{ color: item.color }} />
+                    </motion.div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-sm text-slate-800 mb-0.5">{item.title}</h4>
+                      {item.details.map((detail, i) => (
+                        <p key={i} className="text-slate-600 text-xs font-medium truncate">{detail}</p>
+                      ))}
+                      <p className="text-slate-400 text-xs mt-0.5 truncate">{item.desc}</p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
 
             {/* Map */}
             <motion.div
               variants={itemVariants}
-              className="w-full h-64 rounded-2xl overflow-hidden shadow-lg"
+              className="flex-1 min-h-[300px] rounded-2xl overflow-hidden shadow-lg"
             >
               <iframe 
                 title="Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19462.754567515738!2d13.231722997657545!3d-8.895976417122492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f55202e2690f%3A0x2af97cd8291c9610!2sPr%C3%A9dio%20E209!5e1!3m2!1spt-PT!2sao!4v1770723339579!5m2!1spt-PT!2sao"
                 width="100%" 
                 height="100%" 
-                className="border-0"
+                className="w-full h-full border-0"
                 allowFullScreen 
                 loading="lazy"
               />
@@ -321,34 +367,155 @@ const Contact: React.FC = () => {
                     </>
                   )}
                 </motion.button>
-
-                {/* Team */}
-                <div className="flex items-center justify-center gap-6 pt-4 border-t border-slate-100">
-                  <div className="flex -space-x-3">
-                    {teamMembers.map((member, i) => (
-                      <motion.div 
-                        key={i}
-                        whileHover={{ scale: 1.2, zIndex: 10 }}
-                        className="relative"
-                      >
-                        <img 
-                          src={member.image} 
-                          alt={member.name} 
-                          className="w-12 h-12 rounded-full border-3 border-white object-cover shadow-md"
-                          title={`${member.name} - ${member.role}`}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-bold text-slate-700">{t.contact.teamOnline}</p>
-                    <p className="text-xs text-slate-400">{isPt ? 'Respondemos em 24h' : 'We reply within 24h'}</p>
-                  </div>
-                </div>
               </form>
             </div>
           </motion.div>
         </div>
+
+        {/* Candidatura Espontânea Section */}
+        <motion.div 
+          id="candidatura"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-20"
+        >
+          <div className="text-center mb-12">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block px-6 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-bold uppercase mb-4 tracking-widest"
+            >
+              {isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}
+            </motion.span>
+            <h2 className="text-4xl font-black text-[#1B3C2B] mb-4">
+              {isPt ? 'Junte-se à Nossa Equipa' : 'Join Our Team'}
+            </h2>
+            <p className="max-w-2xl mx-auto text-xl text-slate-500 font-light">
+              {isPt 
+                ? 'Nunca sabe quando uma oportunidade pode surgir. Envie-nos o seu currículo e entraremos em contacto quando surgir uma vaga adequada ao seu perfil.'
+                : 'You never know when an opportunity may arise. Send us your CV and we will get in touch when a suitable position becomes available.'}
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <div className="relative bg-white p-10 rounded-3xl shadow-2xl border border-slate-100">
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#6a00a3]/10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#1B3C2B]/10 rounded-full blur-2xl"></div>
+              
+              <form onSubmit={handleSpontaneousSubmit} className="relative space-y-6">
+                {spontaneousStatus === 'success' && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-5 bg-green-50 border border-green-200 text-green-700 rounded-2xl flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">✓</div>
+                    <span className="font-medium">{isPt ? 'Candidatura enviada com sucesso!' : 'Application sent successfully!'}</span>
+                  </motion.div>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-slate-700">{isPt ? 'Nome Completo' : 'Full Name'}</label>
+                    <input 
+                      type="text" 
+                      name="name"
+                      value={spontaneousData.name}
+                      onChange={(e) => setSpontaneousData({...spontaneousData, name: e.target.value})}
+                      required
+                      placeholder={isPt ? 'Seu nome completo' : 'Your full name'}
+                      className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all" 
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-slate-700">Email</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={spontaneousData.email}
+                      onChange={(e) => setSpontaneousData({...spontaneousData, email: e.target.value})}
+                      required
+                      placeholder={isPt ? 'seu@email.com' : 'you@email.com'}
+                      className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all" 
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-slate-700">{isPt ? 'Telefone' : 'Phone'}</label>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={spontaneousData.phone}
+                      onChange={(e) => setSpontaneousData({...spontaneousData, phone: e.target.value})}
+                      required
+                      placeholder="+244 *** *** ***"
+                      className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all" 
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-slate-700">{isPt ? 'Área de Interesse' : 'Area of Interest'}</label>
+                    <select 
+                      name="area"
+                      value={spontaneousData.area}
+                      onChange={(e) => setSpontaneousData({...spontaneousData, area: e.target.value})}
+                      required
+                      className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
+                    >
+                      <option value="">{isPt ? 'Selecione uma área' : 'Select an area'}</option>
+                      <option value={isPt ? 'Consultoria ISO' : 'ISO Consulting'}>{isPt ? 'Consultoria ISO' : 'ISO Consulting'}</option>
+                      <option value={isPt ? 'Gestão de Projectos' : 'Project Management'}>{isPt ? 'Gestão de Projectos' : 'Project Management'}</option>
+                      <option value={isPt ? 'Academia & Formação' : 'Academy & Training'}>{isPt ? 'Academia & Formação' : 'Academy & Training'}</option>
+                      <option value={isPt ? 'Soluções Digitais' : 'Digital Solutions'}>{isPt ? 'Soluções Digitais' : 'Digital Solutions'}</option>
+                      <option value={isPt ? 'Administração' : 'Administration'}>{isPt ? 'Administração' : 'Administration'}</option>
+                      <option value={isPt ? 'Comercial/Vendas' : 'Commercial/Sales'}>{isPt ? 'Comercial/Vendas' : 'Commercial/Sales'}</option>
+                      <option value={isPt ? 'Outros' : 'Others'}>{isPt ? 'Outros' : 'Others'}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-sm font-bold text-slate-700">{isPt ? 'Breve Apresentação' : 'Brief Presentation'}</label>
+                  <textarea 
+                    name="cv"
+                    rows={5}
+                    value={spontaneousData.cv}
+                    onChange={(e) => setSpontaneousData({...spontaneousData, cv: e.target.value})}
+                    required
+                    placeholder={isPt ? 'Conte-nos um pouco sobre si, sua experiência e competências...' : 'Tell us a bit about yourself, your experience and skills...'}
+                    className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all resize-none"
+                  />
+                </div>
+
+                <motion.button 
+                  type="submit" 
+                  disabled={spontaneousStatus === 'sending'}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-5 bg-[#6a00a3] text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-[#5a008c] shadow-2xl shadow-[#6a00a3]/20 transition-all disabled:opacity-50"
+                >
+                  {spontaneousStatus === 'sending' ? (
+                    <span>{isPt ? 'Enviando...' : 'Sending...'}</span>
+                  ) : (
+                    <>
+                      <span>{isPt ? 'Enviar Candidatura' : 'Send Application'}</span>
+                      <Send className="w-5 h-5" />
+                    </>
+                  )}
+                </motion.button>
+
+                <p className="text-center text-slate-400 text-sm">
+                  {isPt ? 'Ao submeter, concorda com o processamento dos seus dados pessoais.' : 'By submitting, you agree to the processing of your personal data.'}
+                </p>
+              </form>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
