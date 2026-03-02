@@ -19,6 +19,11 @@ export const translations: Record<'pt' | 'en', any> = {
       demo: "Demonstração",
       home: "Início",
     },
+    navDescriptions: {
+      iso: "implementação e acompanhamento a certificação",
+      procurement: "Optimização do processo de aquisição",
+      pmo: "Apoio a necessidades tecnológicas",
+    },
     home: {
       heroTitle: "Excelência em Consultoria e Soluções Digitais",
       heroSubtitle: "Transformamos o compliance e a gestão em valor estratégico para empresas globais.",
@@ -398,6 +403,11 @@ export const translations: Record<'pt' | 'en', any> = {
       scr: "School of Corporate Reputation",
       demo: "Demo",
       home: "Home",
+    },
+    navDescriptions: {
+      iso: "Implementation and monitoring of certification",
+      procurement: "Optimization of the acquisition process",
+      pmo: "Support for technological needs",
     },
     home: {
       heroTitle: "Excellence in Consulting and Digital Solutions",

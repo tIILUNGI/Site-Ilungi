@@ -29,15 +29,24 @@ const Footer: React.FC = () => {
   const handleAdminClick = () => {
     navigate('/admin');
   };
+
+  const handleLogoClick = () => {
+    navigate('/');
+    window.scrollTo(0, 0);
+  };
   
 
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/10 pb-12 mb-10">
         <div className="space-y-6">
-          <Link to="/" className="flex items-center space-x-2">
+          <button onClick={handleLogoClick} className="flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
-          </Link>
+          </button>
+          
+          <p className="text-sm text-slate-300 italic">
+            Estrutura gera previsibilidade. Previsibilidade gera reputação. Reputação gera crescimento.
+          </p>
           
           <div className="flex space-x-4">
             <a href={config.linkedinBaseUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
@@ -132,5 +141,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
-

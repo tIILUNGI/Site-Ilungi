@@ -20,10 +20,10 @@ const Navbar: React.FC = () => {
       path: '/consultoria',
       description: isPt ? 'Consultoria especializada para o seu negócio' : 'Specialized consulting for your business',
       mega: [
-        { title: t.nav.iso, desc: isPt ? 'Implementação e Acompanhamento a Implementação' : 'Implementation and Monitoring of Implementation', path: '/consultoria/iso' },
+        { title: t.nav.iso, desc: isPt ? t.navDescriptions.iso : t.navDescriptions.iso, path: '/consultoria/iso' },
         { title: t.nav.risk, desc: isPt ? 'Emissão de Notação de Risco' : 'Issuance of Risk Notation', path: '/consultoria/risco' },
-        { title: t.nav.procurement, desc: isPt ? 'Otimização de processos de aquisição' : 'Optimization of procurement processes', path: '/consultoria/procurement' },
-        { title: t.nav.pmo, desc: isPt ? 'Gestão estratégica de projetos' : 'Strategic project management', path: '/consultoria/pmo' },
+        { title: t.nav.procurement, desc: isPt ? t.navDescriptions.procurement : t.navDescriptions.procurement, path: '/consultoria/procurement' },
+        { title: t.nav.pmo, desc: isPt ? t.navDescriptions.pmo : t.navDescriptions.pmo, path: '/consultoria/pmo' },
       ]
     },
     {
@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
       path: '/academia',
       description: isPt ? 'Formação e certificação profissional' : 'Professional training and certification',
       mega: [
-        { title: t.nav.alumni, desc: isPt ? 'Portal de Formandos e certificações' : 'AILUNGI portal and certifications', path: '/academia/alumni' },
+        { title: "AILUNGI", desc: isPt ? 'Portal de Formandos e certificações' : 'AILUNGI portal and certifications', path: '/academia/alumni' },
         { title: t.nav.verify, desc: isPt ? 'Verifique a autenticidade de certificados' : 'Verify certificate authenticity', path: '/academia/verificar' },
         { title: "GPMOi", desc: isPt ? 'Cursos e Certificação em Gestão de PMO' : 'Courses and Certification in PMO Management', href: "https://gpmoi.org/" },
         { title: "School of Corporate Reputation", desc: isPt ? 'Cursos e Certificação em Gestão de Reputação Corporativa' : 'Courses and Certification in Corporate Reputation Management', href: "https://scr.ilungi.ao/" },
