@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
-import { loadData } from '../lib/dataSync';
 
 interface ServiceDetailProps {
   type: 'risk' | 'procurement' | 'pmo';
@@ -25,9 +24,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   const serviceReferences = references.filter((ref: any) => ref.service === type);
 
   useEffect(() => {
-    loadData('references', 'ilungi_references_data', t.references?.clients || []).then(data => {
-      setReferences(data);
-    });
+    // Force reload from translations to ensure latest data
+    const loadReferences = async () => {
+      const defaultRefs = t.references?.clients || [];
+      setReferences(defaultRefs);
+    };
+    loadReferences();
   }, [t.references?.clients]);
 
   return (

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
-import { loadData } from '../lib/dataSync';
 
 const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
@@ -15,9 +14,12 @@ const ISOPage: React.FC = () => {
   const displayedIsoKeys = showAllStandards ? allIsoKeys : allIsoKeys.slice(0, 3);
 
   useEffect(() => {
-    loadData('references', 'ilungi_references_data', t.references?.clients || []).then(data => {
-      setReferences(data);
-    });
+    // Force reload from translations to ensure latest data
+    const loadReferences = async () => {
+      const defaultRefs = t.references?.clients || [];
+      setReferences(defaultRefs);
+    };
+    loadReferences();
   }, [t.references?.clients]);
 
   return (

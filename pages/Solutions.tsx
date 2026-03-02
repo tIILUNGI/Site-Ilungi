@@ -64,8 +64,8 @@ const Solutions: React.FC = () => {
       name: "Tocomply360",
       tagline: isPt ? "Gestão de Políticas" : "Policies Management",
       desc: isPt
-        ? "Solução em desenvolvimento para gestão de políticas, programas e processos."
-        : "Solution in development for policies, programs and processes management.",
+        ? "Gestão de Políticas, Programas e Processos."
+        : "Policies, Programs and Processes Management.",
       image: "/imagens/Tocomply360.png",
       path: "/solucoes/tocomply",
       color: "from-slate-700 to-slate-900",
