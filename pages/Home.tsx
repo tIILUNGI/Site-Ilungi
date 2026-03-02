@@ -179,8 +179,6 @@ const Home: React.FC = () => {
 
           {/* Floating Elements - No Cards Design */}
           <div className="relative min-h-[500px] flex items-center justify-center">
-            {/* Central decorative line */}
-            <div className="absolute top-1/2 left-10 right-10 h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/20 to-transparent"></div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 w-full relative">
               {integratedSolutions.map((solution, index) => {
@@ -230,9 +228,6 @@ const Home: React.FC = () => {
                         </motion.div>
                       </motion.div>
                     </Link>
-                    
-                    {/* Connection dot */}
-                    <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" style={{ backgroundColor: solution.color }}></div>
                   </motion.div>
                 );
               })}
