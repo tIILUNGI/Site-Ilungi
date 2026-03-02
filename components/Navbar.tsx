@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
       mega: [
         { title: "Salya", desc: isPt ? 'Plataforma de gestão e compliance' : 'Management and compliance platform', path: '/solucoes/salya' },
         { title: "SICLIC", desc: isPt ? 'Sistema de compliance legal' : 'Legal compliance system', href: "https://siclic.ao/" },
-        { title: "Tocomply360", desc: isPt ? 'Framework de governança corporativa' : 'Corporate governance framework', path: '/solucoes/tocomply' },
+        { title: "Tocomply360", desc: isPt ? 'Gestão de Políticas, Programas e Processos' : 'Management of Policies, Programs, and Processes', path: '/solucoes/tocomply' },
       ]
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },

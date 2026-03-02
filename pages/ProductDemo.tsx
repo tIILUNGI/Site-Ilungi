@@ -15,12 +15,12 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
       ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
       : productName === 'SICLIC'
         ? 'Compliance Intelligence e Gest\u00e3o Normativa'
-        : 'Governan\u00e7a Corporativa e Compliance 360'
+        : 'Gest\u00e3o de Pol\u00edticas, Programas e Processos'
     : productName === 'Salya'
       ? 'Payroll and Human Resources'
       : productName === 'SICLIC'
         ? 'Compliance Intelligence and Regulatory Management'
-        : 'Corporate Governance and Compliance 360';
+        : 'Policies, Programs and Processes Management';
 
   const featureItems = isPt ? [
     {
@@ -194,54 +194,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
           </div>
         </div>
 
-        {/* Features Grid - COM IMAGENS CORPORATIVAS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-          {featureItems.map((f, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <motion.img 
-                  src={productImages.features[i]} 
-                  alt={f.title}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                
-                {/* Ícone tecnológico sobreposto */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
-                  <span className="text-white font-bold text-sm">{i + 1}</span>
-                </div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
-                  {f.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
-              </div>
-              
-              {/* Linha decorativa */}
-              <motion.div 
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r"
-                style={{ 
-                  backgroundImage: `linear-gradient(to right, ${productImages.gradient.split(' ')[0].replace('from-', '')}, #6a00a3, ${productImages.gradient.split(' ')[1].replace('to-', '')})` 
-                }}
-                initial={{ width: 0 }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.4 }}
-              />
-            </motion.div>
-          ))}
-        </div>
-
         {/* Pricing Mockup */}
         <div className="relative bg-slate-50 p-12 rounded-3xl text-center overflow-hidden">
 
@@ -288,23 +240,15 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">Trial</h4>
-                <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (14 dias)' : 'Free (14 days)'}</p>
+                <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (1 dia)' : 'Free (1 day)'}</p>
                 <p className="mb-8 text-white/80 text-sm leading-relaxed">
                   {isPt
                     ? 'Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.'
                     : 'Try all core features with no commitment. Includes email support and access to documentation.'}
                 </p>
                 
-                {/* Indicador de disponibilidade */}
-                <div className="flex items-center justify-center space-x-2 mb-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-xs text-white/80">
-                    {isPt ? 'Demo disponível imediatamente' : 'Demo available immediately'}
-                  </span>
-                </div>
-                
                 <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
-                  {isPt ? 'Iniciar Demo Gratuita' : 'Start Free Demo'}
+                  {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
                 </button>
               </motion.div>
             </div>

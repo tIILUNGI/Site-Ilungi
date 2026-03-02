@@ -62,10 +62,10 @@ const Solutions: React.FC = () => {
     },
     {
       name: "Tocomply360",
-      tagline: isPt ? "Framework de Governança" : "Governance Framework",
+      tagline: isPt ? "Gestão de Políticas" : "Policies Management",
       desc: isPt
-        ? "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de compliance e integridade."
-        : "360-degree solution for corporate governance, integrating ethics, risk, and transparency. Complete framework for compliance and integrity management.",
+        ? "Solução em desenvolvimento para gestão de políticas, programas e processos."
+        : "Solution in development for policies, programs and processes management.",
       image: "/imagens/Tocomply360.png",
       path: "/solucoes/tocomply",
       color: "from-slate-700 to-slate-900",
@@ -101,9 +101,10 @@ const Solutions: React.FC = () => {
 
         const isTocomplyProduct =
           name.includes("tocomply") ||
-          tagline.includes("governanca") ||
-          desc.includes("governanca") ||
-          desc.includes("compliance 360") ||
+          tagline.includes("gestao de politicas") ||
+          tagline.includes("politicas") ||
+          desc.includes("politicas") ||
+          desc.includes("programas") ||
           path.includes("tocomply");
 
         if (isSalyaProduct && product.image !== "/imagens/Salya.png") {

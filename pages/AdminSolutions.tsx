@@ -41,8 +41,8 @@ const defaultProducts = [
   {
     id: 's3',
     name: "Tocomply360",
-    tagline: "Framework de Governança",
-    desc: "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de compliance e integridade.",
+    tagline: "Gestão de Políticas",
+    desc: "Solução em desenvolvimento para gestão de políticas, programas e processos.",
     image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     path: "/solucoes/tocomply",
     color: "from-slate-700 to-slate-900",

@@ -328,14 +328,36 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: ["/Nossas Refeências/cerBRILL.png"]
         },
         {
+          id: "goldproc",
+          name: "Gold Proc",
+          logo: "/Nossas Refeências/Gold Proc.jpg",
+          role: "Serviço de Procurement",
+          comment: "Serviço de procurement eficiente e profissional. Recomendo.",
+          person: "Director de Compras",
+          service: "procurement",
+          description: "Serviços de procurement de materiais e equipamentos",
+          attachments: []
+        },
+        {
+          id: "bureauveritas",
+          name: "Bureau Veritas",
+          logo: "/Nossas Refeências/Bureau_Veritas-Logo.wine.png",
+          role: "Serviço de Procurement",
+          comment: "Excelente parceria em serviços de procurement. Qualidade garantida.",
+          person: "Director de Operações",
+          service: "procurement",
+          description: "Serviços de procurement e consultoria",
+          attachments: []
+        },
+        {
           id: "petromar",
           name: "PetroMar",
           logo: "/Nossas Refeências/PetroMar.jpg",
-          role: "Serviço de Assistência e Suporte de TI",
-          comment: "A ILUNGI proporcionou-nos um suporte técnico de excelência. O serviço de TI melhorou significativamente as nossas operações.",
-          person: "Director de Sistemas",
-          service: "pmo",
-          description: "Serviços de Assistência e suporte de TI para operações de petróleo e gás",
+          role: "Serviço de Procurement",
+          comment: "Serviço de procurement de excelência. A ILUNGI entregou com qualidade.",
+          person: "Director de Compras",
+          service: "procurement",
+          description: "Serviços de procurement para indústria petrolífera",
           attachments: []
         },
         {
@@ -712,14 +734,36 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: ["/Nossas Refeências/cerBRILL.png"]
         },
         {
+          id: "goldproc",
+          name: "Gold Proc",
+          logo: "/Nossas Refeências/Gold Proc.jpg",
+          role: "Procurement Service",
+          comment: "Efficient and professional procurement service. Recommended.",
+          person: "Procurement Director",
+          service: "procurement",
+          description: "Procurement services for materials and equipment",
+          attachments: []
+        },
+        {
+          id: "bureauveritas",
+          name: "Bureau Veritas",
+          logo: "/Nossas Refeências/Bureau_Veritas-Logo.wine.png",
+          role: "Procurement Service",
+          comment: "Excellent partnership in procurement services. Quality guaranteed.",
+          person: "Operations Director",
+          service: "procurement",
+          description: "Procurement and consultancy services",
+          attachments: []
+        },
+        {
           id: "petromar",
           name: "PetroMar",
           logo: "/Nossas Refeências/PetroMar.jpg",
-          role: "IT Assistance and Support Service",
-          comment: "ILUNGI provided us with excellent technical support. The IT service significantly improved our operations.",
-          person: "Systems Director",
-          service: "pmo",
-          description: "IT assistance and support services for oil and gas operations",
+          role: "Procurement Service",
+          comment: "Excellent procurement service. ILUNGI delivered with quality.",
+          person: "Procurement Director",
+          service: "procurement",
+          description: "Procurement services for oil industry",
           attachments: []
         },
         {

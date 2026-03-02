@@ -147,7 +147,7 @@ const CourseCatalog: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="max-w-4xl mx-auto text-lg md:text-xl text-slate-500 font-light"
           >
-            Os nossos programas foram desenvolvidos no intuito de ajudar a melhorar os processos de proteção da reputação das organizações com referência as melhores práticas de gestão, ao mesmo tempo, gerando conhecimento capaz de ajudar os líderes a enfrentarem os desafios mais difíceis em um mercado cada vez mais global e em constante mudança.
+            Os nossos programas foram desenvolvidos para apoiar todas as pessoas que desejam estar mais bem preparadas para atender às exigências do mercado e das organizações.
           </motion.p>
         </motion.div>
 

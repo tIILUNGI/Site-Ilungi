@@ -64,30 +64,6 @@ const AILUNGIPortal: React.FC = () => {
                 {isPt ? 'Criar Conta' : 'Create Account'}
               </button>
             </div>
-            
-            <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <BookOpen className="w-8 h-8 text-[#6a00a3] mb-3" />
-                <h3 className="font-bold mb-2">{isPt ? 'Cursos Exclusivos' : 'Exclusive Courses'}</h3>
-                <p className="text-sm text-slate-400">
-                  {isPt ? 'Acede a formação premium com certificação internacional.' : 'Access premium training with international certification.'}
-                </p>
-              </div>
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <Award className="w-8 h-8 text-[#6a00a3] mb-3" />
-                <h3 className="font-bold mb-2">{isPt ? 'Certificados' : 'Certificates'}</h3>
-                <p className="text-sm text-slate-400">
-                  {isPt ? 'Baixa os teus certificados de conclusão.' : 'Download your completion certificates.'}
-                </p>
-              </div>
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <History className="w-8 h-8 text-[#6a00a3] mb-3" />
-                <h3 className="font-bold mb-2">{isPt ? 'Histórico' : 'History'}</h3>
-                <p className="text-sm text-slate-400">
-                  {isPt ? 'Acompanha o teu progresso de formação.' : 'Track your training progress.'}
-                </p>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
