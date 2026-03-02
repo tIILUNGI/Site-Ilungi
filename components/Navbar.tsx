@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -8,6 +8,8 @@ const Navbar: React.FC = () => {
   const { lang, setLang, t, isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [menuPosition, setMenuPosition] = useState<{ left: number; width: number } | null>(null);
+  const menuItemRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const isPt = lang === 'pt';
   const navigate = useNavigate();
 
@@ -63,10 +65,23 @@ const Navbar: React.FC = () => {
 
   const handleMouseEnter = (id: string) => {
     setActiveMenu(id);
+    // Calculate position based on the menu item
+    const menuItem = menuItemRefs.current[id];
+    if (menuItem) {
+      const rect = menuItem.getBoundingClientRect();
+      const navbarRect = menuItem.closest('nav')?.getBoundingClientRect();
+      if (navbarRect) {
+        setMenuPosition({
+          left: rect.left - navbarRect.left + rect.width / 2,
+          width: rect.width
+        });
+      }
+    }
   };
 
   const handleMouseLeave = () => {
     setActiveMenu(null);
+    setMenuPosition(null);
   };
 
   return (
@@ -92,6 +107,7 @@ const Navbar: React.FC = () => {
           {menuItems.map((item) => (
             <div 
               key={item.id} 
+              ref={(el) => { menuItemRefs.current[item.id] = el; }}
               className="relative h-full"
               onMouseEnter={() => handleMouseEnter(item.id)}
               onMouseLeave={handleMouseLeave}
@@ -123,9 +139,9 @@ const Navbar: React.FC = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-4"
+                      className="absolute top-full left-0 mt-0 pt-4 w-[600px] max-w-[90vw] z-50 ml-4"
                     >
-                      <div className={`w-[600px] ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-2xl border overflow-hidden`}>
+                      <div className={`${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-2xl border overflow-hidden`}>
                         {/* Header Description */}
                         <div className={`px-6 py-4 ${isDark ? 'bg-slate-800/50' : 'bg-slate-50'} border-b ${isDark ? 'border-slate-700' : 'border-slate-100'}`}>
                           <p className={`font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</p>

@@ -1,27 +1,114 @@
-
-import React, { useEffect } from 'react';
-import { LayoutDashboard, BookOpen, Award, History, MessageCircle, LogOut, Bell } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { LayoutDashboard, BookOpen, Award, History, MessageCircle, LogOut, Bell, Play, GraduationCap, ChevronRight, Search, Clock, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { useAlumniAuth } from '../lib/authContext';
+import { defaultCourses } from '../lib/courseCatalogData';
 
 const AILUNGIPortal: React.FC = () => {
   const { t, lang } = useAppContext();
+  const { user } = useAlumniAuth();
   const isPt = lang === 'pt';
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   
-  // Verificar se está logado (simulado)
+  // Check if user is logged in
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('alumni_logged_in');
-    if (!isLoggedIn) {
-      navigate('/academia/login');
-    }
-  }, [navigate]);
+    const isLoggedIn = localStorage.getItem('alumni_logged_in') || user;
+    setIsLoading(false);
+  }, [user]);
 
-  // Se não está logado, não renderiza nada (vai redirecionar)
+  // Filter courses based on search
+  const availableCourses = defaultCourses.filter(course => 
+    course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    course.area.toLowerCase().includes(searchTerm.toLowerCase())
+  ).slice(0, 6);
+
+  // Show welcome page when not logged in
+  if (!isLoading && !localStorage.getItem('alumni_logged_in') && !user) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-8">
+        <div className="max-w-2xl w-full text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-8"
+          >
+            <div className="w-24 h-24 bg-[#6a00a3] rounded-3xl flex items-center justify-center mx-auto">
+              <GraduationCap className="w-12 h-12 text-white" />
+            </div>
+            
+            <h1 className="text-4xl font-black">
+              {isPt ? 'Bem-vindo ao Portal AILUNGI' : 'Welcome to AILUNGI Portal'}
+            </h1>
+            
+            <p className="text-xl text-slate-400">
+              {isPt 
+                ? 'Acede aos teus cursos, certificados e materiais de estudo.' 
+                : 'Access your courses, certificates and study materials.'}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <button 
+                onClick={() => navigate('/academia/login')}
+                className="px-8 py-4 bg-[#6a00a3] text-white rounded-2xl font-bold hover:bg-[#520b7d] transition-all text-lg"
+              >
+                {isPt ? 'Entrar' : 'Login'}
+              </button>
+              <button 
+                onClick={() => navigate('/academia/registar')}
+                className="px-8 py-4 bg-white/10 text-white rounded-2xl font-bold hover:bg-white/20 transition-all text-lg border border-white/20"
+              >
+                {isPt ? 'Criar Conta' : 'Create Account'}
+              </button>
+            </div>
+            
+            <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                <BookOpen className="w-8 h-8 text-[#6a00a3] mb-3" />
+                <h3 className="font-bold mb-2">{isPt ? 'Cursos Exclusivos' : 'Exclusive Courses'}</h3>
+                <p className="text-sm text-slate-400">
+                  {isPt ? 'Acede a formação premium com certificação internacional.' : 'Access premium training with international certification.'}
+                </p>
+              </div>
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                <Award className="w-8 h-8 text-[#6a00a3] mb-3" />
+                <h3 className="font-bold mb-2">{isPt ? 'Certificados' : 'Certificates'}</h3>
+                <p className="text-sm text-slate-400">
+                  {isPt ? 'Baixa os teus certificados de conclusão.' : 'Download your completion certificates.'}
+                </p>
+              </div>
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                <History className="w-8 h-8 text-[#6a00a3] mb-3" />
+                <h3 className="font-bold mb-2">{isPt ? 'Histórico' : 'History'}</h3>
+                <p className="text-sm text-slate-400">
+                  {isPt ? 'Acompanha o teu progresso de formação.' : 'Track your training progress.'}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6a00a3]"></div>
+      </div>
+    );
+  }
+
+  // Logged in view
+  const userName = localStorage.getItem('alumni_email')?.split('@')[0] || 'Aluno';
+
   return (
     <div className="min-h-screen bg-slate-950 text-white flex pt-0">
-      {/* Sidebar Simulation */}
+      {/* Sidebar */}
       <aside className="w-64 border-r border-white/10 p-6 flex flex-col hidden lg:flex">
         <div className="mb-10 flex items-center space-x-2">
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-8 w-auto" />
@@ -62,7 +149,7 @@ const AILUNGIPortal: React.FC = () => {
       <main className="flex-1 p-8 lg:p-12 overflow-y-auto mt-20 lg:mt-0">
         <header className="flex justify-between items-center mb-10">
             <div>
-                <h1 className="text-3xl font-bold">{t.alumni.portal.welcome}, André Manuel</h1>
+                <h1 className="text-3xl font-bold">{t.alumni.portal.welcome}, {userName}</h1>
                 <p className="text-slate-400 mt-1">{t.alumni.portal.welcomeDesc}</p>
             </div>
             <div className="flex items-center space-x-4">
@@ -111,11 +198,74 @@ const AILUNGIPortal: React.FC = () => {
                     <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-4">
                         <div className="h-full bg-[#6a00a3]" style={{ width: '65%' }}></div>
                     </div>
-                    <button className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all">
-                      {t.alumni.portal.continue}
+                    <button 
+                      onClick={() => navigate('/academia/curso/demo')}
+                      className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all flex items-center space-x-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      <span>{t.alumni.portal.continue}</span>
                     </button>
                 </div>
             </div>
+        </div>
+
+        {/* Available Courses Section */}
+        <div className="mt-12">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold">{isPt ? 'Cursos Disponíveis' : 'Available Courses'}</h2>
+            <Link to="/academia/cursos" className="text-sm font-bold text-[#6a00a3] hover:text-[#a855f7] flex items-center gap-1">
+              {isPt ? 'Ver todos' : 'View all'}
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          {/* Search */}
+          <div className="relative mb-6">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input 
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder={isPt ? 'Pesquisar cursos...' : 'Search courses...'}
+              className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:ring-2 focus:ring-[#6a00a3] focus:border-transparent"
+            />
+          </div>
+          
+          {/* Course Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {availableCourses.map((course) => (
+              <motion.div
+                key={course.id}
+                whileHover={{ scale: 1.02 }}
+                className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#6a00a3]/30 transition-all cursor-pointer group"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="p-2 bg-[#6a00a3]/20 rounded-lg">
+                    <BookOpen className="w-5 h-5 text-[#6a00a3]" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-400 bg-white/5 px-2 py-1 rounded">
+                    {course.code}
+                  </span>
+                </div>
+                <h4 className="font-bold text-white mb-2 group-hover:text-[#a855f7] transition-colors line-clamp-2">
+                  {course.name}
+                </h4>
+                <div className="flex items-center gap-3 text-xs text-slate-400 mb-3">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {course.hours}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Users className="w-3 h-3" />
+                    {course.area}
+                  </span>
+                </div>
+                <button className="w-full py-2 bg-white/10 rounded-lg text-sm font-bold text-white group-hover:bg-[#6a00a3] transition-all">
+                  {isPt ? 'Inscrever-se' : 'Enroll'}
+                </button>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </main>
     </div>

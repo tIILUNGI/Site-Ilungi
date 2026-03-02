@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, ChevronLeft, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock } from 'lucide-react';
+import { ArrowRight, ChevronRight, ChevronLeft, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock, Briefcase, Settings, TrendingUp } from 'lucide-react';
 
 const partners = [
   { name: "GPMOi", url: "https://gpmoi.org/", logo: "/imagens/GPMoi.png", color: "#4c0253" },
@@ -49,21 +49,21 @@ const Home: React.FC = () => {
     { 
       title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS & PROJECTS", 
       desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projetos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
-      icon: "/CSG e Projecto .png", 
+      icon: Shield, 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
     },
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
       desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade nos processos." : "Procurement and supply management of materials and services, ensuring efficiency and compliance in processes.",
-      icon: "/imagens/procurement.png", 
+      icon: Briefcase, 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
     { 
       title: isPt ? "ASSISTÊNCIA E SUPORTE DE T.I" : "IT ASSISTANCE AND SUPPORT", 
       desc: isPt ? "Suporte técnico especializado e manutenção de sistemas de informação para garantir a continuidade dos seus negócios." : "Specialized technical support and maintenance of information systems to ensure business continuity.",
-      icon: "/Assistencia de TI.png", 
+      icon: Settings, 
       color: "#0A4D8C", 
       path: "/solucoes" 
     }
@@ -160,11 +160,15 @@ const Home: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* INTEGRATED SOLUTIONS SECTION */}
-      <section className="py-32 bg-gradient-to-b from-white to-slate-50 relative">
+      {/* INTEGRATED SOLUTIONS SECTION - FLOATING ELEMENTS */}
+      <section className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
         
-        <div className="max-w-7xl mx-auto px-6">
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 w-64 h-64 bg-[#6a00a3]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#1B3C2B]/5 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <span className="inline-block px-4 py-2 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
               {isPt ? 'O que fazemos' : 'What we do'}
@@ -173,43 +177,89 @@ const Home: React.FC = () => {
             <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projeto' : 'From strategy to execution, we deliver excellence in every project'}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {integratedSolutions.map((solution, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link to={solution.path} className="block group h-full">
-                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
-                    {/* Icon at top */}
-                    <div className="p-10 pb-6" style={{ backgroundColor: solution.color }}>
-                      <div className="w-40 h-40 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-xl">
-                        <img src={solution.icon} alt={solution.title} className="w-32 h-32 object-contain p-2" />
-                      </div>
-                      <div className="text-sm font-bold opacity-80 text-white">{String(index + 1).padStart(2, '0')}</div>
-                      <h3 className="text-xl font-bold mb-2 text-white">{solution.title}</h3>
-                    </div>
-                    {/* Content at bottom */}
-                    <div className="p-6 flex-1 flex flex-col" style={{ backgroundColor: solution.color }}>
-                      <p className="text-sm text-white/90 leading-relaxed flex-1">{solution.desc}</p>
-                      <div className="mt-4 flex items-center gap-2 text-white font-semibold text-sm group-hover:gap-3 transition-all">
-                        <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+          {/* Floating Elements - No Cards Design */}
+          <div className="relative min-h-[500px] flex items-center justify-center">
+            {/* Central decorative line */}
+            <div className="absolute top-1/2 left-10 right-10 h-px bg-gradient-to-r from-transparent via-[#1B3C2B]/20 to-transparent"></div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 w-full relative">
+              {integratedSolutions.map((solution, index) => {
+                const IconComponent = solution.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2, duration: 0.8 }}
+                    className={`relative ${index % 2 === 0 ? 'lg:mt-0' : 'lg:mt-20'}`}
+                  >
+                    {/* Floating Element - No Card */}
+                    <Link to={solution.path} className="block group">
+                      <motion.div 
+                        whileHover={{ y: -15, scale: 1.02 }}
+                        className="relative flex flex-col items-center text-center"
+                      >
+                        {/* Icon Circle - Floating */}
+                        <motion.div 
+                          className="w-28 h-28 rounded-full flex items-center justify-center mb-6 shadow-2xl relative"
+                          style={{ backgroundColor: solution.color }}
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <IconComponent className="w-12 h-12 text-white" />
+                          {/* Glow effect */}
+                          <div className="absolute inset-0 rounded-full blur-xl opacity-30" style={{ backgroundColor: solution.color }}></div>
+                        </motion.div>
+
+                        {/* Content - No Card Background */}
+                        <h3 className="text-xl font-black text-[#1B3C2B] mb-3 group-hover:text-[#6a00a3] transition-colors max-w-xs">
+                          {solution.title}
+                        </h3>
+                        <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-4">
+                          {solution.desc}
+                        </p>
+                        
+                        {/* Animated arrow */}
+                        <motion.div 
+                          className="flex items-center gap-2 text-sm font-bold"
+                          style={{ color: solution.color }}
+                          whileHover={{ x: 5 }}
+                        >
+                          <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.div>
+                      </motion.div>
+                    </Link>
+                    
+                    {/* Connection dot */}
+                    <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" style={{ backgroundColor: solution.color }}></div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Bottom CTA */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-center mt-20"
+          >
+            <Link 
+              to="/consultoria" 
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#1B3C2B] text-white rounded-full font-bold hover:bg-[#2a5a3f] transition-all"
+            >
+              {isPt ? 'Descobrir todas as soluções' : 'Discover all solutions'}
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* CASE STUDY SECTION */}
-      <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
+      <section className="py-16 bg-[#f8fafc] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
