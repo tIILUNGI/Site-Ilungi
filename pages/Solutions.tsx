@@ -62,10 +62,10 @@ const Solutions: React.FC = () => {
     },
     {
       name: "Tocomply360",
-      tagline: isPt ? "Gestão de Políticas" : "Policies Management",
+      tagline: isPt ? "Gestão de Políticas, Programas e Processos" : "Policies, Programs and Processes Management",
       desc: isPt
-        ? "Gestão de Políticas, Programas e Processos."
-        : "Policies, Programs and Processes Management.",
+        ? "Plataforma para gestão de políticas, programas e processos, assegurando padronização, rastreabilidade e melhoria contínua."
+        : "Platform for managing policies, programs, and processes, ensuring standardization, traceability, and continuous improvement.",
       image: "/imagens/Tocomply360.png",
       path: "/solucoes/tocomply",
       color: "from-slate-700 to-slate-900",
@@ -84,6 +84,15 @@ const Solutions: React.FC = () => {
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "");
       };
+      const legacyTocomplyDescPt = normalizeText(
+        "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de políticas, programas e processos."
+      );
+      const legacyTocomplyDescEn = normalizeText(
+        "360-degree solution for corporate governance, integrating ethics, risk and transparency. Complete framework for policies, programs and processes management."
+      );
+      const newTocomplyDesc = isPt
+        ? "Plataforma para gestão de políticas, programas e processos, assegurando padronização, rastreabilidade e melhoria contínua."
+        : "Platform for managing policies, programs, and processes, ensuring standardization, traceability, and continuous improvement.";
       let changed = false;
       const normalized = data.map((product: any) => {
         const name = normalizeText(product.name);
@@ -107,13 +116,28 @@ const Solutions: React.FC = () => {
           desc.includes("programas") ||
           path.includes("tocomply");
 
+        let updated = product;
+        let updatedFlag = false;
+
         if (isSalyaProduct && product.image !== "/imagens/Salya.png") {
-          changed = true;
-          return { ...product, image: "/imagens/Salya.png" };
+          updated = { ...updated, image: "/imagens/Salya.png" };
+          updatedFlag = true;
         }
         if (isTocomplyProduct && product.image !== "/imagens/Tocomply360.png") {
+          updated = { ...updated, image: "/imagens/Tocomply360.png" };
+          updatedFlag = true;
+        }
+        if (
+          isTocomplyProduct &&
+          (desc === legacyTocomplyDescPt || desc === legacyTocomplyDescEn)
+        ) {
+          updated = { ...updated, desc: newTocomplyDesc };
+          updatedFlag = true;
+        }
+
+        if (updatedFlag) {
           changed = true;
-          return { ...product, image: "/imagens/Tocomply360.png" };
+          return updated;
         }
         return product;
       });

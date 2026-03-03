@@ -22,6 +22,18 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         ? 'Compliance Intelligence and Regulatory Management'
         : 'Policies, Programs and Processes Management';
 
+  const heroSubtitle = isPt
+    ? productName === 'Tocomply360'
+      ? `Plataforma para ${productHeadline}.`
+      : isPreRelease
+        ? `Solu\u00e7\u00e3o em desenvolvimento para ${productHeadline}.`
+        : `A plataforma SaaS definitiva para ${productHeadline}.`
+    : productName === 'Tocomply360'
+      ? `Platform for ${productHeadline}.`
+      : isPreRelease
+        ? `Solution in development for ${productHeadline}.`
+        : `The ultimate SaaS platform for ${productHeadline}.`;
+
   const featureItems = isPt ? [
     {
       title: 'Interface Adaptativa',
@@ -130,20 +142,16 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
           </motion.h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
-          >
-            {isPt
-              ? isPreRelease
-                ? `Solu\u00e7\u00e3o em desenvolvimento para ${productHeadline}.`
-                : `A plataforma SaaS definitiva para ${productHeadline}.`
-              : isPreRelease
-                ? `Solution in development for ${productHeadline}.`
-                : `The ultimate SaaS platform for ${productHeadline}.`}
-          </motion.p>
+          {productName !== 'Tocomply360' && productName !== 'Salya' && (
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
+            >
+              {heroSubtitle}
+            </motion.p>
+          )}
         </div>
 
         {/* Mockup Simulation - COM IMAGEM CORPORATIVA */}

@@ -61,6 +61,30 @@ const ScrollToTop = () => {
   return null;
 };
 
+const CACHE_VERSION = '2026-03-03-1';
+const CACHE_KEYS_TO_RESET = [
+  'ilungi_content_pt',
+  'ilungi_content_en',
+  'ilungi_solutions_data',
+  'ilungi_references_data',
+  'ilungi_services_data',
+  'ilungi_partners_data',
+  'ilungi_courses_data',
+  'ilungi_blog_data'
+];
+
+const resetCacheIfVersionChanged = (): boolean => {
+  try {
+    const current = localStorage.getItem('ilungi_cache_version');
+    if (current === CACHE_VERSION) return false;
+    CACHE_KEYS_TO_RESET.forEach((key) => localStorage.removeItem(key));
+    localStorage.setItem('ilungi_cache_version', CACHE_VERSION);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';
@@ -69,20 +93,35 @@ const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     let isMounted = true;
+    let timeoutId: number | undefined;
     if (!supabase) {
       setChecking(false);
       return;
     }
-    supabase.auth.getSession().then(({ data }) => {
+    timeoutId = window.setTimeout(() => {
       if (!isMounted) return;
-      setHasSession(!!data.session);
+      setHasSession(false);
       setChecking(false);
-    });
+    }, 6000);
+    supabase.auth.getSession()
+      .then(({ data }) => {
+        if (!isMounted) return;
+        setHasSession(!!data.session);
+        setChecking(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setHasSession(false);
+        setChecking(false);
+      });
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!isMounted) return;
       setHasSession(!!session);
+      setChecking(false);
     });
     return () => {
       isMounted = false;
+      if (timeoutId) window.clearTimeout(timeoutId);
       authListener?.subscription?.unsubscribe();
     };
   }, []);
@@ -139,6 +178,12 @@ const App: React.FC = () => {
   };
 
   const [t, setT] = useState<any>(() => getContent(lang));
+
+  useEffect(() => {
+    if (resetCacheIfVersionChanged()) {
+      setT(getContent(lang));
+    }
+  }, []);
 
   useEffect(() => {
     setT(getContent(lang));

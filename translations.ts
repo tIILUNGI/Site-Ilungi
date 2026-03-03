@@ -403,6 +403,28 @@ export const translations: Record<'pt' | 'en', any> = {
           service: "pmo",
           description: "Serviços de outsourcing de TI e suporte técnico",
           attachments: []
+        },
+        {
+          id: "pensana",
+          name: "Pensana",
+          logo: "/Nossas Refeências/pensana-logo-sticky-blue-standard.png",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "Suporte técnico eficiente e acompanhamento contínuo para as nossas operações.",
+          person: "Director de Operações",
+          service: "pmo",
+          description: "Serviços de assistência e suporte de TI",
+          attachments: []
+        },
+        {
+          id: "bioprev",
+          name: "BioPrev",
+          logo: "/Nossas Refeências/BioPrev.webp",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "A ILUNGI garantiu estabilidade e melhoria dos nossos sistemas de TI.",
+          person: "Director de Tecnologia",
+          service: "pmo",
+          description: "Suporte técnico e manutenção de infraestrutura de TI",
+          attachments: []
         }
       ]
     }
@@ -808,6 +830,28 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "General Director",
           service: "pmo",
           description: "IT outsourcing and technical support services",
+          attachments: []
+        },
+        {
+          id: "pensana",
+          name: "Pensana",
+          logo: "/Nossas Refeências/pensana-logo-sticky-blue-standard.png",
+          role: "IT Assistance and Support Service",
+          comment: "Efficient technical support and ongoing monitoring for our operations.",
+          person: "Operations Director",
+          service: "pmo",
+          description: "IT assistance and support services",
+          attachments: []
+        },
+        {
+          id: "bioprev",
+          name: "BioPrev",
+          logo: "/Nossas Refeências/BioPrev.webp",
+          role: "IT Assistance and Support Service",
+          comment: "ILUNGI ensured stability and improvements in our IT systems.",
+          person: "Technology Director",
+          service: "pmo",
+          description: "Technical support and IT infrastructure maintenance",
           attachments: []
         }
       ]

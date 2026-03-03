@@ -89,7 +89,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
           </div>
           {serviceReferences.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {serviceReferences.slice(0, 3).map((ref: any, i: number) => (
+              {serviceReferences.map((ref: any, i: number) => (
                 <ReferenceCard key={ref.id} reference={ref} index={i} />
               ))}
             </div>
