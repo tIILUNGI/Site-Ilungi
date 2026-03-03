@@ -4,6 +4,7 @@ import { Plus, Edit, Trash2, Save, X, ArrowLeft, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { loadData, saveDataAdmin } from '../lib/dataSync';
+import { defaultPartners } from '../lib/partnersData';
 
 interface PartnerForm {
   id: string;
@@ -14,13 +15,6 @@ interface PartnerForm {
   color: string;
 }
 
-const defaultPartners = [
-  { id: 'p1', name: "GPMOi", url: "https://gpmoi.org/", desc: { pt: "Especialistas em Governança de Projectos.", en: "Specialists in Project Governance." }, logo: "/imagens/GPMoi.png", color: "#6a00a3" },
-  { id: 'p2', name: "CFC Institute", url: "https://cfc-institute.org/", desc: { pt: "Líder em certificação financeira.", en: "Leader in financial certification." }, logo: "/imagens/CFC-institute.png", color: "#0A4D8C" },
-  { id: 'p3', name: "Universal Certification and Services", url: "https://unicertservices.com/", desc: { pt: "Serviços de conformidade internacional.", en: "International compliance services." }, logo: "/imagens/UCS.png", color: "#6c0606" },
-  { id: 'p4', name: "Nova Select", url: "https://novaselect.co/index.html", desc: { pt: "Design bem elaborado e criatividade.", en: "Thoughtful design and creativity." }, logo: "/imagens/Nova Select.png", color: "#f06d16" },
-  { id: 'p5', name: "Ixi Ambiental", url: "https://www.ixiambiental.co.ao/", desc: { pt: "Sustentabilidade em Angola.", en: "Sustainability in Angola." }, logo: "/imagens/Ixi Ambiental.png", color: "#2E7D5E" }
-];
 
 const AdminPartners: React.FC = () => {
   const { lang, isDark } = useAppContext();

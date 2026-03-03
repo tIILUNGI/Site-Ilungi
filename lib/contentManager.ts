@@ -5,14 +5,62 @@ import { supabase } from './supabase';
 // Default content from translations
 const defaultContent = translations;
 
+const CONTENT_VERSION = '2026-03-03-3';
+const CONTENT_VERSION_KEY = 'ilungi_content_version';
+
+const isContentVersionCurrent = () => {
+  try {
+    return localStorage.getItem(CONTENT_VERSION_KEY) === CONTENT_VERSION;
+  } catch {
+    return true;
+  }
+};
+
+const markContentVersion = () => {
+  try {
+    localStorage.setItem(CONTENT_VERSION_KEY, CONTENT_VERSION);
+  } catch {}
+};
+
 const isObject = (value: any) => value && typeof value === 'object' && !Array.isArray(value);
 
 const REMOTE_TABLE = 'site_content';
 const REMOTE_ROW_ID = 1;
 
+const mergeArrayById = (base: any[], override: any[]) => {
+  const baseById = new Map<string, any>();
+  base.forEach((item) => {
+    if (item?.id) baseById.set(item.id, item);
+  });
+  const merged: any[] = [];
+  const used = new Set<string>();
+
+  override.forEach((item) => {
+    if (item?.id && baseById.has(item.id)) {
+      merged.push(deepMerge(baseById.get(item.id), item));
+      used.add(item.id);
+    } else {
+      merged.push(item);
+    }
+  });
+
+  base.forEach((item) => {
+    if (item?.id && !used.has(item.id)) {
+      merged.push(item);
+    }
+  });
+
+  return merged;
+};
+
 const deepMerge = (base: any, override: any): any => {
-  if (Array.isArray(base)) {
-    return override !== undefined ? override : base;
+  if (Array.isArray(base) && Array.isArray(override)) {
+    const baseHasIds = base.every((item) => isObject(item) && 'id' in item);
+    const overrideAreObjects = override.every((item) => isObject(item));
+    if (baseHasIds && overrideAreObjects) {
+      return mergeArrayById(base, override);
+    }
+    return override;
   }
   if (isObject(base)) {
     const result: any = { ...base };
@@ -36,7 +84,8 @@ const getStoredContent = (lang: Language): any => {
 };
 
 export const syncContentFromRemote = async (): Promise<boolean> => {
-  if (!supabase) return false;
+  const didBump = ensureContentVersion();
+  if (!supabase) return didBump;
   try {
     const { data, error } = await supabase
       .from(REMOTE_TABLE)
@@ -75,10 +124,12 @@ const saveAllContentRemote = async (): Promise<void> => {
 // Get content from localStorage or use defaults
 export const getContent = (lang: Language): any => {
   try {
+    ensureContentVersion();
     const saved = localStorage.getItem(`ilungi_content_${lang}`);
     if (saved) {
       const parsed = JSON.parse(saved);
-      return deepMerge(defaultContent[lang], parsed);
+      const merged = deepMerge(defaultContent[lang], parsed);
+      return merged;
     }
   } catch (e) {
     console.error('Error loading content:', e);
@@ -124,6 +175,12 @@ export const resetAllContent = (): void => {
   localStorage.removeItem('ilungi_content_pt');
   localStorage.removeItem('ilungi_content_en');
   void saveAllContentRemote();
+};
+
+const ensureContentVersion = (): boolean => {
+  if (isContentVersionCurrent()) return false;
+  markContentVersion();
+  return true;
 };
 
 // Export content for backup

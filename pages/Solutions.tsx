@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Edit, Plus, Trash2, Save, Image as ImageIcon, ArrowRight, CheckCircle, Shield, Zap } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadData, saveDataAdmin } from '../lib/dataSync';
+import { getDefaultSolutions } from '../lib/solutionsData';
 
 // Animation variants
 const containerVariants = {
@@ -37,41 +38,7 @@ const Solutions: React.FC = () => {
   const isPt = lang === 'pt';
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const defaultProducts = [
-    {
-      name: "Salya",
-      tagline: isPt ? "Gestão de Salários & RH" : "Payroll & HR Management",
-      desc: isPt
-        ? "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos. Automatização de folhas de pagamento, benefícios e compliance trabalhista."
-        : "Platform for payroll management, payslip issuance, and complete HR control. Automation of payroll, benefits, and labor compliance.",
-      image: "/imagens/Salya.png",
-      path: "/solucoes/salya",
-      color: "from-[#1B3C2B] to-[#2E7D5E]",
-      bgColor: "bg-[#1B3C2B]"
-    },
-    {
-      name: "SICLIC",
-      tagline: isPt ? "Inteligência de Compliance" : "Compliance Intelligence",
-      desc: isPt
-        ? "Sistema inteligente para gestão de compliance legal, contratual e normativo em tempo real. Monitoramento contínuo de obrigações legais e normativas."
-        : "Smart system for real-time legal, contractual, and regulatory compliance management. Continuous monitoring of legal and regulatory obligations.",
-      image: "/imagens/SICLIC.png",
-      url: "https://siclic.ao/",
-      color: "from-[#6a00a3] to-[#8000c4]",
-      bgColor: "bg-[#6a00a3]"
-    },
-    {
-      name: "Tocomply360",
-      tagline: isPt ? "Gestão de Políticas, Programas e Processos" : "Policies, Programs and Processes Management",
-      desc: isPt
-        ? "Plataforma para gestão de políticas, programas e processos, assegurando padronização, rastreabilidade e melhoria contínua."
-        : "Platform for managing policies, programs, and processes, ensuring standardization, traceability, and continuous improvement.",
-      image: "/imagens/Tocomply360.png",
-      path: "/solucoes/tocomply",
-      color: "from-slate-700 to-slate-900",
-      bgColor: "bg-slate-800"
-    }
-  ];
+  const defaultProducts = getDefaultSolutions(isPt);
 
   const [products, setProducts] = useState(defaultProducts);
 

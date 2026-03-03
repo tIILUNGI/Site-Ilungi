@@ -4,6 +4,7 @@ import { Plus, Edit, Trash2, Save, X, ArrowLeft, PackageSearch } from 'lucide-re
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { loadData, saveDataAdmin } from '../lib/dataSync';
+import { getDefaultSolutions } from '../lib/solutionsData';
 
 interface SolutionForm {
   id: string;
@@ -17,42 +18,12 @@ interface SolutionForm {
   bgColor: string;
 }
 
-const defaultProducts = [
-  {
-    id: 's1',
-    name: "Salya",
-    tagline: "Gestão de Salários & RH",
-    desc: "Plataforma para gestão e emissão de recibos de salário e controle completo de recursos humanos. Automatização de folhas de pagamento, benefícios e compliance trabalhista.",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    path: "/solucoes/salya",
-    color: "from-[#1B3C2B] to-[#2E7D5E]",
-    bgColor: "bg-[#1B3C2B]"
-  },
-  {
-    id: 's2',
-    name: "SICLIC",
-    tagline: "Inteligência de Compliance",
-    desc: "Sistema inteligente para gestão de compliance legal, contratual e normativo em tempo real. Monitoramento contínuo de obrigações legais e normativas.",
-    image: "/imagens/SICLIC.png",
-    url: "https://siclic.ao/",
-    color: "from-[#6a00a3] to-[#8000c4]",
-    bgColor: "bg-[#6a00a3]"
-  },
-  {
-    id: 's3',
-    name: "Tocomply360",
-    tagline: "Gestão de Políticas",
-    desc: "Solução em desenvolvimento para gestão de políticas, programas e processos.",
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    path: "/solucoes/tocomply",
-    color: "from-slate-700 to-slate-900",
-    bgColor: "bg-slate-800"
-  }
-];
+
 
 const AdminSolutions: React.FC = () => {
   const { lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
+  const defaultProducts = getDefaultSolutions(isPt);
   
   const [solutions, setSolutions] = useState<SolutionForm[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
