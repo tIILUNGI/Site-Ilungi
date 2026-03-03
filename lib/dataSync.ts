@@ -1,7 +1,17 @@
 import { supabase } from './supabase';
 
-const DATA_VERSION = '2026-03-03-3';
+const DATA_VERSION = '2026-03-03-5';
 const DATA_VERSION_KEY_PREFIX = 'ilungi_data_version_';
+const DATA_PURGE_KEY = 'ilungi_data_purge_version';
+
+const DATA_TABLES = [
+  { table: 'solutions', key: 'ilungi_solutions_data' },
+  { table: 'services', key: 'ilungi_services_data' },
+  { table: 'references', key: 'ilungi_references_data' },
+  { table: 'partners', key: 'ilungi_partners_data' },
+  { table: 'courses', key: 'ilungi_courses_data' },
+  { table: 'blog_posts', key: 'ilungi_blog_data' }
+];
 
 const getDataVersionKey = (table: string) => `${DATA_VERSION_KEY_PREFIX}${table}`;
 
@@ -97,8 +107,8 @@ export const loadData = async (table: string, localKey: string, defaultData: any
     sourceData = saved ? JSON.parse(saved) : defaultData;
   }
 
-  const merged = mergeData(defaultData, sourceData);
-  const mergedChanged = JSON.stringify(merged) !== JSON.stringify(sourceData);
+  const merged = versionStale ? defaultData : mergeData(defaultData, sourceData);
+  const mergedChanged = versionStale || JSON.stringify(merged) !== JSON.stringify(sourceData);
 
   if (mergedChanged || versionStale) {
     try {
@@ -116,6 +126,35 @@ export const loadData = async (table: string, localKey: string, defaultData: any
 
   markDataVersion(table);
   return merged;
+};
+
+export const purgeAllDataIfNeeded = async () => {
+  try {
+    if (localStorage.getItem(DATA_PURGE_KEY) === DATA_VERSION) return;
+  } catch {
+    return;
+  }
+
+  // Clear local caches so defaults rehydrate on next load
+  DATA_TABLES.forEach(({ table, key }) => {
+    try {
+      localStorage.removeItem(key);
+      localStorage.removeItem(getDataVersionKey(table));
+    } catch {}
+  });
+
+  // Clear remote tables (will be re-populated with defaults)
+  if (supabase) {
+    for (const { table } of DATA_TABLES) {
+      try {
+        await supabase.from(table).delete().neq('id', '0');
+      } catch {}
+    }
+  }
+
+  try {
+    localStorage.setItem(DATA_PURGE_KEY, DATA_VERSION);
+  } catch {}
 };
 
 export const saveDataAdmin = async (table: string, localKey: string, newData: any[]) => {

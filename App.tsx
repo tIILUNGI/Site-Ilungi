@@ -4,6 +4,7 @@ import { translations } from './translations';
 import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
 import { supabase } from './lib/supabase';
+import { purgeAllDataIfNeeded } from './lib/dataSync';
 import { AlumniAuthProvider } from './lib/authContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -158,6 +159,10 @@ const App: React.FC = () => {
   useEffect(() => {
     setT(getContent(lang));
   }, [lang]);
+
+  useEffect(() => {
+    void purgeAllDataIfNeeded();
+  }, []);
 
   useEffect(() => {
     let isMounted = true;

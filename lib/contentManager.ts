@@ -5,7 +5,7 @@ import { supabase } from './supabase';
 // Default content from translations
 const defaultContent = translations;
 
-const CONTENT_VERSION = '2026-03-03-3';
+const CONTENT_VERSION = '2026-03-03-5';
 const CONTENT_VERSION_KEY = 'ilungi_content_version';
 const CONTENT_BASE_KEY_PREFIX = 'ilungi_content_base_';
 
@@ -418,6 +418,7 @@ export const resetAllContent = (): void => {
 
 const ensureContentVersion = (): boolean => {
   if (isContentVersionCurrent()) return false;
+  resetAllContent();
   markContentVersion();
   return true;
 };
