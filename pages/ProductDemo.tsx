@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 
 interface ProductDemoProps {
@@ -10,6 +11,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';
   const isPreRelease = productName === 'Salya' || productName === 'Tocomply360';
+  const isTocomply = productName === 'Tocomply360';
   const productHeadline = isPt
     ? productName === 'Salya'
       ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
@@ -112,6 +114,11 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
   };
 
   const productImages = getProductImages();
+  const demoSubject = isPt ? `Solicitação de Demo - ${productName}` : `Demo Request - ${productName}`;
+  const demoMessage = isPt
+    ? `Olá, gostaria de solicitar uma demonstração do ${productName}.`
+    : `Hello, I'd like to request a demo of ${productName}.`;
+  const demoContactLink = `/contacto?subject=${encodeURIComponent(demoSubject)}&message=${encodeURIComponent(demoMessage)}`;
 
   return (
     <div className="py-20 bg-slate-50 relative overflow-hidden">
@@ -216,49 +223,87 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               {isPt ? 'Planos & Demonstração' : 'Plans & Demo'}
             </motion.h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl border border-slate-200 hover:shadow-xl transition-all duration-500 relative group"
-              >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#1B3C2B] to-[#2E7D5E] rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h4 className="font-bold text-slate-400 uppercase text-xs mb-4 tracking-wider">Enterprise</h4>
-                <p className="text-4xl font-black mb-6 text-[#1B3C2B]">
-                  {isPt ? 'Sob Consulta' : 'On Request'}
-                </p>
-                <ul className="text-left space-y-3 mb-8">
-                  {enterpriseFeatures.map(l => (
-                    <li key={l} className="text-sm text-slate-600">
-                      <span>{l}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full py-3 bg-[#1B3C2B] text-white rounded-xl font-bold hover:bg-black transition-all transform hover:scale-105">
-                  {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
-                </button>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className={`bg-gradient-to-br ${productImages.gradient} p-8 rounded-3xl text-white relative group shadow-xl`}
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">Trial</h4>
-                <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (1 dia)' : 'Free (1 day)'}</p>
-                <p className="mb-8 text-white/80 text-sm leading-relaxed">
-                  {isPt
-                    ? 'Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.'
-                    : 'Try all core features with no commitment. Includes email support and access to documentation.'}
-                </p>
-                
-                <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
-                  {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
-                </button>
-              </motion.div>
+            <div className={`grid grid-cols-1 ${isTocomply ? 'md:grid-cols-1 max-w-2xl place-items-center' : 'md:grid-cols-2 max-w-4xl'} gap-8 mx-auto`}>
+              {isTocomply ? (
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className={`w-full bg-gradient-to-br ${productImages.gradient} p-8 rounded-3xl text-white relative group shadow-xl`}
+                >
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">
+                    {isPt ? 'Demonstração' : 'Demo'}
+                  </h4>
+                  <p className="text-4xl font-black mb-6">{isPt ? 'Sob Solicitação' : 'On Request'}</p>
+                  <p className="mb-8 text-white/80 text-sm leading-relaxed">
+                    {isPt
+                      ? 'Agende uma demonstração personalizada com a nossa equipa e conheça a plataforma.'
+                      : 'Schedule a tailored demo with our team and explore the platform.'}
+                  </p>
+                  
+                  <Link
+                    to={demoContactLink}
+                    className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg text-center block"
+                  >
+                    {isPt ? 'Solicitar Demo' : 'Request Demo'}
+                  </Link>
+                </motion.div>
+              ) : (
+                <>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-white p-8 rounded-3xl border border-slate-200 hover:shadow-xl transition-all duration-500 relative group"
+                  >
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#1B3C2B] to-[#2E7D5E] rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <h4 className="font-bold text-slate-400 uppercase text-xs mb-4 tracking-wider">Enterprise</h4>
+                    <p className="text-4xl font-black mb-6 text-[#1B3C2B]">
+                      {isPt ? 'Sob Consulta' : 'On Request'}
+                    </p>
+                    <ul className="text-left space-y-3 mb-8">
+                      {enterpriseFeatures.map(l => (
+                        <li key={l} className="text-sm text-slate-600">
+                          <span>{l}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="w-full py-3 bg-[#1B3C2B] text-white rounded-xl font-bold hover:bg-black transition-all transform hover:scale-105">
+                      {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
+                    </button>
+                  </motion.div>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className={`bg-gradient-to-br ${productImages.gradient} p-8 rounded-3xl text-white relative group shadow-xl`}
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">Trial</h4>
+                    <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (1 dia)' : 'Free (1 day)'}</p>
+                    <p className="mb-8 text-white/80 text-sm leading-relaxed">
+                      {isPt
+                        ? 'Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.'
+                        : 'Try all core features with no commitment. Includes email support and access to documentation.'}
+                    </p>
+                    
+                    {productName === 'Salya' ? (
+                      <Link
+                        to={demoContactLink}
+                        className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg text-center block"
+                      >
+                        {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
+                      </Link>
+                    ) : (
+                      <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
+                        {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
+                      </button>
+                    )}
+                  </motion.div>
+                </>
+              )}
             </div>
             
             {/* Badge tecnológico */}

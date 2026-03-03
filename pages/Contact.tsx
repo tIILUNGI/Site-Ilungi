@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useAppContext } from '../App';
+import { useLocation } from 'react-router-dom';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
 const SPONTANEOUS_ENDPOINT = 'https://formspree.io/f/xvnekvbp';
@@ -27,11 +28,17 @@ const itemVariants = {
 const Contact: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const prefillName = searchParams.get('name') ?? '';
+  const prefillEmail = searchParams.get('email') ?? '';
+  const prefillSubject = searchParams.get('subject') ?? '';
+  const prefillMessage = searchParams.get('message') ?? '';
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: prefillName,
+    email: prefillEmail,
+    subject: prefillSubject,
+    message: prefillMessage
   });
   const [spontaneousData, setSpontaneousData] = useState({
     name: '',
@@ -43,6 +50,16 @@ const Contact: React.FC = () => {
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [spontaneousStatus, setSpontaneousStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    if (!prefillName && !prefillEmail && !prefillSubject && !prefillMessage) return;
+    setFormData(prev => ({
+      name: prefillName || prev.name,
+      email: prefillEmail || prev.email,
+      subject: prefillSubject || prev.subject,
+      message: prefillMessage || prev.message,
+    }));
+  }, [prefillName, prefillEmail, prefillSubject, prefillMessage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -78,7 +78,6 @@ const ISOPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {references
                 .filter((ref: any) => ref.service === 'iso')
-                .slice(0, 3)
                 .map((ref: any, i: number) => (
                   <ReferenceCard key={ref.id} reference={ref} index={i} />
                 ))}
