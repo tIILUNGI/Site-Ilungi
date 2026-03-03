@@ -437,21 +437,6 @@ const Solutions: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Trust Indicators */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="flex flex-wrap items-center justify-center gap-8 p-8 bg-white rounded-3xl shadow-lg border border-slate-100">
-            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? '+50 Empresas' : '50+ Companies'}</span>
-            <div className="w-px h-8 bg-slate-200 hidden sm:block"></div>
-            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? 'ISO 27001' : 'ISO 27001'}</span>
-            <div className="w-px h-8 bg-slate-200 hidden sm:block"></div>
-            <span className="text-sm font-bold text-slate-700 uppercase">{isPt ? 'Suporte 24/7' : '24/7 Support'}</span>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

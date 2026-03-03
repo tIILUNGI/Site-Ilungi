@@ -5,8 +5,8 @@ import { useAppContext } from '../App';
 
 const ReferenceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { t, isDark } = useAppContext();
-  const isPt = t.nav.home === 'Início';
+  const { t, isDark, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   const references = t.references?.clients || [];

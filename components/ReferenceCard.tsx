@@ -21,8 +21,8 @@ interface ReferenceCardProps {
 }
 
 const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
-  const { t, isDark } = useAppContext();
-  const isPt = t.nav.home === 'Início';
+  const { t, isDark, lang } = useAppContext();
+  const isPt = lang === 'pt';
 
   return (
     <motion.div

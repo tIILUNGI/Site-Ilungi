@@ -45,7 +45,9 @@ const Footer: React.FC = () => {
           </button>
           
           <p className="text-sm text-slate-300 italic">
-            Estrutura gera previsibilidade. Previsibilidade gera reputação. Reputação gera crescimento.
+            {isPt
+              ? 'Estrutura gera previsibilidade. Previsibilidade gera reputação. Reputação gera crescimento.'
+              : 'Structure generates predictability. Predictability generates reputation. Reputation generates growth.'}
           </p>
           
           <div className="flex space-x-4">

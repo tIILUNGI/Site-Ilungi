@@ -4,6 +4,14 @@ const DATA_VERSION = '2026-03-03-6';
 const DATA_VERSION_KEY_PREFIX = 'ilungi_data_version_';
 const DATA_PURGE_KEY = 'ilungi_data_purge_version';
 
+let dataMode: 'admin' | 'public' = 'public';
+
+export const setDataMode = (mode: 'admin' | 'public') => {
+  dataMode = mode;
+};
+
+const useRemoteData = () => dataMode === 'admin';
+
 const DATA_TABLES = [
   { table: 'solutions', key: 'ilungi_solutions_data' },
   { table: 'services', key: 'ilungi_services_data' },
@@ -92,6 +100,9 @@ const mergeData = (defaultData: any, existingData: any) => {
 };
 
 export const loadData = async (table: string, localKey: string, defaultData: any) => {
+  if (!useRemoteData()) {
+    return defaultData;
+  }
   const versionStale = !isDataVersionCurrent(table);
   let sourceData: any = null;
   if (supabase) {
@@ -158,6 +169,7 @@ export const purgeAllDataIfNeeded = async () => {
 };
 
 export const saveDataAdmin = async (table: string, localKey: string, newData: any[]) => {
+  if (!useRemoteData()) return;
   localStorage.setItem(localKey, JSON.stringify(newData));
   markDataVersion(table);
   if (supabase) {
@@ -171,6 +183,9 @@ export const saveDataAdmin = async (table: string, localKey: string, newData: an
 };
 
 export const loadConfig = async (localKey: string, defaultData: any) => {
+  if (!useRemoteData()) {
+    return defaultData;
+  }
   if (supabase) {
     try {
       const { data, error } = await supabase.from('global_config').select('*').eq('id', 1).single();

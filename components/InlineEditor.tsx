@@ -23,8 +23,8 @@ export const triggerInlineEdit = (element: EditableElement) => {
 };
 
 const InlineEditor: React.FC = () => {
-  const { isEditing } = useAppContext();
-  const isPt = true;
+  const { isEditing, lang } = useAppContext();
+  const isPt = lang === 'pt';
   const [isSelecting, setIsSelecting] = useState(false);
   const [selectedElement, setSelectedElement] = useState<EditableElement | null>(null);
   const [editModal, setEditModal] = useState<{element: EditableElement, value: string} | null>(null);
@@ -62,19 +62,19 @@ const InlineEditor: React.FC = () => {
         label = target.tagName;
       } else if (target.tagName === 'P') {
         type = 'paragraph';
-        label = 'Parágrafo';
+        label = isPt ? 'Parágrafo' : 'Paragraph';
       } else if (target.tagName === 'A') {
         type = 'link';
-        label = 'Link: ' + (target.textContent || '').substring(0, 30);
+        label = (isPt ? 'Link: ' : 'Link: ') + (target.textContent || '').substring(0, 30);
       } else if (target.tagName === 'BUTTON') {
         type = 'button';
-        label = 'Botão: ' + (target.textContent || '').substring(0, 30);
+        label = (isPt ? 'Botão: ' : 'Button: ') + (target.textContent || '').substring(0, 30);
       } else if (target.tagName === 'IMG') {
         type = 'image';
-        label = 'Imagem';
+        label = isPt ? 'Imagem' : 'Image';
       } else if (target.tagName === 'LI') {
         type = 'list';
-        label = 'Item de lista';
+        label = isPt ? 'Item de lista' : 'List item';
       } else if (target.textContent) {
         label = target.textContent.substring(0, 50);
       }

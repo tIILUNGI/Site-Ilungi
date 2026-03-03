@@ -74,6 +74,13 @@ const CourseCatalog: React.FC = () => {
       code: selectedCourse.code,
       area: selectedCourse.area,
     };
+    const emailBody = isPt
+      ? `Curso: ${selectedCourse.name} (${selectedCourse.code})\nÁrea: ${selectedCourse.area}\n\nNome: ${formData.name}\nEmail: ${formData.email}\nTelefone: ${formData.phone}\nMensagem:\n${formData.message}`
+      : `Course: ${selectedCourse.name} (${selectedCourse.code})\nArea: ${selectedCourse.area}\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage:\n${formData.message}`;
+    const subject = isPt
+      ? `Catálogo de Cursos: ${selectedCourse.name}`
+      : `Course Catalog: ${selectedCourse.name}`;
+    const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
 
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -88,15 +95,11 @@ const CourseCatalog: React.FC = () => {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
-        const emailBody = `Curso: ${selectedCourse.name} (${selectedCourse.code})\nÁrea: ${selectedCourse.area}\n\nNome: ${formData.name}\nEmail: ${formData.email}\nTelefone: ${formData.phone}\nMensagem:\n${formData.message}`;
-        const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`Catálogo de Cursos: ${selectedCourse.name}`)}&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', message: '' });
       }
     } catch (error) {
-      const emailBody = `Curso: ${selectedCourse.name} (${selectedCourse.code})\nÁrea: ${selectedCourse.area}\n\nNome: ${formData.name}\nEmail: ${formData.email}\nTelefone: ${formData.phone}\nMensagem:\n${formData.message}`;
-      const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(`Catálogo de Cursos: ${selectedCourse.name}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -147,7 +150,9 @@ const CourseCatalog: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="max-w-4xl mx-auto text-lg md:text-xl text-slate-500 font-light"
           >
-            Os nossos programas foram desenvolvidos para apoiar todas as pessoas que desejam estar mais bem preparadas para atender às exigências do mercado e das organizações.
+            {isPt
+              ? 'Os nossos programas foram desenvolvidos para apoiar todas as pessoas que desejam estar mais bem preparadas para atender às exigências do mercado e das organizações.'
+              : 'Our programs were designed to support people who want to be better prepared to meet market and organizational demands.'}
           </motion.p>
         </motion.div>
 
@@ -188,13 +193,13 @@ const CourseCatalog: React.FC = () => {
             <table className="min-w-[1100px] w-full">
               <thead className="bg-slate-50">
                 <tr className="text-left text-sm font-bold text-slate-600">
-                  <th className="px-6 py-4">Código</th>
-                  <th className="px-6 py-4">Nome do Curso</th>
-                  <th className="px-6 py-4">Especialidade / área</th>
-                  <th className="px-6 py-4">Carga Horária</th>
-                  <th className="px-6 py-4">Modalidade</th>
-                  <th className="px-6 py-4">Agenda</th>
-                  <th className="px-6 py-4">Ação</th>
+                  <th className="px-6 py-4">{isPt ? 'Código' : 'Code'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Nome do Curso' : 'Course Name'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Especialidade / área' : 'Specialty / Area'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Carga Horária' : 'Hours'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Modalidade' : 'Format'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Agenda' : 'Schedule'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Ação' : 'Action'}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -213,7 +218,7 @@ const CourseCatalog: React.FC = () => {
                         onClick={() => openForm(course)}
                         className="px-4 py-2 bg-[#6a00a3] text-white text-sm font-bold rounded-full hover:bg-[#520b7d] transition-all"
                       >
-                        Saber mais
+                        {isPt ? 'Saber mais' : 'Learn more'}
                       </motion.button>
                     </td>
                   </tr>
@@ -243,15 +248,15 @@ const CourseCatalog: React.FC = () => {
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                     <div className="rounded-xl bg-slate-50 p-3">
-                      <p className="text-xs uppercase font-semibold text-slate-400">Carga Horária</p>
+                      <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Carga Horária' : 'Hours'}</p>
                       <p className="font-semibold text-slate-700 mt-1">{course.hours}</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3">
-                      <p className="text-xs uppercase font-semibold text-slate-400">Modalidade</p>
+                      <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Modalidade' : 'Format'}</p>
                       <p className="font-semibold text-slate-700 mt-1">{course.modality}</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3 col-span-2">
-                      <p className="text-xs uppercase font-semibold text-slate-400">Agenda</p>
+                      <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Agenda' : 'Schedule'}</p>
                       <p className="font-semibold text-slate-700 mt-1">{course.agenda}</p>
                     </div>
                   </div>
@@ -261,7 +266,7 @@ const CourseCatalog: React.FC = () => {
                     onClick={() => openForm(course)}
                     className="mt-5 w-full px-4 py-3 bg-[#6a00a3] text-white text-sm font-bold rounded-full hover:bg-[#520b7d] transition-all"
                   >
-                    Saber mais
+                    {isPt ? 'Saber mais' : 'Learn more'}
                   </motion.button>
                 </div>
               ))
@@ -287,13 +292,13 @@ const CourseCatalog: React.FC = () => {
             >
               <div className="flex items-start justify-between p-6 border-b border-slate-100">
                 <div>
-                  <p className="text-sm font-bold text-[#6a00a3] uppercase tracking-widest">Saber mais</p>
+                  <p className="text-sm font-bold text-[#6a00a3] uppercase tracking-widest">{isPt ? 'Saber mais' : 'Learn more'}</p>
                   <h3 className="text-2xl font-black text-slate-800 mt-2">{selectedCourse.name}</h3>
                   <p className="text-sm text-slate-500 mt-1">{selectedCourse.code} • {selectedCourse.area}</p>
                 </div>
                 <button
                   onClick={closeForm}
-                  aria-label="Fechar"
+                  aria-label={isPt ? 'Fechar' : 'Close'}
                   className="p-2 rounded-full hover:bg-slate-100 transition-colors"
                 >
                   <X className="w-5 h-5" />
@@ -303,24 +308,24 @@ const CourseCatalog: React.FC = () => {
               <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
                 {status === 'success' && (
                   <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl">
-                    Mensagem enviada com sucesso!
+                    {isPt ? 'Mensagem enviada com sucesso!' : 'Message sent successfully!'}
                   </div>
                 )}
                 {status === 'error' && (
                   <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl">
-                    Erro ao enviar. Tente novamente.
+                    {isPt ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Please try again.'}
                   </div>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">Nome</label>
+                    <label className="text-sm font-bold text-slate-700">{isPt ? 'Nome' : 'Name'}</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      placeholder="Seu nome completo"
+                      placeholder={isPt ? 'Seu nome completo' : 'Your full name'}
                       className="w-full px-5 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
                     />
                   </div>
@@ -331,32 +336,32 @@ const CourseCatalog: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      placeholder="seu@email.com"
+                      placeholder={isPt ? 'seu@email.com' : 'your@email.com'}
                       className="w-full px-5 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Número de telefone</label>
+                  <label className="text-sm font-bold text-slate-700">{isPt ? 'Número de telefone' : 'Phone number'}</label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
-                    placeholder="Ex: +244 9xx xxx xxx"
+                    placeholder={isPt ? 'Ex: +244 9xx xxx xxx' : 'E.g.: +244 9xx xxx xxx'}
                     className="w-full px-5 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Mensagem</label>
+                  <label className="text-sm font-bold text-slate-700">{isPt ? 'Mensagem' : 'Message'}</label>
                   <textarea
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    placeholder="Escreva sua mensagem..."
+                    placeholder={isPt ? 'Escreva sua mensagem...' : 'Write your message...'}
                     className="w-full px-5 py-3 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all resize-none"
                   />
                 </div>
@@ -369,10 +374,10 @@ const CourseCatalog: React.FC = () => {
                   className="w-full py-4 bg-[#1B3C2B] text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-[#142d20] shadow-2xl shadow-[#1B3C2B]/20 transition-all disabled:opacity-50"
                 >
                   {status === 'sending' ? (
-                    <span>Enviando...</span>
+                    <span>{isPt ? 'Enviando...' : 'Sending...'}</span>
                   ) : (
                     <>
-                      <span>Enviar</span>
+                      <span>{isPt ? 'Enviar' : 'Send'}</span>
                       <Send className="w-5 h-5" />
                     </>
                   )}

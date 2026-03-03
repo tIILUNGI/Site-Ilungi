@@ -1,10 +1,10 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, useLayoutEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { translations } from './translations';
 import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
 import { supabase } from './lib/supabase';
-import { purgeAllDataIfNeeded } from './lib/dataSync';
+import { purgeAllDataIfNeeded, setDataMode } from './lib/dataSync';
 import { AlumniAuthProvider } from './lib/authContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -126,7 +126,9 @@ const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   return <>{children}</>;
 };
 
-const App: React.FC = () => {
+const AppShell: React.FC = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
   const [lang, setLangState] = useState<Language>(() => {
     const saved = localStorage.getItem('ilungi_lang');
     return (saved as Language) || 'pt';
@@ -154,17 +156,23 @@ const App: React.FC = () => {
     localStorage.setItem('ilungi_dark', d ? 'true' : 'false');
   };
 
-  const [t, setT] = useState<any>(() => getContent(lang));
+  useLayoutEffect(() => {
+    setDataMode(isAdminRoute ? 'admin' : 'public');
+  }, [isAdminRoute]);
+
+  const [t, setT] = useState<any>(() => (isAdminRoute ? getContent(lang) : translations[lang]));
 
   useEffect(() => {
-    setT(getContent(lang));
-  }, [lang]);
+    setT(isAdminRoute ? getContent(lang) : translations[lang]);
+  }, [lang, isAdminRoute]);
 
   useEffect(() => {
+    if (!isAdminRoute) return;
     void purgeAllDataIfNeeded();
-  }, []);
+  }, [isAdminRoute]);
 
   useEffect(() => {
+    if (!isAdminRoute) return;
     let isMounted = true;
     syncContentFromRemote().then((updated) => {
       if (!isMounted || !updated) return;
@@ -178,57 +186,61 @@ const App: React.FC = () => {
       isMounted = false;
       window.removeEventListener('ilungi-content-updated', handleContentUpdate);
     };
-  }, [lang]);
+  }, [lang, isAdminRoute]);
 
   return (
-    <AlumniAuthProvider>
-      <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t, isEditing, setIsEditing: handleSetIsEditing }}>
-        <Router>
-          <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'theme-dark bg-gray-900 text-white' : 'theme-light bg-slate-50 text-slate-900'}`}>
-            <ScrollToTop />
-            <Navbar />
-            <main className="pt-20">
-              <AnimatePresence mode="wait">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/consultoria" element={<Consulting />} />
-                  <Route path="/consultoria/iso" element={<ISOPage />} />
-                  <Route path="/consultoria/risco" element={<ServiceDetail type="risk" />} />
-                  <Route path="/consultoria/procurement" element={<ServiceDetail type="procurement" />} />
-                  <Route path="/consultoria/pmo" element={<ServiceDetail type="pmo" />} />
-                  <Route path="/academia" element={<Academy />} />
-                  <Route path="/academia/alumni" element={<AILUNGIPortal />} />
-                  <Route path="/academia/login" element={<AILUNGILogin />} />
-                  <Route path="/academia/registar" element={<AILUNGIRegister />} />
-                  <Route path="/academia/verificar" element={<CertificateVerify />} />
-                  <Route path="/academia/cursos" element={<CourseCatalog />} />
-                  <Route path="/academia/curso/:courseId" element={<CoursePlayer />} />
-                  <Route path="/solucoes" element={<Solutions />} />
-                  <Route path="/solucoes/salya" element={<ProductDemo productName="Salya" />} />
-                  <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
-                  <Route path="/parceiros" element={<Partners />} />
-                  <Route path="/contacto" element={<Contact />} />
-                  <Route path="/referencia/:id" element={<ReferenceDetail />} />
-                  <Route path="/admin/login" element={<AdminLogin />} />
-                  <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
-                  <Route path="/admin/solucoes" element={<RequireAdmin><AdminSolutions /></RequireAdmin>} />
-                  <Route path="/admin/parceiros" element={<RequireAdmin><AdminPartners /></RequireAdmin>} />
-                  <Route path="/admin/servicos" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
-                  <Route path="/admin/cursos" element={<RequireAdmin><AdminCourses /></RequireAdmin>} />
-                  <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
-                  <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
-                  <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
-                  <Route path="/certificacoes" element={<Certifications />} />
-                </Routes>
-              </AnimatePresence>
-            </main>
-            
-            <Footer />
-          </div>
-        </Router>
-      </AppContext.Provider>
-    </AlumniAuthProvider>
+    <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t, isEditing, setIsEditing: handleSetIsEditing }}>
+      <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'theme-dark bg-gray-900 text-white' : 'theme-light bg-slate-50 text-slate-900'}`}>
+        <ScrollToTop />
+        <Navbar />
+        <main className="pt-20">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/consultoria" element={<Consulting />} />
+              <Route path="/consultoria/iso" element={<ISOPage />} />
+              <Route path="/consultoria/risco" element={<ServiceDetail type="risk" />} />
+              <Route path="/consultoria/procurement" element={<ServiceDetail type="procurement" />} />
+              <Route path="/consultoria/pmo" element={<ServiceDetail type="pmo" />} />
+              <Route path="/academia" element={<Academy />} />
+              <Route path="/academia/alumni" element={<AILUNGIPortal />} />
+              <Route path="/academia/login" element={<AILUNGILogin />} />
+              <Route path="/academia/registar" element={<AILUNGIRegister />} />
+              <Route path="/academia/verificar" element={<CertificateVerify />} />
+              <Route path="/academia/cursos" element={<CourseCatalog />} />
+              <Route path="/academia/curso/:courseId" element={<CoursePlayer />} />
+              <Route path="/solucoes" element={<Solutions />} />
+              <Route path="/solucoes/salya" element={<ProductDemo productName="Salya" />} />
+              <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
+              <Route path="/parceiros" element={<Partners />} />
+              <Route path="/contacto" element={<Contact />} />
+              <Route path="/referencia/:id" element={<ReferenceDetail />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
+              <Route path="/admin/solucoes" element={<RequireAdmin><AdminSolutions /></RequireAdmin>} />
+              <Route path="/admin/parceiros" element={<RequireAdmin><AdminPartners /></RequireAdmin>} />
+              <Route path="/admin/servicos" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
+              <Route path="/admin/cursos" element={<RequireAdmin><AdminCourses /></RequireAdmin>} />
+              <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
+              <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
+              <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
+              <Route path="/certificacoes" element={<Certifications />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+        
+        <Footer />
+      </div>
+    </AppContext.Provider>
   );
 };
+
+const App: React.FC = () => (
+  <AlumniAuthProvider>
+    <Router>
+      <AppShell />
+    </Router>
+  </AlumniAuthProvider>
+);
 
 export default App;
