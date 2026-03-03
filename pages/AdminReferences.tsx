@@ -36,8 +36,26 @@ const AdminReferences: React.FC = () => {
   useEffect(() => {
     loadData('references', 'ilungi_references_data', defaultReferences).then(data => {
       const cleaned = (data || []).filter((ref: any) => ref.id !== 'cmc' && ref.name !== 'CMC');
-      setReferences(cleaned);
-      if ((data || []).length !== cleaned.length) {
+      const defaultsById = new Map(defaultReferences.map((ref: any) => [ref.id, ref]));
+      const normalized = cleaned.map((ref: any) => {
+        if (ref.id === 'petromar') {
+          const def = defaultsById.get('petromar');
+          if (!def) return ref;
+          return {
+            ...ref,
+            service: def.service,
+            role: def.role,
+            comment: def.comment,
+            description: def.description,
+            logo: def.logo
+          };
+        }
+        return ref;
+      });
+      setReferences(normalized);
+      if (JSON.stringify(normalized) !== JSON.stringify(cleaned)) {
+        saveDataAdmin('references', 'ilungi_references_data', normalized);
+      } else if ((data || []).length !== cleaned.length) {
         saveDataAdmin('references', 'ilungi_references_data', cleaned);
       }
     });

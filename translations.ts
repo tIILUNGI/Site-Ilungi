@@ -159,17 +159,17 @@ export const translations: Record<'pt' | 'en', any> = {
       iso: {
         title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
         desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
-        content: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISSO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias de internas e de fornecedores.\nIMPLEMENTAÇAO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão de Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
+        content: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.\nIMPLEMENTAÇÃO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão da Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
-          "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "A certificação ISO 9001 é o padrão global de excelência! Transforme seus processos, aumente a satisfação dos clientes e posicione sua empresa como líder no mercado. ✓ Melhora Contínua Garantida" },
-          "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Demonstre seu compromisso com o planeta e conquiste clientes conscientes! Esta certificação ajuda a reduzir o impacto ambiental, cumprir legislação ambiental e posicionar sua empresa como sustentável e responsável. 🌱 Sustentabilidade Certificada" },
-          "45001": { title: "ISO 45001 - Saúde e Segurança Ocupacional", benefit: "Crie um ambiente de trabalho onde cada colaborador se sente protegido e valorizado! Reduza acidentes, absentismo e custos associados, enquanto constrói uma cultura de segurança que diferencia sua organização. 🛡️ Segurança em Primeiro Lugar" },
-          "27001": { title: "ISO 27001 - Gestão de Informação", benefit: "Na era digital, a informação é seu ativo mais valioso! Proteja os dados da sua empresa e dos seus clientes com padrões internacionais de segurança que inspiram confiança e demonstram compliance. 🔐 Segurança Digital de Nível Mundial" },
-          "22301": { title: "ISO 22301 - Gestão de Continuidade", benefit: "Esteja preparado para o inesperado! Desenvolva capacidades de resiliência organizacional que garantem a continuidade dos seus negócios mesmo em situações de crise, desastre ou interrupção. ⚡ Resiliência Empresarial" },
-          "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Combata a corrupção de forma estruturada e demonstrável! Esta norma internacional ajuda a implementar controles eficazes que previnem suborno e promovem uma cultura de integridade em toda a organização. ✋ Integridade e Transparência" },
-          "37301": { title: "ISO 37301 - Compliance", benefit: "Transforme o compliance em vantagem competitiva! Esta norma permite demonstrar conformidade legal de forma clara e transparente, reduzindo riscos jurídicos e fortalecendo a reputação da sua organização. 📋 Compliance como Diferencial" },
-          "31000": { title: "ISO 31000 - Gestão de Risco", benefit: "Tome decisões informadas e estratégicas! Identifique, analise e mitigue riscos de forma sistemática, protegendo o futuro da sua empresa com inteligência e proatividade. 🎯 Decisões Seguras e Informadas" },
-          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Garanta a segurança de cada produto que sai das suas instalações! Esta certificação demonstra o compromisso inabalável com a qualidade alimentar, aumentando a confiança de consumidores e distribuidores. 🍽️ Segurança Alimentar Garantida" }
+          "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Padroniza processos e aumenta a satisfação do cliente." },
+          "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Reduz o impacto ambiental e garante conformidade legal." },
+          "45001": { title: "ISO 45001 - Saúde e Segurança Ocupacional", benefit: "Melhora a segurança ocupacional e reduz acidentes." },
+          "27001": { title: "ISO 27001 - Gestão de Informação", benefit: "Protege dados críticos e fortalece a confiança." },
+          "22301": { title: "ISO 22301 - Gestão de Continuidade", benefit: "Garante continuidade do negócio em crises." },
+          "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Implementa controles eficazes contra suborno." },
+          "37301": { title: "ISO 37301 - Compliance", benefit: "Estrutura o compliance e reduz riscos legais." },
+          "31000": { title: "ISO 31000 - Gestão de Risco", benefit: "Identifica, avalia e trata riscos com método." },
+          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Assegura segurança alimentar em toda a cadeia." }
         }
       },
       risk: {
@@ -221,7 +221,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     iso: {
       title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
-      subtitle: "Actuamos na implementação a medida e cirúrgica de sistemas de gestão baseada na normas ISO, acompanhamos nossos parceiros até a auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
+      subtitle: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
         rate: "Taxa de Aprovação",
@@ -589,15 +589,15 @@ export const translations: Record<'pt' | 'en', any> = {
         desc: "Specialists in the implementation and auditing of ISO management systems.",
         content: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit and also conduct internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Security Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
         items: {
-          "9001": { title: "ISO 9001 - Quality Management", benefit: "ISO 9001 certification is the global standard of excellence! Transform your processes, increase customer satisfaction, and position your company as a market leader. ✓ Guaranteed Continuous Improvement" },
-          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Demonstrate your commitment to the planet and win conscious customers! This certification helps reduce environmental impact, comply with legislation, and position your company as sustainable and responsible. 🌱 Certified Sustainability" },
-          "45001": { title: "ISO 45001 - Occupational Health and Safety", benefit: "Create a work environment where every employee feels protected and valued! Reduce accidents, absenteeism, and associated costs while building a safety culture that sets your organization apart. 🛡️ Safety First" },
-          "27001": { title: "ISO 27001 - Information Security Management", benefit: "In the digital age, information is your most valuable asset! Protect your company and client data with international security standards that inspire trust and demonstrate compliance. 🔐 World-Class Digital Security" },
-          "22301": { title: "ISO 22301 - Business Continuity", benefit: "Be prepared for the unexpected! Develop organizational resilience capabilities that ensure business continuity even in crisis, disaster, or interruption situations. ⚡ Business Resilience" },
-          "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Combat corruption in a structured and demonstrable way! This international standard helps implement effective controls that prevent bribery and promote a culture of integrity throughout the organization. ✋ Integrity and Transparency" },
-          "37301": { title: "ISO 37301 - Compliance", benefit: "Turn compliance into a competitive advantage! This standard allows you to demonstrate legal compliance clearly and transparently, reducing legal risks and strengthening your organization's reputation. 📋 Compliance as a Differentiator" },
-          "31000": { title: "ISO 31000 - Risk Management", benefit: "Make informed and strategic decisions! Identify, analyze, and mitigate risks systematically, protecting your company's future with intelligence and proactivity. 🎯 Secure and Informed Decisions" },
-          "22000": { title: "ISO 22000 - Food Safety", benefit: "Guarantee the safety of every product leaving your facilities! This certification demonstrates an unwavering commitment to food quality, increasing consumer and distributor confidence. 🍽️ Guaranteed Food Safety" }
+          "9001": { title: "ISO 9001 - Quality Management", benefit: "Standardizes processes and improves customer satisfaction." },
+          "14001": { title: "ISO 14001 - Environmental Management", benefit: "Reduces environmental impact and ensures legal compliance." },
+          "45001": { title: "ISO 45001 - Occupational Health and Safety", benefit: "Improves occupational safety and reduces accidents." },
+          "27001": { title: "ISO 27001 - Information Security Management", benefit: "Protects critical data and builds trust." },
+          "22301": { title: "ISO 22301 - Business Continuity", benefit: "Ensures business continuity during disruptions." },
+          "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Implements effective anti-bribery controls." },
+          "37301": { title: "ISO 37301 - Compliance", benefit: "Structures compliance and reduces legal risk." },
+          "31000": { title: "ISO 31000 - Risk Management", benefit: "Systematically identifies, assesses, and treats risks." },
+          "22000": { title: "ISO 22000 - Food Safety", benefit: "Ensures food safety across the supply chain." }
         }
       },
       risk: {
