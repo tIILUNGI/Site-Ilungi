@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 
-const DATA_VERSION = '2026-03-03-5';
+const DATA_VERSION = '2026-03-03-6';
 const DATA_VERSION_KEY_PREFIX = 'ilungi_data_version_';
 const DATA_PURGE_KEY = 'ilungi_data_purge_version';
 

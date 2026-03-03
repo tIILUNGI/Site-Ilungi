@@ -5,8 +5,9 @@ import { supabase } from './supabase';
 // Default content from translations
 const defaultContent = translations;
 
-const CONTENT_VERSION = '2026-03-03-5';
+const CONTENT_VERSION = '2026-03-03-6';
 const CONTENT_VERSION_KEY = 'ilungi_content_version';
+const CONTENT_FORCE_KEY = 'ilungi_content_force_version';
 const CONTENT_BASE_KEY_PREFIX = 'ilungi_content_base_';
 
 const isContentVersionCurrent = () => {
@@ -67,6 +68,24 @@ const setBaseSnapshot = (lang: Language): void => {
   try {
     localStorage.setItem(`${CONTENT_BASE_KEY_PREFIX}${lang}`, JSON.stringify(defaultContent[lang]));
   } catch {}
+};
+
+const clearLocalContent = () => {
+  try {
+    localStorage.removeItem('ilungi_content_pt');
+    localStorage.removeItem('ilungi_content_en');
+    localStorage.removeItem(`${CONTENT_BASE_KEY_PREFIX}pt`);
+    localStorage.removeItem(`${CONTENT_BASE_KEY_PREFIX}en`);
+  } catch {}
+};
+
+const setLocalDefaults = () => {
+  try {
+    localStorage.setItem('ilungi_content_pt', JSON.stringify(defaultContent.pt));
+    localStorage.setItem('ilungi_content_en', JSON.stringify(defaultContent.en));
+  } catch {}
+  setBaseSnapshot('pt');
+  setBaseSnapshot('en');
 };
 
 const isStringArray = (value: any[]): value is string[] =>
@@ -307,7 +326,31 @@ const getStoredContent = (lang: Language): any => {
 
 export const syncContentFromRemote = async (): Promise<boolean> => {
   const didBump = ensureContentVersion();
-  if (!supabase) return didBump;
+  const forceDefaults = (() => {
+    try {
+      return localStorage.getItem(CONTENT_FORCE_KEY) === CONTENT_VERSION;
+    } catch {
+      return false;
+    }
+  })();
+  if (didBump || forceDefaults) {
+    setLocalDefaults();
+    if (supabase) {
+      try {
+        await supabase.from(REMOTE_TABLE).upsert(
+          { id: REMOTE_ROW_ID, pt: defaultContent.pt, en: defaultContent.en },
+          { onConflict: 'id' }
+        );
+        try {
+          localStorage.removeItem(CONTENT_FORCE_KEY);
+        } catch {}
+      } catch (e) {
+        console.error('Error saving default content to remote:', e);
+      }
+    }
+    return true;
+  }
+  if (!supabase) return false;
   try {
     const { data, error } = await supabase
       .from(REMOTE_TABLE)
@@ -418,7 +461,10 @@ export const resetAllContent = (): void => {
 
 const ensureContentVersion = (): boolean => {
   if (isContentVersionCurrent()) return false;
-  resetAllContent();
+  clearLocalContent();
+  try {
+    localStorage.setItem(CONTENT_FORCE_KEY, CONTENT_VERSION);
+  } catch {}
   markContentVersion();
   return true;
 };
