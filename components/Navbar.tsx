@@ -139,17 +139,17 @@ const Navbar: React.FC = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-0 mt-0 pt-4 w-[600px] max-w-[90vw] z-50 ml-4"
+                      className="absolute top-full left-0 mt-0 pt-2 w-[320px] max-w-[85vw] z-50 ml-0"
                     >
                       <div className={`${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-2xl border overflow-hidden`}>
                         {/* Header Description */}
-                        <div className={`px-6 py-4 ${isDark ? 'bg-slate-800/50' : 'bg-slate-50'} border-b ${isDark ? 'border-slate-700' : 'border-slate-100'}`}>
-                          <p className={`font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</p>
+                        <div className="px-3 py-2">
+                          <p className={`font-medium text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</p>
                         </div>
                         
                         {/* Menu Items */}
-                        <div className="p-3">
-                          <div className="grid grid-cols-1 gap-1">
+                        <div className="p-1.5">
+                          <div className="grid grid-cols-1 gap-0">
                             {item.mega.map((sub: any, idx) => (
                               <div key={idx}>
                                 {sub.href ? (
@@ -157,24 +157,24 @@ const Navbar: React.FC = () => {
                                     href={sub.href} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className={`flex flex-col p-4 rounded-xl transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
+                                    className={`flex flex-col p-3 rounded-lg transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
                                   >
-                                    <span className={`font-bold text-lg mb-1 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                    <span className={`font-semibold text-base mb-0.5 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                       {sub.title}
                                     </span>
-                                    <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                    <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                                       {sub.desc}
                                     </span>
                                   </a>
                                 ) : (
                                   <Link 
                                     to={sub.path} 
-                                    className={`flex flex-col p-4 rounded-xl transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
+                                    className={`flex flex-col p-3 rounded-lg transition-all group ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-50'}`}
                                   >
-                                    <span className={`font-bold text-lg mb-1 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                    <span className={`font-semibold text-base mb-0.5 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                       {sub.title}
                                     </span>
-                                    <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                    <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                                       {sub.desc}
                                     </span>
                                   </Link>

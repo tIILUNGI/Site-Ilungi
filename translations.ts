@@ -707,7 +707,7 @@ export const translations: Record<'pt' | 'en', any> = {
           role: "Quality Coordinator",
           comment: "Pleasant experience.",
           person: "Nadiry Celestino",
-          service: "iso",
+           service: "iso",
           description: "Consulting and auditing of management systems.",
           attachments: []
         },
