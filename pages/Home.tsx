@@ -38,7 +38,7 @@ const Home: React.FC = () => {
 
   const heroSlides = [
     { bg: "/imagens/Logo Slide.png", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
-    { bg: "/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
+    { bg: "/imagens/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
     { bg: "/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
     { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "Gestão de Projetos" : "Project Management", subtitle: isPt ? "Resultados mensuráveis e eficiência" : "Measurable results and efficiency" }
   ];

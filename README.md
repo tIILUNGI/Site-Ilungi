@@ -189,7 +189,7 @@ Site Ilungi/
 │
 └── public/
     ├── imagens/               # Imagens do site
-    ├── Nossas Refeências/    # Logos de clientes/parceiros
+    ├── Nossas Referências/    # Logos de clientes/parceiros
     └── _redirects            # Configuração de rotas
 ```
 

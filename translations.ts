@@ -253,7 +253,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "esmac",
           name: "Esmac,Lda",
-          logo: "/Nossas Refeências/Esmac.Lda.webp",
+          logo: "/Nossas Referências/Esmac.Lda.webp",
           role: "Coordenador",
           comment: "Excelente, recomendo.",
           person: "Márcio Dumbo",
@@ -264,7 +264,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "velonet",
           name: "Velonet",
-          logo: "/Nossas Refeências/Velonet.png",
+          logo: "/Nossas Referências/Velonet.png",
           role: "Gestor de Qualidade",
           comment: "Muito dedicados, comprometidos e profissionais.",
           person: "Alves Ulo",
@@ -275,7 +275,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "interseguros",
           name: "InterSeguros-Corretores de Seguros, S.A.",
-          logo: "/Nossas Refeências/Inter Seguros.png",
+          logo: "/Nossas Referências/Inter Seguros.png",
           role: "Diretora Geral",
           comment: "Acompanhamento excelente durante e após o processo de certificação. Um parceiro que, certamente, nos acompanhará ao longo de muitos anos.",
           person: "Avelina Rocha",
@@ -286,7 +286,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "aclean",
           name: "Aclean,Lda",
-          logo: "/Nossas Refeências/A Clean.jpg",
+          logo: "/Nossas Referências/A Clean.jpg",
           role: "Diretor Geral",
           comment: "Foi de facto muito boa a prestação, a atenção dedicada, bem como a formulação ao detalhe do sistema, o entendimento dos consultores e a maneira interativa.",
           person: "Gelson Salvador",
@@ -297,7 +297,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "saqia",
           name: "SAQIA--Salvador e Quintas Arquitectura,Lda",
-          logo: "/Nossas Refeências/SAQIA.png",
+          logo: "/Nossas Referências/SAQIA.png",
           role: "Diretor Geral",
           comment: "Foi muito bom ter trabalhado com vocês e pretendemos continuar futuramente pela manutenção e atualização.",
           person: "Gelson Salvador",
@@ -308,7 +308,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "diway",
           name: "Diway",
-          logo: "/Nossas Refeências/Diway.jpg",
+          logo: "/Nossas Referências/Diway.jpg",
           role: "Coordenadora da Qualidade",
           comment: "Experiência agradável.",
           person: "Nadiry Celestino",
@@ -319,7 +319,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imovias-urbanismo-sa",
           name: "Imovias Urbanismo e Construção SA",
-          logo: "/Nossas Refeências/Imovias.png",
+          logo: "/Nossas Referências/Imovias.png",
           role: "PCA",
           comment: "Equipa diligente.",
           person: "Joaquim Alves",
@@ -330,7 +330,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imovias-energy",
           name: "Imovias Energy SA",
-          logo: "/Nossas Refeências/Imovias.png",
+          logo: "/Nossas Referências/Imovias.png",
           role: "PCA",
           comment: "Equipa diligente.",
           person: "Joaquim Alves",
@@ -341,7 +341,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "goldproc",
           name: "Gold Procurement",
-          logo: "/Nossas Refeências/Gold Proc.jpg",
+          logo: "/Nossas Referências/Gold Proc.jpg",
           role: "Serviço de Procurement",
           comment: "Serviço de procurement eficiente e profissional. Recomendo.",
           person: "Director de Compras",
@@ -352,7 +352,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "bureauveritas",
           name: "Bureau Veritas",
-          logo: "/Nossas Refeências/Bureau_Veritas-Logo.wine.png",
+          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
           role: "Serviço de Procurement",
           comment: "Excelente parceria em serviços de procurement. Qualidade garantida.",
           person: "Director de Operações",
@@ -363,7 +363,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "petromar",
           name: "PetroMar",
-          logo: "/Nossas Refeências/PetroMar.jpg",
+          logo: "/Nossas Referências/PetroMar.jpg",
           role: "Serviço de Procurement",
           comment: "Serviço de procurement de excelência. A ILUNGI entregou com qualidade.",
           person: "Director de Compras",
@@ -374,7 +374,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "pensana",
           name: "Pensana",
-          logo: "/Nossas Refeências/pensana-logo-sticky-blue-standard.png",
+          logo: "/Nossas Referências/pensana-logo-sticky-blue-standard.png",
           role: "Serviço de Assistência e Suporte de TI",
           comment: "Suporte técnico eficiente e acompanhamento contínuo para as nossas operações.",
           person: "Director de Operações",
@@ -385,7 +385,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "bioprev",
           name: "BioPrev",
-          logo: "/Nossas Refeências/BioPrev.webp",
+          logo: "/Nossas Referências/BioPrev.webp",
           role: "Serviço de Assistência e Suporte de TI",
           comment: "A ILUNGI garantiu estabilidade e melhoria dos nossos sistemas de TI.",
           person: "Director de Tecnologia",
@@ -648,7 +648,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "esmac",
           name: "Esmac,Lda",
-          logo: "/Nossas Refeências/Esmac.Lda.webp",
+          logo: "/Nossas Referências/Esmac.Lda.webp",
           role: "Coordinator",
           comment: "Excellent, I recommend it.",
           person: "Márcio Dumbo",
@@ -659,7 +659,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "velonet",
           name: "Velonet",
-          logo: "/Nossas Refeências/Velonet.png",
+          logo: "/Nossas Referências/Velonet.png",
           role: "Quality Manager",
           comment: "Very dedicated, committed, and professional.",
           person: "Alves Ulo",
@@ -670,7 +670,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "interseguros",
           name: "InterSeguros-Corretores de Seguros, S.A.",
-          logo: "/Nossas Refeências/Inter Seguros.png",
+          logo: "/Nossas Referências/Inter Seguros.png",
           role: "General Director",
           comment: "Excellent follow-up during and after the certification process. A partner that will certainly accompany us for many years.",
           person: "Avelina Rocha",
@@ -681,7 +681,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "aclean",
           name: "Aclean,Lda",
-          logo: "/Nossas Refeências/A Clean.jpg",
+          logo: "/Nossas Referências/A Clean.jpg",
           role: "General Director",
           comment: "The service was truly very good, with dedicated attention, detailed system formulation, clear understanding by the consultants, and an interactive approach.",
           person: "Gelson Salvador",
@@ -692,7 +692,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "saqia",
           name: "SAQIA--Salvador e Quintas Arquitectura,Lda",
-          logo: "/Nossas Refeências/SAQIA.png",
+          logo: "/Nossas Referências/SAQIA.png",
           role: "General Director",
           comment: "It was very good to work with you and we intend to continue in the future for maintenance and updates.",
           person: "Gelson Salvador",
@@ -703,7 +703,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "diway",
           name: "Diway",
-          logo: "/Nossas Refeências/Diway.jpg",
+          logo: "/Nossas Referências/Diway.jpg",
           role: "Quality Coordinator",
           comment: "Pleasant experience.",
           person: "Nadiry Celestino",
@@ -714,7 +714,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imovias-urbanismo-sa",
           name: "Imovias Urbanismo e Construção SA",
-          logo: "/Nossas Refeências/Imovias.png",
+          logo: "/Nossas Referências/Imovias.png",
           role: "Chairman of the Board",
           comment: "Diligent team.",
           person: "Joaquim Alves",
@@ -725,7 +725,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "imovias-energy",
           name: "Imovias Energy SA",
-          logo: "/Nossas Refeências/Imovias.png",
+          logo: "/Nossas Referências/Imovias.png",
           role: "Chairman of the Board",
           comment: "Diligent team.",
           person: "Joaquim Alves",
@@ -736,7 +736,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "goldproc",
           name: "Gold Procurement",
-          logo: "/Nossas Refeências/Gold Proc.jpg",
+          logo: "/Nossas Referências/Gold Proc.jpg",
           role: "Procurement Service",
           comment: "Efficient and professional procurement service. Recommended.",
           person: "Procurement Director",
@@ -747,7 +747,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "bureauveritas",
           name: "Bureau Veritas",
-          logo: "/Nossas Refeências/Bureau_Veritas-Logo.wine.png",
+          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
           role: "Procurement Service",
           comment: "Excellent partnership in procurement services. Quality guaranteed.",
           person: "Operations Director",
@@ -758,7 +758,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "petromar",
           name: "PetroMar",
-          logo: "/Nossas Refeências/PetroMar.jpg",
+          logo: "/Nossas Referências/PetroMar.jpg",
           role: "Procurement Service",
           comment: "Excellent procurement service. ILUNGI delivered with quality.",
           person: "Procurement Director",
@@ -769,7 +769,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "pensana",
           name: "Pensana",
-          logo: "/Nossas Refeências/pensana-logo-sticky-blue-standard.png",
+          logo: "/Nossas Referências/pensana-logo-sticky-blue-standard.png",
           role: "IT Assistance and Support Service",
           comment: "Efficient technical support and ongoing monitoring for our operations.",
           person: "Operations Director",
@@ -780,7 +780,7 @@ export const translations: Record<'pt' | 'en', any> = {
         {
           id: "bioprev",
           name: "BioPrev",
-          logo: "/Nossas Refeências/BioPrev.webp",
+          logo: "/Nossas Referências/BioPrev.webp",
           role: "IT Assistance and Support Service",
           comment: "ILUNGI ensured stability and improvements in our IT systems.",
           person: "Technology Director",
