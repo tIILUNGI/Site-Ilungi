@@ -19,10 +19,10 @@ const AdminServices: React.FC = () => {
   const isPt = lang === 'pt';
 
   const defaultAreas = [
-    { id: "iso", title: t.consultingAreas.iso.title, desc: t.consultingAreas.iso.desc, image: "/imagens/ISO.png", path: "/consultoria/iso", color: "#1B3C2B" },
-    { id: "risk", title: t.consultingAreas.risk.title, desc: t.consultingAreas.risk.desc, image: "/imagens/Notação de Risco.jpg", path: "/consultoria/risco", color: "#6a00a3" },
-    { id: "procurement", title: t.consultingAreas.procurement.title, desc: t.consultingAreas.procurement.desc, image: "/imagens/procurement.png", path: "/consultoria/procurement", color: "#0A4D8C" },
-    { id: "pmo", title: t.consultingAreas.pmo.title, desc: t.consultingAreas.pmo.desc, image: "/imagens/Gestão de Projecto.jpg", path: "/consultoria/pmo", color: "#B31B1B" }
+    { id: "iso", title: t.consultingAreas.iso.title, desc: t.consultingAreas.iso.desc, image: "/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg", path: "/consultoria/iso", color: "#1B3C2B" },
+    { id: "risk", title: t.consultingAreas.risk.title, desc: t.consultingAreas.risk.desc, image: "/imagens/Notação de Riscos.jpg.jpeg", path: "/consultoria/risco", color: "#6a00a3" },
+    { id: "procurement", title: t.consultingAreas.procurement.title, desc: t.consultingAreas.procurement.desc, image: "/imagens/Procurement.jpg.jpeg", path: "/consultoria/procurement", color: "#0A4D8C" },
+    { id: "pmo", title: t.consultingAreas.pmo.title, desc: t.consultingAreas.pmo.desc, image: "/imagens/Assistência e suporte de TI.jpg.jpeg", path: "/consultoria/pmo", color: "#B31B1B" }
   ];
   
   const [services, setServices] = useState<ServiceForm[]>([]);
@@ -133,7 +133,7 @@ const AdminServices: React.FC = () => {
                   value={formData.image}
                   onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
-                  placeholder="/imagens/ISO.png"
+                  placeholder="/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg"
                 />
               </div>
 

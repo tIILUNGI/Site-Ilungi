@@ -41,7 +41,7 @@ const Consulting: React.FC = () => {
       id: "iso",
       title: t.consultingAreas.iso.title,
       desc: t.consultingAreas.iso.desc,
-      image: "/imagens/ISO.png",
+      image: "/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg",
       path: "/consultoria/iso",
       color: "#1B3C2B"
     },
@@ -49,7 +49,7 @@ const Consulting: React.FC = () => {
       id: "risk",
       title: t.consultingAreas.risk.title,
       desc: t.consultingAreas.risk.desc,
-      image: "/imagens/Notação de Risco.jpg",
+      image: "/imagens/Notação de Riscos.jpg.jpeg",
       path: "/consultoria/risco",
       color: "#6a00a3"
     },
@@ -57,7 +57,7 @@ const Consulting: React.FC = () => {
       id: "procurement",
       title: t.consultingAreas.procurement.title,
       desc: t.consultingAreas.procurement.desc,
-      image: "/imagens/procurement.png",
+      image: "/imagens/Procurement.jpg.jpeg",
       path: "/consultoria/procurement",
       color: "#0A4D8C"
     },
@@ -65,7 +65,7 @@ const Consulting: React.FC = () => {
       id: "pmo",
       title: t.consultingAreas.pmo.title,
       desc: t.consultingAreas.pmo.desc,
-      image: "/imagens/Gestão de Projecto.jpg",
+      image: "/imagens/Assistência e suporte de TI.jpg.jpeg",
       path: "/consultoria/pmo",
       color: "#B31B1B"
     }
