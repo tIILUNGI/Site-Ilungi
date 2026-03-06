@@ -7,7 +7,7 @@ import { ArrowRight, ChevronRight, ChevronLeft, Award, Shield, Zap, Globe, BarCh
 const partners = [
   { name: "GPMOi", url: "https://gpmoi.org/", logo: "/imagens/GPMoi.png", color: "#4c0253" },
   { name: "CFC Institute", url: "https://cfc-institute.org/", logo: "/imagens/CFC-institute.png", color: "#031f3a" },
-  { name: "UCS", url: "https://unicertservices.com/", logo: "/imagens/UCS.png", color: "#550b06" },
+  { name: "UCS", url: "https://ucsiso.com/", logo: "/imagens/UCS.png", color: "#550b06" },
   { name: "Nova Select", url: "https://novaselect.co/index.html", logo: "/imagens/Nova Select.png", color: "#dc6516" },
   { name: "Ixi Ambiental", url: "https://www.ixiambiental.co.ao/", logo: "/imagens/Ixi Ambiental.png", color: "#2E7D5E" }
 ];

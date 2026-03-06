@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   const defaultConfig = {
     companyName: "ILUNGI Lda",
     taglineText: "O Melhor e Verdadeiro Parceiro Nacional.",
-    address: isPt ? 'Projeto Nova Vida, Prédio E209' : 'Nova Vida Project, Building E209',
+    address: isPt ? 'Urbanização Nova Vida, Rua 46, Edifício E209, Apartamento 24' : 'Nova Vida Urbanization, Street 46, Building E209, Apartment 24',
     phone: "+244 935 793 270",
     email: "geral@ilungi.ao",
     linkedinBaseUrl: "https://www.linkedin.com/company/33236785/admin/dashboard/"

@@ -73,7 +73,7 @@ export const translations: Record<'pt' | 'en', any> = {
       email: "Email",
       emailDesc: "Respostas em até 24 horas úteis.",
       location: "Localização",
-      locationDesc: "Luanda, Projeto Nova Vida, Prédio E209",
+      locationDesc: "Luanda, Urbanização Nova Vida, Rua 46, Edifício E209, Apartamento 24",
       teamOnline: "Nossa equipa de consultores está online.",
     },
     consulting: {
@@ -468,7 +468,7 @@ export const translations: Record<'pt' | 'en', any> = {
       email: "Email",
       emailDesc: "Responses within 24 business hours.",
       location: "Location",
-      locationDesc: "Luanda, Projeto Nova Vida, Prédio E209",
+      locationDesc: "Luanda, Urbanização Nova Vida, Rua 46, Edifício E209, Apartamento 24",
       teamOnline: "Our team of consultants is online.",
     },
     consulting: {

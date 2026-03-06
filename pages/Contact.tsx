@@ -267,7 +267,7 @@ const Contact: React.FC = () => {
                 {
                   icon: MapPin,
                   title: t.contact.location,
-                  details: [isPt ? 'Projeto Nova Vida' : 'Nova Vida Project'],
+                  details: [isPt ? 'Urbanização Nova Vida, Rua 46, Edifício E209, Apartamento 24' : 'Nova Vida Urbanization, Street 46, Building E209, Apartment 24'],
                   desc: 'Luanda, Angola',
                   color: '#6a00a3'
                 },

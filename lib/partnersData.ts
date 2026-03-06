@@ -13,8 +13,8 @@ export const defaultPartners: PartnerData[] = [
     name: 'GPMOi',
     url: 'https://gpmoi.org/',
     desc: {
-      pt: 'Especialistas em Governan\u00e7a de Projectos e Gest\u00e3o Estrat\u00e9gica.',
-      en: 'Specialists in Project Governance and Strategic Management.'
+      pt: 'Um instituto global projetado para PMOs culturalmente adaptáveis e liderados pela inovação',
+      en: 'A global institute designed for culturally adaptable and innovation-led PMOs'
     },
     logo: '/imagens/GPMoi.png',
     color: '#6a00a3'
@@ -24,8 +24,8 @@ export const defaultPartners: PartnerData[] = [
     name: 'CFC Institute',
     url: 'https://cfc-institute.org/',
     desc: {
-      pt: 'Institui\u00e7\u00e3o l\u00edder em certifica\u00e7\u00e3o financeira e compliance.',
-      en: 'Leading institution in financial certification and compliance.'
+      pt: 'Capacitando profissionais através de programas de certificação e treinamento de classe mundial que impulsionam o avanço da carreira e a excelência organizacional.',
+      en: 'Empowering professionals through world-class certification and training programs that drive career advancement and organizational excellence.'
     },
     logo: '/imagens/CFC-institute.png',
     color: '#0A4D8C'
@@ -33,10 +33,10 @@ export const defaultPartners: PartnerData[] = [
   {
     id: 'p3',
     name: 'Universal Certification and Services',
-    url: 'https://unicertservices.com/',
+    url: 'https://ucsiso.com/',
     desc: {
-      pt: 'L\u00edder em certifica\u00e7\u00e3o e servi\u00e7os de conformidade internacional.',
-      en: 'Leader in certification and international compliance services.'
+      pt: 'A Universal Certification and Services (UCS) é um órgão certificador que oferece certificação ISO, auditoria e serviços de treinamento. Credenciada pela ASIB e GAC, a UCS ajuda empresas a alcançar conformidade com normas internacionais, incluindo ISO 9001, 14001, 45001 e outras.',
+      en: 'Universal Certification and Services (UCS) is a certification body providing ISO certification, auditing, and training services. Accredited by ASIB and GAC, UCS helps businesses achieve compliance with international standards, including ISO 9001, 14001, 45001, and more.'
     },
     logo: '/imagens/UCS.png',
     color: '#6c0606'
@@ -57,8 +57,8 @@ export const defaultPartners: PartnerData[] = [
     name: 'Ixi Ambiental',
     url: 'https://www.ixiambiental.co.ao/',
     desc: {
-      pt: 'Parceiro estrat\u00e9gico para solu\u00e7\u00f5es de sustentabilidade em Angola.',
-      en: 'Strategic partner for sustainability solutions in Angola.'
+      pt: 'Especialistas em consultoria ambiental, monitoramento e preservação ambiental, gestão de resíduos, formação e treinamento.',
+      en: 'specialists in environmental consulting, environmental monitoring and preservation, waste management, education, and training.'
     },
     logo: '/imagens/Ixi Ambiental.png',
     color: '#2E7D5E'
