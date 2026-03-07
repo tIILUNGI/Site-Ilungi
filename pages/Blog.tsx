@@ -31,7 +31,7 @@ const Blog: React.FC = () => {
   // Internet images for other services
   const internetImages: { [key: string]: string } = {
     iso: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80',
-    projetos: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80',
+    projectos: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80',
     compliance: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80',
     formacao: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80',
     tecnologia: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80',
@@ -112,8 +112,8 @@ const Blog: React.FC = () => {
       content: '',
       author: 'Equipa ILUNGI',
       date: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      category: 'Gestão de Projetos',
-      image: internetImages.projetos,
+      category: 'Gestão de Projectos',
+      image: internetImages.projectos,
       status: 'published'
     },
     {

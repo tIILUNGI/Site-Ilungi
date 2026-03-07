@@ -48,7 +48,7 @@ const Home: React.FC = () => {
   const integratedSolutions = [
     { 
       title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS & PROJECTS", 
-      desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projetos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
+      desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projectos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
       icon: Shield, 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
@@ -174,7 +174,7 @@ const Home: React.FC = () => {
               {isPt ? 'O que fazemos' : 'What we do'}
             </span>
             <h2 className="text-4xl md:text-6xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Soluções Integradas' : 'Integrated Solutions'}</h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projeto' : 'From strategy to execution, we deliver excellence in every project'}</p>
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projecto' : 'From strategy to execution, we deliver excellence in every project'}</p>
           </motion.div>
 
           {/* Floating Elements - No Cards Design */}

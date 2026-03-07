@@ -404,7 +404,7 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     required
-                    placeholder={isPt ? 'Como podemos ajudar? Descreva o seu projeto ou dúvida...' : 'How can we help? Describe your project or question...'}
+                    placeholder={isPt ? 'Como podemos ajudar? Descreva o seu projecto ou dúvida...' : 'How can we help? Describe your project or question...'}
                     className="w-full px-5 py-4 rounded-xl bg-slate-50 border-2 border-transparent focus:border-[#6a00a3] focus:bg-white transition-all resize-none"
                   />
                 </div>
