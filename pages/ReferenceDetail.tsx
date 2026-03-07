@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../App';
 
 // Mapping of ISO references to their acquired norms/seals
@@ -24,9 +24,20 @@ const isoImages: Record<string, string> = {
 
 const ReferenceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
+  const serviceParam = searchParams.get('service');
   const { t, isDark, lang } = useAppContext();
   const isPt = lang === 'pt';
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  
+  // Determine the back link based on service parameter
+  const getBackLink = () => {
+    if (serviceParam === 'iso') return '/consultoria/iso';
+    if (serviceParam === 'risk') return '/consultoria/risco';
+    if (serviceParam === 'procurement') return '/consultoria/procurement';
+    if (serviceParam === 'pmo') return '/consultoria/pmo';
+    return '/consultoria';
+  };
   
   const references = t.references?.clients || [];
   const reference = references.find((ref: any) => ref.id === id);
@@ -52,10 +63,10 @@ const ReferenceDetail: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4">
         {/* Back Button */}
         <Link 
-          to="/consultoria" 
+          to={getBackLink()} 
           className={`inline-flex items-center mb-8 font-medium ${isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'}`}
         >
-          {isPt ? 'Voltar aos serviços' : 'Back to services'}
+          {isPt ? 'Voltar ao serviço' : 'Back to service'}
         </Link>
 
         <motion.div

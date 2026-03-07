@@ -104,7 +104,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
                     transition={{ delay: i * 0.05 }}
                     className="aspect-square rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group"
                   >
-                    <Link to={`/referencia/${ref.id}`} className="block w-full h-full">
+                    <Link to={`/referencia/${ref.id}?service=${type}`} className="block w-full h-full">
                       <img 
                         src={ref.logo} 
                         alt={ref.name}

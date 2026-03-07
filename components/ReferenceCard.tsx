@@ -87,7 +87,7 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
       
       {/* View Details Link */}
       <Link 
-        to={`/referencia/${reference.id}`}
+        to={`/referencia/${reference.id}?service=${reference.service}`}
         className={`mt-4 inline-flex text-sm font-semibold ${
           isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
         }`}
