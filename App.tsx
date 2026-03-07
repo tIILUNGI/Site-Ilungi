@@ -34,6 +34,7 @@ import AdminLogin from './pages/AdminLogin';
 import Certifications from './pages/Certifications';
 import CourseCatalog from './pages/CourseCatalog';
 import CoursePlayer from './pages/CoursePlayer';
+import Blog from './pages/Blog';
 import { AnimatePresence } from 'framer-motion';
 
 interface AppContextType {
@@ -214,6 +215,7 @@ const AppShell: React.FC = () => {
               <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
               <Route path="/parceiros" element={<Partners />} />
               <Route path="/contacto" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
               <Route path="/referencia/:id" element={<ReferenceDetail />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />

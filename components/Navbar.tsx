@@ -53,6 +53,7 @@ const Navbar: React.FC = () => {
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },
     { label: t.nav.contact, id: 'contact', path: '/contacto' },
+    { label: t.nav.blog, id: 'blog', path: '/blog' },
   ];
 
   const handleClick = (e: React.MouseEvent, item: any) => {
@@ -124,7 +125,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <Link 
                   to={item.path}
-                  className="flex items-center gap-1 font-medium px-4 py-2 h-full hover:text-[#6a00a3] transition-colors"
+                  className={`flex items-center gap-1 font-medium px-4 py-2 h-full hover:text-teal-600 transition-colors`}
                 >
                   <span>{item.label}</span>
                 </Link>

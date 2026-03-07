@@ -7,6 +7,7 @@ export const translations: Record<'pt' | 'en', any> = {
       academy: "Academia",
       solutions: "Soluções",
       partners: "Parceiros",
+      blog: "Blog",
       contact: "Contacto",
       iso: "Consultoria de Sistemas de Gestão & Projectos",
       risk: "Serviço de Notação de Risco",
@@ -362,7 +363,7 @@ export const translations: Record<'pt' | 'en', any> = {
         },
         {
           id: "petromar",
-          name: "PetroMar",
+          name: "Petromar",
           logo: "/Nossas Referências/PetroMar.jpg",
           role: "Serviço de Procurement",
           comment: "Serviço de procurement de excelência. A ILUNGI entregou com qualidade.",
@@ -402,6 +403,7 @@ export const translations: Record<'pt' | 'en', any> = {
       academy: "Academy",
       solutions: "Solutions",
       partners: "Partners",
+      blog: "Blog",
       contact: "Contact",
       iso: "Management Systems & Projects Consulting",
       risk: "Risk Rating Service",
@@ -757,7 +759,7 @@ export const translations: Record<'pt' | 'en', any> = {
         },
         {
           id: "petromar",
-          name: "PetroMar",
+          name: "Petromar",
           logo: "/Nossas Referências/PetroMar.jpg",
           role: "Procurement Service",
           comment: "Excellent procurement service. ILUNGI delivered with quality.",

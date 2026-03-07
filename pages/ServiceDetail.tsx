@@ -10,7 +10,7 @@ interface ServiceDetailProps {
 }
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
-  const { t, lang } = useAppContext();
+  const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
   const content = t.services[type];
 
@@ -31,6 +31,9 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
     };
     loadReferences();
   }, [t.references?.clients]);
+
+  // Check if this service should show image-only cards
+  const isImageOnlyService = type === 'procurement' || type === 'pmo';
 
   return (
     <div className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
@@ -87,12 +90,41 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
                 {t.references?.subtitle || (isPt ? 'Empresas que confiaram nos nossos serviços' : 'Companies that trusted our services')}
               </p>
           </div>
+          
           {serviceReferences.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {serviceReferences.map((ref: any, i: number) => (
-                <ReferenceCard key={ref.id} reference={ref} index={i} />
-              ))}
-            </div>
+            isImageOnlyService ? (
+              // Image-only grid for Procurement and PMO
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {serviceReferences.map((ref: any, i: number) => (
+                  <motion.div
+                    key={ref.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="aspect-square rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+                  >
+                    <Link to={`/referencia/${ref.id}`} className="block w-full h-full">
+                      <img 
+                        src={ref.logo} 
+                        alt={ref.name}
+                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">' + ref.name.charAt(0) + '</text></svg>';
+                        }}
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              // Standard card layout for other services
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {serviceReferences.map((ref: any, i: number) => (
+                  <ReferenceCard key={ref.id} reference={ref} index={i} />
+                ))}
+              </div>
+            )
           )}
         </div>
       </div>
