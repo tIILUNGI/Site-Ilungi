@@ -17,13 +17,14 @@ const CertificateVerify: React.FC = () => {
 
     // Mock search logic
     setTimeout(() => {
-      if (certId.toUpperCase() === 'ILUNGI-2024-001') {
+      const certCode = certId.toUpperCase().trim();
+      if (certCode.startsWith('ILUNGI') || certCode.startsWith('AILUNGI')) {
         setResult({
           valid: true,
-          student: "André Manuel Silveira",
-          course: "Lead Auditor ISO 27001",
-          issued: "15/05/2024",
-          id: "ILUNGI-2024-001"
+          student: "João Silva",
+          course: "Gestão de Projetos",
+          issued: "15/01/2024",
+          id: certCode
         });
       } else {
         setResult({ valid: false });
@@ -54,7 +55,7 @@ const CertificateVerify: React.FC = () => {
                         type="text" 
                         value={certId}
                         onChange={(e) => setCertId(e.target.value)}
-                        placeholder={isPt ? 'Ex: ILUNGI-2024-001' : 'e.g., ILUNGI-2024-001'}
+                        placeholder={isPt ? 'Ex: AILUNGI-2024-001' : 'e.g., AILUNGI-2024-001'}
                         className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-100 border-none focus:ring-2 focus:ring-[#6a00a3] transition-all"
                     />
                 </div>
@@ -82,7 +83,7 @@ const CertificateVerify: React.FC = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-slate-800">
-                                      {isPt ? 'Certificado V\u00e1lido' : 'Valid Certificate'}
+                                      {isPt ? 'Certificado Válido' : 'Valid Certificate'}
                                     </h3>
                                     <p className="text-green-600 font-medium">{isPt ? 'Documento autenticado no sistema ILUNGI' : 'Document authenticated in the ILUNGI system'}</p>
                                 </div>
@@ -98,11 +99,11 @@ const CertificateVerify: React.FC = () => {
                                     <p className="font-bold text-slate-800">{result.course}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'Data Emiss\u00e3o' : 'Issue Date'}</p>
+                                    <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'Data de Emissão' : 'Issue Date'}</p>
                                     <p className="font-bold text-slate-800">{result.issued}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'ID Certificado' : 'Certificate ID'}</p>
+                                    <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'ID do Certificado' : 'Certificate ID'}</p>
                                     <p className="font-bold text-slate-800">{result.id}</p>
                                 </div>
                             </div>
@@ -111,16 +112,12 @@ const CertificateVerify: React.FC = () => {
                                 <button className="flex-1 flex items-center justify-center space-x-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all">
                                     <span>{isPt ? 'Baixar PDF' : 'Download PDF'}</span>
                                 </button>
-                                <div className="p-2 border border-slate-200 rounded-2xl flex items-center justify-center">
-                                </div>
                             </div>
                         </div>
                     ) : (
                         <div className="text-center py-6">
-                            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            </div>
-                            <h3 className="text-xl font-bold text-red-700">{isPt ? 'Certificado n\u00e3o encontrado' : 'Certificate not found'}</h3>
-                            <p className="text-red-500 mt-2">{isPt ? 'O c\u00f3digo informado n\u00e3o corresponde a nenhum registro v\u00e1lido em nossa base de dados.' : 'The provided code does not match any valid record in our database.'}</p>
+                            <h3 className="text-xl font-bold text-red-700">{isPt ? 'Certificado não encontrado' : 'Certificate not found'}</h3>
+                            <p className="text-red-500 mt-2">{isPt ? 'O código informado não corresponde a nenhum registro válido em nossa base de dados.' : 'The provided code does not match any valid record in our database.'}</p>
                         </div>
                     )}
                 </motion.div>

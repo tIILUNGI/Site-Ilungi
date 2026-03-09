@@ -206,7 +206,7 @@ const Blog: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4">
           <button 
             onClick={() => setSelectedPost(null)}
-            className={`inline-flex items-center gap-2 mb-6 font-bold transition-colors ${isDark ? 'text-teal-500 hover:text-teal-400' : 'text-teal-600 hover:text-teal-700'}`}
+            className={`inline-flex items-center gap-2 mb-6 font-bold transition-colors ${isDark ? 'text-[#6a00a3] hover:text-[#520b7d]' : 'text-[#6a00a3] hover:text-[#520b7d]'}`}
           >
             <ArrowRight className="w-4 h-4 rotate-180" />
             {isPt ? 'Voltar ao Blog' : 'Back to Blog'}
@@ -229,7 +229,7 @@ const Blog: React.FC = () => {
             
             <div className="p-8 md:p-12">
               <div className="flex flex-wrap items-center gap-4 mb-6">
-                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${isDark ? 'bg-teal-500/20 text-teal-400' : 'bg-teal-100 text-teal-700'}`}>
+                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${isDark ? 'bg-[#6a00a3]/20 text-[#6a00a3]' : 'bg-[#6a00a3]/10 text-[#6a00a3]'}`}>
                   {selectedPost.category}
                 </span>
                 <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
@@ -269,88 +269,67 @@ const Blog: React.FC = () => {
   return (
     <div className={`min-h-screen pt-24 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
       {/* Header Style Newspaper */}
-      <div className={`border-b-4 border-teal-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+      <div className={`border-b-4 border-[#6a00a3] ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
+              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
+              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
             </div>
             <h1 className={`text-5xl md:text-6xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <span className="text-teal-600">ILUNGI</span> BLOG
+              <span className="text-[#6a00a3]">ILUNGI</span> HUB
             </h1>
             <p className={`text-lg mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               {isPt ? 'As suas notícias, análises e tendências sobre gestão, compliance e tecnologia' : 'Your news, analysis and trends on management, compliance and technology'}
             </p>
-            <div className={`flex items-center justify-center gap-4 mt-4 text-sm ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-              <span>{isPt ? 'Publicação diária' : 'Daily publication'}</span>
-              <span>•</span>
-              <span>{isPt ? 'Angola E o Mundo' : 'Angola and the World'}</span>
-              <span>•</span>
-              <span>{new Date().toLocaleDateString(isPt ? 'pt-AO' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
-            </div>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Featured Article - Main Headline */}
+        {/* Featured Articles - Banner Carousel */}
         {featuredPost && selectedCategory === 'all' && !searchTerm && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-12"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-teal-500" />
-              <span className="text-teal-600 font-bold uppercase tracking-wider text-sm">
-                {isPt ? 'Destaque' : 'Featured'}
-              </span>
-            </div>
-            
-            <div 
-              onClick={() => setSelectedPost(featuredPost)}
-              className={`group cursor-pointer rounded-2xl overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-2xl`}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="h-64 lg:h-80 overflow-hidden">
-                  <img 
-                    src={featuredPost.image || internetImages.default} 
-                    alt={featuredPost.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+            {/* Banner visual only - not clickable */}
+            <div className="rounded-3xl overflow-hidden relative h-[500px] shadow-2xl">
+              {/* Background Image */}
+              <img 
+                src={featuredPost.image || internetImages.default} 
+                alt={featuredPost.title}
+                className="w-full h-full object-cover"
+              />
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30"></div>
+              
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#6a00a3] text-white">
+                    {featuredPost.category}
+                  </span>
+                  <span className="text-white/70 text-sm">
+                    {formatDate(featuredPost.date)}
+                  </span>
                 </div>
-                <div className="p-8 lg:p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-500 text-white">
-                      {featuredPost.category}
-                    </span>
-                    <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                      {formatDate(featuredPost.date)}
-                    </span>
+                
+                <h2 className="text-3xl lg:text-4xl font-black mb-4 leading-tight text-white">
+                  {featuredPost.title}
+                </h2>
+                
+                <p className="text-base mb-6 text-white/80 max-w-2xl">
+                  {featuredPost.excerpt}
+                </p>
+                
+                <div className="flex items-center gap-2 text-sm font-medium text-white">
+                  <div className="w-8 h-8 rounded-full bg-[#6a00a3]/30 flex items-center justify-center">
+                    <User className="w-4 h-4 text-[#6a00a3]" />
                   </div>
-                  
-                  <h2 className={`text-2xl lg:text-3xl font-black mb-4 leading-tight group-hover:text-teal-600 transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                    {featuredPost.title}
-                  </h2>
-                  
-                  <p className={`text-base mb-6 line-clamp-3 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    {featuredPost.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center justify-between mt-auto">
-                    <div className={`flex items-center gap-2 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                      <div className="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center">
-                        <User className="w-4 h-4 text-teal-500" />
-                      </div>
-                      {featuredPost.author}
-                    </div>
-                    <div className="flex items-center gap-2 text-teal-600 font-bold group-hover:translate-x-2 transition-transform">
-                      {isPt ? 'Ler artigo' : 'Read article'}
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  </div>
+                  {featuredPost.author}
                 </div>
               </div>
             </div>
@@ -361,8 +340,8 @@ const Blog: React.FC = () => {
         {recentPosts.length > 0 && selectedCategory === 'all' && !searchTerm && (
           <section className="mb-12">
             <div className="flex items-center gap-2 mb-6">
-              <PlayCircle className="w-5 h-5 text-teal-500" />
-              <span className="text-teal-600 font-bold uppercase tracking-wider text-sm">
+              <PlayCircle className="w-5 h-5 text-[#6a00a3]" />
+              <span className="text-[#6a00a3] font-bold uppercase tracking-wider text-sm">
                 {isPt ? 'Mais recentes' : 'Most recent'}
               </span>
             </div>
@@ -384,14 +363,14 @@ const Blog: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="px-2 py-1 rounded text-xs font-bold bg-teal-500 text-white">
+                      <span className="px-2 py-1 rounded text-xs font-bold bg-[#6a00a3] text-white">
                         {post.category}
                       </span>
                     </div>
                   </div>
 
                   <div className="p-5">
-                    <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-teal-600 transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                    <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                       {post.title}
                     </h3>
                     
@@ -424,7 +403,7 @@ const Blog: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={isPt ? 'Pesquisar artigos...' : 'Search articles...'}
-                className={`w-full pl-12 pr-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'} focus:outline-none focus:ring-2 focus:ring-teal-500`}
+                className={`w-full pl-12 pr-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'} focus:outline-none focus:ring-2 focus:ring-[#6a00a3]`}
               />
             </div>
             
@@ -435,7 +414,7 @@ const Blog: React.FC = () => {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
                     selectedCategory === cat 
-                      ? 'bg-teal-500 text-white' 
+                      ? 'bg-[#6a00a3] text-white' 
                       : isDark 
                         ? 'bg-slate-700 text-slate-300 hover:bg-slate-600' 
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -451,8 +430,8 @@ const Blog: React.FC = () => {
         {/* All Articles Grid */}
         <section>
           <div className="flex items-center gap-2 mb-6">
-            <Tag className="w-5 h-5 text-teal-500" />
-            <span className="text-teal-600 font-bold uppercase tracking-wider text-sm">
+            <Tag className="w-5 h-5 text-[#6a00a3]" />
+            <span className="text-[#6a00a3] font-bold uppercase tracking-wider text-sm">
               {selectedCategory === 'all' && !searchTerm 
                 ? (isPt ? 'Todos os artigos' : 'All articles') 
                 : (isPt ? `Artigos de ${selectedCategory}` : `Articles in ${selectedCategory}`)}
@@ -479,14 +458,14 @@ const Blog: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="px-2 py-1 rounded text-xs font-bold bg-teal-500/90 text-white">
+                    <span className="px-2 py-1 rounded text-xs font-bold bg-[#6a00a3]/90 text-white">
                       {post.category}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-5">
-                  <h3 className={`text-base font-bold mb-2 line-clamp-2 group-hover:text-teal-600 transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                  <h3 className={`text-base font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                     {post.title}
                   </h3>
                   
@@ -496,7 +475,7 @@ const Blog: React.FC = () => {
 
                   <div className={`flex items-center justify-between text-xs pt-3 border-t ${isDark ? 'border-slate-700 text-slate-500' : 'border-slate-100 text-slate-400'}`}>
                     <span>{formatDate(post.date)}</span>
-                    <span className="flex items-center gap-1 text-teal-500 font-medium">
+                    <span className="flex items-center gap-1 text-[#6a00a3] font-medium">
                       {isPt ? 'Ler mais' : 'Read more'}
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>

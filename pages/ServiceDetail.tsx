@@ -93,8 +93,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
           
           {serviceReferences.length > 0 && (
             isImageOnlyService ? (
-              // Image-only grid for Procurement and PMO
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              // Image-only grid for Procurement and PMO - centered
+              <div className="flex flex-wrap justify-center gap-4">
                 {serviceReferences.map((ref: any, i: number) => (
                   <motion.div
                     key={ref.id}
@@ -102,13 +102,13 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="aspect-square rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+                    className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group"
                   >
                     <Link to={`/referencia/${ref.id}?service=${type}`} className="block w-full h-full">
                       <img 
                         src={ref.logo} 
                         alt={ref.name}
-                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">' + ref.name.charAt(0) + '</text></svg>';
                         }}

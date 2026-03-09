@@ -74,7 +74,7 @@ const ReferenceDetail: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className={`rounded-3xl p-8 ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}
         >
-          {/* Company Header */}
+          {/* Company Header - Only Name and Logo for ISO clients, no text */}
           <div className="flex items-center space-x-6 mb-8 pb-8 border-b border-slate-200 dark:border-slate-700">
             <div className="w-24 h-24 rounded-2xl overflow-hidden bg-slate-100 flex items-center justify-center">
               <img 
@@ -86,14 +86,9 @@ const ReferenceDetail: React.FC = () => {
                 }}
               />
             </div>
-            <div>
-              <h1 className={`text-3xl font-black mb-2 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                {reference.name}
-              </h1>
-              <p className={`text-lg ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
-                {reference.role}
-              </p>
-            </div>
+            <h1 className={`text-3xl font-black ${isDark ? 'text-white' : 'text-slate-800'}`}>
+              {reference.name}
+            </h1>
           </div>
 
           {/* Service Description or ISO Norms */}

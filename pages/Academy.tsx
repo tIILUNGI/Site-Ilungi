@@ -265,13 +265,15 @@ const Academy: React.FC = () => {
                 className="flex flex-col sm:flex-row justify-center gap-4"
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                  <Link 
-                    to="/academia/login" 
+                  <a 
+                    href="http://localhost:5173" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-10 py-4 bg-white text-[#6a00a3] rounded-full font-bold hover:shadow-2xl transition-all"
                   >
                     <GraduationCap className="w-5 h-5" />
                     {t.academy.banner.portal}
-                  </Link>
+                  </a>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <Link 

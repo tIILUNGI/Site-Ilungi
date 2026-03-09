@@ -293,18 +293,7 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "Gelson Salvador",
           service: "iso",
           description: "Consultoria e auditoria em sistemas de gestão.",
-          attachments: []
-        },
-        {
-          id: "saqia",
-          name: "SAQIA--Salvador e Quintas Arquitectura,Lda",
-          logo: "/Nossas Referências/SAQIA.png",
-          role: "Director Geral",
-          comment: "Foi muito bom ter trabalhado com vocês e pretendemos continuar futuramente pela manutenção e atualização.",
-          person: "Gelson Salvador",
-          service: "iso",
-          description: "Consultoria e auditoria em sistemas de gestão.",
-          attachments: []
+          attachments: ["/Nossas Referências/SAQIA.png"]
         },
         {
           id: "diway",
@@ -689,18 +678,7 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "Gelson Salvador",
           service: "iso",
           description: "Consulting and auditing of management systems.",
-          attachments: []
-        },
-        {
-          id: "saqia",
-          name: "SAQIA--Salvador e Quintas Arquitectura,Lda",
-          logo: "/Nossas Referências/SAQIA.png",
-          role: "General Director",
-          comment: "It was very good to work with you and we intend to continue in the future for maintenance and updates.",
-          person: "Gelson Salvador",
-          service: "iso",
-          description: "Consulting and auditing of management systems.",
-          attachments: []
+          attachments: ["/Nossas Referências/SAQIA.png"]
         },
         {
           id: "diway",
