@@ -286,7 +286,7 @@ const Blog: React.FC = () => {
             <div className={`flex items-center justify-center gap-4 mt-4 text-sm ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
               <span>{isPt ? 'Publicação diária' : 'Daily publication'}</span>
               <span>•</span>
-              <span>{isPt ? 'Angola & Portugal' : 'Angola & Portugal'}</span>
+              <span>{isPt ? 'Angola E o Mundo' : 'Angola and the World'}</span>
               <span>•</span>
               <span>{new Date().toLocaleDateString(isPt ? 'pt-AO' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
