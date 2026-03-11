@@ -217,33 +217,35 @@ const Solutions: React.FC = () => {
           {products.map((product, i) => {
             const isSiclic = product.name === "SICLIC";
             const isSalya = product.name === "Salya";
+            const isTocomply = product.name === "Tocomply360";
+            const isSpecialProduct = isSalya || isTocomply;
             return (
               <motion.div
                 key={i}
                 variants={cardVariants}
                 custom={i}
-                whileHover={{ y: isSiclic ? -8 : -12 }}
+                whileHover={{ y: (isSiclic || isSpecialProduct) ? -8 : -12 }}
                 className={`group relative bg-white rounded-3xl overflow-hidden shadow-xl transition-all duration-500 ${isSiclic ? 'hover:shadow-[0_24px_60px_-30px_rgba(106,0,163,0.45)]' : 'hover:shadow-2xl'}`}
               >
                 {/* Gradient border on hover */}
-                {!isSiclic && (
+                {!(isSiclic || isSpecialProduct) && (
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 )}
                 
                 <div className="relative bg-white rounded-[22px] m-0.5">
-                  {isSiclic ? (
+                  {isSiclic || isSpecialProduct ? (
                     <a
-                      href={product.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="SICLIC"
+                      href={product.url || product.path || '#'}
+                      target={product.url ? "_blank" : undefined}
+                      rel={product.url ? "noopener noreferrer" : undefined}
+                      aria-label={product.name}
                       className="block relative h-56 sm:h-64 rounded-[22px] bg-white overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.08),transparent_60%)]"></div>
                       <motion.img 
                         src={product.image} 
                         alt={product.name}
-                        className="relative z-10 w-full h-full object-contain"
+                        className="relative z-10 w-full h-full object-contain p-6"
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.6 }}
                       />
@@ -331,19 +333,19 @@ const Solutions: React.FC = () => {
                   )}
                 </div>
 
-                {/* Admin Tools */}
-                {isEditing && (
-                  <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
-                    <button
-                      onClick={() => {
-                        const newImg = prompt("URL da Imagem:", product.image);
-                        if(newImg) handleProductChange(i, 'image', newImg);
-                      }}
-                      className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
-                      title="Alterar Imagem"
-                    >
-                      <ImageIcon className="w-4 h-4" />
-                    </button>
+                  {/* Admin Tools */}
+                  {isEditing && (
+                    <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
+                      <button
+                        onClick={() => {
+                          const newImg = prompt("URL da Imagem:", product.image);
+                          if(newImg) handleProductChange(i, 'image', newImg);
+                        }}
+                        className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
+                        title="Alterar Imagem"
+                      >
+                        <ImageIcon className="w-4 h-4" />
+                      </button>
                     <button
                       onClick={() => handleDeleteProduct(i)}
                       className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
