@@ -10,7 +10,7 @@ export const translations: Record<'pt' | 'en', any> = {
       blog: "Blog",
       contact: "Contacto",
       iso: "Consultoria de Sistemas de Gestão & Projectos",
-      risk: "Serviço de Notação de Risco",
+      risk: "GRI - Sustentabilidade",
       procurement: "Procurement",
       pmo: "Assistência e Suporte de TI",
       alumni: "AILUNGI",
@@ -96,8 +96,8 @@ export const translations: Record<'pt' | 'en', any> = {
         desc: "Implementação de sistemas de gestão e condução de projectos de melhoria com foco em padrões e eficiência operacional."
       },
       risk: {
-        title: "Serviço de Notação de Risco",
-        desc: "Classificação e análise de riscos corporativos para suporte à decisão estratégica."
+        title: "GRI - Sustentabilidade",
+        desc: "GRI - Sustentabilidade"
       },
       procurement: {
         title: "Procurement",
@@ -153,7 +153,7 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       tocomply: {
         title: "ToComply360º",
-        desc: "Sistema baseado na cloud que garante flexibilidade e agilidade na gestão de processos de conformidade empresarial.",
+        desc: "Gest\u00e3o de Sistemas ISO",
       },
     },
     services: {
@@ -174,9 +174,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "SERVIÇO DE NOTAÇÃO DE RISCO",
-        desc: "Em processo de regularização pela CMC",
-        content: "\nO Serviço de notação de risco da ILUNGI tem como finalidade contribuir para a transparência, credibilidade e eficiência do mercado, através da avaliação independente da capacidade de cumprimento de obrigações financeiras por parte de entidades e instrumentos financeiros.\n"
+        title: "GRI - Sustentabilidade",
+        desc: "O nosso serviço de GRI-Sustentabilidade tem como propósito apoiar organizações na adoção de práticas responsáveis e transparentes, alinhadas às diretrizes internacionais da Global Reporting Initiative (GRI). Reconhecemos que a sustentabilidade é hoje um fator estratégico para a competitividade e reputação empresarial, e por isso oferecemos um acompanhamento completo na elaboração de relatórios que refletem o desempenho ambiental, social e de governança da sua empresa.",
+        content: ""
       },
       procurement: {
         title: "Procurement",
@@ -395,7 +395,7 @@ export const translations: Record<'pt' | 'en', any> = {
       blog: "Blog",
       contact: "Contact",
       iso: "Management Systems & Projects Consulting",
-      risk: "Risk Rating Service",
+      risk: "GRI - Sustentabilidade",
       procurement: "Procurement",
       pmo: "IT Assistance and Support",
       alumni: "AILUNGI",
@@ -481,8 +481,8 @@ export const translations: Record<'pt' | 'en', any> = {
         desc: "Implementation of management systems and improvement projects focused on standards and operational efficiency."
       },
       risk: {
-        title: "Risk Rating Service",
-        desc: "Corporate risk classification and analysis to support strategic decision-making."
+        title: "GRI - Sustentabilidade",
+        desc: "GRI - Sustentabilidade"
       },
       procurement: {
         title: "Procurement",
@@ -538,7 +538,7 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       tocomply: {
         title: "ToComply360º",
-        desc: "Cloud-based system that ensures flexibility and agility in managing corporate compliance processes.",
+        desc: "Gest\u00e3o de Sistemas ISO",
       },
     },
     services: {
@@ -559,9 +559,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "RISK RATING SERVICE",
-        desc: "Under regularization by the CMC",
-        content: "\nILUNGI's risk rating service aims to contribute to market transparency, credibility, and efficiency through the independent assessment of the ability to meet financial obligations by entities and financial instruments.\n"
+        title: "GRI - Sustentabilidade",
+        desc: "GRI - Sustentabilidade",
+        content: "GRI - Sustentabilidade"
       },
       procurement: {
         title: "PROCUREMENT",

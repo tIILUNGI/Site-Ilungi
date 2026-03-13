@@ -276,31 +276,33 @@ const Home: React.FC = () => {
                   <Award className="w-4 h-4" />
                   {isPt ? 'Sucesso comprovado' : 'Proven Success'}
                 </div>
-                <h3 className="text-3xl lg:text-4xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Transformação Digital Completa' : 'Complete Digital Transformation'}</h3>
+                <h3 className="text-3xl lg:text-4xl font-black text-[#1B3C2B] mb-6">
+                  {isPt ? 'Estratégias ESG e Relatórios GRI' : 'ESG Strategy & GRI Reporting'}
+                </h3>
                 <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                  {isPt 
-                    ? 'Ajudamos uma empresa de referência no setor industrial a implementar um sistema de gestão integrado que resultou em 45% de aumento na eficiência operacional e 30% de redução de custos.'
-                    : 'We helped a leading company in the industrial sector implement an integrated management system that resulted in 45% increase in operational efficiency and 30% cost reduction.'}
+                  {isPt
+                    ? 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'
+                    : 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'}
                 </p>
                 <div className="grid grid-cols-3 gap-6 mb-8">
                   <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">45%</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Eficiência' : 'Efficiency'}</div>
+                    <div className="text-3xl font-black text-[#6a00a3]">+100%</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Alinhamento com padr\u00f5es internacionais' : 'Alinhamento com padr\u00f5es internacionais'}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">30%</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Redução de custos' : 'Cost reduction'}</div>
+                    <div className="text-3xl font-black text-[#6a00a3]">ESG</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a' : 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a'}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">100%</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Conformidade ISO' : 'ISO Compliance'}</div>
+                    <div className="text-3xl font-black text-[#6a00a3]">GRI Standards</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Relat\u00f3rios reconhecidos globalmente' : 'Relat\u00f3rios reconhecidos globalmente'}</div>
                   </div>
                 </div>
                 <Link 
                   to="/contacto" 
                   className="inline-flex items-center gap-2 px-8 py-4 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all w-fit"
                 >
-                  {isPt ? 'Solicitar informações' : 'Request information'}
+                  {isPt ? 'Solicitar Consultoria GRI' : 'Solicitar Consultoria GRI'}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -311,7 +313,6 @@ const Home: React.FC = () => {
                     <Award className="w-12 h-12 text-white" />
                   </div>
                   <div className="text-white font-bold text-xl">{isPt ? 'Caso de Sucesso' : 'Success Story'}</div>
-                  <div className="text-white/70 text-sm mt-2">2024</div>
                 </div>
               </div>
             </div>

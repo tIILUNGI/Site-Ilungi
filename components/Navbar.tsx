@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
       description: isPt ? 'Consultoria especializada para o seu negócio' : 'Specialized consulting for your business',
       mega: [
         { title: t.nav.iso, desc: isPt ? t.navDescriptions.iso : t.navDescriptions.iso, path: '/consultoria/iso' },
-        { title: t.nav.risk, desc: isPt ? 'Emissão de Notação de Risco' : 'Issuance of Risk Notation', path: '/consultoria/risco' },
+        { title: t.nav.risk, desc: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade', path: '/consultoria/risco' },
         { title: t.nav.procurement, desc: isPt ? t.navDescriptions.procurement : t.navDescriptions.procurement, path: '/consultoria/procurement' },
         { title: t.nav.pmo, desc: isPt ? t.navDescriptions.pmo : t.navDescriptions.pmo, path: '/consultoria/pmo' },
       ]
@@ -46,9 +46,9 @@ const Navbar: React.FC = () => {
       path: '/solucoes',
       description: isPt ? 'Tecnologia para a sua gestão' : 'Technology for your management',
       mega: [
-        { title: "Salya", desc: isPt ? 'Plataforma de gestão e compliance' : 'Management and compliance platform', path: '/solucoes/salya' },
-        { title: "SICLIC", desc: isPt ? 'Sistema de compliance legal' : 'Legal compliance system', href: "https://siclic.ao/" },
-        { title: "Tocomply360", desc: isPt ? 'Gestão de Políticas, Programas e Processos' : 'Management of Policies, Programs, and Processes', path: '/solucoes/tocomply' },
+        { title: "Salya", desc: "", path: '/solucoes/salya' },
+        { title: "SICLIC", desc: "", href: "https://siclic.ao/" },
+        { title: "Tocomply360", desc: isPt ? 'Gestão de Sistemas ISO' : 'Gestão de Sistemas ISO', path: '/solucoes/tocomply' },
       ]
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },
@@ -163,9 +163,11 @@ const Navbar: React.FC = () => {
                                     <span className={`font-semibold text-base mb-0.5 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                       {sub.title}
                                     </span>
-                                    <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                                      {sub.desc}
-                                    </span>
+                                    {sub.desc && (
+                                      <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                        {sub.desc}
+                                      </span>
+                                    )}
                                   </a>
                                 ) : (
                                   <Link 
@@ -175,9 +177,11 @@ const Navbar: React.FC = () => {
                                     <span className={`font-semibold text-base mb-0.5 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                       {sub.title}
                                     </span>
-                                    <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                                      {sub.desc}
-                                    </span>
+                                    {sub.desc && (
+                                      <span className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                                        {sub.desc}
+                                      </span>
+                                    )}
                                   </Link>
                                 )}
                               </div>

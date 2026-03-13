@@ -151,8 +151,8 @@ const Blog: React.FC = () => {
     },
     {
       id: 'blog-11',
-      title: isPt ? 'Notação de Riscos Corporativos' : 'Corporate Risk Rating',
-      excerpt: isPt ? 'Serviços especializados de notação de riscos para ajudar as empresas angolanas a tomar decisões informadas.' : 'Specialized risk rating services to help Angolan companies make informed decisions.',
+      title: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade',
+      excerpt: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade',
       content: '',
       author: 'Equipa ILUNGI',
       date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],

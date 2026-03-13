@@ -51,15 +51,8 @@ const Solutions: React.FC = () => {
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "");
       };
-      const legacyTocomplyDescPt = normalizeText(
-        "Solução 360 graus para governança corporativa, integrando ética, risco e transparência. Framework completo para gestão de políticas, programas e processos."
-      );
-      const legacyTocomplyDescEn = normalizeText(
-        "360-degree solution for corporate governance, integrating ethics, risk and transparency. Complete framework for policies, programs and processes management."
-      );
-      const newTocomplyDesc = isPt
-        ? "Plataforma para gestão de políticas, programas e processos, assegurando padronização, rastreabilidade e melhoria contínua."
-        : "Platform for managing policies, programs, and processes, ensuring standardization, traceability, and continuous improvement.";
+      const newTocomplyDesc = "Gestão de Sistemas ISO";
+      const newTocomplyDescNormalized = normalizeText(newTocomplyDesc);
       let changed = false;
       const normalized = data.map((product: any) => {
         const name = normalizeText(product.name);
@@ -94,10 +87,11 @@ const Solutions: React.FC = () => {
           updated = { ...updated, image: "/imagens/Tocomply360.png" };
           updatedFlag = true;
         }
-        if (
-          isTocomplyProduct &&
-          (desc === legacyTocomplyDescPt || desc === legacyTocomplyDescEn)
-        ) {
+        if (isTocomplyProduct && tagline !== newTocomplyDescNormalized) {
+          updated = { ...updated, tagline: newTocomplyDesc };
+          updatedFlag = true;
+        }
+        if (isTocomplyProduct && desc !== newTocomplyDescNormalized) {
           updated = { ...updated, desc: newTocomplyDesc };
           updatedFlag = true;
         }

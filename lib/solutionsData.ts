@@ -38,10 +38,10 @@ export const getDefaultSolutions = (isPt: boolean): SolutionData[] => [
   {
     id: 's3',
     name: 'Tocomply360',
-    tagline: isPt ? 'Gest\u00e3o de Pol\u00edticas, Programas e Processos' : 'Policies, Programs and Processes Management',
+    tagline: isPt ? 'Gest\u00e3o de Sistemas ISO' : 'Gest\u00e3o de Sistemas ISO',
     desc: isPt
-      ? 'Plataforma para gest\u00e3o de pol\u00edticas, programas e processos, assegurando padroniza\u00e7\u00e3o, rastreabilidade e melhoria cont\u00ednua.'
-      : 'Platform for managing policies, programs, and processes, ensuring standardization, traceability, and continuous improvement.',
+      ? 'Gest\u00e3o de Sistemas ISO'
+      : 'Gest\u00e3o de Sistemas ISO',
     image: '/imagens/Tocomply360.png',
     path: '/solucoes/tocomply',
     color: 'from-slate-700 to-slate-900',

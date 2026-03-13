@@ -17,12 +17,12 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
       ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
       : productName === 'SICLIC'
         ? 'Compliance Intelligence e Gest\u00e3o Normativa'
-        : 'Gest\u00e3o de Pol\u00edticas, Programas e Processos'
+        : 'Gest\u00e3o de Sistemas ISO'
     : productName === 'Salya'
       ? 'Payroll and Human Resources'
       : productName === 'SICLIC'
         ? 'Compliance Intelligence and Regulatory Management'
-        : 'Policies, Programs and Processes Management';
+        : 'Gest\u00e3o de Sistemas ISO';
 
   const heroSubtitle = isPt
     ? productName === 'Tocomply360'

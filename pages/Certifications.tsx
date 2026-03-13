@@ -11,8 +11,6 @@ const Certifications: React.FC = () => {
       title: 'ISO 9001:2015',
       subtitle: isPt ? 'Sistema de Gestão ISO' : 'ISO Management System',
       desc: isPt ? 'Certificação internacional que garante a excelência dos nossos processos e a satisfação dos nossos clientes.' : 'International certification that guarantees the excellence of our processes and customer satisfaction.',
-      date: '2024',
-      validity: '2028',
       color: '#1B3C2B',
       badge: isPt ? 'Certificado' : 'Certified'
     },
@@ -20,8 +18,6 @@ const Certifications: React.FC = () => {
       title: 'ANPG',
       subtitle: isPt ? 'Indústria Petrolífera' : 'Petroleum Industry',
       desc: isPt ? 'Certificação pela ANPG para prestação de serviços à indústria petrolífera.' : 'ANPG certification for petroleum industry services.',
-      date: '2024',
-      validity: '2028',
       color: '#6a00a3',
       badge: isPt ? 'Certificado' : 'Certified'
     },
@@ -29,8 +25,6 @@ const Certifications: React.FC = () => {
       title: 'INEFOP',
       subtitle: isPt ? 'Formação Profissional' : 'Professional Training',
       desc: isPt ? 'Licença pelo INEFOP para prestação de serviços de formação profissional.' : 'INEFOP license for professional training services.',
-      date: '2024',
-      validity: '2028',
       color: '#0A4D8C',
       badge: isPt ? 'Licença' : 'License'
     },
@@ -38,8 +32,6 @@ const Certifications: React.FC = () => {
       title: 'CPD UK',
       subtitle: isPt ? 'Cursos Profissionais' : 'Professional Courses',
       desc: isPt ? 'Registo pelo CPD UK para ministração de cursos profissionais no Reino Unido.' : 'CPD UK registration for professional courses in the United Kingdom.',
-      date: '2024',
-      validity: '2028',
       color: '#B31B1B',
       badge: isPt ? 'Registo' : 'Registered'
     },
@@ -47,8 +39,6 @@ const Certifications: React.FC = () => {
       title: 'INIQ',
       subtitle: isPt ? 'Sistemas de Gestão de Qualidade' : 'Quality Management Systems',
       desc: isPt ? 'Registo e formação em sistemas de gestão de qualidade.' : 'Registration and training in quality management systems.',
-      date: '2024',
-      validity: '2028',
       color: '#dc6516',
       badge: isPt ? 'Registo' : 'Registered'
     },
@@ -56,8 +46,6 @@ const Certifications: React.FC = () => {
       title: 'GPMOi',
       subtitle: isPt ? 'Formação Profissional' : 'Professional Training',
       desc: isPt ? 'Parceria estratégica para cursos de formação profissional e certificação.' : 'Strategic partnership for professional training courses and certification.',
-      date: '2024',
-      validity: '2028',
       color: '#4c0253',
       badge: isPt ? 'Acreditado' : 'Accredited'
     }
@@ -181,21 +169,6 @@ const Certifications: React.FC = () => {
                     {cert.desc}
                   </p>
 
-                  {/* Certificate Details - Ano e Validade */}
-                  <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
-                    <div className="text-center">
-                      <span className="text-xs font-bold text-slate-400 uppercase block">
-                        {isPt ? 'Ano' : 'Year'}
-                      </span>
-                      <span className="text-sm font-black text-slate-700">{cert.date}</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="text-xs font-bold text-slate-400 uppercase block">
-                        {isPt ? 'Validade' : 'Validity'}
-                      </span>
-                      <span className="text-sm font-black" style={{ color: cert.color }}>{cert.validity}</span>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Bottom accent line */}
@@ -222,7 +195,7 @@ const Certifications: React.FC = () => {
               : 'Our certifications are internationally recognized'}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 opacity-50">
-            {['ISO', 'IAF', 'CPD', 'ANPG', 'INEFOP'].map((item, i) => (
+            {['ISO', 'ANPG', 'INEFOP'].map((item, i) => (
               <div key={i} className="text-3xl font-black text-slate-300 tracking-wider">{item}</div>
             ))}
           </div>

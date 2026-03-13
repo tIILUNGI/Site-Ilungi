@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadConfig } from '../lib/dataSync';
 
@@ -44,13 +44,7 @@ const Footer: React.FC = () => {
             <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
           </button>
           
-          <p className="text-sm text-slate-300 italic">
-            {isPt
-              ? 'Estrutura gera previsibilidade. Previsibilidade gera reputação. Reputação gera crescimento.'
-              : 'Structure generates predictability. Predictability generates reputation. Reputation generates growth.'}
-          </p>
-          
-          <div className="flex space-x-4">
+          <div className="flex items-center gap-4">
             <a href={config.linkedinBaseUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Linkedin className="w-5 h-5" />
             </a>
@@ -59,9 +53,6 @@ const Footer: React.FC = () => {
             </a>
             <a href="https://www.facebook.com/op.ilungi" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Facebook className="w-5 h-5" />
-            </a>
-            <a href={`https://wa.me/${config.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
-              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
         </div>
