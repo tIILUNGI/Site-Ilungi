@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
+import { loadData } from '../lib/dataSync';
 
 interface ServiceDetailProps {
   type: 'risk' | 'procurement' | 'pmo';
@@ -20,17 +21,21 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
     pmo: "/imagens/Assistência e suporte de TI.jpg.jpeg"
   };
 
-  const [references, setReferences] = useState<any[]>([]);
+  const defaultReferences = t.references?.clients || [];
+  const [references, setReferences] = useState<any[]>(defaultReferences);
   const serviceReferences = references.filter((ref: any) => ref.service === type);
 
   useEffect(() => {
-    // Force reload from translations to ensure latest data
-    const loadReferences = async () => {
-      const defaultRefs = t.references?.clients || [];
-      setReferences(defaultRefs);
+    let isMounted = true;
+    setReferences(defaultReferences);
+    loadData('references', 'ilungi_references_data', defaultReferences).then((data) => {
+      if (!isMounted) return;
+      setReferences(data || []);
+    });
+    return () => {
+      isMounted = false;
     };
-    loadReferences();
-  }, [t.references?.clients]);
+  }, [lang]);
 
   // Check if this service should show image-only cards
   const isImageOnlyService = type === 'procurement' || type === 'pmo';

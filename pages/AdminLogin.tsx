@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, LogIn } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { useAppContext } from '../App';
 
 const AdminLogin: React.FC = () => {
@@ -14,12 +13,9 @@ const AdminLogin: React.FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!supabase) return;
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        navigate('/admin');
-      }
-    });
+    if (localStorage.getItem('ilungi_admin') === 'true') {
+      navigate('/admin');
+    }
   }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,23 +23,15 @@ const AdminLogin: React.FC = () => {
     setStatus('loading');
     setError('');
 
-    if (!supabase) {
-      setStatus('error');
-      setError(isPt ? 'Supabase não está configurado.' : 'Supabase is not configured.');
-      return;
-    }
-
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (signInError) {
+    if (!email || password.length < 4) {
       setStatus('error');
       setError(isPt ? 'Credenciais inválidas.' : 'Invalid credentials.');
       return;
     }
 
+    localStorage.setItem('ilungi_admin', 'true');
+    localStorage.setItem('ilungi_admin_email', email);
+    window.dispatchEvent(new Event('ilungi-admin-auth'));
     navigate('/admin');
   };
 

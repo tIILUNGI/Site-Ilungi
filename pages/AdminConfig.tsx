@@ -17,16 +17,6 @@ const AdminConfig: React.FC = () => {
     const localData = getContent(lang);
     setContent(localData);
     setEditedContent(localData);
-    let isMounted = true;
-    syncContentFromRemote().then((updated) => {
-      if (!isMounted || !updated) return;
-      const data = getContent(lang);
-      setContent(data);
-      setEditedContent(data);
-    });
-    return () => {
-      isMounted = false;
-    };
   }, [lang]);
 
   const handleSave = () => {

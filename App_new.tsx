@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { translations } from './translations';
 import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
-import { supabase } from './lib/supabase';
 import { AlumniAuthProvider } from './lib/authContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -63,48 +62,23 @@ const ScrollToTop = () => {
 };
 
 const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { lang } = useAppContext();
-  const isPt = lang === 'pt';
-  const [checking, setChecking] = useState(true);
-  const [hasSession, setHasSession] = useState(false);
+  const [isAllowed, setIsAllowed] = useState<boolean>(() => {
+    return localStorage.getItem('ilungi_admin') === 'true';
+  });
 
   useEffect(() => {
-    let isMounted = true;
-    if (!supabase) {
-      setChecking(false);
-      return;
-    }
-    supabase.auth.getSession().then(({ data }) => {
-      if (!isMounted) return;
-      setHasSession(!!data.session);
-      setChecking(false);
-    });
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setHasSession(!!session);
-    });
+    const sync = () => {
+      setIsAllowed(localStorage.getItem('ilungi_admin') === 'true');
+    };
+    window.addEventListener('storage', sync);
+    window.addEventListener('ilungi-admin-auth', sync);
     return () => {
-      isMounted = false;
-      authListener?.subscription?.unsubscribe();
+      window.removeEventListener('storage', sync);
+      window.removeEventListener('ilungi-admin-auth', sync);
     };
   }, []);
 
-  if (!supabase) {
-    return (
-      <div className="pt-32 text-center text-slate-500">
-        {isPt ? 'Supabase não está configurado.' : 'Supabase is not configured.'}
-      </div>
-    );
-  }
-
-  if (checking) {
-    return (
-      <div className="pt-32 text-center text-slate-500">
-        {isPt ? 'A carregar...' : 'Loading...'}
-      </div>
-    );
-  }
-
-  if (!hasSession) {
+  if (!isAllowed) {
     return <Navigate to="/admin/login" replace />;
   }
 

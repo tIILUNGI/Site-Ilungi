@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { useAlumniAuth } from '../lib/authContext';
 import { defaultCourses } from '../lib/courseCatalogData';
+import { loadData } from '../lib/dataSync';
 
 const AILUNGIPortal: React.FC = () => {
   const { t, lang } = useAppContext();
@@ -13,6 +14,7 @@ const AILUNGIPortal: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [courses, setCourses] = useState(defaultCourses);
   
   // Check if user is logged in
   useEffect(() => {
@@ -20,8 +22,14 @@ const AILUNGIPortal: React.FC = () => {
     setIsLoading(false);
   }, [user]);
 
+  useEffect(() => {
+    loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
+      setCourses(data);
+    });
+  }, []);
+
   // Filter courses based on search
-  const availableCourses = defaultCourses.filter(course => 
+  const availableCourses = courses.filter(course => 
     course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     course.area.toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(0, 6);

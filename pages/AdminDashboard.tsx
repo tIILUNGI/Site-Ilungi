@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, Building, GraduationCap, LogOut } from 'lucide-react';
 import { useAppContext } from '../App';
-import { supabase } from '../lib/supabase';
 
 const AdminDashboard: React.FC = () => {
   const { lang, isDark } = useAppContext();
@@ -11,9 +10,9 @@ const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    if (supabase) {
-      await supabase.auth.signOut();
-    }
+    localStorage.removeItem('ilungi_admin');
+    localStorage.removeItem('ilungi_admin_email');
+    window.dispatchEvent(new Event('ilungi-admin-auth'));
     navigate('/admin/login');
   };
 

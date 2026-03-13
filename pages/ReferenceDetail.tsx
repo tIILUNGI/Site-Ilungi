@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { loadData } from '../lib/dataSync';
 
 // Mapping of ISO references to their acquired norms/seals
 const isoNorms: Record<string, { norms: string[], asib: boolean }> = {
@@ -39,7 +40,20 @@ const ReferenceDetail: React.FC = () => {
     return '/consultoria';
   };
   
-  const references = t.references?.clients || [];
+  const defaultReferences = t.references?.clients || [];
+  const [references, setReferences] = useState<any[]>(defaultReferences);
+  useEffect(() => {
+    let isMounted = true;
+    setReferences(defaultReferences);
+    loadData('references', 'ilungi_references_data', defaultReferences).then((data) => {
+      if (!isMounted) return;
+      setReferences(data || []);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [lang]);
+
   const reference = references.find((ref: any) => ref.id === id);
   const clientNorms = id ? isoNorms[id] : null;
 

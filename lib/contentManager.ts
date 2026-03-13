@@ -1,11 +1,10 @@
 import { translations } from '../translations';
 import { Language } from '../types';
-import { supabase } from './supabase';
 
 // Default content from translations
 const defaultContent = translations;
 
-const CONTENT_VERSION = '2026-03-03-6';
+const CONTENT_VERSION = '2026-03-13-1';
 const CONTENT_VERSION_KEY = 'ilungi_content_version';
 const CONTENT_FORCE_KEY = 'ilungi_content_force_version';
 const CONTENT_BASE_KEY_PREFIX = 'ilungi_content_base_';
@@ -25,9 +24,6 @@ const markContentVersion = () => {
 };
 
 const isObject = (value: any) => value && typeof value === 'object' && !Array.isArray(value);
-
-const REMOTE_TABLE = 'site_content';
-const REMOTE_ROW_ID = 1;
 
 const mergeArrayById = (base: any[], override: any[]) => {
   const baseById = new Map<string, any>();
@@ -335,55 +331,16 @@ export const syncContentFromRemote = async (): Promise<boolean> => {
   })();
   if (didBump || forceDefaults) {
     setLocalDefaults();
-    if (supabase) {
-      try {
-        await supabase.from(REMOTE_TABLE).upsert(
-          { id: REMOTE_ROW_ID, pt: defaultContent.pt, en: defaultContent.en },
-          { onConflict: 'id' }
-        );
-        try {
-          localStorage.removeItem(CONTENT_FORCE_KEY);
-        } catch {}
-      } catch (e) {
-        console.error('Error saving default content to remote:', e);
-      }
-    }
+    try {
+      localStorage.removeItem(CONTENT_FORCE_KEY);
+    } catch {}
     return true;
   }
-  if (!supabase) return false;
-  try {
-    const { data, error } = await supabase
-      .from(REMOTE_TABLE)
-      .select('pt,en')
-      .eq('id', REMOTE_ROW_ID)
-      .single();
-    if (error || !data) return false;
-
-    if (data.pt) {
-      localStorage.setItem('ilungi_content_pt', JSON.stringify(data.pt));
-    }
-    if (data.en) {
-      localStorage.setItem('ilungi_content_en', JSON.stringify(data.en));
-    }
-    return true;
-  } catch (e) {
-    console.error('Error loading remote content:', e);
-    return false;
-  }
+  return true;
 };
 
 const saveAllContentRemote = async (): Promise<void> => {
-  if (!supabase) return;
-  try {
-    const pt = getStoredContent('pt');
-    const en = getStoredContent('en');
-    await supabase.from(REMOTE_TABLE).upsert(
-      { id: REMOTE_ROW_ID, pt, en },
-      { onConflict: 'id' }
-    );
-  } catch (e) {
-    console.error('Error saving remote content:', e);
-  }
+  return;
 };
 
 // Get content from localStorage or use defaults

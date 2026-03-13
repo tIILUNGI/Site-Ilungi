@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { translations } from './translations';
 import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
-import { supabase } from './lib/supabase';
 import { purgeAllDataIfNeeded, setDataMode } from './lib/dataSync';
 import { AlumniAuthProvider } from './lib/authContext';
 import Navbar from './components/Navbar';
@@ -64,63 +63,23 @@ const ScrollToTop = () => {
 };
 
 const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { lang } = useAppContext();
-  const isPt = lang === 'pt';
-  const [checking, setChecking] = useState(true);
-  const [hasSession, setHasSession] = useState(false);
+  const [isAllowed, setIsAllowed] = useState<boolean>(() => {
+    return localStorage.getItem('ilungi_admin') === 'true';
+  });
 
   useEffect(() => {
-    let isMounted = true;
-    let timeoutId: number | undefined;
-    if (!supabase) {
-      setChecking(false);
-      return;
-    }
-    timeoutId = window.setTimeout(() => {
-      if (!isMounted) return;
-      setHasSession(false);
-      setChecking(false);
-    }, 6000);
-    supabase.auth.getSession()
-      .then(({ data }) => {
-        if (!isMounted) return;
-        setHasSession(!!data.session);
-        setChecking(false);
-      })
-      .catch(() => {
-        if (!isMounted) return;
-        setHasSession(false);
-        setChecking(false);
-      });
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!isMounted) return;
-      setHasSession(!!session);
-      setChecking(false);
-    });
+    const sync = () => {
+      setIsAllowed(localStorage.getItem('ilungi_admin') === 'true');
+    };
+    window.addEventListener('storage', sync);
+    window.addEventListener('ilungi-admin-auth', sync);
     return () => {
-      isMounted = false;
-      if (timeoutId) window.clearTimeout(timeoutId);
-      authListener?.subscription?.unsubscribe();
+      window.removeEventListener('storage', sync);
+      window.removeEventListener('ilungi-admin-auth', sync);
     };
   }, []);
 
-  if (!supabase) {
-    return (
-      <div className="pt-32 text-center text-slate-500">
-        {isPt ? 'Supabase não está configurado.' : 'Supabase is not configured.'}
-      </div>
-    );
-  }
-
-  if (checking) {
-    return (
-      <div className="pt-32 text-center text-slate-500">
-        {isPt ? 'A carregar...' : 'Loading...'}
-      </div>
-    );
-  }
-
-  if (!hasSession) {
+  if (!isAllowed) {
     return <Navigate to="/admin/login" replace />;
   }
 
@@ -161,11 +120,11 @@ const AppShell: React.FC = () => {
     setDataMode(isAdminRoute ? 'admin' : 'public');
   }, [isAdminRoute]);
 
-  const [t, setT] = useState<any>(() => (isAdminRoute ? getContent(lang) : translations[lang]));
+  const [t, setT] = useState<any>(() => getContent(lang));
 
   useEffect(() => {
-    setT(isAdminRoute ? getContent(lang) : translations[lang]);
-  }, [lang, isAdminRoute]);
+    setT(getContent(lang));
+  }, [lang]);
 
   useEffect(() => {
     if (!isAdminRoute) return;
@@ -173,16 +132,17 @@ const AppShell: React.FC = () => {
   }, [isAdminRoute]);
 
   useEffect(() => {
-    if (!isAdminRoute) return;
     let isMounted = true;
-    syncContentFromRemote().then((updated) => {
-      if (!isMounted || !updated) return;
-      setT(getContent(lang));
-    });
     const handleContentUpdate = () => {
       setT(getContent(lang));
     };
     window.addEventListener('ilungi-content-updated', handleContentUpdate);
+    if (!isAdminRoute) {
+      syncContentFromRemote().then((updated) => {
+        if (!isMounted || !updated) return;
+        setT(getContent(lang));
+      });
+    }
     return () => {
       isMounted = false;
       window.removeEventListener('ilungi-content-updated', handleContentUpdate);

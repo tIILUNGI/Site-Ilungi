@@ -3,14 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useAppContext } from '../App';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ChevronLeft, Award, Shield, Zap, Globe, BarChart3, Layers, Cpu, Lock, Briefcase, Settings, TrendingUp } from 'lucide-react';
-
-const partners = [
-  { name: "GPMOi", url: "https://gpmoi.org/", logo: "/imagens/GPMoi.png", color: "#4c0253" },
-  { name: "CFC Institute", url: "https://cfc-institute.org/", logo: "/imagens/CFC-institute.png", color: "#031f3a" },
-  { name: "UCS", url: "https://ucsiso.com/", logo: "/imagens/UCS.png", color: "#550b06" },
-  { name: "Nova Select", url: "https://novaselect.co/index.html", logo: "/imagens/Nova Select.png", color: "#dc6516" },
-  { name: "Ixi Ambiental", url: "https://www.ixiambiental.co.ao/", logo: "/imagens/Ixi Ambiental.png", color: "#2E7D5E" }
-];
+import { loadData } from '../lib/dataSync';
+import { defaultPartners } from '../lib/partnersData';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
@@ -44,6 +38,7 @@ const Home: React.FC = () => {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [partners, setPartners] = useState(defaultPartners);
 
   const integratedSolutions = [
     { 
@@ -80,6 +75,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 7000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    loadData('partners', 'ilungi_partners_data', defaultPartners).then(data => {
+      setPartners(data);
+    });
   }, []);
 
   const handleServicesScroll = (direction: 'prev' | 'next') => {

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { ArrowRight, Clock, GraduationCap, CheckCircle } from 'lucide-react';
+import { loadData } from '../lib/dataSync';
+import { Course, defaultCourses } from '../lib/courseCatalogData';
 
 // Animation variants
 const containerVariants = {
@@ -26,32 +28,27 @@ const Academy: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
 
-  const courses = [
-    { 
-      title: isPt ? "Lead Auditor ISO 9001" : "Lead Auditor ISO 9001", 
-      duration: "40h", 
-      level: isPt ? "Expert" : "Expert",
-      image: "/imagens/Lead Auditor ISO 9001.png"
-    },
-    { 
-      title: isPt ? "Lean Six Sigma - Green Belt" : "Lean Six Sigma - Green Belt", 
-      duration: "60h", 
-      level: isPt ? "Expert" : "Expert",
-      image: "/imagens/Lean Six Sigma - Green Belt.png"
-    },
-    { 
-      title: isPt ? "Compliance & Integridade" : "Compliance & Integrity", 
-      duration: "16h", 
-      level: isPt ? "Base" : "Basic",
-      image: "/imagens/Compliance & Integridade.jpg"
-    },
-    { 
-      title: isPt ? "Gestão de Riscos Corporativos" : "Corporate Risk Management", 
-      duration: "24h", 
-      level: isPt ? "Intermédio" : "Intermediate",
-      image: "/imagens/Gestão de Riscos Corporativos.png"
-    },
+  const [courses, setCourses] = useState<Course[]>(defaultCourses);
+
+  useEffect(() => {
+    loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
+      setCourses(data);
+    });
+  }, []);
+
+  const courseImages = [
+    "/imagens/Lead Auditor ISO 9001.png",
+    "/imagens/Lean Six Sigma - Green Belt.png",
+    "/imagens/Compliance & Integridade.jpg",
+    "/imagens/Gestão de Riscos Corporativos.png"
   ];
+
+  const featuredCourses = courses.slice(0, 4).map((course, index) => ({
+    title: course.name,
+    duration: course.hours || (isPt ? "A definir" : "TBD"),
+    level: course.area || (isPt ? "Curso" : "Course"),
+    image: courseImages[index % courseImages.length]
+  }));
 
   const features = [
     { 
@@ -166,7 +163,7 @@ const Academy: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {courses.map((course, i) => (
+            {featuredCourses.map((course, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}

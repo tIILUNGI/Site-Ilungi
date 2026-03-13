@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { supabase } from './supabase';
-import { User, Session } from '@supabase/supabase-js';
 
 interface AlumniUser {
   id: string;
@@ -11,9 +9,11 @@ interface AlumniUser {
   created_at: string;
 }
 
+type Session = null;
+
 interface AuthContextType {
   user: AlumniUser | null;
-  session: Session | null;
+  session: Session;
   loading: boolean;
   signUp: (email: string, password: string, nomeCompleto: string, receberNotificacoes: boolean) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
@@ -35,113 +35,98 @@ interface AlumniAuthProviderProps {
   children: ReactNode;
 }
 
+const STORAGE_PROFILE = 'alumni_profile';
+const STORAGE_EMAIL = 'alumni_email';
+const STORAGE_LOGGED = 'alumni_logged_in';
+
+const readStoredUser = (): AlumniUser | null => {
+  try {
+    const raw = localStorage.getItem(STORAGE_PROFILE);
+    if (raw) return JSON.parse(raw) as AlumniUser;
+    const email = localStorage.getItem(STORAGE_EMAIL);
+    if (!email) return null;
+    return {
+      id: `local-${email}`,
+      email,
+      nome_completo: email.split('@')[0] || 'Aluno',
+      receber_notificacoes: false,
+      email_confirmado: false,
+      created_at: new Date().toISOString()
+    };
+  } catch {
+    return null;
+  }
+};
+
+const storeUser = (user: AlumniUser) => {
+  try {
+    localStorage.setItem(STORAGE_PROFILE, JSON.stringify(user));
+    localStorage.setItem(STORAGE_EMAIL, user.email);
+  } catch {}
+};
+
+const setLoggedIn = (value: boolean) => {
+  try {
+    localStorage.setItem(STORAGE_LOGGED, value ? 'true' : 'false');
+  } catch {}
+};
+
 export const AlumniAuthProvider: React.FC<AlumniAuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AlumniUser | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<Session>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check active session
-    const initializeAuth = async () => {
-      if (!supabase) {
-        setLoading(false);
-        return;
-      }
-
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      
-      if (session?.user) {
-        // Fetch user profile from custom table
-        const { data: profile } = await supabase
-          .from('alunos')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        
-        if (profile) {
-          setUser(profile);
-        }
-      }
+    const sync = () => {
+      const logged = localStorage.getItem(STORAGE_LOGGED) === 'true';
+      const stored = readStoredUser();
+      setUser(logged ? stored : null);
       setLoading(false);
     };
 
-    initializeAuth();
-
-    // Listen for auth changes
-    if (supabase) {
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-        setSession(session);
-        
-        if (session?.user) {
-          const { data: profile } = await supabase
-            .from('alunos')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          
-          if (profile) {
-            setUser(profile);
-          }
-        } else {
-          setUser(null);
-        }
-        setLoading(false);
-      });
-
-      return () => subscription.unsubscribe();
-    }
+    sync();
+    window.addEventListener('storage', sync);
+    window.addEventListener('ilungi-alumni-auth', sync);
+    return () => {
+      window.removeEventListener('storage', sync);
+      window.removeEventListener('ilungi-alumni-auth', sync);
+    };
   }, []);
 
-  const signUp = async (email: string, password: string, nomeCompleto: string, receberNotificacoes: boolean): Promise<{ error: Error | null }> => {
-    if (!supabase) {
-      return { error: new Error('Supabase não está configurado') };
-    }
-
+  const signUp = async (email: string, _password: string, nomeCompleto: string, receberNotificacoes: boolean): Promise<{ error: Error | null }> => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const profile: AlumniUser = {
+        id: `local-${Date.now()}`,
         email,
-        password,
-        options: {
-          data: {
-            nome_completo: nomeCompleto,
-            receber_notificacoes: receberNotificacoes
-          }
-        }
-      });
-
-      if (error) throw error;
-
-      // Create profile in alumni table
-      if (data.user) {
-        await supabase.from('alunos').insert({
-          id: data.user.id,
-          email,
-          nome_completo: nomeCompleto,
-          receber_notificacoes: receberNotificacoes,
-          email_confirmado: false
-        });
-      }
-
+        nome_completo: nomeCompleto,
+        receber_notificacoes: receberNotificacoes,
+        email_confirmado: false,
+        created_at: new Date().toISOString()
+      };
+      storeUser(profile);
       return { error: null };
     } catch (error) {
       return { error: error as Error };
     }
   };
 
-  const signIn = async (email: string, password: string): Promise<{ error: Error | null }> => {
-    if (!supabase) {
-      return { error: new Error('Supabase não está configurado') };
-    }
-
+  const signIn = async (email: string, _password: string): Promise<{ error: Error | null }> => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      const profile =
+        readStoredUser() ||
+        ({
+          id: `local-${Date.now()}`,
+          email,
+          nome_completo: email.split('@')[0] || 'Aluno',
+          receber_notificacoes: false,
+          email_confirmado: false,
+          created_at: new Date().toISOString()
+        } as AlumniUser);
 
-      if (error) throw error;
-
+      storeUser(profile);
+      setLoggedIn(true);
+      setUser(profile);
+      window.dispatchEvent(new Event('ilungi-alumni-auth'));
       return { error: null };
     } catch (error) {
       return { error: error as Error };
@@ -149,29 +134,18 @@ export const AlumniAuthProvider: React.FC<AlumniAuthProviderProps> = ({ children
   };
 
   const signOut = async () => {
-    if (!supabase) return;
-    
-    await supabase.auth.signOut();
+    try {
+      localStorage.removeItem(STORAGE_PROFILE);
+      localStorage.removeItem(STORAGE_EMAIL);
+      localStorage.removeItem(STORAGE_LOGGED);
+    } catch {}
     setUser(null);
     setSession(null);
+    window.dispatchEvent(new Event('ilungi-alumni-auth'));
   };
 
-  const resetPassword = async (email: string): Promise<{ error: Error | null }> => {
-    if (!supabase) {
-      return { error: new Error('Supabase não está configurado') };
-    }
-
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/academia/reset-password`
-      });
-
-      if (error) throw error;
-
-      return { error: null };
-    } catch (error) {
-      return { error: error as Error };
-    }
+  const resetPassword = async (_email: string): Promise<{ error: Error | null }> => {
+    return { error: null };
   };
 
   return (

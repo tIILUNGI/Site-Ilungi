@@ -6,8 +6,6 @@ import {
   User, Menu, X, Home
 } from 'lucide-react';
 import { useAppContext } from '../App';
-import { useAlumniAuth } from '../lib/authContext';
-import { supabase } from '../lib/supabase';
 
 interface CourseModule {
   id: string;
@@ -37,7 +35,6 @@ interface Course {
 const CoursePlayer: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const { t, lang } = useAppContext();
-  const { user } = useAlumniAuth();
   const isPt = lang === 'pt';
 
   const [course, setCourse] = useState<Course | null>(null);
@@ -45,36 +42,6 @@ const CoursePlayer: React.FC = () => {
   const [currentLesson, setCurrentLesson] = useState<CourseLesson | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (!supabase) {
-      setLoading(false);
-      return;
-    }
-
-    const fetchCourse = async () => {
-      const { data } = await supabase
-        .from('cursos')
-        .select('*')
-        .eq('id', courseId)
-        .single();
-
-      if (data) {
-        setCourse(data);
-        if (data.modulos && data.modulos.length > 0) {
-          const firstModule = data.modulos[0];
-          if (firstModule.lessons && firstModule.lessons.length > 0) {
-            setCurrentLesson(firstModule.lessons[0]);
-          }
-        }
-      }
-      setLoading(false);
-    };
-
-    if (courseId) {
-      fetchCourse();
-    }
-  }, [courseId]);
 
   const demoCourse: Course = {
     id: courseId || 'demo',
@@ -113,6 +80,14 @@ const CoursePlayer: React.FC = () => {
       }
     ]
   };
+
+  useEffect(() => {
+    setCourse(demoCourse);
+    const firstModule = demoCourse.modulos?.[0];
+    const firstLesson = firstModule?.lessons?.[0] || null;
+    setCurrentLesson(firstLesson);
+    setLoading(false);
+  }, [courseId, isPt]);
 
   const displayCourse = course || demoCourse;
 

@@ -4,36 +4,13 @@ import { Plus, Edit, Trash2, Save, X, ArrowLeft, FileText, Image as ImageIcon } 
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { loadData, saveDataAdmin } from '../lib/dataSync';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  date: string;
-  category: string;
-  image: string;
-  status: 'published' | 'draft';
-}
+import { BlogPost, getDefaultBlogPosts } from '../lib/blogData';
 
 const AdminBlog: React.FC = () => {
   const { lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
   
-  const defaultPosts: BlogPost[] = [
-    {
-      id: 'blog-1',
-      title: isPt ? 'A Importância do Compliance em Angola' : 'The Importance of Compliance in Angola',
-      excerpt: isPt ? 'Descubra como as novas normas estão a mudar o panorama empresarial.' : 'Discover how new standards are changing the corporate landscape.',
-      content: 'Conteúdo completo do artigo virá aqui...',
-      author: 'Equipa ILUNGI',
-      date: new Date().toISOString().split('T')[0],
-      category: 'Compliance',
-      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80',
-      status: 'published'
-    }
-  ];
+  const defaultPosts: BlogPost[] = getDefaultBlogPosts(isPt);
 
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
