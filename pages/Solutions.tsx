@@ -206,13 +206,14 @@ const Solutions: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24"
         >
           {products.map((product, i) => {
             const isSiclic = product.name === "SICLIC";
             const isSalya = product.name === "Salya";
             const isTocomply = product.name === "Tocomply360";
-            const isSpecialProduct = isSalya || isTocomply;
+            const isPrimavera = product.name === "Primavera";
+            const isSpecialProduct = isSalya || isTocomply || isPrimavera;
             return (
               <motion.div
                 key={i}

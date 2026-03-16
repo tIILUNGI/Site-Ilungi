@@ -12,6 +12,17 @@ export interface SolutionData {
 
 export const getDefaultSolutions = (isPt: boolean): SolutionData[] => [
   {
+    id: 's0',
+    name: 'Primavera',
+    tagline: isPt ? 'Configuração e Implementação' : 'Configuration and Implementation',
+    desc: isPt
+      ? 'Serviços especializados de configuração e implementação do software Primavera para gestão de projetos, recursos e portfólios. Suporte completo desde a instalação até a customização conforme as necessidades da sua empresa.'
+      : 'Specialized configuration and implementation services for Primavera software for project, resource, and portfolio management. Full support from installation to customization according to your company needs.',
+    image: '/imagens/primavera.png',
+    color: 'from-[#e65100] to-[#ff9800]',
+    bgColor: 'bg-[#e65100]'
+  },
+  {
     id: 's1',
     name: 'Salya',
     tagline: isPt ? 'Gest\u00e3o de Sal\u00e1rios & RH' : 'Payroll & HR Management',

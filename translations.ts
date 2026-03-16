@@ -9,7 +9,7 @@ export const translations: Record<'pt' | 'en', any> = {
       partners: "Parceiros",
       blog: "Blog",
       contact: "Contacto",
-      iso: "Consultoria de Sistemas de Gestão & Projectos",
+      iso: "Consultoria de Sistemas de Gestão",
       risk: "GRI - Sustentabilidade",
       procurement: "Procurement",
       pmo: "Assistência e Suporte de TI",
@@ -92,7 +92,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Consultoria de Sistemas de Gestão & Projectos",
+        title: "Consultoria de Sistemas de Gestão",
         desc: "Implementação de sistemas de gestão e condução de projectos de melhoria com foco em padrões e eficiência operacional."
       },
       risk: {
@@ -158,7 +158,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+        title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO",
         desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
         content: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.\nIMPLEMENTAÇÃO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão da Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
         items: {
@@ -221,7 +221,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS",
+      title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO",
       subtitle: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.",
       stats: {
         certified: "Várias Empresas Certificadas",
@@ -477,7 +477,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     consultingAreas: {
       iso: {
-        title: "Management Systems & Projects Consulting",
+        title: "Management Systems Consulting",
         desc: "Implementation of management systems and improvement projects focused on standards and operational efficiency."
       },
       risk: {
@@ -543,7 +543,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     services: {
       iso: {
-        title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
+        title: "CONSULTING AND AUDIT IN MANAGEMENT SYSTEMS",
         desc: "Specialists in the implementation and auditing of ISO management systems.",
         content: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit and also conduct internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Security Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
         items: {
@@ -606,7 +606,7 @@ export const translations: Record<'pt' | 'en', any> = {
       }
     },
     iso: {
-      title: "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS AND PROJECTS",
+      title: "CONSULTING AND AUDIT IN MANAGEMENT SYSTEMS",
       subtitle: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit, as well as conduct internal and supplier audits.",
       stats: {
         certified: "Several Certified Companies",

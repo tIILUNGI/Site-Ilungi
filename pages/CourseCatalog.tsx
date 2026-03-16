@@ -13,6 +13,8 @@ const CourseCatalog: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>(defaultCourses);
   const [searchTerm, setSearchTerm] = useState('');
   const [areaFilter, setAreaFilter] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const COURSES_PER_PAGE = 25;
 
   useEffect(() => {
     loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
@@ -38,6 +40,18 @@ const CourseCatalog: React.FC = () => {
       );
     });
   }, [courses, searchTerm, areaFilter]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCourses.length / COURSES_PER_PAGE);
+  const paginatedCourses = useMemo(() => {
+    const start = (currentPage - 1) * COURSES_PER_PAGE;
+    return filteredCourses.slice(start, start + COURSES_PER_PAGE);
+  }, [filteredCourses, currentPage]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, areaFilter]);
 
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -199,11 +213,11 @@ const CourseCatalog: React.FC = () => {
                   <th className="px-6 py-4">{isPt ? 'Carga Horária' : 'Hours'}</th>
                   <th className="px-6 py-4">{isPt ? 'Modalidade' : 'Format'}</th>
                   <th className="px-6 py-4">{isPt ? 'Agenda' : 'Schedule'}</th>
-                  <th className="px-6 py-4">{isPt ? 'Ação' : 'Action'}</th>
+                  <th className="px-6 py-4">{isPt ? 'Acção' : 'Action'}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {filteredCourses.map((course) => (
+                {paginatedCourses.map((course) => (
                   <tr key={course.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{course.code}</td>
                     <td className="px-6 py-4 text-sm font-semibold text-slate-800">{course.name}</td>
@@ -231,13 +245,71 @@ const CourseCatalog: React.FC = () => {
               </div>
             )}
           </div>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between px-6 py-4 border-t border-slate-100 bg-slate-50">
+              <div className="text-sm text-slate-500">
+                {isPt 
+                  ? `Página ${currentPage} de ${totalPages} (${filteredCourses.length} cursos)` 
+                  : `Page ${currentPage} of ${totalPages} (${filteredCourses.length} courses)`}
+              </div>
+              <div className="flex items-center gap-2">
+                <motion.button
+                  whileHover={{ scale: currentPage > 1 ? 1.05 : 1 }}
+                  whileTap={{ scale: currentPage > 1 ? 0.95 : 1 }}
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                    currentPage === 1 
+                      ? 'bg-slate-200 text-slate-400 cursor-not-allowed' 
+                      : 'bg-[#6a00a3] text-white hover:bg-[#520b7d]'
+                  }`}
+                >
+                  {isPt ? 'Anterior' : 'Previous'}
+                </motion.button>
+                
+                {/* Page numbers */}
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <motion.button
+                      key={page}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-lg text-sm font-bold transition-all ${
+                        currentPage === page
+                          ? 'bg-[#6a00a3] text-white'
+                          : 'bg-white text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      {page}
+                    </motion.button>
+                  ))}
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: currentPage < totalPages ? 1.05 : 1 }}
+                  whileTap={{ scale: currentPage < totalPages ? 0.95 : 1 }}
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                    currentPage === totalPages 
+                      ? 'bg-slate-200 text-slate-400 cursor-not-allowed' 
+                      : 'bg-[#6a00a3] text-white hover:bg-[#520b7d]'
+                  }`}
+                >
+                  {isPt ? 'Próximo' : 'Next'}
+                </motion.button>
+              </div>
+            </div>
+          )}
           <div className="md:hidden divide-y divide-slate-100">
             {filteredCourses.length === 0 ? (
               <div className="p-6 text-center text-slate-500">
                 {isPt ? 'Nenhum curso encontrado.' : 'No courses found.'}
               </div>
             ) : (
-              filteredCourses.map((course) => (
+              paginatedCourses.map((course) => (
                 <div key={course.id} className="p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>

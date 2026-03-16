@@ -129,9 +129,7 @@ const Blog: React.FC = () => {
             <h1 className={`text-5xl md:text-6xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               <span className="text-[#6a00a3]">ILUNGI</span> HUB
             </h1>
-            <p className={`text-lg mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-              {isPt ? 'As suas notícias, análises e tendências sobre gestão, compliance e tecnologia' : 'Your news, analysis and trends on management, compliance and technology'}
-            </p>
+            
           </div>
         </div>
       </div>

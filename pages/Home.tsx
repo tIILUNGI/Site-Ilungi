@@ -42,7 +42,7 @@ const Home: React.FC = () => {
 
   const integratedSolutions = [
     { 
-      title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO & PROJECTOS" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS & PROJECTS", 
+      title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS", 
       desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projectos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
       icon: Shield, 
       color: "#1B3C2B", 

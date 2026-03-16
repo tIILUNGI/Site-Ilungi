@@ -41,7 +41,7 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ reference, index }) => {
           <img 
             src={reference.logo} 
             alt={reference.name}
-            className="w-[85%] h-[85%] object-contain"
+            className="max-w-full max-h-full object-contain"
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">' + reference.name.charAt(0) + '</text></svg>';
             }}
