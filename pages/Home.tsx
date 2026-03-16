@@ -42,25 +42,32 @@ const Home: React.FC = () => {
 
   const integratedSolutions = [
     { 
-      title: isPt ? "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO" : "CONSULTING AND AUDITING IN MANAGEMENT SYSTEMS", 
-      desc: isPt ? "Serviços especializados de consultoria e auditoria para sistemas de gestão ISO, gestão de projectos e compliance empresarial." : "Specialized consulting and auditing services for ISO management systems, project management and business compliance.",
+      title: isPt ? "SISTEMAS DE GESTÃO ISO" : "ISO MANAGEMENT SYSTEMS", 
+      desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outros padrões internacionais." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
       icon: Shield, 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
     },
     { 
+      title: isPt ? "GRI STANDARD" : "GRI STANDARD", 
+      desc: isPt ? "Relatórios de sustentabilidade baseados nos padrões GRI para transparência e responsabilidade corporativa." : "Sustainability reporting based on GRI standards for transparency and corporate accountability.",
+      icon: Globe, 
+      color: "#2E7D32", 
+      path: "/consultoria" 
+    },
+    { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
-      desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade nos processos." : "Procurement and supply management of materials and services, ensuring efficiency and compliance in processes.",
+      desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade." : "Procurement and supply management of materials and services, ensuring efficiency and compliance.",
       icon: Briefcase, 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
     { 
-      title: isPt ? "ASSISTÊNCIA E SUPORTE DE T.I" : "IT ASSISTANCE AND SUPPORT", 
-      desc: isPt ? "Suporte técnico especializado e manutenção de sistemas de informação para garantir a continuidade dos seus negócios." : "Specialized technical support and maintenance of information systems to ensure business continuity.",
-      icon: Settings, 
+      title: isPt ? "TECNOLOGIA" : "TECHNOLOGY", 
+      desc: isPt ? "Soluções tecnológicas integradas para digitalização e otimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
+      icon: Cpu, 
       color: "#0A4D8C", 
-      path: "/solucoes" 
+      path: "/consultoria/pmo" 
     }
   ];
 
@@ -181,7 +188,7 @@ const Home: React.FC = () => {
           {/* Floating Elements - No Cards Design */}
           <div className="relative min-h-[500px] flex items-center justify-center">
             
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 w-full relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full relative">
               {integratedSolutions.map((solution, index) => {
                 const IconComponent = solution.icon;
                 return (
@@ -191,7 +198,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2, duration: 0.8 }}
-                    className={`relative ${index % 2 === 0 ? 'lg:mt-0' : 'lg:mt-20'}`}
+                    className="relative"
                   >
                     {/* Floating Element - No Card */}
                     <Link to={solution.path} className="block group">
@@ -201,11 +208,11 @@ const Home: React.FC = () => {
                       >
                         {/* Icon Circle - Floating */}
                         <motion.div 
-                          className="w-28 h-28 rounded-full flex items-center justify-center mb-6 shadow-2xl relative"
+                          className="w-24 h-24 rounded-full flex items-center justify-center mb-5 shadow-2xl relative"
                           style={{ backgroundColor: solution.color }}
                           whileHover={{ scale: 1.1 }}
                         >
-                          <IconComponent className="w-12 h-12 text-white" />
+                          <IconComponent className="w-10 h-10 text-white" />
                           {/* Glow effect */}
                           <div className="absolute inset-0 rounded-full blur-xl opacity-30" style={{ backgroundColor: solution.color }}></div>
                         </motion.div>
