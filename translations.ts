@@ -395,7 +395,7 @@ export const translations: Record<'pt' | 'en', any> = {
       blog: "Blog",
       contact: "Contact",
       iso: "Management Systems & Projects Consulting",
-      risk: "GRI - Sustentabilidade",
+      risk: "GRI - Sustainability",
       procurement: "Procurement",
       pmo: "IT Assistance and Support",
       alumni: "AILUNGI",
@@ -481,8 +481,8 @@ export const translations: Record<'pt' | 'en', any> = {
         desc: "Implementation of management systems and improvement projects focused on standards and operational efficiency."
       },
       risk: {
-        title: "GRI - Sustentabilidade",
-        desc: "GRI - Sustentabilidade"
+        title: "GRI - Sustainability",
+        desc: "GRI - Sustainability"
       },
       procurement: {
         title: "Procurement",
@@ -559,9 +559,9 @@ export const translations: Record<'pt' | 'en', any> = {
         }
       },
       risk: {
-        title: "GRI - Sustentabilidade",
-        desc: "GRI - Sustentabilidade",
-        content: "GRI - Sustentabilidade"
+        title: "GRI - Sustainability",
+        desc: "GRI - Sustainability",
+        content: "GRI - Sustainability"
       },
       procurement: {
         title: "PROCUREMENT",

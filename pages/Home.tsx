@@ -43,13 +43,13 @@ const Home: React.FC = () => {
   const integratedSolutions = [
     { 
       title: isPt ? "SISTEMAS DE GESTÃO ISO" : "ISO MANAGEMENT SYSTEMS", 
-      desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outros padrões internacionais." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
+      desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outras directrizes e requisitos." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
       image: "/imagens/Consultoria icon.png", 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
     },
     { 
-      title: isPt ? "GRI SUSTENTÁVEL" : "GRI SUSTAINABLE", 
+      title: isPt ? "GRI STANDARD" : "GRI STANDARD", 
       desc: isPt ? "Relatórios de sustentabilidade baseados nos padrões GRI para transparência e responsabilidade corporativa." : "Sustainability reporting based on GRI standards for transparency and corporate accountability.",
       image: "/imagens/GRI icon.png", 
       color: "#2E7D32", 
@@ -57,14 +57,14 @@ const Home: React.FC = () => {
     },
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
-      desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade." : "Procurement and supply management of materials and services, ensuring efficiency and compliance.",
+      desc: isPt ? "Aquisições e fornecimento de bens e serviços, garantindo eficiência operacional." : "Procurement and supply management of materials and services, ensuring efficiency and compliance.",
       image: "/imagens/Procuremet.png", 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
     { 
       title: isPt ? "TECNOLOGIA" : "TECHNOLOGY", 
-      desc: isPt ? "Soluções tecnológicas integradas para digitalização e otimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
+      desc: isPt ? "Soluções tecnológicas integradas para digitalização e optimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
       image: "/imagens/Tecnologia icon.png", 
       color: "#0A4D8C", 
       path: "/consultoria/pmo" 
@@ -73,10 +73,10 @@ const Home: React.FC = () => {
 
   // Digital solutions features
   const digitalFeatures = [
-    { title: isPt ? "Gestão Integrada" : "Integrated Management", desc: isPt ? "Plataforma unificada para todos os processos" : "Unified platform for all processes" },
+    { title: isPt ? "Sistema Unificado" : "Unified System", desc: isPt ? "Sistema unificado para todos os processos" : "Unified system for all processes" },
     { title: isPt ? "Automação Inteligente" : "Smart Automation", desc: isPt ? "Simplifique operações complexas" : "Simplify complex operations" },
     { title: isPt ? "Analytics Avançado" : "Advanced Analytics", desc: isPt ? "Decisões baseadas em dados" : "Data-driven decisions" },
-    { title: isPt ? "Segurança Total" : "Total Security", desc: isPt ? "Protecção de dados garantida" : "Guaranteed data protection" }
+    { title: isPt ? "Protecção de Dados" : "Data Protection", desc: isPt ? "Protecção de dados garantida" : "Guaranteed data protection" }
   ];
 
   useEffect(() => {
@@ -266,10 +266,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
-              {isPt ? 'Featured' : 'Featured'}
+              {isPt ? 'Destaque' : 'Featured'}
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Estudo de Caso' : 'Case Study'}</h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Descubra como ajudaros os nossos clientes a alcançar resultados extraordinários' : 'Discover how we help our clients achieve extraordinary results'}</p>
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Descubra como ajudamos os nossos clientes a alcançar resultados extraordinários' : 'Discover how we help our clients achieve extraordinary results'}</p>
           </motion.div>
 
           <motion.div 
@@ -292,25 +292,25 @@ const Home: React.FC = () => {
                     ? 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'
                     : 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'}
                 </p>
-                <div className="grid grid-cols-3 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   <div className="text-center">
                     <div className="text-3xl font-black text-[#6a00a3]">+100%</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Alinhamento com padr\u00f5es internacionais' : 'Alinhamento com padr\u00f5es internacionais'}</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Alinhamento com padr\u00f5es internacionais' : 'Alignment with international standards'}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-black text-[#6a00a3]">ESG</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a' : 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a'}</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a' : 'Environmental, social and governance impact management'}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-black text-[#6a00a3]">GRI Standards</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Relat\u00f3rios reconhecidos globalmente' : 'Relat\u00f3rios reconhecidos globalmente'}</div>
+                    <div className="text-sm text-slate-500">{isPt ? 'Relat\u00f3rios reconhecidos globalmente' : 'Globally recognized reports'}</div>
                   </div>
                 </div>
                 <Link 
                   to="/contacto" 
                   className="inline-flex items-center gap-2 px-8 py-4 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all w-fit"
                 >
-                  {isPt ? 'Solicitar Consultoria GRI' : 'Solicitar Consultoria GRI'}
+                  {isPt ? 'Solicitar Consultoria GRI' : 'Request GRI Consulting'}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -351,7 +351,7 @@ const Home: React.FC = () => {
             <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
               <div className="absolute -inset-8 bg-gradient-to-r from-[#6a00a3]/20 to-[#1B3C2B]/20 rounded-3xl blur-2xl"></div>
               <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-10 border border-white/10">
-                <div className="grid grid-cols-2 gap-8 text-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                   <div>
                     <div className="text-4xl font-black text-white mb-2">ISO 9001</div>
                     <div className="text-sm text-slate-400">{isPt ? 'Certificação' : 'Certification'}</div>
@@ -446,10 +446,10 @@ const Home: React.FC = () => {
 
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="hidden text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
               {isPt 
                 ? 'Technologias de ponta que transformam a forma como você gestiona o seu negócio, trazendo eficiência e inovação para cada processo.'
