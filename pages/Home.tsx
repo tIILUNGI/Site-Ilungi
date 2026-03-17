@@ -44,28 +44,28 @@ const Home: React.FC = () => {
     { 
       title: isPt ? "SISTEMAS DE GESTÃO ISO" : "ISO MANAGEMENT SYSTEMS", 
       desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outros padrões internacionais." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
-      icon: Shield, 
+      image: "/imagens/Consultoria icon.png", 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
     },
     { 
-      title: isPt ? "GRI STANDARD" : "GRI STANDARD", 
+      title: isPt ? "GRI SUSTENTÁVEL" : "GRI SUSTAINABLE", 
       desc: isPt ? "Relatórios de sustentabilidade baseados nos padrões GRI para transparência e responsabilidade corporativa." : "Sustainability reporting based on GRI standards for transparency and corporate accountability.",
-      icon: Globe, 
+      image: "/imagens/GRI icon.png", 
       color: "#2E7D32", 
-      path: "/consultoria" 
+      path: "/consultoria/risco" 
     },
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
       desc: isPt ? "Gestão de aquisições e fornecimento de materiais e serviços, garantindo eficiência e conformidade." : "Procurement and supply management of materials and services, ensuring efficiency and compliance.",
-      icon: Briefcase, 
+      image: "/imagens/Procuremet.png", 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
     { 
       title: isPt ? "TECNOLOGIA" : "TECHNOLOGY", 
       desc: isPt ? "Soluções tecnológicas integradas para digitalização e otimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
-      icon: Cpu, 
+      image: "/imagens/Tecnologia icon.png", 
       color: "#0A4D8C", 
       path: "/consultoria/pmo" 
     }
@@ -190,7 +190,6 @@ const Home: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full relative">
               {integratedSolutions.map((solution, index) => {
-                const IconComponent = solution.icon;
                 return (
                   <motion.div
                     key={index}
@@ -206,15 +205,16 @@ const Home: React.FC = () => {
                         whileHover={{ y: -15, scale: 1.02 }}
                         className="relative flex flex-col items-center text-center"
                       >
-                        {/* Icon Circle - Floating */}
+                        {/* Image - No Circle */}
                         <motion.div 
-                          className="w-24 h-24 rounded-full flex items-center justify-center mb-5 shadow-2xl relative"
-                          style={{ backgroundColor: solution.color }}
-                          whileHover={{ scale: 1.1 }}
+                          className="mb-5"
+                          whileHover={{ scale: 1.05 }}
                         >
-                          <IconComponent className="w-10 h-10 text-white" />
-                          {/* Glow effect */}
-                          <div className="absolute inset-0 rounded-full blur-xl opacity-30" style={{ backgroundColor: solution.color }}></div>
+                          <img 
+                            src={solution.image} 
+                            alt={solution.title}
+                            className="w-24 h-24 object-contain"
+                          />
                         </motion.div>
 
                         {/* Content - No Card Background */}
