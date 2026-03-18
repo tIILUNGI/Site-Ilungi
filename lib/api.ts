@@ -7,22 +7,27 @@ const getAuthHeaders = () => {
   return token ? { 'Authorization': `Bearer ${token}` } : {};
 };
 
-const handleResponse = async (response: Response) => {
+const handleResponse = async (response: Response, method: string, path: string) => {
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Unknown error' }));
+    console.error(`[API ERROR] ${method} ${path} - Status: ${response.status}`, error);
     throw new Error(error.message || `Error ${response.status}: ${response.statusText}`);
   }
-  return response.json();
+  const data = await response.json();
+  console.log(`[API SUCCESS] ${method} ${path}`, data);
+  return data;
 };
 
 export const api = {
   get: async (path: string) => {
+    console.log(`[API REQ] GET ${path}`);
     const response = await fetch(`${API_BASE_URL}${path}`, {
       headers: { ...getAuthHeaders() }
     });
-    return handleResponse(response);
+    return handleResponse(response, 'GET', path);
   },
   post: async (path: string, data: any) => {
+    console.log(`[API REQ] POST ${path}`, data);
     const response = await fetch(`${API_BASE_URL}${path}`, {
       method: 'POST',
       headers: {
@@ -31,9 +36,10 @@ export const api = {
       },
       body: JSON.stringify(data)
     });
-    return handleResponse(response);
+    return handleResponse(response, 'POST', path);
   },
   put: async (path: string, data: any) => {
+    console.log(`[API REQ] PUT ${path}`, data);
     const response = await fetch(`${API_BASE_URL}${path}`, {
       method: 'PUT',
       headers: {
@@ -42,16 +48,18 @@ export const api = {
       },
       body: JSON.stringify(data)
     });
-    return handleResponse(response);
+    return handleResponse(response, 'PUT', path);
   },
   delete: async (path: string) => {
+    console.log(`[API REQ] DELETE ${path}`);
     const response = await fetch(`${API_BASE_URL}${path}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() }
     });
-    return handleResponse(response);
+    return handleResponse(response, 'DELETE', path);
   },
   postFormData: async (path: string, formData: FormData) => {
+    console.log(`[API REQ] POST (FormData) ${path}`);
     const response = await fetch(`${API_BASE_URL}${path}`, {
       method: 'POST',
       headers: {
@@ -59,7 +67,7 @@ export const api = {
       },
       body: formData
     });
-    return handleResponse(response);
+    return handleResponse(response, 'POST', path);
   }
 };
 

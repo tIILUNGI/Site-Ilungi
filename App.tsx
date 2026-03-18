@@ -102,16 +102,19 @@ const AppShell: React.FC = () => {
   });
 
   const handleSetIsEditing = (e: boolean) => {
+    console.log(`[APP] Editing mode: ${e}`);
     setIsEditing(e);
     sessionStorage.setItem('ilungi_editing', e ? 'true' : 'false');
   };
 
   const setLang = (l: Language) => {
+    console.log(`[APP] Language changed to: ${l}`);
     setLangState(l);
     sessionStorage.setItem('ilungi_lang', l);
   };
 
   const handleSetIsDark = (d: boolean) => {
+    console.log(`[APP] Theme changed to: ${d ? 'dark' : 'light'}`);
     setIsDark(d);
     sessionStorage.setItem('ilungi_dark', d ? 'true' : 'false');
   };
