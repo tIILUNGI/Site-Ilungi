@@ -36,6 +36,14 @@ const Consulting: React.FC = () => {
   const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const defaultAreas = [
     {
       id: "iso",
@@ -172,7 +180,7 @@ const Consulting: React.FC = () => {
                   {/* Imagem específica da área */}
                   <motion.img 
                     src={area.image} 
-                    alt={area.title}
+                    alt={getLocalized(area.title)}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
@@ -184,7 +192,7 @@ const Consulting: React.FC = () => {
                     whileHover={{ y: -3 }}
                   >
                     <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 drop-shadow-lg">
-                      {area.title}
+                      {getLocalized(area.title)}
                     </h3>
                     <motion.div 
                       whileHover={{ x: 5 }}
@@ -224,8 +232,8 @@ const Consulting: React.FC = () => {
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="text-slate-600 leading-relaxed text-base">
-                    {area.desc}
+                  <p className="text-slate-600 leading-relaxed text-base line-clamp-3">
+                    {getLocalized(area.desc || area.description)}
                   </p>
                   
                   <motion.div

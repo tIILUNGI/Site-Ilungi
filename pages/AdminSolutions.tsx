@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, PackageSearch } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
-import { getDefaultSolutions } from '../lib/solutionsData';
+import { endpoints } from '../lib/api';
 
 interface SolutionForm {
   id: string;
@@ -23,7 +22,6 @@ interface SolutionForm {
 const AdminSolutions: React.FC = () => {
   const { lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
-  const defaultProducts = getDefaultSolutions(isPt);
   
   const [solutions, setSolutions] = useState<SolutionForm[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -32,12 +30,18 @@ const AdminSolutions: React.FC = () => {
     id: '', name: '', tagline: '', desc: '', image: '', path: '', url: '', color: 'from-[#1B3C2B] to-[#2E7D5E]', bgColor: 'bg-[#1B3C2B]'
   });
 
-  // Carregar as solucções guardadas ou defaut
+  const fetchSolutions = async () => {
+    try {
+      const data = await endpoints.solutions.getAll();
+      setSolutions(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch solutions:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('solutions', 'ilungi_solutions_data', defaultProducts).then(data => {
-      setSolutions(data);
-    });
-  }, []);
+    fetchSolutions();
+  }, [lang]);
 
   const getLocalized = (val: any) => {
     if (typeof val === 'string') return val;
@@ -47,25 +51,31 @@ const AdminSolutions: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: SolutionForm[]) => {
-    setSolutions(newData);
-    saveDataAdmin('solutions', 'ilungi_solutions_data', newData);
-  };
-
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(solutions.map(sol => sol.id === editingId ? formData : sol));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...solutions, { ...formData, id: `sol-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.solutions.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.solutions.create(payload);
+      }
+      await fetchSolutions();
+      resetForm();
+    } catch (error) {
+      console.error('Failed to save solution:', error);
+      alert(isPt ? 'Erro ao salvar.' : 'Error saving.');
     }
-    resetForm();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir esta solução?' : 'Are you sure you want to delete this solution?')) {
-      saveToStorage(solutions.filter(sol => sol.id !== id));
+      try {
+        await endpoints.solutions.delete(id);
+        await fetchSolutions();
+      } catch (error) {
+        console.error('Failed to delete solution:', error);
+        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
+      }
     }
   };
 

@@ -1,11 +1,12 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadData } from '../lib/dataSync';
 import { Course, defaultCourses } from '../lib/courseCatalogData';
+import { endpoints } from '../lib/api';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
+// FORMSPREE_ENDPOINT removed
 
 const CourseCatalog: React.FC = () => {
   const { lang } = useAppContext();
@@ -13,8 +14,16 @@ const CourseCatalog: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>(defaultCourses);
   const [searchTerm, setSearchTerm] = useState('');
   const [areaFilter, setAreaFilter] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
   const COURSES_PER_PAGE = 25;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
 
   useEffect(() => {
     loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
@@ -23,7 +32,7 @@ const CourseCatalog: React.FC = () => {
   }, []);
 
   const areas = useMemo(() => {
-    const uniqueAreas = Array.from(new Set(courses.map((course) => course.area).filter(Boolean)));
+    const uniqueAreas = Array.from(new Set(courses.map((course) => getLocalized(course.area)).filter(Boolean)));
     return ['all', ...uniqueAreas];
   }, [courses]);
 
@@ -97,23 +106,11 @@ const CourseCatalog: React.FC = () => {
     const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      } else {
-        window.location.href = mailtoLink;
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      }
+      await endpoints.contact.sendCourse(payload);
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
+      console.error('Error sending course enrollment:', error);
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -219,9 +216,9 @@ const CourseCatalog: React.FC = () => {
               <tbody className="divide-y divide-slate-100">
                 {paginatedCourses.map((course) => (
                   <tr key={course.id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{course.code}</td>
-                    <td className="px-6 py-4 text-sm font-semibold text-slate-800">{course.name}</td>
-                    <td className="px-6 py-4 text-sm text-slate-600">{course.area}</td>
+                    <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{getLocalized(course.code)}</td>
+                    <td className="px-6 py-4 text-sm font-semibold text-slate-800">{getLocalized(course.name)}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600">{getLocalized(course.area)}</td>
                     <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.hours}</td>
                     <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.modality}</td>
                     <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.agenda}</td>
@@ -313,9 +310,9 @@ const CourseCatalog: React.FC = () => {
                 <div key={course.id} className="p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs font-bold text-[#6a00a3] uppercase tracking-widest">{course.code}</p>
-                      <h3 className="text-lg font-bold text-slate-800 mt-2">{course.name}</h3>
-                      <p className="text-sm text-slate-500 mt-1">{course.area}</p>
+                      <p className="text-xs font-bold text-[#6a00a3] uppercase tracking-widest">{getLocalized(course.code)}</p>
+                      <h3 className="text-lg font-bold text-slate-800 mt-2">{getLocalized(course.name)}</h3>
+                      <p className="text-sm text-slate-500 mt-1">{getLocalized(course.area)}</p>
                     </div>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -365,8 +362,8 @@ const CourseCatalog: React.FC = () => {
               <div className="flex items-start justify-between p-6 border-b border-slate-100">
                 <div>
                   <p className="text-sm font-bold text-[#6a00a3] uppercase tracking-widest">{isPt ? 'Saber mais' : 'Learn more'}</p>
-                  <h3 className="text-2xl font-black text-slate-800 mt-2">{selectedCourse.name}</h3>
-                  <p className="text-sm text-slate-500 mt-1">{selectedCourse.code} • {selectedCourse.area}</p>
+                  <h3 className="text-2xl font-black text-slate-800 mt-2">{getLocalized(selectedCourse.name)}</h3>
+                  <p className="text-sm text-slate-500 mt-1">{getLocalized(selectedCourse.code)} • {getLocalized(selectedCourse.area)}</p>
                 </div>
                 <button
                   onClick={closeForm}

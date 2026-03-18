@@ -50,6 +50,16 @@ export const api = {
       headers: { ...getAuthHeaders() }
     });
     return handleResponse(response);
+  },
+  postFormData: async (path: string, formData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      method: 'POST',
+      headers: {
+        ...getAuthHeaders()
+      },
+      body: formData
+    });
+    return handleResponse(response);
   }
 };
 
@@ -106,6 +116,8 @@ export const endpoints = {
     update: (data: any) => api.put('/site-config', data)
   },
   contact: {
-    send: (data: any) => api.post('/contact', data)
+    send: (data: any) => api.post('/contact', data),
+    sendSpontaneous: (formData: FormData) => api.postFormData('/contact/spontaneous', formData),
+    sendCourse: (data: any) => api.post('/contact/course', data)
   }
 };

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
+import { endpoints } from '../lib/api';
 
 interface ServiceForm {
   id: string;
@@ -32,10 +32,17 @@ const AdminServices: React.FC = () => {
     id: '', title: '', desc: '', image: '', path: '', color: '#1B3C2B'
   });
 
+  const fetchServices = async () => {
+    try {
+      const data = await endpoints.services.getAll();
+      setServices(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch services:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('services', 'ilungi_services_data', defaultAreas).then(data => {
-      setServices(data);
-    });
+    fetchServices();
   }, [lang]);
 
   const getLocalized = (val: any) => {
@@ -46,25 +53,31 @@ const AdminServices: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: ServiceForm[]) => {
-    setServices(newData);
-    saveDataAdmin('services', 'ilungi_services_data', newData);
-  };
-
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(services.map(s => s.id === editingId ? formData : s));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...services, { ...formData, id: `serv-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.services.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.services.create(payload);
+      }
+      await fetchServices();
+      resetForm();
+    } catch (error) {
+      console.error('Failed to save service:', error);
+      alert(isPt ? 'Erro ao salvar no servidor.' : 'Error saving to server.');
     }
-    resetForm();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure?')) {
-      saveToStorage(services.filter(s => s.id !== id));
+      try {
+        await endpoints.services.delete(id);
+        await fetchServices();
+      } catch (error) {
+        console.error('Failed to delete service:', error);
+        alert(isPt ? 'Erro ao excluir no servidor.' : 'Error deleting from server.');
+      }
     }
   };
 

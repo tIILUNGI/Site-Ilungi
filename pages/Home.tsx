@@ -90,6 +90,14 @@ const Home: React.FC = () => {
     });
   }, []);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const handleServicesScroll = (direction: 'prev' | 'next') => {
     const row = servicesRowRef.current;
     if (!row) return;
@@ -548,10 +556,10 @@ const Home: React.FC = () => {
               <motion.a href={partner.url} target="_blank" rel="noopener noreferrer" key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -5 }} className="group">
                 <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100">
                   <div className="h-20 flex items-center justify-center mb-4">
-                    <img src={partner.logo} alt={partner.name} className="max-h-full max-w-full object-contain" />
+                    <img src={partner.logo} alt={getLocalized(partner.name)} className="max-h-full max-w-full object-contain" />
                   </div>
                   <div className="text-center">
-                    <span className="font-bold text-slate-700 group-hover:text-[#6a00a3] transition-colors">{partner.name}</span>
+                    <span className="font-bold text-slate-700 group-hover:text-[#6a00a3] transition-colors">{getLocalized(partner.name)}</span>
                   </div>
                 </div>
               </motion.a>

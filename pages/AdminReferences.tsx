@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, Upload, Building } from 'lucide-react';
 import { useAppContext } from '../App';
-import { translations } from '../translations';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
+import { endpoints } from '../lib/api';
 
 interface ReferenceForm {
   id: string;
@@ -19,25 +18,19 @@ interface ReferenceForm {
 const AdminReferences: React.FC = () => {
   const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
-  
-  const defaultReferences = (t.references?.clients || []).map((ref: any) => ({
-    id: ref.id,
-    name: ref.name,
-    logo: ref.logo,
-    role: ref.role,
-    comment: ref.comment,
-    person: ref.person,
-    service: ref.service,
-    description: ref.description || ''
-  }));
-
   const [references, setReferences] = useState<ReferenceForm[]>([]);
 
+  const fetchReferences = async () => {
+    try {
+      const fetched = await endpoints.references.getAll(); 
+      setReferences(Array.isArray(fetched) ? fetched : []);
+    } catch (error) {
+      console.error('Failed to fetch references:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('references', 'ilungi_references_data', defaultReferences).then(data => {
-      const cleaned = (data || []).filter((ref: any) => ref.id !== 'cmc' && ref.name !== 'CMC');
-      setReferences(cleaned);
-    });
+    fetchReferences();
   }, [lang]);
 
   const getLocalized = (val: any) => {
@@ -48,11 +41,6 @@ const AdminReferences: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: ReferenceForm[]) => {
-    setReferences(newData);
-    saveDataAdmin('references', 'ilungi_references_data', newData);
-  };
-  
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState<ReferenceForm>({
@@ -66,29 +54,31 @@ const AdminReferences: React.FC = () => {
     description: ''
   });
 
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(references.map(ref => ref.id === editingId ? formData : ref));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...references, { ...formData, id: `ref-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.references.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.references.create(payload);
+      }
+      await fetchReferences();
+      handleCancel();
+    } catch (error) {
+      console.error('Failed to save reference:', error);
+      alert(isPt ? 'Erro ao salvar.' : 'Error saving.');
     }
-    setFormData({
-      id: '',
-      name: '',
-      logo: '',
-      role: '',
-      comment: '',
-      person: '',
-      service: 'iso',
-      description: ''
-    });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure you want to delete?')) {
-      saveToStorage(references.filter(ref => ref.id !== id));
+      try {
+        await endpoints.references.delete(id);
+        await fetchReferences();
+      } catch (error) {
+        console.error('Failed to delete reference:', error);
+        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
+      }
     }
   };
 

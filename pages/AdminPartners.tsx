@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
-import { defaultPartners } from '../lib/partnersData';
+import { endpoints } from '../lib/api';
 
 interface PartnerForm {
   id: string;
@@ -27,11 +26,18 @@ const AdminPartners: React.FC = () => {
     id: '', name: '', url: '', desc: { pt: '', en: '' }, logo: '', color: '#6a00a3'
   });
 
+  const fetchPartners = async () => {
+    try {
+      const data = await endpoints.partners.getAll();
+      setPartners(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch partners:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('partners', 'ilungi_partners_data', defaultPartners).then(data => {
-      setPartners(data);
-    });
-  }, []);
+    fetchPartners();
+  }, [lang]);
 
   const getLocalized = (val: any) => {
     if (typeof val === 'string') return val;
@@ -41,25 +47,31 @@ const AdminPartners: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: PartnerForm[]) => {
-    setPartners(newData);
-    saveDataAdmin('partners', 'ilungi_partners_data', newData);
-  };
-
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(partners.map(p => p.id === editingId ? formData : p));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...partners, { ...formData, id: `part-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.partners.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.partners.create(payload);
+      }
+      await fetchPartners();
+      resetForm();
+    } catch (error) {
+      console.error('Failed to save partner:', error);
+      alert(isPt ? 'Erro ao salvar.' : 'Error saving.');
     }
-    resetForm();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure?')) {
-      saveToStorage(partners.filter(p => p.id !== id));
+      try {
+        await endpoints.partners.delete(id);
+        await fetchPartners();
+      } catch (error) {
+        console.error('Failed to delete partner:', error);
+        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
+      }
     }
   };
 

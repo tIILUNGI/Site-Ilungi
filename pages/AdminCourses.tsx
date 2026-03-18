@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, ArrowLeft, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
-import { Course, defaultCourses } from '../lib/courseCatalogData';
+import { endpoints } from '../lib/api';
+import { Course } from '../lib/courseCatalogData';
 
 const emptyCourse: Course = {
   id: '',
@@ -25,11 +25,18 @@ const AdminCourses: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState<Course>(emptyCourse);
 
+  const fetchCourses = async () => {
+    try {
+      const data = await endpoints.courses.getAll();
+      setCourses(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch courses:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
-      setCourses(data);
-    });
-  }, []);
+    fetchCourses();
+  }, [lang]);
 
   const getLocalized = (val: any) => {
     if (typeof val === 'string') return val;
@@ -39,25 +46,31 @@ const AdminCourses: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: Course[]) => {
-    setCourses(newData);
-    saveDataAdmin('courses', 'ilungi_courses_data', newData);
-  };
-
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(courses.map((course) => (course.id === editingId ? formData : course)));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...courses, { ...formData, id: `course-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.courses.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.courses.create(payload);
+      }
+      await fetchCourses();
+      resetForm();
+    } catch (error) {
+      console.error('Failed to save course:', error);
+      alert(isPt ? 'Erro ao salvar.' : 'Error saving.');
     }
-    resetForm();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure?')) {
-      saveToStorage(courses.filter((course) => course.id !== id));
+      try {
+        await endpoints.courses.delete(id);
+        await fetchCourses();
+      } catch (error) {
+        console.error('Failed to delete course:', error);
+        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
+      }
     }
   };
 

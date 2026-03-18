@@ -3,27 +3,32 @@ import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, ArrowLeft, FileText, Image as ImageIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { loadData, saveDataAdmin } from '../lib/dataSync';
-import { BlogPost, getDefaultBlogPosts } from '../lib/blogData';
+import { endpoints } from '../lib/api';
+import { BlogPost } from '../lib/blogData';
 
 const AdminBlog: React.FC = () => {
   const { lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
-  
-  const defaultPosts: BlogPost[] = getDefaultBlogPosts(isPt);
 
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState<BlogPost>({
-    id: '', title: '', excerpt: '', content: '', author: 'Equipa ILUNGI', date: new Date().toISOString().split('T')[0], category: 'Geral', image: '', status: 'draft'
+      id: '', title: '', excerpt: '', content: '', author: 'Equipa ILUNGI', date: new Date().toISOString().split('T')[0], category: 'Geral', image: '', status: 'draft'
   });
 
+  const fetchPosts = async () => {
+    try {
+      const data = await endpoints.blog.getAll();
+      setPosts(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch blog posts:', error);
+    }
+  };
+
   useEffect(() => {
-    loadData('blog_posts', 'ilungi_blog_data', defaultPosts).then(data => {
-      setPosts(data);
-    });
-  }, []);
+    fetchPosts();
+  }, [lang]);
 
   const getLocalized = (val: any) => {
     if (typeof val === 'string') return val;
@@ -33,25 +38,31 @@ const AdminBlog: React.FC = () => {
     return '';
   };
 
-  const saveToStorage = (newData: BlogPost[]) => {
-    setPosts(newData);
-    saveDataAdmin('blog_posts', 'ilungi_blog_data', newData);
-  };
-
-  const handleSave = () => {
-    if (editingId) {
-      saveToStorage(posts.map(p => p.id === editingId ? formData : p));
-      setEditingId(null);
-    } else if (isAdding) {
-      saveToStorage([...posts, { ...formData, id: `blog-${Date.now()}` }]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        await endpoints.blog.update(editingId, formData);
+      } else if (isAdding) {
+        const { id, ...payload } = formData;
+        await endpoints.blog.create(payload);
+      }
+      await fetchPosts();
+      resetForm();
+    } catch (error) {
+      console.error('Failed to save blog post:', error);
+      alert(isPt ? 'Erro ao salvar.' : 'Error saving.');
     }
-    resetForm();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir esta publicação?' : 'Are you sure you want to delete this post?')) {
-      saveToStorage(posts.filter(p => p.id !== id));
+      try {
+        await endpoints.blog.delete(id);
+        await fetchPosts();
+      } catch (error) {
+        console.error('Failed to delete blog post:', error);
+        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
+      }
     }
   };
 

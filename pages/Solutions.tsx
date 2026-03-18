@@ -42,6 +42,14 @@ const Solutions: React.FC = () => {
 
   const [products, setProducts] = useState(defaultProducts);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   useEffect(() => {
     loadData('solutions', 'ilungi_solutions_data', defaultProducts).then(data => {
       const normalizeText = (value: any) => {
@@ -55,10 +63,10 @@ const Solutions: React.FC = () => {
       const newTocomplyDescNormalized = normalizeText(newTocomplyDesc);
       let changed = false;
       const normalized = data.map((product: any) => {
-        const name = normalizeText(product.name);
-        const tagline = normalizeText(product.tagline);
-        const desc = normalizeText(product.desc);
-        const path = normalizeText(product.path);
+        const name = normalizeText(getLocalized(product.name));
+        const tagline = normalizeText(getLocalized(product.tagline));
+        const desc = normalizeText(getLocalized(product.desc));
+        const path = normalizeText(getLocalized(product.path));
 
         const isSalyaProduct =
           name.includes("salya") ||
@@ -209,10 +217,11 @@ const Solutions: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24"
         >
           {products.map((product, i) => {
-            const isSiclic = product.name === "SICLIC";
-            const isSalya = product.name === "Salya";
-            const isTocomply = product.name === "Tocomply360";
-            const isPrimavera = product.name === "Primavera";
+            const prodName = getLocalized(product.name);
+            const isSiclic = prodName === "SICLIC";
+            const isSalya = prodName === "Salya";
+            const isTocomply = prodName === "Tocomply360";
+            const isPrimavera = prodName === "Primavera";
             const isSpecialProduct = isSalya || isTocomply || isPrimavera;
             return (
               <motion.div
@@ -233,13 +242,13 @@ const Solutions: React.FC = () => {
                       href={product.url || product.path || '#'}
                       target={product.url ? "_blank" : undefined}
                       rel={product.url ? "noopener noreferrer" : undefined}
-                      aria-label={product.name}
+                      aria-label={getLocalized(product.name)}
                       className="block relative h-56 sm:h-64 rounded-[22px] bg-white overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.08),transparent_60%)]"></div>
                       <motion.img 
                         src={product.image} 
-                        alt={product.name}
+                        alt={getLocalized(product.name)}
                         className="relative z-10 w-full h-full object-contain p-6"
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.6 }}
@@ -258,7 +267,7 @@ const Solutions: React.FC = () => {
                         
                         <motion.img 
                           src={product.image} 
-                          alt={product.name}
+                          alt={getLocalized(product.name)}
                           className={`w-full h-full ${isSalya ? 'object-contain p-5 bg-white' : 'object-cover'}`}
                           whileHover={{ scale: 1.1 }}
                           transition={{ duration: 0.6 }}
@@ -271,7 +280,7 @@ const Solutions: React.FC = () => {
                         >
                           <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-xl shadow-lg border border-white/20`}>
                             <span className="text-white font-black text-lg">
-                              {product.name}
+                              {getLocalized(product.name)}
                             </span>
                           </div>
                         </motion.div>
@@ -279,7 +288,7 @@ const Solutions: React.FC = () => {
                         {/* Tagline */}
                         <div className="absolute bottom-5 left-5 z-20">
                           <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium border border-white/30">
-                            {product.tagline}
+                            {getLocalized(product.tagline)}
                           </span>
                         </div>
                       </div>
@@ -287,7 +296,7 @@ const Solutions: React.FC = () => {
                       {/* Content */}
                     <div className="p-5 bg-white">
                         <p className="text-slate-500 leading-relaxed mb-6 text-sm line-clamp-3">
-                          {product.desc}
+                          {getLocalized(product.desc)}
                         </p>
                         
                         <div className="flex items-center justify-between">

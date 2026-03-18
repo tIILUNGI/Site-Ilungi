@@ -2,14 +2,6 @@ import { endpoints } from './api';
 
 const DATA_VERSION = '2026-03-13-1';
 
-let dataMode: 'admin' | 'public' = 'public';
-
-export const setDataMode = (mode: 'admin' | 'public') => {
-  dataMode = mode;
-};
-
-const canWriteLocal = () => dataMode === 'admin';
-
 const DATA_TABLES = [
   { table: 'solutions', key: 'ilungi_solutions_data', endpoint: 'solutions' },
   { table: 'services', key: 'ilungi_services_data', endpoint: 'services' },
@@ -42,19 +34,45 @@ export const purgeAllDataIfNeeded = async () => {
 };
 
 export const saveDataAdmin = async (table: string, _localKey: string, newData: any[]) => {
-  if (!canWriteLocal()) return;
   
   try {
     const tableInfo = DATA_TABLES.find(t => t.table === table);
-    if (tableInfo) {
-      const endpoint = (endpoints as any)[tableInfo.endpoint];
-      if (endpoint && endpoint.update) {
-         // This still needs individual or bulk update implementation in the backend
-         console.log(`Saving ${table} to remote...`);
+    if (!tableInfo) return;
+    const endpoint = (endpoints as any)[tableInfo.endpoint];
+    if (!endpoint || !endpoint.getAll) return;
+
+    console.log(`Synchronizing ${table} with remote database...`);
+    const remoteData = await endpoint.getAll();
+    if (!Array.isArray(remoteData)) return;
+
+    const remoteMap = new Map(remoteData.map(item => [item.id, item]));
+    const newMap = new Map(newData.map(item => [item.id, item]));
+
+    // Delete items that exist in remote but not in new
+    for (const [id] of remoteMap) {
+      if (!newMap.has(id)) {
+        if (endpoint.delete) {
+          try { await endpoint.delete(id); } catch (e) { console.error('Delete error', e); }
+        }
+      }
+    }
+
+    // Create or Update items
+    for (const item of newData) {
+      if (remoteMap.has(item.id)) {
+        // Update existing
+        if (endpoint.update) {
+          try { await endpoint.update(item.id, item); } catch (e) { console.error('Update error', e); }
+        }
+      } else {
+        // Create new
+        if (endpoint.create) {
+          try { await endpoint.create(item); } catch (e) { console.error('Create error', e); }
+        }
       }
     }
   } catch (error) {
-    console.error(`Failed to save ${table} to remote:`, error);
+    console.error(`Failed to bulk sync ${table} to remote:`, error);
   }
 };
 
@@ -71,7 +89,6 @@ export const loadConfig = async (_localKey: string, defaultData: any) => {
 }
 
 export const saveConfigAdmin = async (_localKey: string, config: any) => {
-  if (!canWriteLocal()) return;
   try {
     await endpoints.config.update(config);
   } catch (error) {

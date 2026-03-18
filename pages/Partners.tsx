@@ -20,8 +20,17 @@ const Partners: React.FC = () => {
 
   // Função para truncar texto com elegância
   const truncateText = (text: string, maxLength: number = 90) => {
+    if (!text) return '';
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
+  };
+
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
   };
 
   return (
@@ -130,7 +139,7 @@ const Partners: React.FC = () => {
                         <div className="w-full h-full relative z-10 p-2">
                           <img 
                             src={p.logo} 
-                            alt={p.name} 
+                            alt={getLocalized(p.name)} 
                             className="w-full h-full object-contain transition-all duration-500 partner-logo"
                           />
                         </div>
@@ -146,7 +155,7 @@ const Partners: React.FC = () => {
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        {p.name}
+                        {getLocalized(p.name)}
                       </motion.h3>
                       
                       {/* Descrição com altura dinâmica */}
@@ -169,7 +178,7 @@ const Partners: React.FC = () => {
                                   )}
                                 </>
                               ) : (
-                                truncateText(isPt ? p.desc.pt : p.desc.en, 85)
+                                truncateText(getLocalized(p.desc), 85)
                               )}
                             </p>
                             

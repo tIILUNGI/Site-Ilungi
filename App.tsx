@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { translations } from './translations';
 import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
-import { purgeAllDataIfNeeded, setDataMode } from './lib/dataSync';
+import { purgeAllDataIfNeeded } from './lib/dataSync';
 import { AlumniAuthProvider } from './lib/authContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -116,9 +116,7 @@ const AppShell: React.FC = () => {
     sessionStorage.setItem('ilungi_dark', d ? 'true' : 'false');
   };
 
-  useLayoutEffect(() => {
-    setDataMode(isAdminRoute ? 'admin' : 'public');
-  }, [isAdminRoute]);
+
 
   const [t, setT] = useState<any>(() => getContent(lang));
 

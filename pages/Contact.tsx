@@ -3,9 +3,7 @@ import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useAppContext } from '../App';
 import { useLocation } from 'react-router-dom';
-
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgeknpd';
-const SPONTANEOUS_ENDPOINT = 'https://formspree.io/f/xvnekvbp';
+import { endpoints } from '../lib/api';
 
 // Animation variants
 const containerVariants = {
@@ -47,7 +45,6 @@ const Contact: React.FC = () => {
     area: '',
     cv: ''
   });
-  const [cvFile, setCvFile] = useState<File | null>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [spontaneousStatus, setSpontaneousStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -66,36 +63,15 @@ const Contact: React.FC = () => {
     setStatus('sending');
     
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        const emailBody = isPt
-          ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
-          : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-        const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
-        window.location.href = mailtoLink;
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }
+      await endpoints.contact.send(formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Error sending contact message:', error);
       const emailBody = isPt
         ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
         : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -106,73 +82,27 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setSpontaneousStatus('sending');
     
-    // Get the file input
     const fileInput = document.querySelector('input[name="cvFile"]') as HTMLInputElement;
     const file = fileInput?.files?.[0];
 
     try {
-      // If there's a file, use FormData to send it
+      const fd = new FormData();
+      fd.append('name', spontaneousData.name);
+      fd.append('email', spontaneousData.email);
+      fd.append('phone', spontaneousData.phone);
+      fd.append('area', spontaneousData.area);
+      fd.append('cv', spontaneousData.cv);
       if (file) {
-        const formData = new FormData();
-        formData.append('name', spontaneousData.name);
-        formData.append('email', spontaneousData.email);
-        formData.append('phone', spontaneousData.phone);
-        formData.append('area', spontaneousData.area);
-        formData.append('cv', spontaneousData.cv);
-        formData.append('cvFile', file);
-
-        const response = await fetch(SPONTANEOUS_ENDPOINT, {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (response.ok) {
-          setSpontaneousStatus('success');
-          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-          setCvFile(null);
-          if (fileInput) fileInput.value = '';
-        } else {
-          // Fallback to email
-          const emailBody = isPt
-            ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}\n\nAnexar currículo: ${file.name}`
-            : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}\n\nAttach resume: ${file.name}`;
-          const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
-          window.location.href = mailtoLink;
-          setSpontaneousStatus('success');
-          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-          setCvFile(null);
-          if (fileInput) fileInput.value = '';
-        }
-      } else {
-        // No file, use JSON
-        const response = await fetch(SPONTANEOUS_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: spontaneousData.name,
-            email: spontaneousData.email,
-            phone: spontaneousData.phone,
-            area: spontaneousData.area,
-            cv: spontaneousData.cv,
-          }),
-        });
-
-        if (response.ok) {
-          setSpontaneousStatus('success');
-          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-        } else {
-          const emailBody = isPt
-            ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}`
-            : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}`;
-          const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
-          window.location.href = mailtoLink;
-          setSpontaneousStatus('success');
-          setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-        }
+        fd.append('cvFile', file);
       }
+
+      await endpoints.contact.sendSpontaneous(fd);
+      
+      setSpontaneousStatus('success');
+      setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
+      if (fileInput) fileInput.value = '';
     } catch (error) {
+      console.error('Error sending spontaneous application:', error);
       const emailBody = isPt
         ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}${file ? `\n\nAnexar currículo: ${file.name}` : ''}`
         : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}${file ? `\n\nAttach resume: ${file.name}` : ''}`;
@@ -180,7 +110,7 @@ const Contact: React.FC = () => {
       window.location.href = mailtoLink;
       setSpontaneousStatus('success');
       setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-      setCvFile(null);
+      if (fileInput) fileInput.value = '';
     }
   };
 

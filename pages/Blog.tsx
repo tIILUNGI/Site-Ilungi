@@ -18,6 +18,14 @@ const Blog: React.FC = () => {
 
   const categories = ['all', 'ILUNGI', 'RFID', 'Gestão de Stocks', 'Consultoria ISO', 'Gestão de Projetos', 'Compliance', 'Formação', 'Tecnologia', 'Gestão de Riscos'];
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   useEffect(() => {
     loadData('blog_posts', 'ilungi_blog_data', defaultPosts).then(data => {
       const published = data.filter((p: BlogPost) => p.status === 'published');
@@ -32,8 +40,9 @@ const Blog: React.FC = () => {
   }, []);
 
   const filteredPosts = posts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const titleMatch = getLocalized(post.title).toLowerCase().includes(searchTerm.toLowerCase());
+    const excerptMatch = getLocalized(post.excerpt).toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = titleMatch || excerptMatch;
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -70,7 +79,7 @@ const Blog: React.FC = () => {
               <div className="h-64 md:h-96 overflow-hidden">
                 <img 
                   src={selectedPost.image} 
-                  alt={selectedPost.title}
+                  alt={getLocalized(selectedPost.title)}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -92,16 +101,16 @@ const Blog: React.FC = () => {
               </div>
 
               <h1 className={`text-3xl md:text-4xl font-black mb-6 leading-tight ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                {selectedPost.title}
+                {getLocalized(selectedPost.title)}
               </h1>
 
               <div className={`prose max-w-none ${isDark ? 'prose-invert' : ''}`}>
                 <p className={`text-lg leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                  {selectedPost.excerpt}
+                  {getLocalized(selectedPost.excerpt)}
                 </p>
                 {selectedPost.content && (
                   <div className={`mt-8 whitespace-pre-line ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                    {selectedPost.content}
+                    {getLocalized(selectedPost.content)}
                   </div>
                 )}
               </div>
@@ -147,7 +156,7 @@ const Blog: React.FC = () => {
               {/* Background Image */}
               <img 
                 src={featuredPost.image || internetImages.default} 
-                alt={featuredPost.title}
+                alt={getLocalized(featuredPost.title)}
                 className="w-full h-full object-cover"
               />
               {/* Dark Overlay */}
@@ -165,11 +174,11 @@ const Blog: React.FC = () => {
                 </div>
                 
                 <h2 className="text-3xl lg:text-4xl font-black mb-4 leading-tight text-white">
-                  {featuredPost.title}
+                  {getLocalized(featuredPost.title)}
                 </h2>
                 
                 <p className="text-base mb-6 text-white/80 max-w-2xl">
-                  {featuredPost.excerpt}
+                  {getLocalized(featuredPost.excerpt)}
                 </p>
                 
                 <div className="flex items-center gap-2 text-sm font-medium text-white">
@@ -206,7 +215,7 @@ const Blog: React.FC = () => {
                   <div className="h-48 overflow-hidden relative">
                     <img 
                       src={post.image || internetImages.default} 
-                      alt={post.title}
+                      alt={getLocalized(post.title)}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3">
@@ -218,7 +227,7 @@ const Blog: React.FC = () => {
 
                   <div className="p-5">
                     <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                      {post.title}
+                      {getLocalized(post.title)}
                     </h3>
                     
                     <div className={`flex items-center justify-between text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
@@ -301,7 +310,7 @@ const Blog: React.FC = () => {
                 <div className="h-40 overflow-hidden relative">
                   <img 
                     src={post.image || internetImages.default} 
-                    alt={post.title}
+                    alt={getLocalized(post.title)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
@@ -313,11 +322,11 @@ const Blog: React.FC = () => {
 
                 <div className="p-5">
                   <h3 className={`text-base font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                    {post.title}
+                    {getLocalized(post.title)}
                   </h3>
                   
                   <p className={`text-sm mb-3 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    {post.excerpt}
+                    {getLocalized(post.excerpt)}
                   </p>
 
                   <div className={`flex items-center justify-between text-xs pt-3 border-t ${isDark ? 'border-slate-700 text-slate-500' : 'border-slate-100 text-slate-400'}`}>
