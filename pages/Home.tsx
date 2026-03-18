@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     { bg: "/imagens/Logo Slide.png", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
     { bg: "/imagens/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
     { bg: "/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
-    { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "Gestão de Projetos" : "Project Management", subtitle: isPt ? "Resultados mensuráveis e eficiência" : "Measurable results and efficiency" }
+    { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "ESC" : "ESC", subtitle: isPt ? "Relatório Padrão de Sustentabilidade" : "Standard Sustainability Report" }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -80,7 +80,7 @@ const Home: React.FC = () => {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 7000);
+    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 15000);
     return () => clearInterval(interval);
   }, []);
 
