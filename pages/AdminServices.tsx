@@ -145,7 +145,7 @@ const AdminServices: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Título</label>
                 <input
                   type="text"
-                  value={formData.title}
+                  value={getLocalized(formData.title)}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                 />
@@ -186,7 +186,7 @@ const AdminServices: React.FC = () => {
               <div className="md:col-span-2">
                 <label className="block text-sm font-bold mb-2">Descrição Curta</label>
                 <textarea
-                  value={formData.desc}
+                  value={getLocalized(formData.desc)}
                   onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
                   rows={2}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
