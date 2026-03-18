@@ -38,6 +38,14 @@ const AdminServices: React.FC = () => {
     });
   }, [lang]);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const saveToStorage = (newData: ServiceForm[]) => {
     setServices(newData);
     saveDataAdmin('services', 'ilungi_services_data', newData);
@@ -61,7 +69,11 @@ const AdminServices: React.FC = () => {
   };
 
   const handleEdit = (s: ServiceForm) => {
-    setFormData(s);
+    setFormData({
+      ...s,
+      title: getLocalized(s.title),
+      desc: getLocalized(s.desc)
+    });
     setEditingId(s.id);
     setIsAdding(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -195,8 +207,8 @@ const AdminServices: React.FC = () => {
               className={`rounded-2xl p-6 ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-lg border border-slate-200 relative group`}
               style={{ borderTop: `4px solid ${s.color}` }}
             >
-              <h3 className="font-bold text-xl mb-2">{s.title}</h3>
-              <p className="text-slate-500 text-sm mb-4 line-clamp-2">{s.desc}</p>
+              <h3 className="font-bold text-xl mb-2">{getLocalized(s.title)}</h3>
+              <p className="text-slate-500 text-sm mb-4 line-clamp-2">{getLocalized(s.desc)}</p>
               
               <div className="flex gap-2 justify-end mt-4">
                 <button

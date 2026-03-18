@@ -64,12 +64,12 @@ const ScrollToTop = () => {
 
 const RequireAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAllowed, setIsAllowed] = useState<boolean>(() => {
-    return localStorage.getItem('ilungi_admin') === 'true';
+    return sessionStorage.getItem('ilungi_admin') === 'true' && !!sessionStorage.getItem('ilungi_admin_token');
   });
 
   useEffect(() => {
     const sync = () => {
-      setIsAllowed(localStorage.getItem('ilungi_admin') === 'true');
+      setIsAllowed(sessionStorage.getItem('ilungi_admin') === 'true' && !!sessionStorage.getItem('ilungi_admin_token'));
     };
     window.addEventListener('storage', sync);
     window.addEventListener('ilungi-admin-auth', sync);
@@ -90,30 +90,30 @@ const AppShell: React.FC = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
   const [lang, setLangState] = useState<Language>(() => {
-    const saved = localStorage.getItem('ilungi_lang');
+    const saved = sessionStorage.getItem('ilungi_lang');
     return (saved as Language) || 'pt';
   });
   const [isDark, setIsDark] = useState<boolean>(() => {
-    const saved = localStorage.getItem('ilungi_dark');
+    const saved = sessionStorage.getItem('ilungi_dark');
     return saved === 'true';
   });
   const [isEditing, setIsEditing] = useState<boolean>(() => {
-    return localStorage.getItem('ilungi_editing') === 'true';
+    return sessionStorage.getItem('ilungi_editing') === 'true';
   });
 
   const handleSetIsEditing = (e: boolean) => {
     setIsEditing(e);
-    localStorage.setItem('ilungi_editing', e ? 'true' : 'false');
+    sessionStorage.setItem('ilungi_editing', e ? 'true' : 'false');
   };
 
   const setLang = (l: Language) => {
     setLangState(l);
-    localStorage.setItem('ilungi_lang', l);
+    sessionStorage.setItem('ilungi_lang', l);
   };
 
   const handleSetIsDark = (d: boolean) => {
     setIsDark(d);
-    localStorage.setItem('ilungi_dark', d ? 'true' : 'false');
+    sessionStorage.setItem('ilungi_dark', d ? 'true' : 'false');
   };
 
   useLayoutEffect(() => {

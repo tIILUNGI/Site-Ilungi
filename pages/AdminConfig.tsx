@@ -19,10 +19,10 @@ const AdminConfig: React.FC = () => {
     setEditedContent(localData);
   }, [lang]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSaveStatus('saving');
     try {
-      saveContent(lang, editedContent);
+      await saveContent(lang, editedContent);
       setContent(editedContent);
       window.dispatchEvent(new Event('ilungi-content-updated'));
       setTimeout(() => setSaveStatus('saved'), 500);
@@ -51,9 +51,9 @@ const AdminConfig: React.FC = () => {
     }
   };
 
-  const handleReset = () => {
+  const handleReset = async () => {
     if (confirm(isPt ? 'Tem a certeza que pretende restaurar os valores padrão?' : 'Are you sure you want to restore default values?')) {
-      resetContent(lang);
+      await resetContent(lang);
       const data = getContent(lang);
       setContent(data);
       setEditedContent(data);
@@ -72,13 +72,13 @@ const AdminConfig: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
         try {
-          importContent(event.target?.result as string);
+          await importContent(event.target?.result as string);
           const data = getContent(lang);
           setContent(data);
           setEditedContent(data);

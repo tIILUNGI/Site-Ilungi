@@ -9,7 +9,7 @@ import { loadData } from '../lib/dataSync';
 
 const AILUNGIPortal: React.FC = () => {
   const { t, lang } = useAppContext();
-  const { user } = useAlumniAuth();
+  const { user, signOut, loading } = useAlumniAuth();
   const isPt = lang === 'pt';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -18,9 +18,10 @@ const AILUNGIPortal: React.FC = () => {
   
   // Check if user is logged in
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('alumni_logged_in') || user;
-    setIsLoading(false);
-  }, [user]);
+    if (!loading) {
+      setIsLoading(false);
+    }
+  }, [user, loading]);
 
   useEffect(() => {
     loadData('courses', 'ilungi_courses_data', defaultCourses).then((data) => {
@@ -35,7 +36,7 @@ const AILUNGIPortal: React.FC = () => {
   ).slice(0, 6);
 
   // Show welcome page when not logged in
-  if (!isLoading && !localStorage.getItem('alumni_logged_in') && !user) {
+  if (!isLoading && !user) {
     return (
       <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-8">
         <div className="max-w-2xl w-full text-center">
@@ -88,7 +89,7 @@ const AILUNGIPortal: React.FC = () => {
   }
 
   // Logged in view
-  const userName = localStorage.getItem('alumni_email')?.split('@')[0] || 'Aluno';
+  const userName = user?.nome_completo || 'Aluno';
 
   return (
     <div className="min-h-screen bg-slate-950 text-white flex pt-0">
@@ -116,9 +117,8 @@ const AILUNGIPortal: React.FC = () => {
 
         <div className="pt-6 border-t border-white/10">
             <button 
-              onClick={() => {
-                localStorage.removeItem('alumni_logged_in');
-                localStorage.removeItem('alumni_email');
+              onClick={async () => {
+                await signOut();
                 navigate('/academia/login');
               }}
               className="flex items-center space-x-3 text-slate-400 hover:text-red-400 cursor-pointer w-full"

@@ -3,27 +3,35 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { useAlumniAuth } from '../lib/authContext';
 
 const AILUNGILogin: React.FC = () => {
   const { t, lang } = useAppContext();
+  const { signIn } = useAlumniAuth();
   const isPt = lang === 'pt';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     
-    // Login simulado - aceita qualquer email/password para demo
-    if (email && password.length >= 6) {
-      localStorage.setItem('alumni_logged_in', 'true');
-      localStorage.setItem('alumni_email', email);
-      navigate('/academia/alumni');
+    if (email && password) {
+      setLoading(true);
+      const { error: apiError } = await signIn(email, password);
+      setLoading(false);
+      
+      if (!apiError) {
+        navigate('/academia/alumni');
+      } else {
+        setError(apiError.message);
+      }
     } else {
-      setError(isPt ? 'Por favor, insira um email e senha válida.' : 'Please enter a valid email and password.');
+      setError(isPt ? 'Por favor, insira um email e password válida.' : 'Please enter a valid email and password.');
     }
   };
 
@@ -112,9 +120,10 @@ const AILUNGILogin: React.FC = () => {
 
             <button 
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-[#6a00a3] to-[#7c3aed] text-white rounded-xl font-bold hover:from-[#520b7d] hover:to-[#6a00a3] transition-all shadow-lg shadow-purple-900/30"
+              disabled={loading}
+              className="w-full py-3 bg-gradient-to-r from-[#6a00a3] to-[#7c3aed] text-white rounded-xl font-bold hover:from-[#520b7d] hover:to-[#6a00a3] transition-all shadow-lg shadow-purple-900/30 disabled:opacity-50"
             >
-              {t.alumni.login.button}
+              {loading ? (isPt ? 'A entrar...' : 'Signing in...') : t.alumni.login.button}
             </button>
           </form>
 

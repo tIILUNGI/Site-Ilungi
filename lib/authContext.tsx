@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { endpoints } from './api';
 
-interface AlumniUser {
+export interface AlumniUser {
   id: string;
   email: string;
   nome_completo: string;
   receber_notificacoes: boolean;
   email_confirmado: boolean;
-  created_at: string;
+  role?: string;
+  created_at?: string;
 }
 
-type Session = null;
+type Session = { token: string } | null;
 
 interface AuthContextType {
   user: AlumniUser | null;
@@ -35,53 +37,39 @@ interface AlumniAuthProviderProps {
   children: ReactNode;
 }
 
-const STORAGE_PROFILE = 'alumni_profile';
-const STORAGE_EMAIL = 'alumni_email';
-const STORAGE_LOGGED = 'alumni_logged_in';
-
-const readStoredUser = (): AlumniUser | null => {
-  try {
-    const raw = localStorage.getItem(STORAGE_PROFILE);
-    if (raw) return JSON.parse(raw) as AlumniUser;
-    const email = localStorage.getItem(STORAGE_EMAIL);
-    if (!email) return null;
-    return {
-      id: `local-${email}`,
-      email,
-      nome_completo: email.split('@')[0] || 'Aluno',
-      receber_notificacoes: false,
-      email_confirmado: false,
-      created_at: new Date().toISOString()
-    };
-  } catch {
-    return null;
-  }
-};
-
-const storeUser = (user: AlumniUser) => {
-  try {
-    localStorage.setItem(STORAGE_PROFILE, JSON.stringify(user));
-    localStorage.setItem(STORAGE_EMAIL, user.email);
-  } catch {}
-};
-
-const setLoggedIn = (value: boolean) => {
-  try {
-    localStorage.setItem(STORAGE_LOGGED, value ? 'true' : 'false');
-  } catch {}
-};
+const STORAGE_TOKEN = 'alumni_token';
 
 export const AlumniAuthProvider: React.FC<AlumniAuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AlumniUser | null>(null);
   const [session, setSession] = useState<Session>(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchProfile = async (token: string) => {
+    try {
+      // endpoints.auth.profile automatically uses the token from sessionStorage in API client
+      const profileData = await endpoints.auth.profile();
+      setUser(profileData);
+      setSession({ token });
+    } catch (error) {
+      console.error('Failed to fetch alumni profile:', error);
+      sessionStorage.removeItem(STORAGE_TOKEN);
+      setUser(null);
+      setSession(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const sync = () => {
-      const logged = localStorage.getItem(STORAGE_LOGGED) === 'true';
-      const stored = readStoredUser();
-      setUser(logged ? stored : null);
-      setLoading(false);
+      const token = sessionStorage.getItem(STORAGE_TOKEN);
+      if (token) {
+        fetchProfile(token);
+      } else {
+        setUser(null);
+        setSession(null);
+        setLoading(false);
+      }
     };
 
     sync();
@@ -93,59 +81,69 @@ export const AlumniAuthProvider: React.FC<AlumniAuthProviderProps> = ({ children
     };
   }, []);
 
-  const signUp = async (email: string, _password: string, nomeCompleto: string, receberNotificacoes: boolean): Promise<{ error: Error | null }> => {
+  const signUp = async (email: string, password: string, nomeCompleto: string, receberNotificacoes: boolean): Promise<{ error: Error | null }> => {
     try {
-      const profile: AlumniUser = {
-        id: `local-${Date.now()}`,
+      const response = await endpoints.auth.register({
         email,
+        password,
         nome_completo: nomeCompleto,
-        receber_notificacoes: receberNotificacoes,
-        email_confirmado: false,
-        created_at: new Date().toISOString()
-      };
-      storeUser(profile);
-      return { error: null };
-    } catch (error) {
-      return { error: error as Error };
+        receber_notificacoes: receberNotificacoes
+      });
+      
+      if (response.token) {
+        sessionStorage.setItem(STORAGE_TOKEN, response.token);
+        setUser({
+          id: response.id,
+          email: response.email,
+          nome_completo: response.nome_completo,
+          receber_notificacoes: response.receber_notificacoes,
+          email_confirmado: response.email_confirmado,
+          role: response.role
+        });
+        setSession({ token: response.token });
+        window.dispatchEvent(new Event('ilungi-alumni-auth'));
+        return { error: null };
+      }
+      return { error: new Error('Token não recebido após o registo.') };
+    } catch (error: any) {
+      return { error: new Error(error.message || 'Erro ao criar conta.') };
     }
   };
 
-  const signIn = async (email: string, _password: string): Promise<{ error: Error | null }> => {
+  const signIn = async (email: string, password: string): Promise<{ error: Error | null }> => {
     try {
-      const profile =
-        readStoredUser() ||
-        ({
-          id: `local-${Date.now()}`,
-          email,
-          nome_completo: email.split('@')[0] || 'Aluno',
-          receber_notificacoes: false,
-          email_confirmado: false,
-          created_at: new Date().toISOString()
-        } as AlumniUser);
-
-      storeUser(profile);
-      setLoggedIn(true);
-      setUser(profile);
-      window.dispatchEvent(new Event('ilungi-alumni-auth'));
-      return { error: null };
-    } catch (error) {
-      return { error: error as Error };
+      const response = await endpoints.auth.login({ email, password });
+      
+      if (response.token) {
+        sessionStorage.setItem(STORAGE_TOKEN, response.token);
+        setUser({
+          id: response.id,
+          email: response.email,
+          nome_completo: response.nome_completo,
+          receber_notificacoes: response.receber_notificacoes,
+          email_confirmado: response.email_confirmado,
+          role: response.role
+        });
+        setSession({ token: response.token });
+        window.dispatchEvent(new Event('ilungi-alumni-auth'));
+        return { error: null };
+      }
+      return { error: new Error('Token não recebido após o login.') };
+    } catch (error: any) {
+      return { error: new Error(error.message || 'Credenciais inválidas.') };
     }
   };
 
   const signOut = async () => {
-    try {
-      localStorage.removeItem(STORAGE_PROFILE);
-      localStorage.removeItem(STORAGE_EMAIL);
-      localStorage.removeItem(STORAGE_LOGGED);
-    } catch {}
+    sessionStorage.removeItem(STORAGE_TOKEN);
     setUser(null);
     setSession(null);
     window.dispatchEvent(new Event('ilungi-alumni-auth'));
   };
 
-  const resetPassword = async (_email: string): Promise<{ error: Error | null }> => {
-    return { error: null };
+  const resetPassword = async (email: string): Promise<{ error: Error | null }> => {
+    // Requires backend implementation for /auth/forgot-password if needed via endpoints
+    return { error: new Error('Funcionalidade não implementada.') };
   };
 
   return (

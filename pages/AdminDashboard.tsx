@@ -10,8 +10,9 @@ const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    localStorage.removeItem('ilungi_admin');
-    localStorage.removeItem('ilungi_admin_email');
+    sessionStorage.removeItem('ilungi_admin');
+    sessionStorage.removeItem('ilungi_admin_token');
+    sessionStorage.removeItem('ilungi_admin_email');
     window.dispatchEvent(new Event('ilungi-admin-auth'));
     navigate('/admin/login');
   };

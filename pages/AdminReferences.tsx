@@ -36,30 +36,17 @@ const AdminReferences: React.FC = () => {
   useEffect(() => {
     loadData('references', 'ilungi_references_data', defaultReferences).then(data => {
       const cleaned = (data || []).filter((ref: any) => ref.id !== 'cmc' && ref.name !== 'CMC');
-      const defaultsById = new Map(defaultReferences.map((ref: any) => [ref.id, ref]));
-      const normalized = cleaned.map((ref: any) => {
-        if (ref.id === 'petromar') {
-          const def = defaultsById.get('petromar');
-          if (!def) return ref;
-          return {
-            ...ref,
-            service: def.service,
-            role: def.role,
-            comment: def.comment,
-            description: def.description,
-            logo: def.logo
-          };
-        }
-        return ref;
-      });
-      setReferences(normalized);
-      if (JSON.stringify(normalized) !== JSON.stringify(cleaned)) {
-        saveDataAdmin('references', 'ilungi_references_data', normalized);
-      } else if ((data || []).length !== cleaned.length) {
-        saveDataAdmin('references', 'ilungi_references_data', cleaned);
-      }
+      setReferences(cleaned);
     });
   }, [lang]);
+
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
 
   const saveToStorage = (newData: ReferenceForm[]) => {
     setReferences(newData);
@@ -106,7 +93,13 @@ const AdminReferences: React.FC = () => {
   };
 
   const handleEdit = (ref: ReferenceForm) => {
-    setFormData(ref);
+    setFormData({
+      ...ref,
+      name: getLocalized(ref.name),
+      role: getLocalized(ref.role),
+      comment: getLocalized(ref.comment),
+      description: getLocalized(ref.description)
+    });
     setEditingId(ref.id);
     setIsAdding(false);
   };
@@ -329,13 +322,13 @@ const AdminReferences: React.FC = () => {
               </div>
               
               <h3 className={`font-bold text-lg mb-1 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                {ref.name}
+                {getLocalized(ref.name)}
               </h3>
               <p className={`text-sm mb-3 ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
-                {ref.role}
+                {getLocalized(ref.role)}
               </p>
               <p className={`text-sm line-clamp-3 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                "{ref.comment}"
+                "{getLocalized(ref.comment)}"
               </p>
             </motion.div>
           ))}

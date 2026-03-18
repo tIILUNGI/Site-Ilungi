@@ -33,6 +33,14 @@ const AdminPartners: React.FC = () => {
     });
   }, []);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const saveToStorage = (newData: PartnerForm[]) => {
     setPartners(newData);
     saveDataAdmin('partners', 'ilungi_partners_data', newData);
@@ -56,7 +64,11 @@ const AdminPartners: React.FC = () => {
   };
 
   const handleEdit = (p: PartnerForm) => {
-    setFormData(p);
+    setFormData({
+      ...p,
+      name: getLocalized(p.name),
+      desc: typeof p.desc === 'object' ? p.desc : { pt: p.desc, en: p.desc }
+    });
     setEditingId(p.id);
     setIsAdding(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -200,9 +212,9 @@ const AdminPartners: React.FC = () => {
               style={{ borderBottom: `4px solid ${p.color}` }}
             >
               <div className="h-20 mb-4 flex justify-center items-center">
-                <img src={p.logo} alt={p.name} className="h-full object-contain" />
+                <img src={p.logo} alt={getLocalized(p.name)} className="h-full object-contain" />
               </div>
-              <h3 className="font-bold text-lg mb-2">{p.name}</h3>
+              <h3 className="font-bold text-lg mb-2">{getLocalized(p.name)}</h3>
               
               <div className="flex gap-2 justify-center mt-4">
                 <button

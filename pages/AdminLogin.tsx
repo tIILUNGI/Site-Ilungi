@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, LogIn } from 'lucide-react';
 import { useAppContext } from '../App';
+import { endpoints } from '../lib/api';
 
 const AdminLogin: React.FC = () => {
   const { lang, isDark } = useAppContext();
@@ -13,7 +14,7 @@ const AdminLogin: React.FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (localStorage.getItem('ilungi_admin') === 'true') {
+    if (sessionStorage.getItem('ilungi_admin') === 'true') {
       navigate('/admin');
     }
   }, [navigate]);
@@ -23,16 +24,22 @@ const AdminLogin: React.FC = () => {
     setStatus('loading');
     setError('');
 
-    if (!email || password.length < 4) {
+    try {
+      const response = await endpoints.auth.login({ email, password });
+      
+      if (response.token) {
+        sessionStorage.setItem('ilungi_admin', 'true');
+        sessionStorage.setItem('ilungi_admin_token', response.token);
+        sessionStorage.setItem('ilungi_admin_email', email);
+        window.dispatchEvent(new Event('ilungi-admin-auth'));
+        navigate('/admin');
+      } else {
+        throw new Error('No token received');
+      }
+    } catch (err: any) {
       setStatus('error');
-      setError(isPt ? 'Credenciais inválidas.' : 'Invalid credentials.');
-      return;
+      setError(err.message || (isPt ? 'Erro ao entrar. Verifique suas credenciais.' : 'Login error. Check your credentials.'));
     }
-
-    localStorage.setItem('ilungi_admin', 'true');
-    localStorage.setItem('ilungi_admin_email', email);
-    window.dispatchEvent(new Event('ilungi-admin-auth'));
-    navigate('/admin');
   };
 
   return (

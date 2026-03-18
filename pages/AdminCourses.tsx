@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, ArrowLeft, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -31,6 +31,14 @@ const AdminCourses: React.FC = () => {
     });
   }, []);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const saveToStorage = (newData: Course[]) => {
     setCourses(newData);
     saveDataAdmin('courses', 'ilungi_courses_data', newData);
@@ -54,7 +62,10 @@ const AdminCourses: React.FC = () => {
   };
 
   const handleEdit = (course: Course) => {
-    setFormData(course);
+    setFormData({
+      ...course,
+      name: getLocalized(course.name)
+    });
     setEditingId(course.id);
     setIsAdding(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -218,7 +229,7 @@ const AdminCourses: React.FC = () => {
                       {course.code}
                     </td>
                     <td className={`px-6 py-4 text-sm font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                      {course.name}
+                      {getLocalized(course.name)}
                     </td>
                     <td className={`px-6 py-4 text-sm ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.area}</td>
                     <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.hours}</td>

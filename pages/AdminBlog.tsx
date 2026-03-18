@@ -25,6 +25,14 @@ const AdminBlog: React.FC = () => {
     });
   }, []);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const saveToStorage = (newData: BlogPost[]) => {
     setPosts(newData);
     saveDataAdmin('blog_posts', 'ilungi_blog_data', newData);
@@ -48,7 +56,12 @@ const AdminBlog: React.FC = () => {
   };
 
   const handleEdit = (p: BlogPost) => {
-    setFormData(p);
+    setFormData({
+      ...p,
+      title: getLocalized(p.title),
+      excerpt: getLocalized(p.excerpt),
+      content: getLocalized(p.content)
+    });
     setEditingId(p.id);
     setIsAdding(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -251,8 +264,8 @@ const AdminBlog: React.FC = () => {
               </div>
               
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-xl mb-2 line-clamp-2">{p.title}</h3>
-                <p className="text-slate-500 text-sm mb-4 line-clamp-3 flex-1">{p.excerpt}</p>
+                <h3 className="font-bold text-xl mb-2 line-clamp-2">{getLocalized(p.title)}</h3>
+                <p className="text-slate-500 text-sm mb-4 line-clamp-3 flex-1">{getLocalized(p.excerpt)}</p>
                 
                 <div className="flex items-center justify-between text-xs text-slate-400 font-medium mb-4 pt-4 border-t border-slate-100 dark:border-slate-700">
                   <span>{new Date(p.date).toLocaleDateString()}</span>

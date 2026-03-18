@@ -39,6 +39,14 @@ const AdminSolutions: React.FC = () => {
     });
   }, []);
 
+  const getLocalized = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   const saveToStorage = (newData: SolutionForm[]) => {
     setSolutions(newData);
     saveDataAdmin('solutions', 'ilungi_solutions_data', newData);
@@ -62,7 +70,12 @@ const AdminSolutions: React.FC = () => {
   };
 
   const handleEdit = (sol: SolutionForm) => {
-    setFormData(sol);
+    setFormData({
+      ...sol,
+      name: getLocalized(sol.name),
+      tagline: getLocalized(sol.tagline),
+      desc: getLocalized(sol.desc)
+    });
     setEditingId(sol.id);
     setIsAdding(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -306,13 +319,13 @@ const AdminSolutions: React.FC = () => {
 
                 <motion.div className="absolute top-6 left-6 z-20" whileHover={{ scale: 1.05 }}>
                   <div className={`bg-gradient-to-r ${sol.color || 'from-[#1B3C2B] to-[#2E7D5E]'} px-5 py-2.5 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}>
-                    <span className="text-white font-black text-xl">{sol.name}</span>
+                    <span className="text-white font-black text-xl">{getLocalized(sol.name)}</span>
                   </div>
                 </motion.div>
 
                 <motion.div className="absolute bottom-6 left-6 z-20" whileHover={{ y: -3 }}>
                   <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium inline-block border border-white/30 shadow-lg">
-                    {sol.tagline}
+                    {getLocalized(sol.tagline)}
                   </span>
                 </motion.div>
               </div>
@@ -321,10 +334,10 @@ const AdminSolutions: React.FC = () => {
                 <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
                 
                 <h3 className={`text-2xl font-black ${isDark ? 'text-white' : 'text-slate-800'} mb-3`}>
-                  {sol.name}
+                  {getLocalized(sol.name)}
                 </h3>
                 <p className={`${isDark ? 'text-slate-400' : 'text-slate-500'} leading-relaxed mb-6 text-sm line-clamp-3`}>
-                  {sol.desc}
+                  {getLocalized(sol.desc)}
                 </p>
               </div>
 
