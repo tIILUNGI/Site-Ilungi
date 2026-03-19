@@ -161,9 +161,8 @@ const AdminBlog: React.FC = () => {
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
-                >
-                  {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                </select>
+                  placeholder="Ex: Tecnologia, Negócios"
+                />
               </div>
 
               <div>
@@ -219,7 +218,7 @@ const AdminBlog: React.FC = () => {
               <div className="md:col-span-2">
                 <label className="block text-sm font-bold mb-2">Conteúdo do Artigo (Markdown/HTML Simples)</label>
                 <textarea
-                  value={formData.content}
+                  value={getLocalized(formData.content)}
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   rows={8}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'} font-mono text-sm`}
@@ -252,10 +251,11 @@ const AdminBlog: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`rounded-2xl overflow-hidden ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'} shadow-lg border relative flex flex-col`}
+              style={{ borderBottom: `4px solid ${p.status === 'published' ? '#0d9488' : '#64748b'}` }}
             >
               <div className="h-48 overflow-hidden relative bg-slate-100">
                 {p.image ? (
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                  <img src={p.image} alt={getLocalized(p.title)} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-300">
                     <ImageIcon className="w-12 h-12" />
@@ -269,7 +269,7 @@ const AdminBlog: React.FC = () => {
                 </div>
                 <div className="absolute top-4 right-4">
                   <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-md">
-                    {p.category}
+                    {getLocalized(p.category)}
                   </span>
                 </div>
               </div>

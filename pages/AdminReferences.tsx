@@ -167,7 +167,7 @@ const AdminReferences: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={formData.name}
+                  value={getLocalized(formData.name)}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder={isPt ? 'Ex: Sonangol' : 'Ex: Sonangol'}
@@ -193,7 +193,7 @@ const AdminReferences: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={formData.role}
+                  value={getLocalized(formData.role)}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder={isPt ? 'Ex: Gerente de Qualidade' : 'Ex: Quality Manager'}
@@ -206,7 +206,7 @@ const AdminReferences: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={formData.person}
+                  value={getLocalized(formData.person)}
                   onChange={(e) => setFormData({ ...formData, person: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder={isPt ? 'Ex: João Miguel' : 'Ex: John Smith'}
@@ -218,7 +218,7 @@ const AdminReferences: React.FC = () => {
                   {isPt ? 'Serviço' : 'Service'}
                 </label>
                 <select
-                  value={formData.service}
+                  value={getLocalized(formData.service)}
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                   title={isPt ? 'Selecione um serviço' : 'Select a service'}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
@@ -235,7 +235,7 @@ const AdminReferences: React.FC = () => {
                   {isPt ? 'Comentário/Testemunho' : 'Comment/Testimonial'}
                 </label>
                 <textarea
-                  value={formData.comment}
+                  value={getLocalized(formData.comment)}
                   onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
                   rows={3}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
@@ -248,7 +248,7 @@ const AdminReferences: React.FC = () => {
                   {isPt ? 'Descrição do Serviço' : 'Service Description'}
                 </label>
                 <textarea
-                  value={formData.description}
+                  value={getLocalized(formData.description)}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}

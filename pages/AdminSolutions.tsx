@@ -168,9 +168,9 @@ const AdminSolutions: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={formData.name}
+                  value={getLocalized(formData.name)}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200 focus:border-[#6a00a3] focus:ring-1 focus:ring-[#6a00a3] outline-none outline-none'}`}
+                  className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200 focus:border-[#6a00a3] focus:ring-1 focus:ring-[#6a00a3] outline-none'}`}
                   placeholder="Ex: Salya"
                 />
               </div>
@@ -181,7 +181,7 @@ const AdminSolutions: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={formData.tagline}
+                  value={getLocalized(formData.tagline)}
                   onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200 outline-none'}`}
                   placeholder="Ex: Gestão de RH"
@@ -193,7 +193,7 @@ const AdminSolutions: React.FC = () => {
                   {isPt ? 'Descrição Completa' : 'Full Description'}
                 </label>
                 <textarea
-                  value={formData.desc}
+                  value={getLocalized(formData.desc)}
                   onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
                   rows={3}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200 outline-none'}`}

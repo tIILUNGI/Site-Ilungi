@@ -180,7 +180,7 @@ const AdminCourses: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Nome do Curso</label>
                 <input
                   type="text"
-                  value={formData.name}
+                  value={getLocalized(formData.name)}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                 />
@@ -190,7 +190,7 @@ const AdminCourses: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Especialidade / Área</label>
                 <input
                   type="text"
-                  value={formData.area}
+                  value={getLocalized(formData.area)}
                   onChange={(e) => setFormData({ ...formData, area: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                 />
@@ -200,7 +200,7 @@ const AdminCourses: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Carga Horária</label>
                 <input
                   type="text"
-                  value={formData.hours}
+                  value={getLocalized(formData.hours)}
                   onChange={(e) => setFormData({ ...formData, hours: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder="Ex: 24h"
@@ -211,7 +211,7 @@ const AdminCourses: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Modalidade</label>
                 <input
                   type="text"
-                  value={formData.modality}
+                  value={getLocalized(formData.modality)}
                   onChange={(e) => setFormData({ ...formData, modality: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder="Presencial / Online"
@@ -222,7 +222,7 @@ const AdminCourses: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Agenda</label>
                 <input
                   type="text"
-                  value={formData.agenda}
+                  value={getLocalized(formData.agenda)}
                   onChange={(e) => setFormData({ ...formData, agenda: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   placeholder="On-demand ou data"
@@ -271,9 +271,10 @@ const AdminCourses: React.FC = () => {
                       {getLocalized(course.name)}
                     </td>
                     <td className={`px-6 py-4 text-sm ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.area)}</td>
-                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.hours}</td>
+                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.hours)}</td>
                     <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.modality)}</td>
-                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.agenda}</td>
+                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.agenda)}</td>
+
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <button

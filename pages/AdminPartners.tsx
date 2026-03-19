@@ -179,8 +179,8 @@ const AdminPartners: React.FC = () => {
                 <div>
                   <label className="block text-sm font-bold mb-2">Descrição (PT)</label>
                   <textarea
-                    value={formData.desc.pt}
-                    onChange={(e) => setFormData({ ...formData, desc: { ...formData.desc, pt: e.target.value } })}
+                    value={formData.desc?.pt || ''}
+                    onChange={(e) => setFormData({ ...formData, desc: { ...(formData.desc || {pt:'', en:''}), pt: e.target.value } })}
                     rows={2}
                     className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   />
@@ -188,8 +188,8 @@ const AdminPartners: React.FC = () => {
                 <div>
                   <label className="block text-sm font-bold mb-2">Description (EN)</label>
                   <textarea
-                    value={formData.desc.en}
-                    onChange={(e) => setFormData({ ...formData, desc: { ...formData.desc, en: e.target.value } })}
+                    value={formData.desc?.en || ''}
+                    onChange={(e) => setFormData({ ...formData, desc: { ...(formData.desc || {pt:'', en:''}), en: e.target.value } })}
                     rows={2}
                     className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
                   />
