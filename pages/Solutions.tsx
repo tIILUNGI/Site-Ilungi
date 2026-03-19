@@ -62,7 +62,7 @@ const Solutions: React.FC = () => {
       const newTocomplyDesc = "Gestão de Sistemas ISO";
       const newTocomplyDescNormalized = normalizeText(newTocomplyDesc);
       let changed = false;
-      const normalized = data.map((product: any) => {
+      const normalized = data.map((product: any, idx: number) => {
         const name = normalizeText(getLocalized(product.name));
         const tagline = normalizeText(getLocalized(product.tagline));
         const desc = normalizeText(getLocalized(product.desc));
@@ -86,6 +86,19 @@ const Solutions: React.FC = () => {
 
         let updated = product;
         let updatedFlag = false;
+
+        // Fix empty image issue - use order-based fallback
+        const orderIdx = (product.order || idx) - 1;
+        const orderImages = [
+          '/imagens/primavera.png',  // order 1
+          '/imagens/Salya.png',  // order 2
+          '/imagens/SICLIC.png',  // order 3
+          '/imagens/Tocomply360.png'  // order 4
+        ];
+        if (!product.image || product.image === '') {
+          updated = { ...updated, image: orderImages[orderIdx] || orderImages[0] };
+          updatedFlag = true;
+        }
 
         if (isSalyaProduct && product.image !== "/imagens/Salya.png") {
           updated = { ...updated, image: "/imagens/Salya.png" };
@@ -111,7 +124,8 @@ const Solutions: React.FC = () => {
         return product;
       });
       setProducts(normalized);
-      if (changed) {
+      // Only save to API if user is logged in as admin
+      if (changed && sessionStorage.getItem('ilungi_admin_token')) {
         saveDataAdmin('solutions', 'ilungi_solutions_data', normalized);
       }
     });

@@ -53,11 +53,24 @@ const AdminSolutions: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      // Map frontend data to API format
+      const apiData = {
+        title: { pt: formData.name, en: formData.name },
+        tagline: { pt: formData.tagline, en: formData.tagline },
+        description: { pt: formData.desc, en: formData.desc },
+        featured_image: formData.image || '',
+        demo_url: formData.url || '',
+        path: formData.path || '',
+        color: formData.color || 'from-[#6a00a3] to-[#8000c4]',
+        bgColor: formData.bgColor || 'bg-[#6a00a3]',
+        active: true,
+        order: solutions.length + 1
+      };
+      
       if (editingId) {
-        await endpoints.solutions.update(editingId, formData);
+        await endpoints.solutions.update(editingId, apiData);
       } else if (isAdding) {
-        const { id, ...payload } = formData;
-        await endpoints.solutions.create(payload);
+        await endpoints.solutions.create(apiData);
       }
       await fetchSolutions();
       resetForm();

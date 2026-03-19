@@ -28,7 +28,17 @@ const AdminCourses: React.FC = () => {
   const fetchCourses = async () => {
     try {
       const data = await endpoints.courses.getAll();
-      setCourses(Array.isArray(data) ? data : []);
+      // Map the raw API data to ensure we have strings
+      const mappedCourses = Array.isArray(data) ? data.map((c: any) => ({
+        id: c.id || '',
+        code: c.code || '',
+        name: getLocalized(c.title),
+        area: getLocalized(c.area),
+        hours: c.duration || c.hours || '',
+        modality: getLocalized(c.modality),
+        agenda: c.agenda || 'On-demand'
+      })) : [];
+      setCourses(mappedCourses);
     } catch (error) {
       console.error('Failed to fetch courses:', error);
     }
@@ -48,11 +58,25 @@ const AdminCourses: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      // Convert form data to API format (JSONB fields)
+      const apiData = {
+        title: { pt: formData.name, en: formData.name },
+        code: formData.code,
+        area: { pt: formData.area, en: formData.area },
+        description: { pt: formData.name, en: formData.name },
+        duration: formData.hours,
+        hours: formData.hours,
+        modality: { pt: formData.modality, en: formData.modality },
+        agenda: formData.agenda || 'On-demand',
+        level: 'intermediate',
+        active: true,
+        order: courses.length + 1
+      };
+      
       if (editingId) {
-        await endpoints.courses.update(editingId, formData);
+        await endpoints.courses.update(editingId, apiData);
       } else if (isAdding) {
-        const { id, ...payload } = formData;
-        await endpoints.courses.create(payload);
+        await endpoints.courses.create(apiData);
       }
       await fetchCourses();
       resetForm();
@@ -77,7 +101,9 @@ const AdminCourses: React.FC = () => {
   const handleEdit = (course: Course) => {
     setFormData({
       ...course,
-      name: getLocalized(course.name)
+      name: getLocalized(course.name),
+      area: getLocalized(course.area),
+      modality: getLocalized(course.modality)
     });
     setEditingId(course.id);
     setIsAdding(false);
@@ -244,9 +270,9 @@ const AdminCourses: React.FC = () => {
                     <td className={`px-6 py-4 text-sm font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>
                       {getLocalized(course.name)}
                     </td>
-                    <td className={`px-6 py-4 text-sm ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.area}</td>
+                    <td className={`px-6 py-4 text-sm ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.area)}</td>
                     <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.hours}</td>
-                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.modality}</td>
+                    <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{getLocalized(course.modality)}</td>
                     <td className={`px-6 py-4 text-sm whitespace-nowrap ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{course.agenda}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">

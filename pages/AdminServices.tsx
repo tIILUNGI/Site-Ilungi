@@ -55,11 +55,23 @@ const AdminServices: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      // Map frontend data to API format
+      const apiData = {
+        title: { pt: formData.title, en: formData.title },
+        description: { pt: formData.desc, en: formData.desc },
+        content: { pt: '', en: '' },
+        image: formData.image || '',
+        path: formData.path || '',
+        color: formData.color || '#1B3C2B',
+        icon: 'ShieldCheck',
+        active: true,
+        order: services.length + 1
+      };
+      
       if (editingId) {
-        await endpoints.services.update(editingId, formData);
+        await endpoints.services.update(editingId, apiData);
       } else if (isAdding) {
-        const { id, ...payload } = formData;
-        await endpoints.services.create(payload);
+        await endpoints.services.create(apiData);
       }
       await fetchServices();
       resetForm();

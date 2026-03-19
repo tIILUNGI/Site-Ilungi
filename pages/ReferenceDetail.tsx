@@ -5,14 +5,20 @@ import { useAppContext } from '../App';
 import { loadData } from '../lib/dataSync';
 
 // Mapping of ISO references to their acquired norms/seals
+// Use client name slug for matching
 const isoNorms: Record<string, { norms: string[], asib: boolean }> = {
   'esmac': { norms: ['9001', '45001', '14001'], asib: true },
   'aclean': { norms: ['9001', '45001', '14001'], asib: true },
-  'imovias-urbanismo-sa': { norms: ['9001', '45001'], asib: true },
-  'imovias-energy': { norms: ['9001', '45001'], asib: true },
+  'imovias-urbanismo-e-construcao-sa': { norms: ['9001', '45001'], asib: true },
+  'imovias-energy-sa': { norms: ['9001', '45001'], asib: true },
   'diway': { norms: ['9001'], asib: true },
   'velonet': { norms: ['9001'], asib: true },
-  'interseguros': { norms: ['9001'], asib: true }
+  'interseguros-corretores-de-seguros-sa': { norms: ['9001'], asib: true },
+  'gold-procurement': { norms: [], asib: false },
+  'bureau-veritas': { norms: [], asib: false },
+  'petromar': { norms: [], asib: false },
+  'pensana': { norms: [], asib: false },
+  'bioprev': { norms: [], asib: false }
 };
 
 // ISO norm image paths
@@ -55,7 +61,41 @@ const ReferenceDetail: React.FC = () => {
   }, [lang]);
 
   const reference = references.find((ref: any) => ref.id === id);
-  const clientNorms = id ? isoNorms[id] : null;
+  
+  // Find client norms by matching client name slug
+  const getClientNorms = () => {
+    if (!reference) return null;
+    const clientName = (reference.client_name || reference.name || '').toLowerCase();
+    const slug = clientName
+      .replace(/[,.]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/[-]+/g, '-');
+    
+    // Try different slug variations
+    for (const key of Object.keys(isoNorms)) {
+      if (slug.includes(key) || key.includes(slug)) {
+        return isoNorms[key];
+      }
+    }
+    // Also check if service_type contains ISO info
+    const serviceType = reference.service_type || {};
+    const serviceStr = typeof serviceType === 'string' ? serviceType : (serviceType.pt || serviceType.en || '');
+    if (serviceStr.toLowerCase().includes('iso')) {
+      const norms: string[] = [];
+      if (serviceStr.includes('9001')) norms.push('9001');
+      if (serviceStr.includes('14001')) norms.push('14001');
+      if (serviceStr.includes('45001')) norms.push('45001');
+      if (serviceStr.includes('27001')) norms.push('27001');
+      if (serviceStr.includes('22301')) norms.push('22301');
+      if (serviceStr.includes('37001') || serviceStr.includes('37301')) norms.push('37001');
+      if (serviceStr.includes('31000')) norms.push('31000');
+      if (serviceStr.includes('22000')) norms.push('22000');
+      return { norms, asib: norms.length > 0 };
+    }
+    return null;
+  };
+  
+  const clientNorms = getClientNorms();
 
   if (!reference) {
     return (

@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Save, RotateCcw, Download, Upload, Trash2, Edit3, Globe, Palette, FileText, Users, Briefcase, Monitor } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Save, RotateCcw, Download, Upload, Trash2, Edit3, Globe, Palette, FileText, Users, Briefcase, Monitor, ArrowLeft } from 'lucide-react';
 import { useAppContext } from '../App';
 import { getContent, saveContent, resetContent, exportContent, importContent, resetAllContent, syncContentFromRemote } from '../lib/contentManager';
+
+// Helper to get localized value from object {pt, en} or string
+const getLocalizedValue = (value: any, lang: string): string => {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (typeof value === 'object') {
+    // Check if it's a bilingual object {pt, en}
+    if (value.pt !== undefined || value.en !== undefined) {
+      return lang === 'pt' ? (value.pt || value.en || '') : (value.en || value.pt || '');
+    }
+    // For other objects, return JSON string
+    return JSON.stringify(value, null, 2);
+  }
+  return String(value);
+};
 
 const AdminConfig: React.FC = () => {
   const { lang, setLang, isDark, setIsDark, t } = useAppContext();
@@ -121,6 +137,13 @@ const AdminConfig: React.FC = () => {
   return (
     <div className={`min-h-screen pt-32 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
       <div className="max-w-7xl mx-auto px-4">
+        <Link
+          to="/admin"
+          className={`inline-flex items-center text-sm font-bold mb-4 hover:underline ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-[#1B3C2B]'}`}
+        >
+          <ArrowLeft className="w-4 h-4 mr-1" />
+          {isPt ? 'Voltar ao Painel' : 'Back to Dashboard'}
+        </Link>
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -131,7 +154,7 @@ const AdminConfig: React.FC = () => {
             {isPt ? 'Configuração do Site' : 'Site Configuration'}
           </h1>
           <p className={`${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            {isPt ? 'Edite todo o conteúdo do site' : 'Edit all site content'}
+            {isPt ? '⚠️ Nota: Esta secção é técnica. Altere apenas se souber o que está a fazer.' : '⚠️ Note: This is a technical section. Only change if you know what you are doing.'}
           </p>
         </motion.div>
 
@@ -222,25 +245,20 @@ const AdminConfig: React.FC = () => {
                       <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </label>
-                      {typeof value === 'string' ? (
-                        <input
-                          type="text"
-                          value={value}
-                          onChange={(e) => handleFieldChange(`home.${key}`, e.target.value)}
-                          className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300'} focus:ring-2 focus:ring-[#6a00a3] focus:border-transparent`}
-                        />
-                      ) : typeof value === 'object' ? (
-                        <textarea
-                          value={JSON.stringify(value, null, 2)}
-                          onChange={(e) => {
-                            try {
-                              handleFieldChange(`home.${key}`, e.target.value);
-                            } catch {}
-                          }}
-                          className={`w-full px-4 py-3 rounded-xl border font-mono text-sm ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300'} focus:ring-2 focus:ring-[#6a00a3] focus:border-transparent`}
-                          rows={4}
-                        />
-                      ) : null}
+                      <input
+                        type="text"
+                        value={getLocalizedValue(value, lang)}
+                        onChange={(e) => {
+                          // Try to parse as JSON, otherwise treat as string
+                          try {
+                            const parsed = JSON.parse(e.target.value);
+                            handleFieldChange(`home.${key}`, JSON.stringify({ pt: parsed.pt || parsed.en || e.target.value, en: parsed.en || parsed.pt || e.target.value }));
+                          } catch {
+                            handleFieldChange(`home.${key}`, JSON.stringify({ pt: e.target.value, en: e.target.value }));
+                          }
+                        }}
+                        className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300'} focus:ring-2 focus:ring-[#6a00a3] focus:border-transparent`}
+                      />
                     </div>
                   ))}
                 </div>
@@ -261,8 +279,15 @@ const AdminConfig: React.FC = () => {
                         {key}
                       </label>
                       <textarea
-                        value={typeof value === 'string' ? value : JSON.stringify(value)}
-                        onChange={(e) => handleFieldChange(`home.${key}`, e.target.value)}
+                        value={getLocalizedValue(value, lang)}
+                        onChange={(e) => {
+                          try {
+                            const parsed = JSON.parse(e.target.value);
+                            handleFieldChange(`home.${key}`, JSON.stringify({ pt: parsed.pt || parsed.en || e.target.value, en: parsed.en || parsed.pt || e.target.value }));
+                          } catch {
+                            handleFieldChange(`home.${key}`, JSON.stringify({ pt: e.target.value, en: e.target.value }));
+                          }
+                        }}
                         className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300'} focus:ring-2 focus:ring-[#6a00a3]`}
                         rows={3}
                       />
@@ -287,8 +312,15 @@ const AdminConfig: React.FC = () => {
                       </label>
                       <input
                         type="text"
-                        value={value as string}
-                        onChange={(e) => handleFieldChange(`nav.${key}`, e.target.value)}
+                        value={getLocalizedValue(value, lang)}
+                        onChange={(e) => {
+                          try {
+                            const parsed = JSON.parse(e.target.value);
+                            handleFieldChange(`nav.${key}`, JSON.stringify({ pt: parsed.pt || parsed.en || e.target.value, en: parsed.en || parsed.pt || e.target.value }));
+                          } catch {
+                            handleFieldChange(`nav.${key}`, JSON.stringify({ pt: e.target.value, en: e.target.value }));
+                          }
+                        }}
                         className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300'} focus:ring-2 focus:ring-[#6a00a3]`}
                       />
                     </div>
