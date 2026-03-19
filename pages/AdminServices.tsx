@@ -55,6 +55,9 @@ const AdminServices: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      // Debug logging
+      console.log('Saving service - editingId:', editingId, 'isAdding:', isAdding);
+      
       // Map frontend data to API format
       const apiData = {
         title: { pt: formData.title, en: formData.title },
@@ -69,9 +72,15 @@ const AdminServices: React.FC = () => {
       };
       
       if (editingId) {
+        console.log('Updating service:', editingId, apiData);
         await endpoints.services.update(editingId, apiData);
       } else if (isAdding) {
+        console.log('Creating new service:', apiData);
         await endpoints.services.create(apiData);
+      } else {
+        console.error('No editingId or isAdding set!');
+        alert(isPt ? 'Erro: Nenhum modo de edição selecionado.' : 'Error: No edit mode selected.');
+        return;
       }
       await fetchServices();
       resetForm();

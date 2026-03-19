@@ -53,6 +53,8 @@ const AdminSolutions: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      console.log('Saving solution - editingId:', editingId, 'isAdding:', isAdding);
+      
       // Map frontend data to API format
       const apiData = {
         title: { pt: formData.name, en: formData.name },
@@ -68,9 +70,15 @@ const AdminSolutions: React.FC = () => {
       };
       
       if (editingId) {
+        console.log('Updating solution:', editingId, apiData);
         await endpoints.solutions.update(editingId, apiData);
       } else if (isAdding) {
+        console.log('Creating new solution:', apiData);
         await endpoints.solutions.create(apiData);
+      } else {
+        console.error('No editingId or isAdding set!');
+        alert(isPt ? 'Erro: Nenhum modo de edição selecionado.' : 'Error: No edit mode selected.');
+        return;
       }
       await fetchSolutions();
       resetForm();
