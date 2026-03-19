@@ -12,6 +12,8 @@ interface ServiceForm {
   image: string;
   path: string;
   color: string;
+  _originalTitle?: { pt: string; en: string };
+  _originalDesc?: { pt: string; en: string };
 }
 
 const AdminServices: React.FC = () => {
@@ -55,13 +57,34 @@ const AdminServices: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      // Debug logging
       console.log('Saving service - editingId:', editingId, 'isAdding:', isAdding);
       
-      // Map frontend data to API format
+      // When editing, preserve the other language that wasn't changed
+      let titlePt, titleEn, descPt, descEn;
+      
+      if (editingId && formData._originalTitle) {
+        // Keep the other language from original, update current language
+        const orig = formData._originalTitle;
+        titlePt = isPt ? formData.title : (orig.pt || formData.title);
+        titleEn = !isPt ? formData.title : (orig.en || formData.title);
+      } else {
+        titlePt = formData.title;
+        titleEn = formData.title;
+      }
+      
+      if (editingId && formData._originalDesc) {
+        const orig = formData._originalDesc;
+        descPt = isPt ? formData.desc : (orig.pt || formData.desc);
+        descEn = !isPt ? formData.desc : (orig.en || formData.desc);
+      } else {
+        descPt = formData.desc;
+        descEn = formData.desc;
+      }
+      
+      // Map frontend data to API format with preserved bilingual data
       const apiData = {
-        title: { pt: formData.title, en: formData.title },
-        description: { pt: formData.desc, en: formData.desc },
+        title: { pt: titlePt, en: titleEn },
+        description: { pt: descPt, en: descEn },
         content: { pt: '', en: '' },
         image: formData.image || '',
         path: formData.path || '',
@@ -103,10 +126,16 @@ const AdminServices: React.FC = () => {
   };
 
   const handleEdit = (s: ServiceForm) => {
+    // Preserve the original bilingual data
+    const originalTitle = typeof s.title === 'object' ? s.title : { pt: s.title, en: s.title };
+    const originalDesc = typeof s.desc === 'object' ? s.desc : { pt: s.desc, en: s.desc };
+    
     setFormData({
       ...s,
       title: getLocalized(s.title),
-      desc: getLocalized(s.desc)
+      desc: getLocalized(s.desc),
+      _originalTitle: originalTitle,
+      _originalDesc: originalDesc
     });
     setEditingId(s.id);
     setIsAdding(false);

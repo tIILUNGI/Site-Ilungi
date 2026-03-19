@@ -15,6 +15,9 @@ interface SolutionForm {
   url?: string;
   color: string;
   bgColor: string;
+  _originalName?: { pt: string; en: string };
+  _originalTagline?: { pt: string; en: string };
+  _originalDesc?: { pt: string; en: string };
 }
 
 
@@ -55,11 +58,41 @@ const AdminSolutions: React.FC = () => {
     try {
       console.log('Saving solution - editingId:', editingId, 'isAdding:', isAdding);
       
-      // Map frontend data to API format
+      // When editing, preserve the other language that wasn't changed
+      let namePt, nameEn, taglinePt, taglineEn, descPt, descEn;
+      
+      if (editingId && formData._originalName) {
+        const orig = formData._originalName;
+        namePt = isPt ? formData.name : (orig.pt || formData.name);
+        nameEn = !isPt ? formData.name : (orig.en || formData.name);
+      } else {
+        namePt = formData.name;
+        nameEn = formData.name;
+      }
+      
+      if (editingId && formData._originalTagline) {
+        const orig = formData._originalTagline;
+        taglinePt = isPt ? formData.tagline : (orig.pt || formData.tagline);
+        taglineEn = !isPt ? formData.tagline : (orig.en || formData.tagline);
+      } else {
+        taglinePt = formData.tagline;
+        taglineEn = formData.tagline;
+      }
+      
+      if (editingId && formData._originalDesc) {
+        const orig = formData._originalDesc;
+        descPt = isPt ? formData.desc : (orig.pt || formData.desc);
+        descEn = !isPt ? formData.desc : (orig.en || formData.desc);
+      } else {
+        descPt = formData.desc;
+        descEn = formData.desc;
+      }
+      
+      // Map frontend data to API format with preserved bilingual data
       const apiData = {
-        title: { pt: formData.name, en: formData.name },
-        tagline: { pt: formData.tagline, en: formData.tagline },
-        description: { pt: formData.desc, en: formData.desc },
+        title: { pt: namePt, en: nameEn },
+        tagline: { pt: taglinePt, en: taglineEn },
+        description: { pt: descPt, en: descEn },
         featured_image: formData.image || '',
         demo_url: formData.url || '',
         path: formData.path || '',
@@ -101,11 +134,19 @@ const AdminSolutions: React.FC = () => {
   };
 
   const handleEdit = (sol: SolutionForm) => {
+    // Preserve the original bilingual data
+    const originalName = typeof sol.name === 'object' ? sol.name : { pt: sol.name, en: sol.name };
+    const originalTagline = typeof sol.tagline === 'object' ? sol.tagline : { pt: sol.tagline, en: sol.tagline };
+    const originalDesc = typeof sol.desc === 'object' ? sol.desc : { pt: sol.desc, en: sol.desc };
+    
     setFormData({
       ...sol,
       name: getLocalized(sol.name),
       tagline: getLocalized(sol.tagline),
-      desc: getLocalized(sol.desc)
+      desc: getLocalized(sol.desc),
+      _originalName: originalName,
+      _originalTagline: originalTagline,
+      _originalDesc: originalDesc
     });
     setEditingId(sol.id);
     setIsAdding(false);
