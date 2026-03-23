@@ -66,6 +66,13 @@ const AdminDashboard: React.FC = () => {
       icon: <Settings className="w-8 h-8 mb-4 text-slate-500" />,
       path: '/admin/configuracoes',
       color: 'bg-slate-500/10 border-slate-500/20'
+    },
+    {
+      title: isPt ? 'Estatísticas do Site' : 'Site Statistics',
+      desc: isPt ? 'Análise de visitantes e visualizações.' : 'Visitor and view analytics.',
+      icon: <LayoutDashboard className="w-8 h-8 mb-4 text-green-500" />,
+      path: '/admin/analytics',
+      color: 'bg-green-500/10 border-green-500/20'
     }
   ];
 

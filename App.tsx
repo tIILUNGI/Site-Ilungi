@@ -5,6 +5,7 @@ import { Language } from './types';
 import { getContent, syncContentFromRemote } from './lib/contentManager';
 import { purgeAllDataIfNeeded } from './lib/dataSync';
 import { AlumniAuthProvider } from './lib/authContext';
+import { trackPageView } from './lib/api';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -30,6 +31,7 @@ import AdminCourses from './pages/AdminCourses';
 import AdminBlog from './pages/AdminBlog';
 import AdminConfig from './pages/AdminConfig';
 import AdminLogin from './pages/AdminLogin';
+import AdminAnalytics from './pages/AdminAnalytics';
 import Certifications from './pages/Certifications';
 import CourseCatalog from './pages/CourseCatalog';
 import CoursePlayer from './pages/CoursePlayer';
@@ -58,6 +60,8 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Track page view on route change
+    trackPageView();
   }, [pathname]);
   return null;
 };
@@ -187,6 +191,7 @@ const AppShell: React.FC = () => {
               <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
               <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
               <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
+                  <Route path="/admin/analytics" element={<RequireAdmin><AdminAnalytics /></RequireAdmin>} />
               <Route path="/certificacoes" element={<Certifications />} />
             </Routes>
           </AnimatePresence>
