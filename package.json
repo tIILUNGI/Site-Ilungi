@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node ./scripts/generate-static-seo.mjs",
+    "optimize:images": "node ./scripts/optimize-images.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -18,6 +19,8 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.34.5",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

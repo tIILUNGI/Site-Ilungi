@@ -39,12 +39,16 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#1B3C2B] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/10 pb-12 mb-10">
-        <div className="space-y-6">
-          <button onClick={handleLogoClick} className="flex items-center space-x-2">
-            <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-14 w-auto bg-white rounded-lg p-1" />
+        <div className="space-y-6 flex flex-col items-center">
+          <button onClick={handleLogoClick} className="w-full flex items-center justify-center">
+            <img
+              src="/imagens/ilungi_logo_clean_white.png"
+              alt="ILUNGI Logo"
+              className="h-16 w-auto bg-white rounded-lg p-1 shadow-md"
+            />
           </button>
           
-          <div className="flex items-center gap-4">
+          <div className="w-full flex items-center justify-center gap-4">
             <a href={config.linkedinBaseUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#6a00a3] hover:border-transparent transition-all">
               <Linkedin className="w-5 h-5" />
             </a>

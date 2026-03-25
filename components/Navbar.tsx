@@ -89,9 +89,9 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-slate-900/95' : 'bg-white/95'} backdrop-blur-xl border-b ${isDark ? 'border-slate-700/50' : 'border-slate-200/50'}`}>
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="ml-2 lg:ml-4 flex items-center">
           <motion.img 
-            src="/imagens/ilungi_logo.jpg" 
+            src="/imagens/ilungi_logo_clean_transparent.png" 
             alt="ILUNGI Logo" 
             className="h-14 w-auto"
             whileHover={{ scale: 1.05 }}
