@@ -37,6 +37,7 @@ import CourseCatalog from './pages/CourseCatalog';
 import CoursePlayer from './pages/CoursePlayer';
 import Blog from './pages/Blog';
 import { AnimatePresence } from 'framer-motion';
+import { RouteSeoManager } from './components/Seo';
 
 interface AppContextType {
   lang: Language;
@@ -158,6 +159,7 @@ const AppShell: React.FC = () => {
     <AppContext.Provider value={{ lang, setLang, isDark, setIsDark: handleSetIsDark, t, isEditing, setIsEditing: handleSetIsEditing }}>
       <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'theme-dark bg-gray-900 text-white' : 'theme-light bg-slate-50 text-slate-900'}`}>
         <ScrollToTop />
+        <RouteSeoManager />
         <Navbar />
         <main className="pt-20">
           <AnimatePresence mode="wait">

@@ -33,8 +33,8 @@ const Home: React.FC = () => {
   const heroSlides = [
     { bg: "/imagens/Logo Slide.png", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
     { bg: "/imagens/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
-    { bg: "/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
-    { bg: "/imagens/Gestão de Projecto.jpg", title: isPt ? "ESC" : "ESC", subtitle: isPt ? "Relatório Padrão de Sustentabilidade" : "Standard Sustainability Report" }
+    { bg: "/imagens/consultoria-iso.jpg", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
+    { bg: "/imagens/esg-gri.jpg", title: isPt ? "ESC" : "ESC", subtitle: isPt ? "Relatório Padrão de Sustentabilidade" : "Standard Sustainability Report" }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -44,28 +44,28 @@ const Home: React.FC = () => {
     { 
       title: isPt ? "SISTEMAS DE GESTÃO ISO" : "ISO MANAGEMENT SYSTEMS", 
       desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outras directrizes e requisitos." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
-      image: "/imagens/Consultoria icon.png", 
+      image: "/imagens/consultoria-icon.png", 
       color: "#1B3C2B", 
       path: "/consultoria/iso" 
     },
     { 
       title: isPt ? "GRI STANDARD" : "GRI STANDARD", 
       desc: isPt ? "Relatórios de sustentabilidade baseados nos padrões GRI para transparência e responsabilidade corporativa." : "Sustainability reporting based on GRI standards for transparency and corporate accountability.",
-      image: "/imagens/GRI icon.png", 
+      image: "/imagens/gri-icon.png", 
       color: "#2E7D32", 
       path: "/consultoria/risco" 
     },
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
       desc: isPt ? "Aquisições e fornecimento de bens e serviços, garantindo eficiência operacional." : "Procurement and supply management of materials and services, ensuring efficiency and compliance.",
-      image: "/imagens/Procuremet.png", 
+      image: "/imagens/procurement-icon.png", 
       color: "#6a00a3", 
       path: "/consultoria/procurement" 
     },
     { 
       title: isPt ? "TECNOLOGIA" : "TECHNOLOGY", 
       desc: isPt ? "Soluções tecnológicas integradas para digitalização e optimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
-      image: "/imagens/Tecnologia icon.png", 
+      image: "/imagens/tecnologia-icon.png", 
       color: "#0A4D8C", 
       path: "/consultoria/pmo" 
     }
@@ -323,7 +323,7 @@ const Home: React.FC = () => {
                 </Link>
               </div>
               <div className="relative h-64 lg:h-auto bg-gradient-to-br from-[#1B3C2B] to-[#6a00a3] p-8 flex items-center justify-center">
-                <div className="absolute inset-0 bg-[url('/imagens/Consultoria.png')] bg-cover bg-center opacity-20"></div>
+                <div className="absolute inset-0 bg-[url('/imagens/esg-gri.jpg')] bg-cover bg-center opacity-20"></div>
                 <div className="relative z-10 text-center">
                   <div className="w-24 h-24 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
                     <Award className="w-12 h-12 text-white" />

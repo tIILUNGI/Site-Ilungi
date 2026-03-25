@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../App';
+import { SEO } from '../components/Seo';
 import { loadData } from '../lib/dataSync';
+import { DEFAULT_SITE_URL, toAbsoluteUrl } from '../seo/routeSeo.js';
 
 // Mapping of ISO references to their acquired norms/seals
 // Use client name slug for matching
@@ -35,6 +37,7 @@ const ReferenceDetail: React.FC = () => {
   const serviceParam = searchParams.get('service');
   const { t, isDark, lang } = useAppContext();
   const isPt = lang === 'pt';
+  const siteUrl = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   // Determine the back link based on service parameter
@@ -96,10 +99,53 @@ const ReferenceDetail: React.FC = () => {
   };
   
   const clientNorms = getClientNorms();
+  const canonicalPath = id ? `/referencia/${id}` : '/referencia';
+  const referenceTitle = reference
+    ? `${reference.name} | ILUNGI`
+    : isPt
+      ? 'Referencia nao encontrada | ILUNGI'
+      : 'Reference not found | ILUNGI';
+  const referenceDescription = reference
+    ? clientNorms
+      ? isPt
+        ? `Referencia da ILUNGI para ${reference.name}, com destaque para certificacoes e normas implementadas.`
+        : `ILUNGI reference for ${reference.name}, highlighting implemented certifications and standards.`
+      : reference.description || (isPt
+        ? `Caso de cliente da ILUNGI para ${reference.name}.`
+        : `ILUNGI client case for ${reference.name}.`)
+    : isPt
+      ? 'A referencia solicitada nao foi encontrada.'
+      : 'The requested reference could not be found.';
+  const referenceImage = reference?.logo
+    ? toAbsoluteUrl(siteUrl, reference.logo)
+    : toAbsoluteUrl(siteUrl, '/imagens/ilungi_logo.jpg');
+  const seoSchema = reference
+    ? [
+        {
+          '@type': 'WebPage',
+          name: referenceTitle,
+          description: referenceDescription,
+          url: `${siteUrl}${canonicalPath}`,
+          inLanguage: isPt ? 'pt-AO' : 'en',
+        },
+      ]
+    : [];
 
   if (!reference) {
     return (
       <div className={`min-h-screen pt-32 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
+        <SEO
+          override={{
+            title: referenceTitle,
+            description: referenceDescription,
+            canonicalPath,
+            canonicalUrl: `${siteUrl}${canonicalPath}`,
+            image: referenceImage,
+            noindex: true,
+            robots: 'noindex, nofollow',
+            schema: seoSchema,
+          }}
+        />
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-800'}`}>
             {isPt ? 'Referência não encontrada' : 'Reference not found'}
@@ -114,6 +160,16 @@ const ReferenceDetail: React.FC = () => {
 
   return (
     <div className={`min-h-screen pt-32 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
+      <SEO
+        override={{
+          title: referenceTitle,
+          description: referenceDescription,
+          canonicalPath,
+          canonicalUrl: `${siteUrl}${canonicalPath}`,
+          image: referenceImage,
+          schema: seoSchema,
+        }}
+      />
       <div className="max-w-4xl mx-auto px-4">
         {/* Back Button */}
         <Link 

@@ -31,10 +31,10 @@ const mapServiceFromAPI = (service: any, index: number) => {
   // order 3 = procurement
   // order 4 = pmo (Assistência e suporte de TI)
   const orderImages = [
-    '/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg',  // order 1 - iso
-    '/imagens/Notação de Riscos.jpg.jpeg',  // order 2 - risk (GRI)
-    '/imagens/Procurement.jpg.jpeg',  // order 3 - procurement
-    '/imagens/Assistência e suporte de TI.jpg.jpeg'  // order 4 - pmo
+    '/imagens/consultoria-iso.jpg',  // order 1 - iso
+    '/imagens/gri-sustentabilidade.jpg',  // order 2 - risk (GRI)
+    '/imagens/procurement.jpg',  // order 3 - procurement
+    '/imagens/suporte-ti.jpg'  // order 4 - pmo
   ];
   let image = service.image || orderImages[(service.order || index) - 1] || '';
   
