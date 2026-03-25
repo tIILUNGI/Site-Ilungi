@@ -35,7 +35,7 @@ const ISOPage: React.FC = () => {
                 </p>
             </div>
             <div className="flex-1 relative">
-                <img src="/imagens/Consultoria de Sistema e GEstão de Projectos.jpg.jpeg" className="rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
+                <img src="/imagens/consultoria-iso.jpg" className="rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
             </div>
         </div>
 

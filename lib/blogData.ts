@@ -11,10 +11,10 @@ export interface BlogPost {
 }
 
 export const blogImages: { [key: string]: string } = {
-  ilungi: '/BLOG/Dia da mulher Angolana.jpeg',
-  rfid: '/BLOG/Modernização RFID.jpeg',
-  stock: '/BLOG/Gestão de Stock.jpeg',
-  inventario: '/BLOG/inventario.jpeg'
+  ilungi: '/blog-assets/dia-mulher-angolana.jpeg',
+  rfid: '/blog-assets/modernizacao-rfid.jpeg',
+  stock: '/blog-assets/gestao-stock.jpeg',
+  inventario: '/blog-assets/inventario.jpeg'
 };
 
 export const internetImages: { [key: string]: string } = {

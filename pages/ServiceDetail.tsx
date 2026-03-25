@@ -16,9 +16,9 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   const content = t.services[type];
 
   const images = {
-    risk: "/imagens/Notação de Riscos.jpg.jpeg",
-    procurement: "/imagens/Procurement.jpg.jpeg",
-    pmo: "/imagens/Assistência e suporte de TI.jpg.jpeg"
+    risk: "/imagens/gri-sustentabilidade.jpg",
+    procurement: "/imagens/procurement.jpg",
+    pmo: "/imagens/suporte-ti.jpg"
   };
 
   const defaultReferences = t.references?.clients || [];
