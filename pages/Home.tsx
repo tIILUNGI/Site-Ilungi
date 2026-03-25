@@ -32,9 +32,9 @@ const Home: React.FC = () => {
 
   const heroSlides = [
     { bg: "/imagens/Logo Slide.png", title: isPt ? "Excelência em Consultoria" : "Excellence in Consulting", subtitle: isPt ? "Transformamos desafios em oportunidades de crescimento sustentável" : "We transform challenges into sustainable growth opportunities" },
-    { bg: "/imagens/Silde.jpg", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
-    { bg: "/imagens/consultoria-iso.jpg", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
-    { bg: "/imagens/esg-gri.jpg", title: isPt ? "ESC" : "ESC", subtitle: isPt ? "Relatório Padrão de Sustentabilidade" : "Standard Sustainability Report" }
+    { bg: "/imagens/Logo Slide.png", title: isPt ? "Gestão de Risco Corporativo" : "Corporate Risk Management", subtitle: isPt ? "Protegemos o futuro do seu negócio" : "We protect your business future" },
+    { bg: "/imagens/Logo Slide.png", title: isPt ? "Sistema de Gestão ISO" : "ISO Management System", subtitle: isPt ? "Elevamos os padrões da sua empresa" : "We elevate your company's standards" },
+    { bg: "/imagens/Logo Slide.png", title: isPt ? "GRI" : "GRI", subtitle: isPt ? "Relatório Global de Sultentablidade" : "Global Sustainability Report" }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);

@@ -263,7 +263,7 @@ const Academy: React.FC = () => {
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <a 
-                    href="http://localhost:5173" 
+                    href="https://ailungi-frontend.vercel.app/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-10 py-4 bg-white text-[#6a00a3] rounded-full font-bold hover:shadow-2xl transition-all"
