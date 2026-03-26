@@ -319,7 +319,8 @@ const Contact: React.FC = () => {
                   >
                     <option value="">{isPt ? 'Selecione um assunto' : 'Select a subject'}</option>
                     <option value={isPt ? 'Consultoria ISO' : 'ISO Consulting'}>{isPt ? 'Consultoria ISO' : 'ISO Consulting'}</option>
-                    <option value={isPt ? 'Gestão de Projectos' : 'Project Management'}>{isPt ? 'Gestão de Projectos' : 'Project Management'}</option>
+                    <option value={isPt ? 'GRI Sustentabilidade' : 'GRI Sustainability'}>{isPt ? 'GRI Sustentabilidade' : 'GRI Sustainability'}</option>
+                    <option value={isPt ? 'Procurement' : 'Procurement'}>{isPt ? 'Procurement' : 'Procurement'}</option>
                     <option value={isPt ? 'Academia & Cursos' : 'Academy & Courses'}>{isPt ? 'Academia & Cursos' : 'Academy & Courses'}</option>
                     <option value={isPt ? 'Soluções Digitais' : 'Digital Solutions'}>{isPt ? 'Soluções Digitais' : 'Digital Solutions'}</option>
                     <option value={isPt ? 'Outros' : 'Others'}>{isPt ? 'Outros' : 'Others'}</option>
@@ -457,7 +458,8 @@ const Contact: React.FC = () => {
                     >
                       <option value="">{isPt ? 'Selecione uma área' : 'Select an area'}</option>
                       <option value={isPt ? 'Consultoria ISO' : 'ISO Consulting'}>{isPt ? 'Consultoria ISO' : 'ISO Consulting'}</option>
-                      <option value={isPt ? 'Gestão de Projectos' : 'Project Management'}>{isPt ? 'Gestão de Projectos' : 'Project Management'}</option>
+                      <option value={isPt ? 'GRI Sustentabilidade' : 'GRI Sustainability'}>{isPt ? 'GRI Sustentabilidade' : 'GRI Sustainability'}</option>
+                      <option value={isPt ? 'Procurement' : 'Procurement'}>{isPt ? 'Procurement' : 'Procurement'}</option>
                       <option value={isPt ? 'Formação' : 'Training'}>{isPt ? 'Formação' : 'Training'}</option>
                       <option value={isPt ? 'Soluções Tecnológicas' : 'Technological Solutions'}>{isPt ? 'Soluções Tecnológicas' : 'Technological Solutions'}</option>
                       <option value={isPt ? 'Administrativo' : 'Administrative'}>{isPt ? 'Administrativo' : 'Administrative'}</option>
