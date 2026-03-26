@@ -75,7 +75,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
               <div className="absolute -inset-4 bg-[#1B3C2B]/5 rounded-[3rem] blur-3xl"></div>
               <img 
                 src={images[type]} 
-                className="relative z-10 rounded-[3rem] shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" 
+                className="relative z-10 rounded-[3rem] shadow-2xl transition-all duration-700" 
                 alt={content.title} 
               />
             </motion.div>
