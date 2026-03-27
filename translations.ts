@@ -110,7 +110,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     academy: {
       title: "FORMAÇÕES E EDUCAÇÃO CORPORATIVA",
-      subtitle: "Reconhecendo as especificidades de cada empresa, desenhamos soluções formativas personalizadas. Disponibilizamos todo o auxílio necessário na gestão integrada do plano de formação, para que as empresas possam alcançar, eficiente e eficazmente, os seus objectivos.",
+      subtitle: "Soluções formativas personalizadas para o desenvolvimento profissional da sua empresa.",
       description: "A educação corporativa, neste contexto de serviço, uma estratégia de acompanhamento voltada para a gestão de pessoas da sua empresa, em que habilidades devem ser desenvolvidas em favor do contexto organizacional. Isso significa que a prática vai muito além de oferecermos treinamentos ou simplesmente qualificar a mão de obra.",
       features: {
         cert: "Certificação Int.",
@@ -495,7 +495,7 @@ export const translations: Record<'pt' | 'en', any> = {
     },
     academy: {
       title: "TRAINING AND CORPORATE EDUCATION",
-      subtitle: "Recognizing the specific needs of each company, we design customized training solutions. We provide all the necessary support in the integrated management of the training plan so companies can efficiently and effectively achieve their objectives.",
+      subtitle: "Customized training solutions for your company's professional development.",
       description: "Corporate education, in this service context, is a follow-up strategy focused on people management in your company, where skills are developed in line with the organizational context. This means the practice goes far beyond offering training or simply qualifying the workforce.",
       features: {
         cert: "Int. Certification",
