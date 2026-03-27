@@ -12,30 +12,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
   const isPt = lang === 'pt';
   const isPreRelease = productName === 'Salya' || productName === 'Tocomply360';
   const isTocomply = productName === 'Tocomply360';
-  const productHeadline = isPt
-    ? productName === 'Salya'
-      ? 'Gest\u00e3o de Sal\u00e1rios e Recursos Humanos'
-      : productName === 'SICLIC'
-        ? 'Compliance Intelligence e Gest\u00e3o Normativa'
-        : 'Gest\u00e3o de Sistemas ISO'
-    : productName === 'Salya'
-      ? 'Payroll and Human Resources'
-      : productName === 'SICLIC'
-        ? 'Compliance Intelligence and Regulatory Management'
-        : 'Gest\u00e3o de Sistemas ISO';
-
-  const heroSubtitle = isPt
-    ? productName === 'Tocomply360'
-      ? `Plataforma para ${productHeadline}.`
-      : isPreRelease
-        ? `Solu\u00e7\u00e3o em desenvolvimento para ${productHeadline}.`
-        : `A plataforma SaaS definitiva para ${productHeadline}.`
-    : productName === 'Tocomply360'
-      ? `Platform for ${productHeadline}.`
-      : isPreRelease
-        ? `Solution in development for ${productHeadline}.`
-        : `The ultimate SaaS platform for ${productHeadline}.`;
-
   const featureItems = isPt ? [
     {
       title: 'Interface Adaptativa',
@@ -148,17 +124,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             {/* Linha decorativa tecnológica */}
             <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-full"></span>
           </motion.h1>
-          
-          {productName !== 'Tocomply360' && productName !== 'Salya' && (
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed relative"
-            >
-              {heroSubtitle}
-            </motion.p>
-          )}
         </div>
 
         {/* Mockup Simulation - COM IMAGEM CORPORATIVA */}
@@ -189,22 +154,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               {/* Overlay tecnológico na imagem */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-b-2xl"></div>
               
-              {/* Badge do produto */}
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                <div className={`bg-white px-8 py-3 rounded-full shadow-lg border border-slate-100`}>
-                  <span className="text-slate-800 font-black text-sm">{productName} DEMO</span>
-                </div>
-              </div>
-              
-              {/* Indicador de sistema ativo */}
-              {!isPreRelease && (
-                <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-xs text-white font-medium">
-                    {isPt ? 'Sistema Online' : 'System Online'}
-                  </span>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -223,7 +172,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               {isPt ? 'Planos & Demonstração' : 'Plans & Demo'}
             </motion.h2>
             
-            <div className={`grid grid-cols-1 ${isTocomply ? 'md:grid-cols-1 max-w-2xl place-items-center' : 'md:grid-cols-2 max-w-4xl'} gap-8 mx-auto`}>
+            <div className={`grid grid-cols-1 md:grid-cols-1 max-w-xl mx-auto`}>
               {isTocomply ? (
                 <motion.div 
                   initial={{ opacity: 0, y: 30 }}
@@ -269,41 +218,12 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
                         </li>
                       ))}
                     </ul>
-                    <button className="w-full py-3 bg-[#1B3C2B] text-white rounded-xl font-bold hover:bg-black transition-all transform hover:scale-105">
+                    <Link to="/contacto" className="w-full py-3 bg-[#1B3C2B] text-white rounded-xl font-bold hover:bg-black transition-all transform hover:scale-105 block text-center">
                       {isPt ? 'Solicitar Proposta' : 'Request Proposal'}
-                    </button>
-                  </motion.div>
-                  
-                  <motion.div 
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className={`bg-gradient-to-br ${productImages.gradient} p-8 rounded-3xl text-white relative group shadow-xl`}
-                  >
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <h4 className="font-bold text-white/60 uppercase text-xs mb-4 tracking-wider">Trial</h4>
-                    <p className="text-4xl font-black mb-6">{isPt ? 'Grátis (1 dia)' : 'Free (1 day)'}</p>
-                    <p className="mb-8 text-white/80 text-sm leading-relaxed">
-                      {isPt
-                        ? 'Experimente todas as funcionalidades básicas sem compromisso. Inclui suporte por email e acesso à documentação.'
-                        : 'Try all core features with no commitment. Includes email support and access to documentation.'}
-                    </p>
-                    
-                    {productName === 'Salya' ? (
-                      <Link
-                        to={demoContactLink}
-                        className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg text-center block"
-                      >
-                        {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
-                      </Link>
-                    ) : (
-                      <button className="w-full py-3 bg-white text-[#6a00a3] rounded-xl font-bold hover:bg-slate-100 transition-all transform hover:scale-105 shadow-lg">
-                        {isPt ? 'Solicitar Demo Gratuita' : 'Request Free Demo'}
-                      </button>
-                    )}
+                    </Link>
                   </motion.div>
                 </>
-              )}
+              )  }
             </div>
             
             {/* Badge tecnológico */}

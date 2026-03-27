@@ -270,14 +270,14 @@ const Home: React.FC = () => {
       </section>
 
       {/* CASE STUDY SECTION */}
-      <section className="py-16 bg-[#f8fafc] relative overflow-hidden">
+      <section className="py-12 bg-[#f8fafc] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <span className="inline-block px-4 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
               {isPt ? 'Destaque' : 'Featured'}
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Estudo de Caso' : 'Case Study'}</h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Descubra como ajudamos os nossos clientes a alcançar resultados extraordinários' : 'Discover how we help our clients achieve extraordinary results'}</p>
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Projeto realizado para a Ozango Minerais S.A, empresa do Grupo Pensana.' : 'Project delivered for Ozango Minerais S.A, a Pensana Group company.'}</p>
           </motion.div>
 
           <motion.div 
@@ -286,49 +286,62 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="relative bg-white rounded-3xl overflow-hidden shadow-xl"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-10 lg:p-16 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6 w-fit">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr]">
+              <div className="p-8 lg:p-10">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-4 w-fit">
                   <Award className="w-4 h-4" />
-                  {isPt ? 'Sucesso comprovado' : 'Proven Success'}
+                  {isPt ? 'Caso de Sucesso' : 'Success Story'}
                 </div>
-                <h3 className="text-3xl lg:text-4xl font-black text-[#1B3C2B] mb-6">
-                  {isPt ? 'Estratégias ESG e Relatórios GRI' : 'ESG Strategy & GRI Reporting'}
+                <h3 className="text-2xl lg:text-[1.65rem] font-black text-[#1B3C2B] mb-4 leading-tight">
+                  {isPt ? 'Migração e Configuração de Dados do ERP Cegid Primavera para a Ozango Minerais' : 'ERP Cegid Primavera Data Migration and Configuration for Ozango Minerais'}
                 </h3>
-                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                  {isPt
-                    ? 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'
-                    : 'Apoiamos empresas e institui\u00e7\u00f5es na implementa\u00e7\u00e3o de estrat\u00e9gias ESG, medi\u00e7\u00e3o de impacto e elabora\u00e7\u00e3o de Relat\u00f3rios de Sustentabilidade GRI, garantindo transpar\u00eancia, conformidade e credibilidade perante investidores, reguladores e stakeholders.'}
+                <p className="text-base lg:text-[1.02rem] text-slate-600 mb-6 leading-relaxed text-left lg:text-justify">
+                  {isPt 
+                    ? 'A ILUNGI foi responsável por entregar um projeto de migração e configuração de dados do ERP Cegid Primavera para a Ozango Minerais S.A, uma empresa do Grupo Pensana, com o objetivo de estruturar e operacionalizar o sistema de gestão financeira e administrativa para suas operações em Angola.'
+                    : 'ILUNGI was responsible for delivering a data migration and configuration project of the Cegid Primavera ERP for Ozango Minerais S.A, a company of the Pensana Group, with the objective of structuring and operationalizing the financial and administrative management system for its operations in Angola.'}
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">+100%</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Alinhamento com padr\u00f5es internacionais' : 'Alignment with international standards'}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">ESG</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Gest\u00e3o de impacto ambiental, social e governan\u00e7a' : 'Environmental, social and governance impact management'}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-[#6a00a3]">GRI Standards</div>
-                    <div className="text-sm text-slate-500">{isPt ? 'Relat\u00f3rios reconhecidos globalmente' : 'Globally recognized reports'}</div>
+
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 lg:p-6">
+                  <div className="space-y-4">
+                    <p className="text-slate-700 leading-relaxed text-left lg:text-justify">
+                      {isPt 
+                        ? 'Tivemos uma ótima experiência trabalhando com a ILUNGI na nossa migração e configuração do ERP. A equipa foi profissional, experiente e fez com que um processo que poderia ser muito complexo fosse tranquilo e gerível.'
+                        : 'We had a great experience working with ILUNGI on our ERP migration and configuration. The team was professional, experienced and made what could be a very complex process smooth and manageable.'}
+                    </p>
+                    <p className="text-slate-700 leading-relaxed text-left lg:text-justify">
+                      {isPt 
+                        ? 'Eles nos apoiaram na migração, validação e reconciliação de dados, além de ajudar na configuração de módulos-chave, incluindo contabilidade, tesouraria/bancos, fornecedores, IVA e ativos fixos. A atenção ao detalhe garantiu que nossos dados estivessem corretos, alinhados e prontos para as operações diárias desde o início.'
+                        : 'They supported us in data migration, validation and reconciliation, as well as helping configure key modules including accounting, treasury/banks, suppliers, VAT and fixed assets. The attention to detail ensured our data was correct, aligned and ready for daily operations from the start.'}
+                    </p>
+                    <p className="text-slate-700 leading-relaxed text-left lg:text-justify">
+                      {isPt 
+                        ? 'Estavam sempre dispostos a ir além para apoiar nossa equipa, seja resolvendo problemas, respondendo perguntas ou ajudando-nos a sentir-nos confortáveis com o sistema. A sua capacidade de resposta e abordagem prática realmente se destacaram.'
+                        : 'They were always willing to go above and beyond to support our team, whether solving problems, answering questions or helping us feel comfortable with the system. Their responsiveness and practical approach really stood out.'}
+                    </p>
+                    <p className="text-slate-700 leading-relaxed text-left lg:text-justify">
+                      {isPt 
+                        ? 'Estamos muito satisfeitos com o resultado e os recomendaríamos com prazer.'
+                        : 'We are very satisfied with the result and would highly recommend them.'}
+                    </p>
+                    <div className="pt-1">
+                      <p className="text-slate-900 font-semibold">{isPt ? 'Atenciosamente,' : 'Sincerely,'}</p>
+                      <p className="text-slate-900 font-semibold">Angie Bles (de Oliveira)</p>
+                      <p className="text-slate-600 font-medium">{isPt ? 'Financial Manager Angola/Portugal' : 'Financial Manager Angola/Portugal'}</p>
+                    </div>
                   </div>
                 </div>
-                <Link 
-                  to="/contacto" 
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all w-fit"
-                >
-                  {isPt ? 'Solicitar Consultoria GRI' : 'Request GRI Consulting'}
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
               </div>
-              <div className="relative h-64 lg:h-auto bg-gradient-to-br from-[#1B3C2B] to-[#6a00a3] p-8 flex items-center justify-center">
-                <div className="absolute inset-0 bg-[url('/imagens/esg-gri.jpg')] bg-cover bg-center opacity-20"></div>
-                <div className="relative z-10 text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <Award className="w-12 h-12 text-white" />
+              <div className="relative min-h-[340px] lg:min-h-full bg-gradient-to-br from-[#1B3C2B] to-[#6a00a3] p-6 lg:p-8 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[url('/Nossas%20Refer%C3%AAncias/pensana-logo-sticky-blue-standard.png')] bg-contain bg-no-repeat bg-center opacity-10"></div>
+                <div className="relative z-10 w-full max-w-xl bg-white rounded-2xl shadow-2xl p-5 lg:p-6 flex flex-col items-center text-center">
+                  <img
+                    src="/Nossas%20Refer%C3%AAncias/pensana-logo-sticky-blue-standard.png"
+                    alt="Logotipo PENSANA"
+                    className="h-[180px] sm:h-[210px] lg:h-[260px] w-auto max-w-full object-contain mb-3"
+                  />
+                  <div className="text-[#1B3C2B] font-bold text-sm uppercase tracking-[0.25em]">
+                    Grupo Pensana
                   </div>
-                  <div className="text-white font-bold text-xl">{isPt ? 'Caso de Sucesso' : 'Success Story'}</div>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Calendar, User, ArrowRight, Tag, Clock, TrendingUp, PlayCircle } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -91,10 +91,6 @@ const Blog: React.FC = () => {
                   {selectedPost.category}
                 </span>
                 <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                  <Calendar className="w-4 h-4" />
-                  {formatDate(selectedPost.date)}
-                </div>
-                <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   <User className="w-4 h-4" />
                   {selectedPost.author}
                 </div>
@@ -168,9 +164,6 @@ const Blog: React.FC = () => {
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#6a00a3] text-white">
                     {featuredPost.category}
                   </span>
-                  <span className="text-white/70 text-sm">
-                    {formatDate(featuredPost.date)}
-                  </span>
                 </div>
                 
                 <h2 className="text-3xl lg:text-4xl font-black mb-4 leading-tight text-white">
@@ -229,14 +222,6 @@ const Blog: React.FC = () => {
                     <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
                       {getLocalized(post.title)}
                     </h3>
-                    
-                    <div className={`flex items-center justify-between text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-                      <span>{formatDate(post.date)}</span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {isPt ? '5 min' : '5 min'}
-                      </span>
-                    </div>
                   </div>
                 </motion.article>
               ))}
@@ -329,13 +314,10 @@ const Blog: React.FC = () => {
                     {getLocalized(post.excerpt)}
                   </p>
 
-                  <div className={`flex items-center justify-between text-xs pt-3 border-t ${isDark ? 'border-slate-700 text-slate-500' : 'border-slate-100 text-slate-400'}`}>
-                    <span>{formatDate(post.date)}</span>
-                    <span className="flex items-center gap-1 text-[#6a00a3] font-medium">
-                      {isPt ? 'Ler mais' : 'Read more'}
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
+                  <span className="flex items-center gap-1 text-[#6a00a3] font-medium">
+                    {isPt ? 'Ler mais' : 'Read more'}
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </div>
               </motion.article>
             ))}
