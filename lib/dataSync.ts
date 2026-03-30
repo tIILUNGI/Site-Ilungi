@@ -359,7 +359,14 @@ export const loadConfig = async (_localKey: string, defaultData: any) => {
   try {
     const remoteConfig = await endpoints.config.get();
     if (remoteConfig) {
-      return { ...defaultData, ...remoteConfig };
+      // Map API config field names to frontend expected names
+      return { 
+        ...defaultData, 
+        ...remoteConfig,
+        email: remoteConfig.contact_email || defaultData.email,
+        phone: remoteConfig.contact_phone || defaultData.phone,
+        address: remoteConfig.address || defaultData.address
+      };
     }
   } catch (error) {
     console.error('Failed to fetch config from remote:', error);
