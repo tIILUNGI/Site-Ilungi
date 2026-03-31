@@ -339,9 +339,7 @@ const Home: React.FC = () => {
                     alt="Logotipo PENSANA"
                     className="h-[180px] sm:h-[210px] lg:h-[260px] w-auto max-w-full object-contain mb-3"
                   />
-                  <div className="text-[#1B3C2B] font-bold text-sm uppercase tracking-[0.25em]">
-                    Grupo Pensana
-                  </div>
+
                 </div>
               </div>
             </div>

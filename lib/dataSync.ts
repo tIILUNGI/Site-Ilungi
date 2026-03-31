@@ -140,7 +140,7 @@ const mapCourseFromAPI = (course: any, index: number) => {
     name: getLocalized(course.title),
     title: course.title,
     area: getLocalized(course.area),
-    hours: course.hours || course.duration || 'A definir',
+    hours: course.duration ? course.duration + 'h' : 'A definir',
     duration: course.duration || course.hours || 'A definir',
     modality: getLocalized(course.modality),
     level: course.level || 'Intermediário',
@@ -159,7 +159,7 @@ const mapCourseToAPI = (course: any) => {
     area: course.area || '',
     description: { pt: course.description || '', en: course.description || '' },
     duration: course.duration || course.hours || '16',
-    hours: course.hours || course.duration || '16',
+    hours: course.duration ? course.duration + 'h' : '16',
     modality: course.modality || 'Presencial / Online',
     level: course.level || 'intermediate',
     order: course.order || 0,
@@ -244,6 +244,36 @@ const mapReferenceFromAPI = (ref: any) => {
 };
 
 export const loadData = async (table: string, _localKey: string, defaultData: any) => {
+  // For courses, always use default data first and merge with remote
+  if (table === 'courses') {
+    try {
+      const tableInfo = DATA_TABLES.find(t => t.table === table);
+      if (tableInfo) {
+        const endpoint = (endpoints as any)[tableInfo.endpoint];
+        if (endpoint && endpoint.getAll) {
+          const remoteData = await endpoint.getAll();
+          if (Array.isArray(remoteData) && remoteData.length > 0) {
+            // Map remote data but use default courses as base
+            const mappedCourses = remoteData.filter((c: any) => c.active !== false).map((c: any, i: number) => mapCourseFromAPI(c, i));
+            // Merge: use default courses and update with remote data where available
+            const mergedCourses = defaultData.map((defaultCourse: any) => {
+              const remoteCourse = mappedCourses.find((rc: any) => rc.code === defaultCourse.code);
+              if (remoteCourse) {
+                return { ...defaultCourse, ...remoteCourse };
+              }
+              return defaultCourse;
+            });
+            return mergedCourses;
+          }
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to fetch courses from remote:`, error);
+    }
+    return defaultData;
+  }
+  
+  // For other tables, try to fetch from remote
   try {
     const tableInfo = DATA_TABLES.find(t => t.table === table);
     if (tableInfo) {

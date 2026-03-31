@@ -252,8 +252,8 @@ const ReferenceDetail: React.FC = () => {
             )}
           </div>
 
-          {/* Testimonial and Attachments - only for non-ISO clients */}
-          {!clientNorms && (
+          {/* Testimonial and Attachments - only for non-ISO clients or PMO services */}
+          {(!clientNorms || serviceParam === 'pmo') && (
             <>
               <div className={`rounded-2xl p-6 mb-8 ${isDark ? 'bg-purple-900/30' : 'bg-purple-50'}`}>
                 <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-800'}`}>
