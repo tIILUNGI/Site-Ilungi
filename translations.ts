@@ -366,10 +366,10 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Pensana",
           logo: "/Nossas Referências/pensana-logo-sticky-blue-standard.png",
           role: "Serviço de Assistência e Suporte de TI",
-          comment: "A ILUNGI foi responsável por entregar um projeto de migração e configuração de dados do ERP Cegid Primavera para a Ozango Minerais S.A, uma empresa do Grupo Pensana, com o objetivo de estruturar e operacionalizar o sistema de gestão financeira e administrativa para suas operações em Angola.",
-          person: "Director de Operações",
+          comment: "Tivemos uma ótima experiência trabalhando com a ILUNGI na nossa migração e configuração do ERP. A equipa foi profissional, experiente e fez com que um processo que poderia ser muito complexo fosse tranquilo e gerível.\n\nEles nos apoiaram na migração, validação e reconciliação de dados, além de ajudar na configuração de módulos-chave, incluindo contabilidade, tesouraria/bancos, fornecedores, IVA e ativos fixos. A atenção ao detalhe garantiu que nossos dados estivessem corretos, alinhados e prontos para as operações diárias desde o início.\n\nEstavam sempre dispostos a ir além para apoiar nossa equipa, seja resolvendo problemas, respondendo perguntas ou ajudando-nos a sentir-nos confortáveis com o sistema. A sua capacidade de resposta e abordagem prática realmente se destacaram.\n\nEstamos muito satisfeitos com o resultado e os recomendaríamos com prazer.\n\nAtenciosamente,\n\nAngie Bles (de Oliveira)\n\nFinancial Manager Angola/Portugal",
+          person: "Angie Bles (de Oliveira)",
           service: "pmo",
-          description: "Migração de dados e suporte de TI para as operações",
+          description: "Migração e configuração do ERP Cegid Primavera para Ozango Minerais S.A.",
           attachments: []
         },
         {
@@ -751,10 +751,10 @@ export const translations: Record<'pt' | 'en', any> = {
           name: "Pensana",
           logo: "/Nossas Referências/pensana-logo-sticky-blue-standard.png",
           role: "IT Assistance and Support Service",
-          comment: "ILUNGI was responsible for delivering a data migration and configuration project of the Cegid Primavera ERP for Ozango Minerais S.A, a company of the Pensana Group, with the objective of structuring and operationalizing the financial and administrative management system for its operations in Angola.",
-          person: "Operations Director",
+          comment: "We had a great experience working with ILUNGI on our ERP migration and configuration. The team was professional, experienced, and made what could have been a very complex process smooth and manageable.\n\nThey supported us in the migration, validation, and reconciliation of data, as well as helping with the configuration of key modules including accounting, treasury/banks, suppliers, VAT, and fixed assets. The attention to detail ensured our data was correct, aligned, and ready for daily operations from the start.\n\nThey were always willing to go above and beyond to support our team, whether resolving issues, answering questions, or helping us feel comfortable with the system. Their responsiveness and practical approach really stood out.\n\nWe are very satisfied with the result and would gladly recommend them.\n\nSincerely,\n\nAngie Bles (de Oliveira)\n\nFinancial Manager Angola/Portugal",
+          person: "Angie Bles (de Oliveira)",
           service: "pmo",
-          description: "Data migration and IT support for operations",
+          description: "Cegid Primavera ERP migration and configuration for Ozango Minerais S.A.",
           attachments: []
         },
         {
