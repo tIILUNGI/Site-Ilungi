@@ -333,14 +333,13 @@ const Home: React.FC = () => {
               </div>
               <div className="relative min-h-[340px] lg:min-h-full bg-gradient-to-br from-[#1B3C2B] to-[#6a00a3] p-6 lg:p-8 flex items-center justify-center">
                 <div className="absolute inset-0 bg-[url('/Nossas%20Refer%C3%AAncias/pensana-logo-sticky-blue-standard.png')] bg-contain bg-no-repeat bg-center opacity-10"></div>
-                <div className="relative z-10 w-full max-w-xl bg-white rounded-2xl shadow-2xl p-5 lg:p-6 flex flex-col items-center text-center">
+                <Link to="/referencia/pensana?service=pmo" className="relative z-10 w-full max-w-xl bg-white rounded-2xl shadow-2xl p-5 lg:p-6 flex flex-col items-center text-center hover:scale-[1.02] transition-transform">
                   <img
                     src="/Nossas%20Refer%C3%AAncias/pensana-logo-sticky-blue-standard.png"
                     alt="Logotipo PENSANA"
                     className="h-[180px] sm:h-[210px] lg:h-[260px] w-auto max-w-full object-contain mb-3"
                   />
-
-                </div>
+                </Link>
               </div>
             </div>
           </motion.div>

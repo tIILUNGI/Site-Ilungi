@@ -248,6 +248,11 @@ export const loadData = async (table: string, _localKey: string, defaultData: an
   if (table === 'partners') {
     return defaultData;
   }
+
+  // For references, always use default data (no backend dependency)
+  if (table === 'references') {
+    return defaultData;
+  }
   
   // For courses, always use default data first and merge with remote
   if (table === 'courses') {
