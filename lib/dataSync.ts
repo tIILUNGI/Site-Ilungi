@@ -244,6 +244,11 @@ const mapReferenceFromAPI = (ref: any) => {
 };
 
 export const loadData = async (table: string, _localKey: string, defaultData: any) => {
+  // For partners, always use default data (no backend dependency)
+  if (table === 'partners') {
+    return defaultData;
+  }
+  
   // For courses, always use default data first and merge with remote
   if (table === 'courses') {
     try {

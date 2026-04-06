@@ -44,9 +44,9 @@ export const defaultPartners: PartnerData[] = [
   {
     id: 'p4',
     name: 'Nova Select',
-    url: 'https://novaselect.co/index.html',
+    url: 'https://novaselect.co/',
     desc: {
-      pt: 'Desde a primeira conversa at\u00e9 a entrega final, entregamos crescimento mensur\u00e1vel. Especialistas em enfrentar desafios digitais complexos com design bem elaborado, criatividade e engenharia de precis\u00e3o.',
+      pt: 'Desde a primeira conversa até a entrega final, entregamos crescimento mensurável. Especialistas em enfrentar desafios digitais complexos com design bem elaborado, criatividade e engenharia de precisão.',
       en: 'From the first conversation to final delivery, we deliver measurable growth. Specialists in tackling complex digital challenges with thoughtful design, creativity, and precision engineering.'
     },
     logo: '/imagens/Nova Select.png',
@@ -64,3 +64,4 @@ export const defaultPartners: PartnerData[] = [
     color: '#2E7D5E'
   }
 ];
+
