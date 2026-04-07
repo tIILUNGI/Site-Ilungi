@@ -20,11 +20,11 @@ const AdminServices: React.FC = () => {
   const { lang, isDark, t } = useAppContext();
   const isPt = lang === 'pt';
 
-  const defaultAreas = [
-    { id: "iso", title: t.consultingAreas.iso.title, desc: t.consultingAreas.iso.desc, image: "/imagens/consultoria-iso.jpg", path: "/consultoria/iso", color: "#1B3C2B" },
-    { id: "risk", title: t.consultingAreas.risk.title, desc: t.consultingAreas.risk.desc, image: "/imagens/gri-sustentabilidade.jpg", path: "/consultoria/risco", color: "#6a00a3" },
+const defaultAreas = [
+    { id: "iso", title: t.consultingAreas.iso.title, desc: t.consultingAreas.iso.desc, image: "/imagens/consultoria-iso.jpg", path: "/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao", color: "#1B3C2B" },
+    { id: "risk", title: t.consultingAreas.risk.title, desc: t.consultingAreas.risk.desc, image: "/imagens/gri-sustentabilidade.jpg", path: "/consultoria/gri-sustentabilidade", color: "#6a00a3" },
     { id: "procurement", title: t.consultingAreas.procurement.title, desc: t.consultingAreas.procurement.desc, image: "/imagens/procurement.jpg", path: "/consultoria/procurement", color: "#0A4D8C" },
-    { id: "pmo", title: t.consultingAreas.pmo.title, desc: t.consultingAreas.pmo.desc, image: "/imagens/suporte-ti.jpg", path: "/consultoria/pmo", color: "#B31B1B" }
+    { id: "pmo", title: t.consultingAreas.pmo.title, desc: t.consultingAreas.pmo.desc, image: "/imagens/suporte-ti.jpg", path: "/consultoria/assistencia-e-suporte-de-ti", color: "#B31B1B" }
   ];
   
   const [services, setServices] = useState<ServiceForm[]>([]);
@@ -219,7 +219,7 @@ const AdminServices: React.FC = () => {
                   value={formData.path}
                   onChange={(e) => setFormData({ ...formData, path: e.target.value })}
                   className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-200'}`}
-                  placeholder="/consultoria/risco"
+                  placeholder="/consultoria/gri-sustentabilidade"
                 />
               </div>
 

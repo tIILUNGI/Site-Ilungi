@@ -45,7 +45,7 @@ const mapServiceFromAPI = (service: any, index: number) => {
     description: service.description,
     content: service.content,
     image: image,
-    path: service.path || `/consultoria/${(service.order === 1 ? 'iso' : service.order === 2 ? 'risco' : service.order === 3 ? 'procurement' : service.order === 4 ? 'pmo' : `service-${index + 1}`)}`,
+    path: service.path || `/consultoria/${(service.order === 1 ? 'consultoria-e-auditoria-em-sistemas-de-gestao' : service.order === 2 ? 'gri-sustentabilidade' : service.order === 3 ? 'procurement' : service.order === 4 ? 'assistencia-e-suporte-de-ti' : `service-${index + 1}`)}`,
     color: color,
     icon: service.icon || 'ShieldCheck',
     items: service.items || {},

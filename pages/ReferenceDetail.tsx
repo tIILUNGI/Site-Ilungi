@@ -42,10 +42,10 @@ const ReferenceDetail: React.FC = () => {
   
   // Determine the back link based on service parameter
   const getBackLink = () => {
-    if (serviceParam === 'iso') return '/consultoria/iso';
-    if (serviceParam === 'risk') return '/consultoria/risco';
+    if (serviceParam === 'iso') return '/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao';
+    if (serviceParam === 'risk') return '/consultoria/gri-sustentabilidade';
     if (serviceParam === 'procurement') return '/consultoria/procurement';
-    if (serviceParam === 'pmo') return '/consultoria/pmo';
+    if (serviceParam === 'pmo') return '/consultoria/assistencia-e-suporte-de-ti';
     return '/consultoria';
   };
   

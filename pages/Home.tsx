@@ -46,14 +46,14 @@ const Home: React.FC = () => {
       desc: isPt ? "Implementação e certificação de sistemas de gestão ISO 9001, 14001, 45001 e outras directrizes e requisitos." : "Implementation and certification of ISO 9001, 14001, 45001 and other international standards.",
       image: "/imagens/consultoria-icon.png", 
       color: "#1B3C2B", 
-      path: "/consultoria/iso" 
+      path: "/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao" 
     },
     { 
       title: isPt ? "GRI STANDARD" : "GRI STANDARD", 
       desc: isPt ? "Relatórios de sustentabilidade baseados nos padrões GRI para transparência e responsabilidade corporativa." : "Sustainability reporting based on GRI standards for transparency and corporate accountability.",
       image: "/imagens/gri-icon.png", 
       color: "#2E7D32", 
-      path: "/consultoria/risco" 
+      path: "/consultoria/gri-sustentabilidade" 
     },
     { 
       title: isPt ? "PROCUREMENT" : "PROCUREMENT", 
@@ -67,7 +67,7 @@ const Home: React.FC = () => {
       desc: isPt ? "Soluções tecnológicas integradas para digitalização e optimização dos processos empresariais." : "Integrated technological solutions for digitization and optimization of business processes.",
       image: "/imagens/tecnologia-icon.png", 
       color: "#0A4D8C", 
-      path: "/consultoria/pmo" 
+      path: "/consultoria/assistencia-e-suporte-de-ti" 
     }
   ];
 

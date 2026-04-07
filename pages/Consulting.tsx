@@ -45,12 +45,12 @@ const Consulting: React.FC = () => {
   };
 
   const defaultAreas = [
-    {
+{
       id: "iso",
       title: t.consultingAreas.iso.title,
       desc: t.consultingAreas.iso.desc,
       image: "/imagens/consultoria-iso.jpg",
-      path: "/consultoria/iso",
+      path: "/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao",
       color: "#1B3C2B"
     },
     {
@@ -58,7 +58,7 @@ const Consulting: React.FC = () => {
       title: t.consultingAreas.risk.title,
       desc: t.consultingAreas.risk.desc,
       image: "/imagens/gri-sustentabilidade.jpg",
-      path: "/consultoria/risco",
+      path: "/consultoria/gri-sustentabilidade",
       color: "#6a00a3"
     },
     {
@@ -74,7 +74,7 @@ const Consulting: React.FC = () => {
       title: t.consultingAreas.pmo.title,
       desc: t.consultingAreas.pmo.desc,
       image: "/imagens/suporte-ti.jpg",
-      path: "/consultoria/pmo",
+      path: "/consultoria/assistencia-e-suporte-de-ti",
       color: "#B31B1B"
     }
   ];

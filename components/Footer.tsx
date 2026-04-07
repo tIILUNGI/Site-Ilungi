@@ -64,10 +64,10 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="font-bold text-lg mb-6">{t.nav.consulting}</h4>
           <ul className="space-y-3 text-slate-300">
-            <li><Link to="/consultoria/iso" className="hover:text-white transition-colors">{t.nav.iso}</Link></li>
-            <li><Link to="/consultoria/risco" className="hover:text-white transition-colors">{t.nav.risk}</Link></li>
+            <li><Link to="/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao" className="hover:text-white transition-colors">{t.nav.iso}</Link></li>
+            <li><Link to="/consultoria/gri-sustentabilidade" className="hover:text-white transition-colors">{t.nav.risk}</Link></li>
             <li><Link to="/consultoria/procurement" className="hover:text-white transition-colors">{t.nav.procurement}</Link></li>
-            <li><Link to="/consultoria/pmo" className="hover:text-white transition-colors">{t.nav.pmo}</Link></li>
+            <li><Link to="/consultoria/assistencia-e-suporte-de-ti" className="hover:text-white transition-colors">{t.nav.pmo}</Link></li>
           </ul>
         </div>
 

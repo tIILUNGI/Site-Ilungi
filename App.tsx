@@ -167,11 +167,11 @@ const AppShell: React.FC = () => {
             <AnimatePresence mode="wait">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/consultoria" element={<Consulting />} />
-                <Route path="/consultoria/iso" element={<ISOPage />} />
-                <Route path="/consultoria/risco" element={<ServiceDetail type="risk" />} />
+<Route path="/consultoria" element={<Consulting />} />
+                <Route path="/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao" element={<ISOPage />} />
+                <Route path="/consultoria/gri-sustentabilidade" element={<ServiceDetail type="risk" />} />
                 <Route path="/consultoria/procurement" element={<ServiceDetail type="procurement" />} />
-                <Route path="/consultoria/pmo" element={<ServiceDetail type="pmo" />} />
+                <Route path="/consultoria/assistencia-e-suporte-de-ti" element={<ServiceDetail type="pmo" />} />
                 <Route path="/academia" element={<Academy />} />
                 <Route path="/academia/alumni" element={<AILUNGIPortal />} />
                 <Route path="/academia/login" element={<AILUNGILogin />} />

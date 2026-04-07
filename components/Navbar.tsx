@@ -22,10 +22,10 @@ const Navbar: React.FC = () => {
       path: '/consultoria',
       description: isPt ? 'Consultoria especializada para o seu negócio' : 'Specialized consulting for your business',
       mega: [
-        { title: t.nav.iso, desc: isPt ? t.navDescriptions.iso : t.navDescriptions.iso, path: '/consultoria/iso' },
-        { title: t.nav.risk, desc: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade', path: '/consultoria/risco' },
+        { title: t.nav.iso, desc: isPt ? t.navDescriptions.iso : t.navDescriptions.iso, path: '/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao' },
+        { title: t.nav.risk, desc: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade', path: '/consultoria/gri-sustentabilidade' },
         { title: t.nav.procurement, desc: isPt ? t.navDescriptions.procurement : t.navDescriptions.procurement, path: '/consultoria/procurement' },
-        { title: t.nav.pmo, desc: isPt ? t.navDescriptions.pmo : t.navDescriptions.pmo, path: '/consultoria/pmo' },
+        { title: t.nav.pmo, desc: isPt ? t.navDescriptions.pmo : t.navDescriptions.pmo, path: '/consultoria/assistencia-e-suporte-de-ti' },
       ]
     },
     {

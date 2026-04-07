@@ -152,7 +152,7 @@ const exactRouteSeo = {
       makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description, 'CollectionPage'),
     ],
   },
-  '/consultoria/iso': {
+  '/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao': {
     title: {
       pt: 'Consultoria ISO e Sistemas de Gestao | ILUNGI',
       en: 'ISO Consulting and Management Systems | ILUNGI',
@@ -173,20 +173,20 @@ const exactRouteSeo = {
       makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
     ],
   },
-  '/consultoria/risco': {
+  '/consultoria/gri-sustentabilidade': {
     title: {
-      pt: 'Gestao e Notacao de Riscos | ILUNGI',
-      en: 'Risk Management and Rating | ILUNGI',
+      pt: 'GRI - Sustentabilidade | ILUNGI',
+      en: 'GRI - Sustainability | ILUNGI',
     },
     description: {
-      pt: 'Avaliacao, classificacao e mitigacao de riscos corporativos para fortalecer governanca, compliance e resiliencia empresarial.',
-      en: 'Assessment, classification, and mitigation of corporate risks to strengthen governance, compliance, and business resilience.',
+      pt: 'Relatorios de sustentabilidade baseados nos padroes GRI para transparencia e responsabilidade corporativa.',
+      en: 'Sustainability reporting based on GRI standards for transparency and corporate accountability.',
     },
     keywords: {
-      pt: [...sharedKeywords.pt, 'gestao de riscos', 'riscos corporativos', 'notacao de riscos'],
-      en: [...sharedKeywords.en, 'risk management', 'corporate risk', 'risk rating'],
+      pt: [...sharedKeywords.pt, 'GRI', 'sustentabilidade', 'relatorio de sustentabilidade'],
+      en: [...sharedKeywords.en, 'GRI', 'sustainability', 'sustainability report'],
     },
-    image: '/imagens/procurement.jpg',
+    image: '/imagens/gri-sustentabilidade.jpg',
     changefreq: 'monthly',
     priority: '0.8',
     schema: (siteUrl, lang, entry) => [
@@ -207,7 +207,7 @@ const exactRouteSeo = {
       pt: [...sharedKeywords.pt, 'procurement', 'compras', 'aquisicoes'],
       en: [...sharedKeywords.en, 'procurement', 'purchasing', 'sourcing'],
     },
-    image: '/imagens/suporte-ti.jpg',
+    image: '/imagens/procurement.jpg',
     changefreq: 'monthly',
     priority: '0.8',
     schema: (siteUrl, lang, entry) => [
@@ -215,10 +215,10 @@ const exactRouteSeo = {
       makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
     ],
   },
-  '/consultoria/pmo': {
+  '/consultoria/assistencia-e-suporte-de-ti': {
     title: {
-      pt: 'PMO e Suporte de TI | ILUNGI',
-      en: 'PMO and IT Support | ILUNGI',
+      pt: 'Assistência e Suporte de TI | ILUNGI',
+      en: 'IT Support and Assistance | ILUNGI',
     },
     description: {
       pt: 'Estruturacao de PMO, apoio operacional e suporte de TI para projetos e equipas com maior controlo e desempenho.',
