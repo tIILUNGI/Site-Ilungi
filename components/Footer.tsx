@@ -80,12 +80,9 @@ const Footer: React.FC = () => {
             <li><Link to="/academia/scr" className="hover:text-white transition-colors">{t.nav.scr}</Link></li>
           </ul>
         </div>
+
         <div>
-          <h4 className="font-bold text-lg mb-6">{isPt ? 'Politicas' : 'Policies'}</h4>
-          <ul className="space-y-3 text-slate-300">
-            <li><a href="/Politica de Qualidade.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{isPt ? 'Politica de Qualidade' : 'Quality Policy'}</a></li>
-            <li><a href="/Politica de Compliance.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{isPt ? 'Politica de Compliance' : 'Compliance Policy'}</a></li>
-          </ul>
+          <h4 className="font-bold text-lg mb-6">{isPt ? 'Candidatura' : 'Application'}</h4>
           <div className="mt-6">
             <Link
               to="/contacto#candidatura"
