@@ -403,7 +403,7 @@ export const loadConfig = async (_localKey: string, defaultData: any) => {
       return { 
         ...defaultData, 
         ...remoteConfig,
-        email: remoteConfig.contact_email || defaultData.email,
+        email: "geral@ilungi.ao",
         phone: remoteConfig.contact_phone || defaultData.phone,
         address: remoteConfig.address || defaultData.address
       };
