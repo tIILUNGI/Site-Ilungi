@@ -177,7 +177,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* INTEGRATED SOLUTIONS SECTION - FLOATING ELEMENTS */}
-      <section className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+      <section className="py-16 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#6a00a3]/20 to-transparent"></div>
         
         {/* Decorative elements */}
@@ -185,18 +185,18 @@ const Home: React.FC = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#1B3C2B]/5 rounded-full blur-3xl"></div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <span className="inline-block px-4 py-2 bg-[#1B3C2B]/10 text-[#1B3C2B] rounded-full text-sm font-bold uppercase tracking-widest mb-4">
               {isPt ? 'O que fazemos' : 'What we do'}
             </span>
-            <h2 className="text-4xl md:text-6xl font-black text-[#1B3C2B] mb-6">{isPt ? 'Soluções Integradas' : 'Integrated Solutions'}</h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projecto' : 'From strategy to execution, we deliver excellence in every project'}</p>
+            <h2 className="text-4xl md:text-6xl font-black text-[#1B3C2B] mb-4">{isPt ? 'Soluções Integradas' : 'Integrated Solutions'}</h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">{isPt ? 'Da estratégia à execução, entregamos excelência em cada projecto' : 'From strategy to execution, we deliver excellence in every project'}</p>
           </motion.div>
 
           {/* Floating Elements - No Cards Design */}
-          <div className="relative min-h-[500px] flex items-center justify-center">
+          <div className="relative min-h-[400px] flex items-center justify-center">
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full relative">
               {integratedSolutions.map((solution, index) => {
                 return (
                   <motion.div
@@ -215,21 +215,21 @@ const Home: React.FC = () => {
                       >
                         {/* Image - No Circle */}
                         <motion.div 
-                          className="mb-5"
+                          className="mb-3"
                           whileHover={{ scale: 1.05 }}
                         >
                           <img 
                             src={solution.image} 
                             alt={solution.title}
-                            className="w-24 h-24 object-contain"
+                            className="w-20 h-20 object-contain"
                           />
                         </motion.div>
 
                         {/* Content - No Card Background */}
-                        <h3 className="text-xl font-black text-[#1B3C2B] mb-3 group-hover:text-[#6a00a3] transition-colors max-w-xs">
+                        <h3 className="text-lg font-black text-[#1B3C2B] mb-2 group-hover:text-[#6a00a3] transition-colors max-w-xs">
                           {solution.title}
                         </h3>
-                        <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-4">
+                        <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-3">
                           {solution.desc}
                         </p>
                         
@@ -256,7 +256,7 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className="text-center mt-20"
+            className="text-center mt-12"
           >
             <Link 
               to="/consultoria" 
