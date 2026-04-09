@@ -379,7 +379,7 @@ const Home: React.FC = () => {
                     <div className="text-sm text-slate-400">{isPt ? 'Satisfação' : 'Satisfaction'}</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white mb-2">ISO 37301</div>
+                    <div className="text-4xl font-black text-white mb-2">ISO 29993</div>
                     <div className="text-sm text-slate-400">{isPt ? 'Certificação' : 'Certification'}</div>
                   </div>
                   <div>

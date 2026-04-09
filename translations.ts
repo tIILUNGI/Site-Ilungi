@@ -160,7 +160,7 @@ export const translations: Record<'pt' | 'en', any> = {
       iso: {
         title: "CONSULTORIA E AUDITORIA EM SISTEMAS DE GESTÃO",
         desc: "Especialistas em implementação e auditoria de sistemas de gestão ISO.",
-        content: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.\nIMPLEMENTAÇÃO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão da Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO",
+        content: "Actuamos na implementação à medida e cirúrgica de sistemas de gestão baseados nas normas ISO, acompanhamos os nossos parceiros até à auditoria de certificação, bem como realizamos auditorias internas e de fornecedores.\nIMPLEMENTAÇÃO E AUDITORIA EM SISTEMAS DE GESTÃO:\nGestão de Qualidade ISO 9001\nGestão Ambiental ISO 14001\nGestão de Saúde e Segurança Ocupacional ISO 45001 \nGestão da Informação ISO 27001\nGestão de Compliance e Antissuborno ISO 37001 e ISO 37301\nGestão da Segurança Alimentar ISO 22000 / HACCP\nGestão de Risco ISO 31000 e COSO\nServiços de Aprendizagem ISO 29993\nGestão de Consultoria ISO 20700",
         items: {
           "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Padroniza processos e aumenta a satisfação do cliente." },
           "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Reduz o impacto ambiental e garante conformidade legal." },
@@ -170,7 +170,9 @@ export const translations: Record<'pt' | 'en', any> = {
           "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Implementa controles eficazes contra suborno." },
           "37301": { title: "ISO 37301 - Compliance", benefit: "Estrutura o compliance e reduz riscos legais." },
           "31000": { title: "ISO 31000 - Gestão de Risco", benefit: "Identifica, avalia e trata riscos com método." },
-          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Assegura segurança alimentar em toda a cadeia." }
+          "22000": { title: "ISO 22000 - Segurança Alimentar", benefit: "Assegura segurança alimentar em toda a cadeia." },
+          "29993": { title: "ISO 29993 - Serviços de Aprendizagem", benefit: "Melhora a qualidade dos serviços de aprendizagem." },
+          "20700": { title: "ISO 20700 - Gestão de Consultoria", benefit: " padroniza a prestação de serviços de consultoria." }
         }
       },
       risk: {
@@ -545,7 +547,7 @@ export const translations: Record<'pt' | 'en', any> = {
       iso: {
         title: "CONSULTING AND AUDIT IN MANAGEMENT SYSTEMS",
         desc: "Specialists in the implementation and auditing of ISO management systems.",
-        content: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit and also conduct internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Security Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO",
+        content: "We provide tailored and precise implementation of management systems based on ISO standards. We support our partners through the certification audit and also conduct internal and supplier audits.\nIMPLEMENTATION AND AUDITING IN MANAGEMENT SYSTEMS:\nQuality Management ISO 9001\nEnvironmental Management ISO 14001\nOccupational Health and Safety ISO 45001\nInformation Security Management ISO 27001\nCompliance and Anti-Bribery ISO 37001 and ISO 37301\nFood Safety Management ISO 22000 / HACCP\nRisk Management ISO 31000 and COSO\nLearning Services ISO 29993\nConsulting Management ISO 20700",
         items: {
           "9001": { title: "ISO 9001 - Quality Management", benefit: "Standardizes processes and improves customer satisfaction." },
           "14001": { title: "ISO 14001 - Environmental Management", benefit: "Reduces environmental impact and ensures legal compliance." },
@@ -555,7 +557,9 @@ export const translations: Record<'pt' | 'en', any> = {
           "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Implements effective anti-bribery controls." },
           "37301": { title: "ISO 37301 - Compliance", benefit: "Structures compliance and reduces legal risk." },
           "31000": { title: "ISO 31000 - Risk Management", benefit: "Systematically identifies, assesses, and treats risks." },
-          "22000": { title: "ISO 22000 - Food Safety", benefit: "Ensures food safety across the supply chain." }
+          "22000": { title: "ISO 22000 - Food Safety", benefit: "Ensures food safety across the supply chain." },
+          "29993": { title: "ISO 29993 - Learning Services", benefit: "Improves the quality of learning services." },
+          "20700": { title: "ISO 20700 - Consulting Management", benefit: "Standardizes consulting service delivery." }
         }
       },
       risk: {
