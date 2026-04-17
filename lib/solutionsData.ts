@@ -25,10 +25,10 @@ export const getDefaultSolutions = (isPt: boolean): SolutionData[] => [
   {
     id: 's1',
     name: 'Salya',
-    tagline: isPt ? 'Gest\u00e3o de Sal\u00e1rios & RH' : 'Payroll & HR Management',
+    tagline: isPt ? 'Gestão de Salários' : 'Payroll Management',
     desc: isPt
-      ? 'Plataforma para gest\u00e3o e emiss\u00e3o de recibos de sal\u00e1rio e controle completo de recursos humanos. Automatiza\u00e7\u00e3o de folhas de pagamento, benef\u00edcios e compliance trabalhista.'
-      : 'Platform for payroll management, payslip issuance, and complete HR control. Automation of payroll, benefits, and labor compliance.',
+      ? 'Plataforma para gestão e emissão de recibos de salário. Automatização de folhas de pagamento e gestão de pagamentos.'
+      : 'Platform for payroll management and salary receipt issuance. Automation of payroll and payment management.',
     image: '/imagens/Salya.png',
     path: '/solucoes/salya',
     color: 'from-[#1B3C2B] to-[#2E7D5E]',

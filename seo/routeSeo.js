@@ -318,16 +318,16 @@ const exactRouteSeo = {
   },
   '/solucoes/salya': {
     title: {
-      pt: 'Salya | Gestao de Salarios e RH',
-      en: 'Salya | Payroll and HR Management',
+      pt: 'Salya | Gestao de Salarios',
+      en: 'Salya | Payroll Management',
     },
     description: {
-      pt: 'Conheca a plataforma Salya para gestao de salarios e recursos humanos com foco em eficiencia operacional.',
-      en: 'Discover Salya, the payroll and human resources platform focused on operational efficiency.',
+      pt: 'Plataforma para gestão e emissão de recibos de salário. Automatização de folhas de pagamento.',
+      en: 'Platform for payroll management and salary receipt issuance. Automation of payroll.',
     },
     keywords: {
-      pt: [...sharedKeywords.pt, 'Salya', 'recursos humanos', 'salarios'],
-      en: [...sharedKeywords.en, 'Salya', 'human resources', 'payroll'],
+      pt: [...sharedKeywords.pt, 'Salya', 'salarios', 'recibos'],
+      en: [...sharedKeywords.en, 'Salya', 'payroll', 'salary receipts'],
     },
     image: '/imagens/Salya.png',
     changefreq: 'monthly',

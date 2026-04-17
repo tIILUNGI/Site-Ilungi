@@ -20,35 +20,32 @@ const Navbar: React.FC = () => {
       label: t.nav.consulting,
       id: 'consulting',
       path: '/consultoria',
-      description: isPt ? 'Consultoria especializada para o seu negócio' : 'Specialized consulting for your business',
       mega: [
-        { title: t.nav.iso, desc: isPt ? t.navDescriptions.iso : t.navDescriptions.iso, path: '/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao' },
-        { title: t.nav.risk, desc: isPt ? 'GRI - Sustentabilidade' : 'GRI - Sustentabilidade', path: '/consultoria/gri-sustentabilidade' },
-        { title: t.nav.procurement, desc: isPt ? t.navDescriptions.procurement : t.navDescriptions.procurement, path: '/consultoria/procurement' },
-        { title: t.nav.pmo, desc: isPt ? t.navDescriptions.pmo : t.navDescriptions.pmo, path: '/consultoria/assistencia-e-suporte-de-ti' },
+        { title: t.nav.iso, desc: "", path: '/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao' },
+        { title: t.nav.risk, desc: "", path: '/consultoria/gri-sustentabilidade' },
+        { title: t.nav.procurement, desc: "", path: '/consultoria/procurement' },
+        { title: t.nav.pmo, desc: "", path: '/consultoria/assistencia-e-suporte-de-ti' },
       ]
     },
     {
       label: t.nav.academy,
       id: 'academy',
       path: '/academia',
-      description: isPt ? 'Formação e certificação profissional' : 'Professional training and certification',
       mega: [
-        { title: "AILUNGI", desc: isPt ? 'Portal de Formandos e certificações' : 'AILUNGI portal and certifications', href: "https://ailungi-frontend.vercel.app/" },
-        { title: t.nav.verify, desc: isPt ? 'Verifique a autenticidade de certificados' : 'Verify certificate authenticity', path: '/academia/verificar' },
-        { title: "GPMOi", desc: isPt ? 'Cursos e Certificação em Gestão de PMO' : 'Courses and Certification in PMO Management', href: "https://gpmoi.org/" },
-        { title: "School of Corporate Reputation", desc: isPt ? 'Cursos e Certificação em Gestão de Reputação Corporativa' : 'Courses and Certification in Corporate Reputation Management', href: "https://scr.ilungi.ao/" },
+        { title: "AILUNGI", desc: "", href: "https://ailungi-frontend.vercel.app/" },
+        { title: t.nav.verify, desc: "", path: '/academia/verificar' },
+        { title: "GPMOi", desc: "", href: "https://gpmoi.org/" },
+        { title: "School of Corporate Reputation", desc: "", href: "https://scr.ilungi.ao/" },
       ]
     },
     {
       label: t.nav.solutions,
       id: 'solutions',
       path: '/solucoes',
-      description: isPt ? 'Tecnologia para a sua gestão' : 'Technology for your management',
       mega: [
         { title: "Salya", desc: "", path: '/solucoes/salya' },
         { title: "SICLIC", desc: "", href: "https://siclic.ao/" },
-        { title: "Tocomply360", desc: isPt ? 'Gestão de Sistemas ISO' : 'Gestão de Sistemas ISO', path: '/solucoes/tocomply' },
+        { title: "Tocomply360", desc: "", path: '/solucoes/tocomply' },
       ]
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },
@@ -143,10 +140,6 @@ const Navbar: React.FC = () => {
                       className="absolute top-full left-0 mt-0 pt-2 w-[320px] max-w-[85vw] z-50 ml-0"
                     >
                       <div className={`${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-2xl border overflow-hidden`}>
-                        {/* Header Description */}
-                        <div className="px-3 py-2">
-                          <p className={`font-medium text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</p>
-                        </div>
                         
                         {/* Menu Items */}
                         <div className="p-1.5">

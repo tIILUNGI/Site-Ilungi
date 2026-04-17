@@ -20,11 +20,7 @@ export const translations: Record<'pt' | 'en', any> = {
       demo: "Demonstração",
       home: "Início",
     },
-    navDescriptions: {
-      iso: "implementação e acompanhamento a certificação",
-      procurement: "Optimização do processo de aquisição",
-      pmo: "Apoio a necessidades tecnológicas",
-    },
+    navDescriptions: {},
     home: {
       heroTitle: "Excelência em Consultoria e Soluções Digitais",
       heroSubtitle: "Transformamos o compliance e a gestão em valor estratégico para empresas globais.",
@@ -177,7 +173,7 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       risk: {
         title: "GRI - Sustentabilidade",
-        desc: "O nosso serviço de GRI-Sustentabilidade tem como propósito apoiar organizações na adoção de práticas responsáveis e transparentes, alinhadas às diretrizes internacionais da Global Reporting Initiative (GRI). Reconhecemos que a sustentabilidade é hoje um fator estratégico para a competitividade e reputação empresarial, e por isso oferecemos um acompanhamento completo na elaboração de relatórios que refletem o desempenho ambiental, social e de governança da sua empresa.",
+        desc: "O nosso serviço de GRI - Sustentabilidade tem como propósito apoiar organizações na adoção de práticas responsáveis e transparentes, alinhadas às diretrizes internacionais da Global Reporting Initiative (GRI). Reconhecemos que a sustentabilidade é hoje um fator estratégico para a competitividade e reputação empresarial, e por isso oferecemos um acompanhamento completo na elaboração de relatórios que refletem o desempenho ambiental, social e de governança da sua empresa.",
         content: ""
       },
       procurement: {
@@ -396,7 +392,7 @@ export const translations: Record<'pt' | 'en', any> = {
       partners: "Partners",
       blog: "Blog",
       contact: "Contact",
-      iso: "Management Systems & Projects Consulting",
+      iso: "CONSULTING AND AUDIT IN MANAGEMENT SYSTEMS",
       risk: "GRI - Sustainability",
       procurement: "Procurement",
       pmo: "IT Assistance and Support",
@@ -407,11 +403,7 @@ export const translations: Record<'pt' | 'en', any> = {
       demo: "Demo",
       home: "Home",
     },
-    navDescriptions: {
-      iso: "Implementation and monitoring of certification",
-      procurement: "Optimization of the acquisition process",
-      pmo: "Support for technological needs",
-    },
+    navDescriptions: {},
     home: {
       heroTitle: "Excellence in Consulting and Digital Solutions",
       heroSubtitle: "We transform compliance and management into strategic value for global companies.",

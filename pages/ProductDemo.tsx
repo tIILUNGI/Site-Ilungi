@@ -136,10 +136,6 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-              <div className="flex-1"></div>
-              <div className="px-4 py-1 bg-white border border-slate-200 rounded-full text-[10px] text-slate-500 line-clamp-1 w-24 sm:w-auto">
-                {productName.toLowerCase()}.ilungi.ao
-              </div>
             </div>
             
             <div className="relative h-48 overflow-hidden rounded-b-2xl">
