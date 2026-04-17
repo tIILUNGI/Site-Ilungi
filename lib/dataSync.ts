@@ -2,11 +2,23 @@ import { endpoints } from './api';
 
 const DATA_VERSION = '2026-03-13-1';
 
+// Get current language - check sessionStorage first (set by App.tsx), fallback to 'pt'
+const getCurrentLang = (): string => {
+  try {
+    return sessionStorage.getItem('ilungi_lang') || 'pt';
+  } catch {
+    return 'pt';
+  }
+};
+
 // Helper to extract localized value from JSONB fields
 const getLocalized = (val: any) => {
   if (!val) return '';
   if (typeof val === 'string') return val;
-  if (typeof val === 'object') return val.pt || val.en || '';
+  if (typeof val === 'object') {
+    const currentLang = getCurrentLang();
+    return val[currentLang] || val.pt || val.en || '';
+  }
   return '';
 };
 
@@ -130,7 +142,10 @@ const mapCourseFromAPI = (course: any, index: number) => {
   const getLocalized = (val: any) => {
     if (!val) return '';
     if (typeof val === 'string') return val;
-    if (typeof val === 'object') return val.pt || val.en || '';
+    if (typeof val === 'object') {
+      const currentLang = getCurrentLang();
+      return val[currentLang] || val.pt || val.en || '';
+    }
     return '';
   };
   
@@ -173,7 +188,10 @@ const mapPartnerFromAPI = (partner: any) => {
   const getLocalized = (val: any) => {
     if (!val) return '';
     if (typeof val === 'string') return val;
-    if (typeof val === 'object') return val.pt || val.en || '';
+    if (typeof val === 'object') {
+      const currentLang = getCurrentLang();
+      return val[currentLang] || val.pt || val.en || '';
+    }
     return '';
   };
   
@@ -197,7 +215,10 @@ const mapReferenceFromAPI = (ref: any) => {
   const getLocalized = (val: any) => {
     if (!val) return '';
     if (typeof val === 'string') return val;
-    if (typeof val === 'object') return val.pt || val.en || '';
+    if (typeof val === 'object') {
+      const currentLang = getCurrentLang();
+      return val[currentLang] || val.pt || val.en || '';
+    }
     return '';
   };
 
