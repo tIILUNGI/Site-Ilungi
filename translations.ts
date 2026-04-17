@@ -564,8 +564,8 @@ export const translations: Record<'pt' | 'en', any> = {
       },
       risk: {
         title: "GRI - Sustainability",
-        desc: "GRI - Sustainability",
-        content: "GRI - Sustainability"
+        desc: "Our GRI-Sustainability service aims to support organizations in adopting responsible and transparent practices, aligned with the international guidelines of the Global Reporting Initiative (GRI). We recognize that sustainability is now a strategic factor for business competitiveness and reputation, which is why we offer comprehensive support in preparing reports that reflect the environmental, social, and governance performance of your company.",
+        content: ""
       },
       procurement: {
         title: "PROCUREMENT",
