@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { useAppContext } from '../App';
@@ -8,7 +8,6 @@ const Navbar: React.FC = () => {
   const { lang, setLang, t, isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [menuPosition, setMenuPosition] = useState<{ left: number; width: number } | null>(null);
   const menuItemRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const isPt = lang === 'pt';
   const navigate = useNavigate();
@@ -33,10 +32,16 @@ const Navbar: React.FC = () => {
       path: '/academia',
       mega: [
         { title: "AILUNGI", desc: "", href: "https://ailungi-frontend.vercel.app/" },
+        { title: t.alumni.showcase.title, desc: "", path: '/academia/showcase' },
         { title: t.nav.verify, desc: "", path: '/academia/verificar' },
         { title: "GPMOi", desc: "", href: "https://gpmoi.org/" },
         { title: "School of Corporate Reputation", desc: "", href: "https://scr.ilungi.ao/" },
       ]
+    },
+    {
+      label: t.alumni.talent.title,
+      id: 'talent-hub',
+      path: '/academia/talent-hub'
     },
     {
       label: t.nav.solutions,
@@ -63,23 +68,10 @@ const Navbar: React.FC = () => {
 
   const handleMouseEnter = (id: string) => {
     setActiveMenu(id);
-    // Calculate position based on the menu item
-    const menuItem = menuItemRefs.current[id];
-    if (menuItem) {
-      const rect = menuItem.getBoundingClientRect();
-      const navbarRect = menuItem.closest('nav')?.getBoundingClientRect();
-      if (navbarRect) {
-        setMenuPosition({
-          left: rect.left - navbarRect.left + rect.width / 2,
-          width: rect.width
-        });
-      }
-    }
   };
 
   const handleMouseLeave = () => {
     setActiveMenu(null);
-    setMenuPosition(null);
   };
 
   return (
@@ -114,7 +106,7 @@ const Navbar: React.FC = () => {
                 <Link 
                   to={item.path}
                   onClick={(e) => handleClick(e, item)}
-                  className={`flex items-center gap-1 font-medium px-4 py-2 h-full ${activeMenu === item.id ? 'text-[#6a00a3]' : ''} hover:text-[#6a00a3] transition-colors cursor-pointer`}
+                  className={`flex items-center gap-1 font-medium px-3 py-2 h-full ${activeMenu === item.id ? 'text-[#6a00a3]' : ''} hover:text-[#6a00a3] transition-colors cursor-pointer`}
                 >
                   <span>{item.label}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform ${activeMenu === item.id ? 'rotate-180' : ''}`} />
@@ -122,7 +114,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <Link 
                   to={item.path}
-                  className={`flex items-center gap-1 font-medium px-4 py-2 h-full hover:text-teal-600 transition-colors`}
+                  className={`flex items-center gap-1 font-medium px-3 py-2 h-full hover:text-teal-600 transition-colors`}
                 >
                   <span>{item.label}</span>
                 </Link>

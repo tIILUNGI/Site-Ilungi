@@ -1,4 +1,4 @@
-﻿import { Translation } from './types';
+import { Translation } from './types';
 
 export const translations: Record<'pt' | 'en', any> = {
   pt: {
@@ -216,6 +216,28 @@ export const translations: Record<'pt' | 'en', any> = {
         inProgress: "Em Andamento",
         continue: "Continuar Aula",
         completed: "concluído",
+        profile: "Perfil Público",
+        cv: "Currículo Digital",
+      },
+      showcase: {
+        title: "Nossos Alumni",
+        subtitle: "Conheça os profissionais formados pela ILUNGI que estão transformando o mercado.",
+        searchPlaceholder: "Pesquisar por nome ou curso...",
+        viewProfile: "Ver Perfil",
+        formation: "Formação",
+        comment: "Comentário sobre o curso",
+        empty: "Nenhum alumni encontrado.",
+      },
+      talent: {
+        title: "Hub de Talentos",
+        subtitle: "Conectamos empresas aos melhores profissionais certificados pela ILUNGI.",
+        iAmProfessional: "Sou Profissional",
+        iAmCompany: "Sou Empresa",
+        searchTalent: "Procurar Talentos",
+        postJob: "Publicar Vaga",
+        hireNow: "Contratar",
+        contact: "Entrar em Contacto",
+        partnerSearch: "Procurar Parceiros de Negócio",
       }
     },
     iso: {
@@ -599,6 +621,28 @@ export const translations: Record<'pt' | 'en', any> = {
         inProgress: "In Progress",
         continue: "Continue Lesson",
         completed: "completed",
+        profile: "Public Profile",
+        cv: "Digital CV",
+      },
+      showcase: {
+        title: "Our Alumni",
+        subtitle: "Meet the professionals trained by ILUNGI who are transforming the market.",
+        searchPlaceholder: "Search by name or course...",
+        viewProfile: "View Profile",
+        formation: "Formation",
+        comment: "Course Comment",
+        empty: "No alumni found.",
+      },
+      talent: {
+        title: "Talent Hub",
+        subtitle: "We connect companies with the best professionals certified by ILUNGI.",
+        iAmProfessional: "I am a Professional",
+        iAmCompany: "I am a Company",
+        searchTalent: "Search Talent",
+        postJob: "Post Job",
+        hireNow: "Hire Now",
+        contact: "Contact",
+        partnerSearch: "Search Business Partners",
       }
     },
     iso: {

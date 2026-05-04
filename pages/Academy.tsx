@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
-import { ArrowRight, Clock, GraduationCap, CheckCircle } from 'lucide-react';
+import { ArrowRight, Clock, GraduationCap, CheckCircle, Briefcase, Users } from 'lucide-react';
 import { loadData } from '../lib/dataSync';
 import { Course, defaultCourses } from '../lib/courseCatalogData';
 
@@ -208,6 +208,68 @@ const Academy: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Alumni & Talent Hub Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-24 py-16 px-8 rounded-[3rem] bg-white border border-slate-100 shadow-xl"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-[#1B3C2B] mb-4">
+              {isPt ? 'Comunidade & Networking' : 'Community & Networking'}
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              {isPt 
+                ? 'Conectamos os nossos formandos ao mercado de trabalho e promovemos o networking profissional de excelência.' 
+                : 'We connect our graduates to the job market and promote excellence in professional networking.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+              <div className="w-16 h-16 bg-[#6a00a3]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Users className="w-8 h-8 text-[#6a00a3]" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">{t.alumni.showcase.title}</h3>
+              <p className="text-slate-500 mb-8 leading-relaxed">
+                {t.alumni.showcase.subtitle}
+              </p>
+              <Link to="/academia/showcase" className="px-8 py-3 bg-[#6a00a3] text-white rounded-full font-bold hover:bg-[#520b7d] transition-all">
+                {isPt ? 'Conhecer Alumni' : 'Meet Alumni'}
+              </Link>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+              <div className="w-16 h-16 bg-[#1B3C2B]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Briefcase className="w-8 h-8 text-[#1B3C2B]" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">{t.alumni.talent.title}</h3>
+              <p className="text-slate-500 mb-8 leading-relaxed">
+                {isPt ? "Encontre oportunidades ou parceiros de negócio." : "Find opportunities or business partners."}
+              </p>
+              <Link to="/academia/talent-hub" className="px-8 py-3 bg-[#1B3C2B] text-white rounded-full font-bold hover:bg-[#142d20] transition-all">
+                {isPt ? 'Procurar Talentos' : 'Search Talent'}
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-12 p-8 rounded-3xl bg-[#6a00a3]/5 border border-[#6a00a3]/10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-[#6a00a3] rounded-2xl text-white">
+                <GraduationCap className="w-8 h-8" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xl font-bold text-slate-800">{isPt ? 'É um profissional formado pela ILUNGI?' : 'Are you an ILUNGI graduate?'}</h4>
+                <p className="text-slate-500">{isPt ? 'Crie o seu perfil público e currículo digital hoje mesmo.' : 'Create your public profile and digital CV today.'}</p>
+              </div>
+            </div>
+            <Link to="/academia/alumni" className="px-8 py-4 bg-[#6a00a3] text-white rounded-2xl font-black hover:bg-[#520b7d] transition-all shadow-lg shadow-purple-900/20">
+              {isPt ? 'Criar Perfil / Registar' : 'Create Profile / Register'}
+            </Link>
           </div>
         </motion.div>
 

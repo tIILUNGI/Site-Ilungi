@@ -57,6 +57,9 @@ const Certifications = lazy(() => import('./pages/Certifications'));
 const CourseCatalog = lazy(() => import('./pages/CourseCatalog'));
 const CoursePlayer = lazy(() => import('./pages/CoursePlayer'));
 const Blog = lazy(() => import('./pages/Blog'));
+const AlumniShowcase = lazy(() => import('./pages/AlumniShowcase'));
+const TalentHub = lazy(() => import('./pages/TalentHub'));
+const TalentRegistration = lazy(() => import('./pages/TalentRegistration'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -179,6 +182,9 @@ const AppShell: React.FC = () => {
                 <Route path="/academia/verificar" element={<CertificateVerify />} />
                 <Route path="/academia/cursos" element={<CourseCatalog />} />
                 <Route path="/academia/curso/:courseId" element={<CoursePlayer />} />
+                <Route path="/academia/showcase" element={<AlumniShowcase />} />
+                <Route path="/academia/talent-hub" element={<TalentHub />} />
+                <Route path="/talent-hub/registar" element={<TalentRegistration />} />
                 <Route path="/solucoes" element={<Solutions />} />
                 <Route path="/solucoes/salya" element={<ProductDemo productName="Salya" />} />
                 <Route path="/solucoes/tocomply" element={<ProductDemo productName="Tocomply360" />} />
