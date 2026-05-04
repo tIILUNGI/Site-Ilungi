@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Search, Briefcase, Users, Building2, MapPin, Star, ChevronRight, FileText, Download, MessageCircle, ExternalLink, Globe, ShieldCheck, GraduationCap, X, Mail, Phone, Linkedin, Calendar, Award, Filter, ArrowUpRight } from 'lucide-react';
+import { Search, Briefcase, Users, Building2, MapPin, Star, ChevronRight, FileText, Download, MessageCircle, ExternalLink, Globe, ShieldCheck, GraduationCap, X, Mail, Phone, Linkedin, Calendar, Award, Filter, ArrowUpRight, MoreHorizontal, UserPlus, Send, ChevronDown, CheckCircle2, Facebook, Twitter, Instagram, Paperclip, FileCheck } from 'lucide-react';
 import { useAppContext } from '../App';
 
 const TalentHub: React.FC = () => {
@@ -11,65 +11,92 @@ const TalentHub: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'talents' | 'partners'>('talents');
   const [selectedTalent, setSelectedTalent] = useState<any | null>(null);
   const [showContact, setShowContact] = useState<any | null>(null);
+  const [showFilters, setShowFilters] = useState(false);
   
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Mock data for talents
+  // Expanded mock data for talents
   const talentsData = [
     {
       id: 1,
-      name: "Ricardo Mendes",
+      name: "Ricardo Manuel Mendes",
       role: "Especialista em Cibersegurança",
-      location: "Luanda, AO",
+      headline: "ISO 27001 Lead Auditor | Cybersecurity Expert",
+      location: "Luanda, Angola",
       experience: "8 anos",
-      skills: ["ISO 27001", "Pentesting", "GDPR", "Network Security"],
+      skills: ["ISO 27001", "Pentesting", "GDPR", "Firewalls", "SIEM"],
       category: "Cibersegurança",
       rating: 4.9,
       verified: true,
       email: "ricardo.mendes@email.com",
       phone: "+244 923 000 000",
-      linkedin: "https://linkedin.com",
-      bio: "Profissional dedicado com vasta experiência em auditoria de segurança e implementação de normas ISO. Palestrante e entusiasta de novas tecnologias de proteção de dados.",
-      education: "Mestrado em Engenharia Informática - UAN"
+      linkedin: "https://linkedin.com/in/ricardo",
+      twitter: "https://twitter.com/ricardo",
+      website: "https://ricardomendes.com",
+      bio: "Profissional dedicado com vasta experiência em auditoria de segurança e implementação de normas ISO.",
+      education: "Mestrado em Engenharia Informática - UAN",
+      additionalCourses: ["Certified Ethical Hacker (CEH)", "CISM", "CompTIA Security+"],
+      connections: "500+",
+      about: "Especialista focado em proteger infraestruturas críticas e garantir a conformidade normativa.",
+      availability: "Remoto", // Remoto, Presencial, Híbrido
+      attachments: [
+        { name: "Curriculum Vitae.pdf", type: "cv", url: "#" },
+        { name: "Certificado ISO 27001.png", type: "cert", url: "#" }
+      ]
     },
     {
       id: 2,
       name: "Ana Paula Silva",
       role: "Gestora de Projectos PMO",
-      location: "Lisboa, PT",
+      headline: "PMP Certified | Transformação Digital",
+      location: "Lisboa, Portugal",
       experience: "5 anos",
-      skills: ["PMP", "Agile", "Risk Management", "Scrum"],
+      skills: ["PMP", "Agile", "Scrum", "Risk Management"],
       category: "Gestão de Projectos",
       rating: 4.8,
       verified: true,
       email: "ana.paula@email.com",
       phone: "+351 912 000 000",
-      linkedin: "https://linkedin.com",
-      bio: "Especialista em liderança de equipas multidisciplinares e gestão de portfolios complexos. Focada em resultados e otimização de processos corporativos.",
-      education: "Certificação PMP, MBA em Gestão de Projectos"
+      linkedin: "https://linkedin.com/in/ana",
+      bio: "Especialista em liderança de equipas multidisciplinares e gestão de portfolios complexos.",
+      education: "MBA em Gestão de Projectos - ISCTE",
+      additionalCourses: ["Scrum Master Certified", "Prince2 Foundation"],
+      connections: "320+",
+      about: "Líder orientada a resultados com histórico comprovado na entrega de projetos tecnológicos.",
+      availability: "Híbrido",
+      attachments: [
+        { name: "Ana_Silva_CV.pdf", type: "cv", url: "#" }
+      ]
     },
     {
       id: 3,
-      name: "João Cabral",
+      name: "João Carlos Cabral",
       role: "Auditor de Qualidade ISO 9001",
-      location: "Benguela, AO",
+      headline: "Qualidade Industrial | Lean Six Sigma",
+      location: "Benguela, Angola",
       experience: "10 anos",
-      skills: ["ISO 9001", "Qualidade", "Auditoria Interna"],
+      skills: ["ISO 9001", "Lean", "Process Mapping", "Auditoria de Qualidade"],
       category: "Qualidade & ISO",
       rating: 4.7,
       verified: true,
       email: "j.cabral@email.com",
       phone: "+244 911 000 000",
-      linkedin: "https://linkedin.com",
-      bio: "Especialista em sistemas de gestão da qualidade com foco em melhoria contínua e eficiência operacional.",
-      education: "Engenharia de Produção"
+      linkedin: "https://linkedin.com/in/joao",
+      bio: "Especialista em sistemas de gestão da qualidade com foco em melhoria contínua.",
+      education: "Engenharia de Produção - UKB",
+      additionalCourses: ["Lean Six Sigma Green Belt", "Total Quality Management"],
+      connections: "450+",
+      about: "Profissional experiente em implementação de sistemas de gestão em grandes indústrias.",
+      availability: "Presencial",
+      attachments: [
+        { name: "Certificação Lean.pdf", type: "cert", url: "#" }
+      ]
     }
   ];
 
-  // Mock data for partners
   const partnersData = [
     {
       id: 1,
@@ -77,8 +104,9 @@ const TalentHub: React.FC = () => {
       type: "Instituição Financeira",
       location: "Luanda",
       needs: ["Cibersegurança", "Auditores ISO"],
-      image: "/imagens/partner1.png",
-      description: "Buscamos constantemente talentos certificados para fortalecer nossa infraestrutura de segurança e conformidade."
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Standard_Bank_logo.svg/1200px-Standard_Bank_logo.svg.png",
+      description: "Buscamos constantemente talentos certificados para fortalecer nossa infraestrutura.",
+      website: "https://www.standardbank.co.ao"
     },
     {
       id: 2,
@@ -86,8 +114,9 @@ const TalentHub: React.FC = () => {
       type: "Fintech",
       location: "Luanda",
       needs: ["Desenvolvedores", "Project Managers"],
-      image: "/imagens/partner2.png",
-      description: "Parceiro estratégico da ILUNGI na busca por inovação e excelência em gestão de projectos tecnológicos."
+      image: "https://unitelmoney.ao/wp-content/uploads/2021/08/Logo-Unitel-Money.png",
+      description: "Parceiro estratégico da ILUNGI na busca por inovação.",
+      website: "https://unitelmoney.ao"
     }
   ];
 
@@ -98,371 +127,356 @@ const TalentHub: React.FC = () => {
     { label: "Compliance", count: 19 }
   ];
 
-  // Filtering logic
   const filteredTalents = talentsData.filter(talent => {
     const matchesSearch = talent.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         talent.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         talent.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+                         talent.role.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesLocation = talent.location.toLowerCase().includes(locationQuery.toLowerCase());
-    
     const matchesCategory = selectedCategory ? talent.category === selectedCategory : true;
-
     return matchesSearch && matchesLocation && matchesCategory;
   });
-
-  const handleContactAction = (type: string, value: string) => {
-    if (type === 'email') window.location.href = `mailto:${value}`;
-    if (type === 'linkedin') window.open(value, '_blank');
-    if (type === 'phone') window.location.href = `tel:${value}`;
-  };
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6a00a3]/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px]" />
-        </div>
-
+      <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#6a00a3]/10 text-[#6a00a3] text-sm font-bold uppercase tracking-wider mb-6 border border-[#6a00a3]/20">
-              Talent & Networking Hub
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-[#6a00a3] to-teal-400 bg-clip-text text-transparent">
-              {t.alumni.talent.title}
+            <h1 className="text-5xl font-black mb-6 tracking-tight">
+              Professional Talent Hub
             </h1>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto mb-12">
-              {isPt ? "Conectamos empresas aos melhores profissionais do mercado" : "Connecting companies with the best professionals in the market"}
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 font-medium">
+              A plataforma definitiva para encontrar e contratar talentos certificados com currículos digitais verificados.
             </p>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <button 
-                onClick={() => navigate('/talent-hub/registar')}
-                className="px-8 py-4 bg-[#6a00a3] text-white rounded-2xl font-bold hover:bg-[#520b7d] transition-all flex items-center gap-2 shadow-xl shadow-purple-900/20"
-              >
-                <FileText className="w-5 h-5" />
-                {isPt ? 'Cadastrar-se como Talento' : 'Register as Talent'}
-              </button>
-              <button 
-                onClick={() => navigate('/contacto')}
-                className={`px-8 py-4 rounded-2xl font-bold border transition-all flex items-center gap-2 ${isDark ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
-              >
-                <Building2 className="w-5 h-5" />
-                {isPt ? 'Tornar-se Parceiro' : 'Become a Partner'}
-              </button>
-            </div>
+            
+            <button 
+              onClick={() => navigate('/talent-hub/registar')}
+              className="px-10 py-4 bg-[#6a00a3] text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-purple-900/40 mb-12"
+            >
+              {isPt ? 'Criar Meu Currículo Digital' : 'Create My Digital CV'}
+            </button>
           </motion.div>
 
-          {/* Search Bar */}
-          <div className={`max-w-4xl mx-auto p-2 rounded-3xl border ${isDark ? 'bg-slate-900/50 border-white/10' : 'bg-white border-slate-200'} shadow-2xl backdrop-blur-xl mb-20`}>
-            <div className="flex flex-col md:flex-row items-center gap-2">
-              <div className="flex-1 w-full relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          {/* Integrated Search with Location and Filter */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className={`flex flex-col lg:flex-row gap-2 p-2 rounded-3xl border ${isDark ? 'bg-slate-900 border-white/5' : 'bg-white border-slate-200'} shadow-2xl`}>
+              <div className="flex-1 flex items-center px-4 gap-3 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/5">
+                <Search className="w-5 h-5 text-slate-400" />
                 <input 
                   type="text" 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={isPt ? "Pesquisar por cargo ou habilidade..." : "Search by role or skill..."}
-                  className="w-full pl-12 pr-4 py-4 bg-transparent outline-none font-medium"
+                  placeholder="Pesquisar por nome ou cargo..."
+                  className="w-full py-4 bg-transparent border-none outline-none font-bold"
                 />
               </div>
-              <div className="h-8 w-px bg-slate-200 hidden md:block" />
-              <div className="flex-1 w-full relative">
-                <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              
+              <div className="flex-1 flex items-center px-4 gap-3 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/5">
+                <MapPin className="w-5 h-5 text-slate-400" />
                 <input 
                   type="text" 
                   value={locationQuery}
                   onChange={(e) => setLocationQuery(e.target.value)}
-                  placeholder={isPt ? "Localização..." : "Location..."}
-                  className="w-full pl-12 pr-4 py-4 bg-transparent outline-none font-medium"
+                  placeholder="Localização (Luanda, Lisboa...)"
+                  className="w-full py-4 bg-transparent border-none outline-none font-bold"
                 />
               </div>
-              <button 
-                className="w-full md:w-auto px-10 py-4 bg-[#6a00a3] text-white rounded-2xl font-bold hover:bg-[#520b7d] transition-all"
-              >
-                {isPt ? 'Pesquisar' : 'Search'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Main Content */}
-      <section className="pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-center mb-12">
-            <div className={`p-1.5 rounded-2xl border ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} flex gap-2`}>
-              <button 
-                onClick={() => setActiveTab('talents')}
-                className={`px-8 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'talents' ? 'bg-[#6a00a3] text-white shadow-lg' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white'}`}
-              >
-                <Users className="w-5 h-5" />
-                {isPt ? 'Talentos' : 'Talents'}
-              </button>
-              <button 
-                onClick={() => setActiveTab('partners')}
-                className={`px-8 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'partners' ? 'bg-[#6a00a3] text-white shadow-lg' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white'}`}
-              >
-                <Building2 className="w-5 h-5" />
-                {isPt ? 'Parceiros' : 'Partners'}
-              </button>
-            </div>
-          </div>
+              <div className="flex items-center gap-2 p-2">
+                <button 
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-2 transition-all ${showFilters ? 'bg-[#6a00a3] text-white shadow-lg' : 'bg-slate-100 dark:bg-white/5 text-slate-600'}`}
+                >
+                  <Filter className="w-4 h-4" />
+                  {isPt ? 'Filtros' : 'Filters'}
+                </button>
+                <button className="px-10 py-3 bg-slate-950 text-white dark:bg-white dark:text-black rounded-xl font-black text-sm uppercase tracking-widest hover:opacity-90 transition-all">
+                  {isPt ? 'Pesquisar' : 'Search'}
+                </button>
+              </div>
 
-          <AnimatePresence mode="wait">
-            {activeTab === 'talents' ? (
-              <motion.div 
-                key="talents-grid"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-              >
-                {/* Sidebar Filters */}
-                <div className="lg:col-span-1 space-y-6">
-                  <div className={`p-8 rounded-[2rem] border ${isDark ? 'bg-slate-900/50 border-white/10' : 'bg-white border-slate-200 shadow-xl'}`}>
-                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                      <Filter className="w-5 h-5 text-[#6a00a3]" />
-                      {isPt ? 'Filtros de Área' : 'Area Filters'}
-                    </h3>
-                    
-                    {/* Categories */}
-                    <div className="space-y-4">
+              <AnimatePresence>
+                {showFilters && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 p-6 rounded-2xl border z-50 ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} shadow-2xl`}
+                  >
+                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Especialidade</h4>
+                    <div className="space-y-2">
                       {categories.map((cat, i) => (
-                        <label 
-                          key={i} 
-                          className="flex items-center justify-between group cursor-pointer"
-                          onClick={() => setSelectedCategory(selectedCategory === cat.label ? null : cat.label)}
+                        <button 
+                          key={i}
+                          onClick={() => {setSelectedCategory(selectedCategory === cat.label ? null : cat.label); setShowFilters(false);}}
+                          className={`w-full text-left px-4 py-2 rounded-xl text-sm font-bold transition-all ${selectedCategory === cat.label ? 'bg-[#6a00a3]/10 text-[#6a00a3]' : 'hover:bg-slate-100 dark:hover:bg-white/5 text-slate-500'}`}
                         >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-md border transition-all flex items-center justify-center ${selectedCategory === cat.label ? 'bg-[#6a00a3] border-[#6a00a3]' : 'border-slate-300 group-hover:border-[#6a00a3]'}`}>
-                              {selectedCategory === cat.label && <X className="w-3 h-3 text-white" />}
-                            </div>
-                            <span className={`font-medium transition-all ${selectedCategory === cat.label ? 'text-[#6a00a3]' : 'text-slate-500 group-hover:text-slate-900 dark:group-hover:text-white'}`}>{cat.label}</span>
-                          </div>
-                          <span className="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-white/5 rounded-md text-slate-400">{cat.count}</span>
-                        </label>
+                          {cat.label}
+                        </button>
                       ))}
                     </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
 
-                    <div className="h-px bg-slate-200 dark:bg-white/5 my-8" />
+          <div className="flex justify-center mb-16">
+            <div className={`p-1.5 rounded-2xl flex gap-2 border ${isDark ? 'bg-slate-900 border-white/5' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <button onClick={() => setActiveTab('talents')} className={`px-10 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'talents' ? 'bg-[#6a00a3] text-white shadow-lg shadow-purple-900/20' : 'text-slate-500'}`}>Talentos</button>
+              <button onClick={() => setActiveTab('partners')} className={`px-10 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'partners' ? 'bg-[#6a00a3] text-white shadow-lg shadow-purple-900/20' : 'text-slate-500'}`}>Parceiros</button>
+            </div>
+          </div>
 
-                    <button 
-                      onClick={() => {
-                        setSearchQuery('');
-                        setLocationQuery('');
-                        setSelectedCategory(null);
-                      }}
-                      className="w-full py-4 border-2 border-[#6a00a3] text-[#6a00a3] rounded-2xl font-bold hover:bg-[#6a00a3] hover:text-white transition-all"
-                    >
-                      {isPt ? 'Limpar Filtros' : 'Clear Filters'}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Content Area */}
-                <div className="lg:col-span-2 space-y-6">
-                  {filteredTalents.length > 0 ? (
-                    filteredTalents.map((talent) => (
-                      <motion.div 
-                        key={talent.id}
-                        layout
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        whileHover={{ y: -4 }}
-                        className={`p-8 rounded-[2.5rem] border transition-all group ${isDark ? 'bg-slate-900/50 border-white/10 hover:border-[#6a00a3]/50' : 'bg-white border-slate-200 hover:border-[#6a00a3]/20 shadow-lg'}`}
-                      >
-                        <div className="flex flex-col md:flex-row gap-6">
-                          <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#6a00a3] to-teal-400 flex items-center justify-center text-white text-3xl font-bold shadow-lg shadow-purple-500/20">
+          <div className="max-w-7xl mx-auto">
+            {activeTab === 'talents' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredTalents.map((talent) => (
+                  <motion.div 
+                    key={talent.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ y: -8 }}
+                    className={`flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-500 ${isDark ? 'bg-slate-900 border-white/5 hover:border-[#6a00a3]/30' : 'bg-white border-slate-200 hover:shadow-2xl'}`}
+                  >
+                    <div className="p-8 flex-1">
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="relative">
+                          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#6a00a3] to-teal-400 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                             {talent.name.charAt(0)}
                           </div>
-                          <div className="flex-1">
-                            <div className="flex flex-wrap items-center justify-between gap-4 mb-2">
-                              <div>
-                                <h4 className="text-2xl font-bold flex items-center gap-2">
-                                  {talent.name}
-                                  {talent.verified && <ShieldCheck className="w-5 h-5 text-teal-400" />}
-                                </h4>
-                                <p className="text-[#6a00a3] font-bold">{talent.role}</p>
-                              </div>
-                              <div className="flex items-center gap-1 px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-sm font-black">
-                                <Star className="w-4 h-4 fill-yellow-500" />
-                                {talent.rating}
-                              </div>
+                          {talent.verified && (
+                            <div className="absolute -bottom-1 -right-1 bg-teal-500 text-white p-1.5 rounded-lg shadow-lg">
+                              <ShieldCheck className="w-4 h-4" />
                             </div>
-
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mb-6 font-medium">
-                              <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {talent.location}</span>
-                              <span className="flex items-center gap-1.5"><Briefcase className="w-4 h-4" /> {talent.experience}</span>
-                              <span className="flex items-center gap-1.5"><Globe className="w-4 h-4" /> {isPt ? 'Disponível Remoto' : 'Remote Available'}</span>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2 mb-8">
-                              {talent.skills.map((skill: string, i: number) => (
-                                <span key={i} className={`px-4 py-1.5 rounded-xl text-xs font-bold ${isDark ? 'bg-white/5 text-slate-300' : 'bg-slate-100 text-slate-600'}`}>
-                                  {skill}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="flex flex-wrap gap-4">
-                              <button 
-                                onClick={() => setShowContact(talent)}
-                                className="px-8 py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] transition-all flex items-center gap-2 shadow-lg shadow-purple-900/20"
-                              >
-                                <MessageCircle className="w-4 h-4" />
-                                {isPt ? 'Entrar em Contacto' : 'Get in Touch'}
-                              </button>
-                              <button 
-                                onClick={() => setSelectedTalent(talent)}
-                                className={`px-8 py-3 rounded-xl font-bold border transition-all flex items-center gap-2 ${isDark ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
-                              >
-                                <FileText className="w-4 h-4" />
-                                {isPt ? 'Ver CV Digital' : 'View Digital CV'}
-                              </button>
-                            </div>
-                          </div>
+                          )}
                         </div>
-                      </motion.div>
-                    ))
-                  ) : (
-                    <div className="text-center py-20 bg-white/5 rounded-[2rem] border border-dashed border-white/10">
-                      <p className="text-xl text-slate-500">{isPt ? 'Nenhum talento encontrado com os filtros actuais.' : 'No talent found with current filters.'}</p>
+                        <div className="px-3 py-1 bg-teal-500/10 text-teal-500 rounded-lg text-[10px] font-black uppercase">
+                          {talent.availability}
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl font-black mb-1 leading-tight">{talent.name}</h3>
+                      <p className="text-sm text-[#6a00a3] font-bold mb-4">{talent.role}</p>
+                      
+                      <div className="flex flex-col gap-2 mb-6">
+                        <p className="text-xs text-slate-500 flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> {talent.location}</p>
+                        <p className="text-xs text-slate-500 flex items-center gap-1.5"><Briefcase className="w-3.5 h-3.5" /> {talent.experience} exp.</p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {talent.skills.slice(0, 3).map((skill, i) => (
+                          <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-lg text-[10px] font-black uppercase text-slate-500">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  )}
-                </div>
-              </motion.div>
+
+                    <div className="p-6 pt-0 mt-auto flex gap-3">
+                      <button 
+                        onClick={() => setSelectedTalent(talent)}
+                        className="flex-1 py-4 bg-slate-950 text-white dark:bg-white dark:text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                      >
+                        <FileText className="w-4 h-4" />
+                        Ver Currículo
+                      </button>
+                      <button 
+                        onClick={() => setShowContact(talent)}
+                        className="p-4 border-2 border-slate-100 dark:border-white/5 rounded-2xl hover:bg-[#6a00a3] hover:text-white transition-all group"
+                      >
+                        <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             ) : (
-              <motion.div 
-                key="partners-grid"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8"
-              >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {partnersData.map((partner) => (
-                  <div 
-                    key={partner.id}
-                    className={`p-10 rounded-[3rem] border transition-all hover:shadow-2xl ${isDark ? 'bg-slate-900 border-white/5 hover:border-[#6a00a3]/30' : 'bg-white border-slate-200 hover:shadow-slate-200'}`}
-                  >
+                  <div key={partner.id} className={`p-10 rounded-[3rem] border ${isDark ? 'bg-slate-900 border-white/5' : 'bg-white border-slate-200 shadow-xl'}`}>
                     <div className="flex items-center gap-6 mb-8">
-                      <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center p-3 shadow-inner">
-                        <img src={partner.image} alt={partner.name} className="w-full h-auto object-contain" />
-                      </div>
+                      <div className="w-20 h-20 bg-white rounded-2xl p-3 shadow-inner"><img src={partner.image} className="w-full h-full object-contain" /></div>
                       <div>
-                        <h3 className="text-2xl font-bold">{partner.name}</h3>
-                        <p className="text-[#6a00a3] font-bold">{partner.type}</p>
+                        <h4 className="text-2xl font-black">{partner.name}</h4>
+                        <p className="text-[#6a00a3] font-bold text-sm uppercase tracking-widest">{partner.type}</p>
                       </div>
                     </div>
-                    <p className="text-slate-500 mb-8 leading-relaxed text-lg">
-                      {partner.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {partner.needs.map((need, i) => (
-                        <span key={i} className="px-3 py-1 bg-teal-500/10 text-teal-500 rounded-full text-xs font-black uppercase">
-                          {need}
-                        </span>
-                      ))}
-                    </div>
-                    <button className="w-full py-4 bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-white rounded-2xl font-bold hover:bg-[#6a00a3] hover:text-white transition-all flex items-center justify-center gap-2">
-                      {isPt ? 'Visitar Website' : 'Visit Website'}
-                      <ArrowUpRight className="w-4 h-4" />
+                    <p className="text-slate-500 mb-8 text-lg">{partner.description}</p>
+                    <button 
+                      onClick={() => window.open(partner.website, '_blank')}
+                      className="w-full py-4 bg-[#6a00a3] text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-[#520b7d] transition-all flex items-center justify-center gap-2"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Visitar Website
                     </button>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
+          </div>
         </div>
       </section>
 
-      {/* CV Modal */}
+      {/* CV Modal - ENHANCED WITH ALL REQUESTED INFO */}
       <AnimatePresence>
         {selectedTalent && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedTalent(null)} className="absolute inset-0 bg-slate-950/95 backdrop-blur-xl" />
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedTalent(null)}
-              className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className={`relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[3rem] border ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} shadow-2xl p-8 md:p-12`}
+              initial={{ opacity: 0, scale: 0.9, y: 50 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.9, y: 50 }} 
+              className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[3.5rem] border ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} shadow-2xl p-8 md:p-16`}
             >
-              <button 
-                onClick={() => setSelectedTalent(null)}
-                className="absolute top-8 right-8 p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-all"
-              >
-                <X className="w-6 h-6" />
-              </button>
-
-              <div className="flex flex-col md:flex-row gap-10 mb-10">
-                <div className="w-40 h-40 rounded-[2.5rem] bg-gradient-to-br from-[#6a00a3] to-teal-400 flex items-center justify-center text-white text-5xl font-bold shadow-2xl shadow-purple-500/20">
-                  {selectedTalent.name.charAt(0)}
+              <button onClick={() => setSelectedTalent(null)} className="absolute top-8 right-8 p-3 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-all"><X className="w-8 h-8" /></button>
+              
+              {/* Profile Header */}
+              <div className="flex flex-col md:flex-row gap-12 mb-16 items-center md:items-start text-center md:text-left">
+                <div className="relative">
+                  <div className="w-44 h-44 rounded-[3rem] bg-gradient-to-br from-[#6a00a3] to-teal-400 flex items-center justify-center text-white text-6xl font-black shadow-2xl">
+                    {selectedTalent.name.charAt(0)}
+                  </div>
+                  {selectedTalent.verified && (
+                    <div className="absolute -bottom-2 -right-2 bg-teal-500 text-white p-3 rounded-2xl border-8 border-white dark:border-slate-900 shadow-xl">
+                      <ShieldCheck className="w-8 h-8" />
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-4xl font-black mb-2">{selectedTalent.name}</h2>
-                  <p className="text-[#6a00a3] text-xl font-bold mb-4">{selectedTalent.role}</p>
-                  <div className="flex flex-wrap gap-4 text-slate-500 font-medium">
-                    <span className="flex items-center gap-1.5"><MapPin className="w-5 h-5" /> {selectedTalent.location}</span>
-                    <span className="flex items-center gap-1.5"><Briefcase className="w-5 h-5" /> {selectedTalent.experience}</span>
-                    <span className="flex items-center gap-1.5 text-teal-500"><ShieldCheck className="w-5 h-5" /> {isPt ? 'Perfil Verificado' : 'Verified Profile'}</span>
+                  <h2 className="text-5xl font-black mb-3">{selectedTalent.name}</h2>
+                  <p className="text-2xl text-[#6a00a3] font-bold mb-6">{selectedTalent.role}</p>
+                  
+                  <div className="flex flex-wrap justify-center md:justify-start gap-6">
+                    <div className="flex items-center gap-2 text-slate-500 font-bold"><MapPin className="w-5 h-5" /> {selectedTalent.location}</div>
+                    <div className="flex items-center gap-2 text-slate-500 font-bold"><Briefcase className="w-5 h-5" /> {selectedTalent.experience} de Experiência</div>
+                    <div className="flex items-center gap-2 text-teal-500 font-black uppercase tracking-widest"><Globe className="w-5 h-5" /> {selectedTalent.availability}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="text-lg font-black uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                      <FileText className="w-5 h-5" /> {isPt ? 'Resumo Profissional' : 'Professional Summary'}
+              {/* Main Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                
+                {/* Left Column: About & Education */}
+                <div className="lg:col-span-7 space-y-12">
+                  <section>
+                    <h3 className="text-lg font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <FileText className="w-6 h-6 text-[#6a00a3]" /> Resumo Profissional
                     </h3>
-                    <p className="text-slate-500 leading-relaxed text-lg">
+                    <p className="text-xl leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
+                      {selectedTalent.about}
+                    </p>
+                    <p className="mt-6 text-slate-500 dark:text-slate-400 leading-relaxed text-lg">
                       {selectedTalent.bio}
                     </p>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-black uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5" /> {isPt ? 'Formação Académica' : 'Education'}
-                    </h3>
-                    <p className="text-slate-500 font-bold">{selectedTalent.education}</p>
-                  </div>
-                </div>
+                  </section>
 
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="text-lg font-black uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5" /> {isPt ? 'Competências' : 'Skills'}
+                  <section>
+                    <h3 className="text-lg font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <GraduationCap className="w-6 h-6 text-[#6a00a3]" /> Formação e Cursos
                     </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedTalent.skills.map((skill: string, i: number) => (
-                        <span key={i} className="px-4 py-2 bg-[#6a00a3]/10 text-[#6a00a3] rounded-xl text-sm font-bold">
-                          {skill}
-                        </span>
+                    <div className="space-y-6">
+                      <div className="p-6 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                        <p className="font-black text-xl mb-1">{selectedTalent.education}</p>
+                        <p className="text-sm text-[#6a00a3] font-bold uppercase tracking-widest">Graduação Principal</p>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {selectedTalent.additionalCourses.map((course: string, i: number) => (
+                          <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-slate-100 dark:bg-white/5">
+                            <Award className="w-5 h-5 text-amber-500" />
+                            <span className="font-bold text-sm">{course}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Documents Section */}
+                  <section>
+                    <h3 className="text-lg font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <Paperclip className="w-6 h-6 text-[#6a00a3]" /> Documentos Anexos
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedTalent.attachments.map((doc: any, i: number) => (
+                        <button key={i} className="flex items-center justify-between p-5 rounded-2xl border-2 border-dashed border-slate-200 dark:border-white/10 hover:border-[#6a00a3] transition-all group">
+                          <div className="flex items-center gap-3">
+                            <FileCheck className="w-6 h-6 text-[#6a00a3]" />
+                            <div className="text-left">
+                              <p className="font-bold text-sm">{doc.name}</p>
+                              <p className="text-[10px] text-slate-400 uppercase font-black">{doc.type === 'cv' ? 'Currículo Vitae' : 'Certificado'}</p>
+                            </div>
+                          </div>
+                          <Download className="w-5 h-5 text-slate-300 group-hover:text-[#6a00a3] transition-colors" />
+                        </button>
                       ))}
                     </div>
-                  </div>
-                  <div className={`p-6 rounded-3xl ${isDark ? 'bg-white/5' : 'bg-slate-50'} border border-[#6a00a3]/10`}>
-                    <p className="text-sm font-bold text-[#6a00a3] mb-2">{isPt ? 'Interessado neste perfil?' : 'Interested in this profile?'}</p>
-                    <button 
-                      onClick={() => {
-                        setSelectedTalent(null);
-                        setShowContact(selectedTalent);
-                      }}
-                      className="w-full py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] transition-all"
-                    >
-                      {isPt ? 'Obter Contactos' : 'Get Contact Info'}
+                  </section>
+                </div>
+
+                {/* Right Column: Skills & Contacts */}
+                <div className="lg:col-span-5 space-y-12">
+                  <section>
+                    <h3 className="text-lg font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-[#6a00a3]" /> Competências Profissionais
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedTalent.skills.map((skill: string, i: number) => (
+                        <div key={i} className="px-5 py-2.5 rounded-2xl bg-[#6a00a3]/10 border border-[#6a00a3]/20 text-[#6a00a3] font-black text-xs uppercase tracking-widest">
+                          {skill}
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h3 className="text-lg font-black uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <Send className="w-6 h-6 text-[#6a00a3]" /> Contactos e Redes
+                    </h3>
+                    <div className="space-y-4">
+                      <button onClick={() => window.location.href = `mailto:${selectedTalent.email}`} className="w-full flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
+                        <Mail className="w-6 h-6 text-[#6a00a3]" />
+                        <div className="text-left">
+                          <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Email</p>
+                          <p className="font-bold">{selectedTalent.email}</p>
+                        </div>
+                      </button>
+                      <button onClick={() => window.location.href = `tel:${selectedTalent.phone}`} className="w-full flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
+                        <Phone className="w-6 h-6 text-[#6a00a3]" />
+                        <div className="text-left">
+                          <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Telefone</p>
+                          <p className="font-bold">{selectedTalent.phone}</p>
+                        </div>
+                      </button>
+                      <div className="flex gap-4">
+                        {selectedTalent.linkedin && (
+                          <button onClick={() => window.open(selectedTalent.linkedin, '_blank')} className="flex-1 flex items-center justify-center p-5 rounded-2xl bg-[#0a66c2]/10 text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white transition-all">
+                            <Linkedin className="w-6 h-6" />
+                          </button>
+                        )}
+                        {selectedTalent.twitter && (
+                          <button onClick={() => window.open(selectedTalent.twitter, '_blank')} className="flex-1 flex items-center justify-center p-5 rounded-2xl bg-[#1da1f2]/10 text-[#1da1f2] hover:bg-[#1da1f2] hover:text-white transition-all">
+                            <Twitter className="w-6 h-6" />
+                          </button>
+                        )}
+                        {selectedTalent.website && (
+                          <button onClick={() => window.open(selectedTalent.website, '_blank')} className="flex-1 flex items-center justify-center p-5 rounded-2xl bg-slate-500/10 text-slate-500 hover:bg-slate-500 hover:text-white transition-all">
+                            <Globe className="w-6 h-6" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+
+                  <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#6a00a3] to-[#4a0072] text-white">
+                    <p className="text-lg font-bold mb-2">Interessado neste perfil?</p>
+                    <p className="text-white/70 text-sm mb-8 leading-relaxed">Este profissional tem as competências validadas pela ILUNGI. Pode entrar em contacto directo ou solicitar uma entrevista mediada.</p>
+                    <button className="w-full py-4 bg-white text-[#6a00a3] rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-all">
+                      Solicitar Entrevista
                     </button>
                   </div>
                 </div>
@@ -472,83 +486,25 @@ const TalentHub: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Contact Modal */}
+      {/* Contact Modal (Legacy) */}
       <AnimatePresence>
         {showContact && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-6">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowContact(null)}
-              className="absolute inset-0 bg-slate-950/90 backdrop-blur-md"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className={`relative w-full max-w-md rounded-[2.5rem] border ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} shadow-2xl p-8`}
-            >
-              <button 
-                onClick={() => setShowContact(null)}
-                className="absolute top-6 right-6 p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-all"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-[#6a00a3]/10 rounded-3xl flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="w-10 h-10 text-[#6a00a3]" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowContact(null)} className="absolute inset-0 bg-slate-950/80" />
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className={`relative w-full max-w-md rounded-[2.5rem] border ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} shadow-2xl p-10 text-center`}>
+              <div className="w-20 h-20 bg-[#6a00a3]/10 rounded-[1.5rem] flex items-center justify-center mx-auto mb-6"><MessageCircle className="w-10 h-10 text-[#6a00a3]" /></div>
+              <h3 className="text-2xl font-black mb-8">Informações Directas</h3>
+              <div className="space-y-4 text-left">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                  <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Email</p>
+                  <p className="font-bold">{showContact.email}</p>
                 </div>
-                <h3 className="text-2xl font-black">{isPt ? 'Dados de Contacto' : 'Contact Details'}</h3>
-                <p className="text-slate-500">{isPt ? 'Entre em contacto com' : 'Get in touch with'} {showContact.name}</p>
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                  <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Telefone</p>
+                  <p className="font-bold">{showContact.phone}</p>
+                </div>
               </div>
-
-              <div className="space-y-4">
-                <button 
-                  onClick={() => handleContactAction('email', showContact.email)}
-                  className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-slate-50 hover:bg-slate-100'}`}
-                >
-                  <div className="p-2 bg-blue-500/20 text-blue-400 rounded-lg">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">Email</p>
-                    <p className="font-bold">{showContact.email}</p>
-                  </div>
-                </button>
-                <button 
-                  onClick={() => handleContactAction('phone', showContact.phone)}
-                  className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-slate-50 hover:bg-slate-100'}`}
-                >
-                  <div className="p-2 bg-green-500/20 text-green-400 rounded-lg">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">{isPt ? 'Telefone' : 'Phone'}</p>
-                    <p className="font-bold">{showContact.phone}</p>
-                  </div>
-                </button>
-                <button 
-                  onClick={() => handleContactAction('linkedin', showContact.linkedin)}
-                  className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-slate-50 hover:bg-slate-100'}`}
-                >
-                  <div className="p-2 bg-[#0077b5]/20 text-[#0077b5] rounded-lg">
-                    <Linkedin className="w-5 h-5" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">LinkedIn</p>
-                    <p className="font-bold">{showContact.linkedin.split('/').pop()}</p>
-                  </div>
-                </button>
-              </div>
-
-              <button 
-                onClick={() => setShowContact(null)}
-                className="w-full mt-8 py-4 bg-slate-800 text-white rounded-2xl font-bold hover:bg-slate-700 transition-all"
-              >
-                {isPt ? 'Fechar' : 'Close'}
-              </button>
+              <button onClick={() => setShowContact(null)} className="mt-8 text-xs font-black text-slate-400 uppercase hover:text-[#6a00a3]">Fechar</button>
             </motion.div>
           </div>
         )}

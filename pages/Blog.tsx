@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Calendar, User, ArrowRight, Tag, Clock, TrendingUp, PlayCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Calendar, User, ArrowRight, Tag, Clock, TrendingUp, PlayCircle, Volume2, VolumeX, Play, Filter, X } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadData } from '../lib/dataSync';
 import { BlogPost, getDefaultBlogPosts, internetImages } from '../lib/blogData';
@@ -15,6 +15,8 @@ const Blog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const categories = ['all', 'ILUNGI', 'RFID', 'Gestão de Stocks', 'Consultoria ISO', 'Gestão de Projetos', 'Compliance', 'Formação', 'Tecnologia', 'Gestão de Riscos'];
 
@@ -47,9 +49,8 @@ const Blog: React.FC = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const featuredPost = posts[0];
-  const recentPosts = posts.slice(1, 4);
-  const olderPosts = posts.slice(4);
+  const featuredVideoPost = posts.find(p => p.video);
+  const otherPosts = posts.filter(p => p.id !== featuredVideoPost?.id);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -60,7 +61,7 @@ const Blog: React.FC = () => {
   // Single post view
   if (selectedPost) {
     return (
-      <div className={`min-h-screen pt-24 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
+      <div className={`min-h-screen pt-24 pb-20 ${isDark ? 'bg-slate-950' : 'bg-slate-50'}`}>
         <div className="max-w-4xl mx-auto px-4">
           <button 
             onClick={() => setSelectedPost(null)}
@@ -73,9 +74,18 @@ const Blog: React.FC = () => {
           <motion.article
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`rounded-3xl overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}
+            className={`rounded-[3rem] overflow-hidden ${isDark ? 'bg-slate-900 border border-white/5 shadow-2xl' : 'bg-white border border-slate-200 shadow-xl'}`}
           >
-            {selectedPost.image && (
+            {selectedPost.video ? (
+              <div className="aspect-video w-full bg-black relative">
+                <video 
+                  src={selectedPost.video} 
+                  controls 
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            ) : selectedPost.image && (
               <div className="h-64 md:h-96 overflow-hidden">
                 <img 
                   src={selectedPost.image} 
@@ -87,25 +97,25 @@ const Blog: React.FC = () => {
             
             <div className="p-8 md:p-12">
               <div className="flex flex-wrap items-center gap-4 mb-6">
-                <span className={`px-4 py-1.5 rounded-full text-sm font-bold ${isDark ? 'bg-[#6a00a3]/20 text-[#6a00a3]' : 'bg-[#6a00a3]/10 text-[#6a00a3]'}`}>
+                <span className="px-4 py-1.5 rounded-full text-sm font-bold bg-[#6a00a3]/10 text-[#6a00a3] border border-[#6a00a3]/20 uppercase tracking-widest">
                   {selectedPost.category}
                 </span>
-                <div className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                <div className="flex items-center gap-2 text-sm text-slate-500">
                   <User className="w-4 h-4" />
                   {selectedPost.author}
                 </div>
               </div>
 
-              <h1 className={`text-3xl md:text-4xl font-black mb-6 leading-tight ${isDark ? 'text-white' : 'text-slate-800'}`}>
+              <h1 className="text-4xl md:text-5xl font-black mb-8 leading-tight">
                 {getLocalized(selectedPost.title)}
               </h1>
 
-              <div className={`prose max-w-none ${isDark ? 'prose-invert' : ''}`}>
-                <p className={`text-lg leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+              <div className="prose prose-lg max-w-none dark:prose-invert">
+                <p className="text-xl leading-relaxed mb-8 font-medium text-slate-700 dark:text-slate-300">
                   {getLocalized(selectedPost.excerpt)}
                 </p>
                 {selectedPost.content && (
-                  <div className={`mt-8 whitespace-pre-line ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                  <div className="mt-8 whitespace-pre-line text-lg leading-relaxed text-slate-600 dark:text-slate-400">
                     {getLocalized(selectedPost.content)}
                   </div>
                 )}
@@ -117,228 +127,142 @@ const Blog: React.FC = () => {
     );
   }
 
-  // Blog listing view - Show ALL posts when "all" is selected
-  const displayPosts = selectedCategory === 'all' && !searchTerm ? posts : filteredPosts;
-
   return (
-    <div className={`min-h-screen pt-24 pb-20 ${isDark ? 'bg-slate-900' : 'bg-slate-50'}`}>
-      {/* Header Style Newspaper */}
-      <div className={`border-b-4 border-[#6a00a3] ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
-              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
-              <div className="w-3 h-3 bg-[#6a00a3] rounded-full"></div>
-            </div>
-            <h1 className={`text-5xl md:text-6xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <span className="text-[#6a00a3]">ILUNGI</span> HUB
-            </h1>
-            
-          </div>
+    <div className={`min-h-screen pt-24 ${isDark ? 'bg-slate-950' : 'bg-slate-50'}`}>
+      {/* Newspaper Style Header */}
+      <div className={`border-b-4 border-[#6a00a3] ${isDark ? 'bg-slate-900' : 'bg-white'} mb-12`}>
+        <div className="max-w-7xl mx-auto px-6 py-12 text-center">
+          <h1 className={`text-6xl md:text-8xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
+            <span className="text-[#6a00a3]">ILUNGI</span> HUB
+          </h1>
+          <p className="mt-4 text-slate-500 font-bold uppercase tracking-[0.4em]">Knowledge Center</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Featured Articles - Banner Carousel */}
-        {featuredPost && selectedCategory === 'all' && !searchTerm && (
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Featured Video Section - Highlighted before explore */}
+        {featuredVideoPost && selectedCategory === 'all' && !searchTerm && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
+            className="mb-20"
           >
-            {/* Banner visual only - not clickable */}
-            <div className="rounded-3xl overflow-hidden relative h-[500px] shadow-2xl">
-              {/* Background Image */}
-              <img 
-                src={featuredPost.image || internetImages.default} 
-                alt={getLocalized(featuredPost.title)}
-                className="w-full h-full object-cover"
-              />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30"></div>
-              
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#6a00a3] text-white">
-                    {featuredPost.category}
-                  </span>
-                </div>
-                
-                <h2 className="text-3xl lg:text-4xl font-black mb-4 leading-tight text-white">
-                  {getLocalized(featuredPost.title)}
-                </h2>
-                
-                <p className="text-base mb-6 text-white/80 max-w-2xl">
-                  {getLocalized(featuredPost.excerpt)}
+            <div className="flex items-center gap-3 mb-8">
+              <PlayCircle className="w-6 h-6 text-[#6a00a3]" />
+              <h2 className="text-2xl font-black uppercase tracking-tighter">
+                {isPt ? 'Destaque em Vídeo' : 'Video Highlight'}
+              </h2>
+            </div>
+            
+            <div className={`group relative rounded-[3rem] overflow-hidden border ${isDark ? 'bg-slate-900 border-white/5 shadow-2xl' : 'bg-white border-slate-200 shadow-xl'} flex flex-col lg:flex-row h-auto lg:h-[450px]`}>
+              <div className="lg:w-3/5 relative bg-black">
+                <video 
+                  src={featuredVideoPost.video} 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all" />
+              </div>
+              <div className="lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
+                <span className="inline-block px-3 py-1 rounded-lg text-[10px] font-black bg-[#6a00a3]/10 text-[#6a00a3] uppercase tracking-widest mb-4 w-fit">
+                  {featuredVideoPost.category}
+                </span>
+                <h3 className="text-3xl font-black mb-4 leading-tight group-hover:text-[#6a00a3] transition-colors cursor-pointer" onClick={() => setSelectedPost(featuredVideoPost)}>
+                  {getLocalized(featuredVideoPost.title)}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 mb-8 line-clamp-3 leading-relaxed">
+                  {getLocalized(featuredVideoPost.excerpt)}
                 </p>
-                
-                <div className="flex items-center gap-2 text-sm font-medium text-white">
-                  <div className="w-8 h-8 rounded-full bg-[#6a00a3]/30 flex items-center justify-center">
-                    <User className="w-4 h-4 text-[#6a00a3]" />
-                  </div>
-                  {featuredPost.author}
-                </div>
+                <button 
+                  onClick={() => setSelectedPost(featuredVideoPost)}
+                  className="w-fit flex items-center gap-3 text-[#6a00a3] font-black group/btn"
+                >
+                  {isPt ? 'VER AGORA' : 'WATCH NOW'}
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
+                </button>
               </div>
             </div>
           </motion.section>
         )}
 
-        {/* Recent Articles - Sidebar Style */}
-        {recentPosts.length > 0 && selectedCategory === 'all' && !searchTerm && (
-          <section className="mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <PlayCircle className="w-5 h-5 text-[#6a00a3]" />
-              <span className="text-[#6a00a3] font-bold uppercase tracking-wider text-sm">
-                {isPt ? 'Mais recentes' : 'Most recent'}
-              </span>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {recentPosts.map((post, index) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setSelectedPost(post)}
-                  className={`group cursor-pointer rounded-xl overflow-hidden ${isDark ? 'bg-slate-800 hover:bg-slate-750' : 'bg-white hover:bg-slate-50'} shadow-lg hover:shadow-xl transition-all duration-300`}
-                >
-                  <div className="h-48 overflow-hidden relative">
-                    <img 
-                      src={post.image || internetImages.default} 
-                      alt={getLocalized(post.title)}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2 py-1 rounded text-xs font-bold bg-[#6a00a3] text-white">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                      {getLocalized(post.title)}
-                    </h3>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Search and Filter Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className={`rounded-2xl p-6 mb-12 ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-lg`}
-        >
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${isDark ? 'text-slate-400' : 'text-slate-400'}`} />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder={isPt ? 'Pesquisar artigos...' : 'Search articles...'}
-                className={`w-full pl-12 pr-4 py-3 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'} focus:outline-none focus:ring-2 focus:ring-[#6a00a3]`}
-              />
-            </div>
-            
-            <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
-                    selectedCategory === cat 
-                      ? 'bg-[#6a00a3] text-white' 
-                      : isDark 
-                        ? 'bg-slate-700 text-slate-300 hover:bg-slate-600' 
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {cat === 'all' ? (isPt ? 'Todos' : 'All') : cat}
-                </button>
-              ))}
-            </div>
+        {/* Search and Filters */}
+        <div className={`p-6 rounded-[2rem] mb-12 flex flex-col md:flex-row items-center gap-4 ${isDark ? 'bg-slate-900 border border-white/5' : 'bg-white border border-slate-200'} shadow-xl`}>
+          <div className="flex-1 w-full relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input 
+              type="text" 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder={isPt ? "Pesquisar artigos..." : "Search articles..."}
+              className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-white/5 rounded-xl border-none outline-none font-bold"
+            />
           </div>
-        </motion.div>
-
-        {/* All Articles Grid */}
-        <section>
-          <div className="flex items-center gap-2 mb-6">
-            <Tag className="w-5 h-5 text-[#6a00a3]" />
-            <span className="text-[#6a00a3] font-bold uppercase tracking-wider text-sm">
-              {selectedCategory === 'all' && !searchTerm 
-                ? (isPt ? 'Todos os artigos' : 'All articles') 
-                : (isPt ? `Artigos de ${selectedCategory}` : `Articles in ${selectedCategory}`)}
-            </span>
-            <span className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-              ({displayPosts.length} {isPt ? 'artigos' : 'articles'})
-            </span>
+          <div className="flex flex-wrap gap-2">
+            {categories.map(cat => (
+              <button 
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-xl text-xs font-black uppercase transition-all ${selectedCategory === cat ? 'bg-[#6a00a3] text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-500 hover:bg-slate-200'}`}
+              >
+                {cat === 'all' ? (isPt ? 'Tudo' : 'All') : cat}
+              </button>
+            ))}
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {displayPosts.map((post, index) => (
+        </div>
+
+        {/* Article Grid */}
+        <section className="pb-32">
+          <div className="flex items-center gap-3 mb-10">
+            <TrendingUp className="w-6 h-6 text-[#6a00a3]" />
+            <h2 className="text-3xl font-black uppercase tracking-tighter">
+              {isPt ? 'Explorar Conteúdo' : 'Explore Content'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {filteredPosts.filter(p => p.id !== featuredVideoPost?.id).map((post, idx) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ delay: idx * 0.05 }}
                 onClick={() => setSelectedPost(post)}
-                className={`group cursor-pointer rounded-xl overflow-hidden ${isDark ? 'bg-slate-800 hover:bg-slate-750' : 'bg-white hover:bg-slate-50'} shadow-md hover:shadow-lg transition-all duration-300`}
+                className="group cursor-pointer"
               >
-                <div className="h-40 overflow-hidden relative">
+                <div className="h-64 rounded-[2rem] overflow-hidden relative mb-6 shadow-lg border border-transparent group-hover:border-[#6a00a3]/20 transition-all">
                   <img 
                     src={post.image || internetImages.default} 
                     alt={getLocalized(post.title)}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2 py-1 rounded text-xs font-bold bg-[#6a00a3]/90 text-white">
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-lg text-[10px] font-black bg-[#6a00a3] text-white uppercase tracking-widest">
                       {post.category}
                     </span>
                   </div>
                 </div>
-
-                <div className="p-5">
-                  <h3 className={`text-base font-bold mb-2 line-clamp-2 group-hover:text-[#6a00a3] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                <div className="px-2">
+                  <div className="flex items-center gap-2 mb-2 text-xs font-bold text-slate-400">
+                    <Calendar className="w-3 h-3" />
+                    {formatDate(post.date)}
+                  </div>
+                  <h3 className="text-xl font-black mb-3 line-clamp-2 leading-tight group-hover:text-[#6a00a3] transition-colors">
                     {getLocalized(post.title)}
                   </h3>
-                  
-                  <p className={`text-sm mb-3 line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed mb-6">
                     {getLocalized(post.excerpt)}
                   </p>
-
-                  <span className="flex items-center gap-1 text-[#6a00a3] font-medium">
-                    {isPt ? 'Ler mais' : 'Read more'}
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-xs font-black text-[#6a00a3] flex items-center gap-2 group-hover:gap-3 transition-all">
+                    {isPt ? 'LER MAIS' : 'READ MORE'}
+                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
               </motion.article>
             ))}
           </div>
-
-          {/* Empty State */}
-          {displayPosts.length === 0 && (
-            <div className="text-center py-16">
-              <div className={`text-6xl mb-4 ${isDark ? 'text-slate-700' : 'text-slate-200'}`}>
-                <Tag className="w-24 h-24 mx-auto" />
-              </div>
-              <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                {isPt ? 'Nenhum artigo encontrado' : 'No articles found'}
-              </h3>
-              <p className={isDark ? 'text-slate-400' : 'text-slate-500'}>
-                {isPt 
-                  ? 'Tente ajustar os filtros ou pesquisar por outro termo.' 
-                  : 'Try adjusting your filters or search for another term.'}
-              </p>
-            </div>
-          )}
         </section>
       </div>
     </div>

@@ -7,6 +7,7 @@ export interface BlogPost {
   date: string;
   category: string;
   image: string;
+  video?: string;
   status: 'published' | 'draft';
 }
 
@@ -27,6 +28,18 @@ export const internetImages: { [key: string]: string } = {
 };
 
 export const getDefaultBlogPosts = (isPt: boolean): BlogPost[] => [
+  {
+    id: 'blog-video-1',
+    title: isPt ? 'Inovação e Tecnologia na ILUNGI' : 'Innovation and Technology at ILUNGI',
+    excerpt: isPt ? 'Veja como a ILUNGI está transformando o futuro tecnológico em Angola com soluções inovadoras.' : 'See how ILUNGI is transforming the technological future in Angola with innovative solutions.',
+    content: isPt ? 'A tecnologia é o motor que impulsiona o desenvolvimento de Angola. Na ILUNGI, estamos na vanguarda desta transformação, trazendo soluções que conectam tradição e modernidade.\n\nAssista ao vídeo acima para ver um pouco da nossa jornada.' : 'Technology is the engine that drives Angolan development. At ILUNGI, we are at the forefront of this transformation, bringing solutions that connect tradition and modernity.',
+    author: 'Equipa ILUNGI',
+    date: new Date().toISOString().split('T')[0],
+    category: 'Tecnologia',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80',
+    video: '/imagens/blog-intro.mp4',
+    status: 'published'
+  },
   {
     id: 'blog-1',
     title: isPt ? 'ILUNGI: Tradição e Inovação em Angola' : 'ILUNGI: Tradition and Innovation in Angola',
@@ -53,7 +66,7 @@ export const getDefaultBlogPosts = (isPt: boolean): BlogPost[] => [
     id: 'blog-3',
     title: isPt ? 'O custo silencioso do inventário manual' : 'The silent cost of manual inventory',
     excerpt: isPt ? 'Perdas pequenas diárias geram impactos grandes anuais. Em indústrias como: Petrolíferas, Cimenteiras, Plásticos, Logística pesada.' : 'Small daily losses generate large annual impacts. In industries like: Oil, Cement, Plastics, Heavy logistics.',
-    content: isPt ? 'Perdas pequenas diárias geram impactos grandes anuais.\n\nEm indústrias como:\n1. Petrolíferas\n2. Cimenteiras\n3. Plásticos\n4. Logística pesada\n\nErros de contagem, extravios e divergências de stock são comuns.\n\nSem um sistema automatizado, a empresa:\n1. Perde tempo\n2. Perde dinheiro\n3. Perde controlo\n\nRFID reduz drasticamente essas vulnerabilidades.\nControlo não é custo. É proteção financeira.\n\n#IndústriaAngolana #RFID #TransformaçãoIndustrial' : 'Small daily losses generate large annual impacts.\n\nIn industries like:\n1. Oil\n2. Cement\n3. Plastics\n4. Heavy logistics\n\nCounting errors, losses and stock discrepancies are common.\n\nWithout an automated system, the company:\n1. Loses time\n2. Loses money\n3. Loses control\n\nRFID drastically reduces these vulnerabilities.\nControl is not cost. It is financial protection.',
+    content: isPt ? 'Perdas pequenas diárias geram impactos grandes anuais.\n\nEm indústrias como:\n1. Petrolíferas\n2. Cimenteiras\n3. Plásticos\n4. Logística pesada\n\nErros de contagem, extravios e divergências de stock são comuns.\n\nSem um sistema automatizado, a empresa:\n1. Perde tempo\n2. Perde dinheiro\n3. Perde controlo\n\nRFID reduz drasticamente essas vulnerabilidades.\nControlo não é custo. É proteção financeira.\n\n#IndústriaAngolana #RFID #TransformaçãoIndustrial' : 'Small daily losses generate large annual impacts.\n\nIn industries like: \n1. Oil\n2. Cement\n3. Plastics\n4. Heavy logistics\n\nCounting errors, losses and stock discrepancies are common.\n\nWithout an automated system, the company:\n1. Loses time\n2. Loses money\n3. Loses control\n\nRFID drastically reduces these vulnerabilities.\nControl is not cost. It is financial protection.',
     author: 'Equipa ILUNGI',
     date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     category: 'RFID',
