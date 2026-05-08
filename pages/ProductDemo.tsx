@@ -118,7 +118,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl font-black text-[#1B3C2B] mb-8 relative"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1B3C2B] mb-8 relative px-4 break-words"
           >
             {productName}
             {/* Linha decorativa tecnológica */}
@@ -155,7 +155,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
         </div>
 
         {/* Pricing Mockup */}
-        <div className="relative bg-slate-50 p-12 rounded-3xl text-center overflow-hidden">
+        <div className="relative bg-slate-50 p-6 sm:p-8 lg:p-12 rounded-3xl text-center overflow-hidden">
 
           
           <div className="relative z-10">
@@ -163,7 +163,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold mb-10"
+              className="text-2xl sm:text-3xl font-bold mb-10"
             >
               {isPt ? 'Planos & Demonstração' : 'Plans & Demo'}
             </motion.h2>
@@ -248,7 +248,7 @@ const ProductDemo: React.FC<ProductDemoProps> = ({ productName }) => {
             transition={{ duration: 2, ease: "easeInOut" }}
           ></motion.div>
         </div>
-        <div className="flex justify-between mt-2 text-[10px] text-slate-400 uppercase tracking-wider">
+        <div className="mt-2 grid grid-cols-2 gap-2 text-[10px] text-slate-400 uppercase tracking-wider sm:grid-cols-4">
           <span>{isPt ? 'Descoberta' : 'Discovery'}</span>
           <span>{isPt ? 'Configuração' : 'Configuration'}</span>
           <span>{isPt ? 'Integração' : 'Integration'}</span>

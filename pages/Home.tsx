@@ -135,32 +135,32 @@ const Home: React.FC = () => {
 
         <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
 
-        <motion.div style={{ opacity }} className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <motion.div style={{ opacity }} className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <motion.div key={currentSlide} variants={staggerContainer} initial="hidden" animate="visible">
             <motion.div variants={scaleIn} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#6a00a3]/20 border border-[#6a00a3]/40 rounded-full text-white font-semibold text-sm">
+              <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 bg-[#6a00a3]/20 border border-[#6a00a3]/40 rounded-full text-white font-semibold text-xs sm:text-sm">
                 <Award className="w-4 h-4" />
                 {isPt ? 'Consultoria de Excelência' : 'Excellence Consulting'}
               </span>
             </motion.div>
             
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight tracking-tight">
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight tracking-tight">
               {heroSlides[currentSlide].title}
             </motion.h1>
             
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
+            <motion.p variants={fadeInUp} className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
               {heroSlides[currentSlide].subtitle}
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link to="/contacto" className="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#6a00a3] text-white rounded-full font-bold text-lg overflow-hidden">
+                <Link to="/contacto" className="group relative inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-[#6a00a3] text-white rounded-full font-bold text-base sm:text-lg overflow-hidden">
                   <span className="relative z-10">{t.home.ctaPrimary}</span>
                   <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link to="/consultoria" className="inline-flex items-center gap-3 px-10 py-5 border-2 border-white/30 text-white rounded-full font-bold text-lg hover:bg-white/10 backdrop-blur-sm transition-all">
+                <Link to="/consultoria" className="inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 border-2 border-white/30 text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/10 backdrop-blur-sm transition-all">
                   {t.home.ctaSecondary}
                   <ChevronRight className="w-5 h-5" />
                 </Link>

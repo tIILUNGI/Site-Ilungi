@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl md:text-6xl font-black text-[#1B3C2B] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1B3C2B] mb-6"
           >
             {t.contact.title}
           </motion.h1>
@@ -163,7 +163,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="max-w-2xl mx-auto text-xl text-slate-500 font-light"
+            className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-500 font-light"
           >
             {t.contact.subtitle}
           </motion.p>
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
             className="lg:col-span-5 flex flex-col gap-4"
           >
             {/* Contact Cards - Compact Grid */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 {
                   icon: Phone,
@@ -225,9 +225,9 @@ const Contact: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-bold text-sm text-slate-800 mb-0.5">{item.title}</h4>
                       {item.details.map((detail, i) => (
-                        <p key={i} className="text-slate-600 text-xs font-medium truncate">{detail}</p>
+                        <p key={i} className="text-slate-600 text-xs font-medium break-words">{detail}</p>
                       ))}
-                      <p className="text-slate-400 text-xs mt-0.5 truncate">{item.desc}</p>
+                      <p className="text-slate-400 text-xs mt-0.5 break-words">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -263,7 +263,7 @@ const Contact: React.FC = () => {
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#6a00a3]/10 rounded-full blur-2xl"></div>
               <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#1B3C2B]/10 rounded-full blur-2xl"></div>
               
-              <form onSubmit={handleSubmit} className="relative bg-white p-10 rounded-3xl shadow-2xl border border-slate-100 space-y-8">
+              <form onSubmit={handleSubmit} className="relative bg-white p-6 sm:p-8 lg:p-10 rounded-3xl shadow-2xl border border-slate-100 space-y-6 sm:space-y-8">
                 {status === 'success' && (
                   <motion.div 
                     initial={{ opacity: 0, y: -10 }}
@@ -345,7 +345,7 @@ const Contact: React.FC = () => {
                   disabled={status === 'sending'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-5 bg-[#1B3C2B] text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-[#142d20] shadow-2xl shadow-[#1B3C2B]/20 transition-all disabled:opacity-50"
+                  className="w-full py-4 sm:py-5 bg-[#1B3C2B] text-white rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 hover:bg-[#142d20] shadow-2xl shadow-[#1B3C2B]/20 transition-all disabled:opacity-50"
                 >
                   {status === 'sending' ? (
                     <span>{isPt ? 'Enviando...' : 'Sending...'}</span>
@@ -379,10 +379,10 @@ const Contact: React.FC = () => {
             >
               {isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}
             </motion.span>
-            <h2 className="text-4xl font-black text-[#1B3C2B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#1B3C2B] mb-4">
               {isPt ? 'Junte-se à Nossa Equipa' : 'Join Our Team'}
             </h2>
-            <p className="max-w-2xl mx-auto text-xl text-slate-500 font-light">
+            <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-500 font-light">
               {isPt 
                 ? 'Nunca sabe quando uma oportunidade pode surgir. Envie-nos o seu currículo e entraremos em contacto quando surgir uma vaga adequada ao seu perfil.'
                 : 'You never know when an opportunity may arise. Send us your CV and we will get in touch when a suitable position becomes available.'}
@@ -390,7 +390,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <div className="relative bg-white p-10 rounded-3xl shadow-2xl border border-slate-100">
+            <div className="relative bg-white p-6 sm:p-8 lg:p-10 rounded-3xl shadow-2xl border border-slate-100">
               {/* Decorative elements */}
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#6a00a3]/10 rounded-full blur-2xl"></div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#1B3C2B]/10 rounded-full blur-2xl"></div>
@@ -499,7 +499,7 @@ const Contact: React.FC = () => {
                   disabled={spontaneousStatus === 'sending'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-5 bg-[#6a00a3] text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-[#5a008c] shadow-2xl shadow-[#6a00a3]/20 transition-all disabled:opacity-50"
+                  className="w-full py-4 sm:py-5 bg-[#6a00a3] text-white rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 hover:bg-[#5a008c] shadow-2xl shadow-[#6a00a3]/20 transition-all disabled:opacity-50"
                 >
                   {spontaneousStatus === 'sending' ? (
                     <span>{isPt ? 'Enviando...' : 'Sending...'}</span>

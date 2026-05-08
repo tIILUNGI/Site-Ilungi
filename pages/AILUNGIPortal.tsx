@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LayoutDashboard, BookOpen, Award, History, MessageCircle, LogOut, Bell, Play, GraduationCap, ChevronRight, Search, Clock, Users, User, Camera, Save, Globe, Linkedin, Briefcase, FileText } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Award, History, MessageCircle, LogOut, Bell, Play, GraduationCap, ChevronRight, Search, Clock, Users, User, Camera, Save, Globe, Linkedin, Briefcase, FileText, Building2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../App';
@@ -115,7 +115,7 @@ const AILUNGIPortal: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex pt-0">
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col lg:flex-row pt-0">
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/10 p-6 flex flex-col hidden lg:flex">
         <div className="mb-10 flex items-center space-x-2">
@@ -151,8 +151,46 @@ const AILUNGIPortal: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 lg:p-12 overflow-y-auto mt-20 lg:mt-0">
-        <header className="flex justify-between items-center mb-10">
+      <main className="flex-1 p-4 sm:p-8 lg:p-12 overflow-y-auto mt-20 lg:mt-0">
+        <div className="lg:hidden mb-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-3xl bg-white/5 border border-white/10 p-4">
+            <div className="flex items-center space-x-3">
+              <img src="/imagens/ilungi_logo.jpg" alt="ILUNGI Logo" className="h-10 w-auto rounded-xl" />
+              <div>
+                <p className="font-bold text-lg">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</p>
+                <p className="text-sm text-slate-400">{userName}</p>
+              </div>
+            </div>
+            <button 
+              onClick={async () => {
+                await signOut();
+                navigate('/academia/login');
+              }}
+              className="inline-flex items-center justify-center space-x-2 rounded-2xl border border-white/10 px-4 py-3 text-slate-300 hover:text-red-400 hover:border-red-400/30"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="font-medium">{t.alumni.portal.logout}</span>
+            </button>
+          </div>
+
+          <div className="-mx-1 overflow-x-auto pb-1">
+            <div className="flex w-max gap-2 px-1">
+              {menuItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveTab(item.id)}
+                  className={`inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-medium transition-all ${activeTab === item.id ? 'bg-[#6a00a3] text-white shadow-lg shadow-purple-900/30' : 'bg-white/5 text-slate-300 border border-white/10'}`}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <header className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-10">
             <div>
                 <h1 className="text-3xl font-bold">
                   {activeTab === 'profile' ? (isPt ? 'Meu Perfil Profissional' : 'My Professional Profile') : `${t.alumni.portal.welcome}, ${userName}`}
@@ -163,7 +201,7 @@ const AILUNGIPortal: React.FC = () => {
                     : t.alumni.portal.welcomeDesc}
                 </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
                 <div className="relative p-2 bg-white/5 rounded-full cursor-pointer hover:bg-white/10">
                     <Bell className="w-6 h-6" />
                     <div className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></div>
@@ -200,11 +238,11 @@ const AILUNGIPortal: React.FC = () => {
                         <img src="/imagens/ISO.png" className="w-full h-full object-cover" alt="Course" />
                     </div>
                     <div className="flex-1 w-full">
-                        <div className="flex justify-between items-start mb-2">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start mb-2">
                             <h4 className="text-lg font-bold uppercase tracking-tight">
                               {isPt ? 'Especialista em ISO 27001 - Segurança da Informação' : 'ISO 27001 Information Security Specialist'}
                             </h4>
-                            <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold uppercase">
+                            <span className="self-start px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold uppercase">
                               65% {t.alumni.portal.completed}
                             </span>
                         </div>
@@ -213,7 +251,7 @@ const AILUNGIPortal: React.FC = () => {
                         </div>
                         <button 
                           onClick={() => navigate('/academia/curso/demo')}
-                          className="px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all flex items-center space-x-2"
+                          className="w-full sm:w-auto px-6 py-2 bg-[#6a00a3] rounded-full text-sm font-bold hover:bg-[#520b7d] transition-all flex items-center justify-center space-x-2"
                         >
                           <Play className="w-4 h-4" />
                           <span>{t.alumni.portal.continue}</span>
@@ -224,7 +262,7 @@ const AILUNGIPortal: React.FC = () => {
 
             {/* Available Courses Section */}
             <div className="mt-12">
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mb-6">
                 <h2 className="text-xl font-bold">{isPt ? 'Cursos Disponíveis' : 'Available Courses'}</h2>
                 <Link to="/academia/cursos" className="text-sm font-bold text-[#6a00a3] hover:text-[#a855f7] flex items-center gap-1">
                   {isPt ? 'Ver todos' : 'View all'}
@@ -369,7 +407,7 @@ const AILUNGIPortal: React.FC = () => {
                   </div>
 
                   <div className="pt-6 border-t border-white/10 space-y-4">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-purple-500/10 rounded-lg">
                           <Globe className="w-5 h-5 text-purple-400" />
@@ -387,7 +425,7 @@ const AILUNGIPortal: React.FC = () => {
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-blue-500/10 rounded-lg">
                           <FileText className="w-5 h-5 text-blue-400" />

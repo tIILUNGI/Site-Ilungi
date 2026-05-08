@@ -40,7 +40,7 @@ const CoursePlayer: React.FC = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentLesson, setCurrentLesson] = useState<CourseLesson | null>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const demoCourse: Course = {
@@ -89,6 +89,16 @@ const CoursePlayer: React.FC = () => {
     setLoading(false);
   }, [courseId, isPt]);
 
+  useEffect(() => {
+    const syncSidebar = () => {
+      setSidebarOpen(window.innerWidth >= 1024);
+    };
+
+    syncSidebar();
+    window.addEventListener('resize', syncSidebar);
+    return () => window.removeEventListener('resize', syncSidebar);
+  }, []);
+
   const displayCourse = course || demoCourse;
 
   const handleLessonComplete = () => {
@@ -116,8 +126,17 @@ const CoursePlayer: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex">
-      <aside className={`${sidebarOpen ? 'w-80' : 'w-0'} fixed lg:relative z-20 bg-slate-800 border-r border-white/10 transition-all duration-300 overflow-hidden`}>
-        <div className="w-80 h-screen flex flex-col">
+      {sidebarOpen && (
+        <button
+          type="button"
+          aria-label={isPt ? 'Fechar menu do curso' : 'Close course menu'}
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-20 bg-black/50 lg:hidden"
+        />
+      )}
+
+      <aside className={`fixed inset-y-0 left-0 z-30 w-[85vw] max-w-80 transform bg-slate-800 border-r border-white/10 transition-transform duration-300 overflow-hidden ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 lg:w-80 lg:max-w-none`}>
+        <div className="h-screen w-full flex flex-col">
           <div className="p-4 border-b border-white/10">
             <Link to="/academia/alumni" className="flex items-center space-x-2 text-slate-400 hover:text-white mb-4">
               <ChevronLeft className="w-5 h-5" />
@@ -180,26 +199,26 @@ const CoursePlayer: React.FC = () => {
       </aside>
 
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header className="h-16 bg-slate-800 border-b border-white/10 flex items-center justify-between px-4">
+        <header className="min-h-16 bg-slate-800 border-b border-white/10 flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center space-x-4">
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 hover:bg-white/10 rounded-lg">
               {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <Link to="/academia/alumni" className="flex items-center space-x-2 text-slate-400 hover:text-white">
               <Home className="w-4 h-4" />
-              <span className="text-sm">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</span>
+              <span className="hidden text-sm sm:inline">{isPt ? 'Portal AILUNGI' : 'AILUNGI Portal'}</span>
             </Link>
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:flex-row sm:items-center sm:space-x-4">
             {currentLesson?.type === 'material' && (
-              <button className="flex items-center space-x-2 px-4 py-2 bg-[#6a00a3] rounded-lg text-sm font-bold hover:bg-[#520b7d]">
+              <button className="flex items-center justify-center space-x-2 px-4 py-2 bg-[#6a00a3] rounded-lg text-sm font-bold hover:bg-[#520b7d]">
                 <Download className="w-4 h-4" />
                 <span>{isPt ? 'Baixar Material' : 'Download Material'}</span>
               </button>
             )}
             {currentLesson?.type === 'live' && (
-              <button className="flex items-center space-x-2 px-4 py-2 bg-red-600 rounded-lg text-sm font-bold hover:bg-red-700 animate-pulse">
+              <button className="flex items-center justify-center space-x-2 px-4 py-2 bg-red-600 rounded-lg text-sm font-bold hover:bg-red-700 animate-pulse">
                 <Video className="w-4 h-4" />
                 <span>{isPt ? 'Entrar na Aula' : 'Join Class'}</span>
               </button>
@@ -207,7 +226,7 @@ const CoursePlayer: React.FC = () => {
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           {currentLesson ? (
             <div className="max-w-4xl mx-auto">
               {currentLesson.type === 'video' && (
@@ -232,7 +251,7 @@ const CoursePlayer: React.FC = () => {
                   <p className="text-slate-400 mb-4">
                     {isPt ? 'Participe desta aula ao vivo e tire as suas dúvidas com o professor.' : 'Join this live class and ask your questions to the teacher.'}
                   </p>
-                  <button className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700">
+                  <button className="w-full sm:w-auto px-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700">
                     {isPt ? 'Entrar Agora' : 'Join Now'}
                   </button>
                 </div>
@@ -245,7 +264,7 @@ const CoursePlayer: React.FC = () => {
                     <span className="text-[#6a00a3] font-bold">{isPt ? 'MATERIAL DE ESTUDO' : 'STUDY MATERIAL'}</span>
                   </div>
                   <h2 className="text-2xl font-bold mb-2">{currentLesson.title}</h2>
-                  <button className="px-6 py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] flex items-center space-x-2">
+                  <button className="w-full sm:w-auto px-6 py-3 bg-[#6a00a3] text-white rounded-xl font-bold hover:bg-[#520b7d] flex items-center justify-center space-x-2">
                     <Download className="w-5 h-5" />
                     <span>{isPt ? 'Baixar PDF' : 'Download PDF'}</span>
                   </button>
@@ -265,18 +284,18 @@ const CoursePlayer: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                  <button className="flex items-center space-x-2 px-4 py-2 text-slate-400 hover:text-white">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-white/10">
+                  <button className="flex items-center justify-center space-x-2 px-4 py-2 text-slate-400 hover:text-white">
                     <ChevronLeft className="w-5 h-5" />
                     <span>{isPt ? 'Anterior' : 'Previous'}</span>
                   </button>
                   
-                  <button onClick={handleLessonComplete} className="flex items-center space-x-2 px-6 py-2 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700">
+                  <button onClick={handleLessonComplete} className="flex items-center justify-center space-x-2 px-6 py-2 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700">
                     <CheckCircle className="w-5 h-5" />
                     <span>{isPt ? 'Marcar como Concluído' : 'Mark as Completed'}</span>
                   </button>
                   
-                  <button className="flex items-center space-x-2 px-4 py-2 text-slate-400 hover:text-white">
+                  <button className="flex items-center justify-center space-x-2 px-4 py-2 text-slate-400 hover:text-white">
                     <span>{isPt ? 'Próxima' : 'Next'}</span>
                     <ChevronRight className="w-5 h-5" />
                   </button>

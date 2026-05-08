@@ -131,11 +131,11 @@ const Blog: React.FC = () => {
     <div className={`min-h-screen pt-24 ${isDark ? 'bg-slate-950' : 'bg-slate-50'}`}>
       {/* Newspaper Style Header */}
       <div className={`border-b-4 border-[#6a00a3] ${isDark ? 'bg-slate-900' : 'bg-white'} mb-12`}>
-        <div className="max-w-7xl mx-auto px-6 py-12 text-center">
-          <h1 className={`text-6xl md:text-8xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 text-center">
+          <h1 className={`text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
             <span className="text-[#6a00a3]">ILUNGI</span> HUB
           </h1>
-          <p className="mt-4 text-slate-500 font-bold uppercase tracking-[0.4em]">Knowledge Center</p>
+          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-bold uppercase tracking-[0.25em] sm:tracking-[0.4em]">Knowledge Center</p>
         </div>
       </div>
 
@@ -166,11 +166,11 @@ const Blog: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all" />
               </div>
-              <div className="lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
+              <div className="lg:w-2/5 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
                 <span className="inline-block px-3 py-1 rounded-lg text-[10px] font-black bg-[#6a00a3]/10 text-[#6a00a3] uppercase tracking-widest mb-4 w-fit">
                   {featuredVideoPost.category}
                 </span>
-                <h3 className="text-3xl font-black mb-4 leading-tight group-hover:text-[#6a00a3] transition-colors cursor-pointer" onClick={() => setSelectedPost(featuredVideoPost)}>
+                <h3 className="text-2xl sm:text-3xl font-black mb-4 leading-tight group-hover:text-[#6a00a3] transition-colors cursor-pointer" onClick={() => setSelectedPost(featuredVideoPost)}>
                   {getLocalized(featuredVideoPost.title)}
                 </h3>
                 <p className="text-slate-500 dark:text-slate-400 mb-8 line-clamp-3 leading-relaxed">
@@ -189,7 +189,7 @@ const Blog: React.FC = () => {
         )}
 
         {/* Search and Filters */}
-        <div className={`p-6 rounded-[2rem] mb-12 flex flex-col md:flex-row items-center gap-4 ${isDark ? 'bg-slate-900 border border-white/5' : 'bg-white border border-slate-200'} shadow-xl`}>
+        <div className={`p-6 rounded-[2rem] mb-12 flex flex-col md:flex-row items-stretch md:items-center gap-4 ${isDark ? 'bg-slate-900 border border-white/5' : 'bg-white border border-slate-200'} shadow-xl`}>
           <div className="flex-1 w-full relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <input 

@@ -38,7 +38,7 @@ const CertificateVerify: React.FC = () => {
     <div className="min-h-[80vh] py-20 bg-slate-50">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-12">
-            <h1 className="text-4xl font-extrabold text-[#1B3C2B] mb-4">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1B3C2B] mb-4">
               {isPt ? 'Verificar Certificado' : 'Verify Certificate'}
             </h1>
             <p className="text-slate-500">
@@ -48,7 +48,7 @@ const CertificateVerify: React.FC = () => {
             </p>
         </div>
 
-        <div className="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mb-8">
+        <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mb-8">
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
@@ -63,7 +63,7 @@ const CertificateVerify: React.FC = () => {
                 <button 
                     onClick={handleVerify}
                     disabled={loading}
-                    className="px-10 py-4 bg-[#1B3C2B] text-white rounded-2xl font-bold hover:bg-[#142d20] disabled:opacity-50 transition-all"
+                    className="w-full sm:w-auto px-6 sm:px-10 py-4 bg-[#1B3C2B] text-white rounded-2xl font-bold hover:bg-[#142d20] disabled:opacity-50 transition-all"
                 >
                     {loading ? (isPt ? 'Verificando...' : 'Verifying...') : (isPt ? 'Verificar' : 'Verify')}
                 </button>
@@ -75,11 +75,11 @@ const CertificateVerify: React.FC = () => {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`p-8 rounded-3xl border-2 ${result.valid ? 'bg-white border-green-500' : 'bg-red-50 border-red-200'}`}
+                    className={`p-6 sm:p-8 rounded-3xl border-2 ${result.valid ? 'bg-white border-green-500' : 'bg-red-50 border-red-200'}`}
                 >
                     {result.valid ? (
                         <div className="space-y-6">
-                            <div className="flex items-center space-x-4">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                                 <div className="p-3 bg-green-100 text-green-600 rounded-2xl">
                                 </div>
                                 <div>
@@ -90,7 +90,7 @@ const CertificateVerify: React.FC = () => {
                                 </div>
                             </div>
                             
-                            <div className="grid grid-cols-2 gap-6 py-6 border-y border-slate-100">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 border-y border-slate-100">
                                 <div>
                                     <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'Aluno' : 'Student'}</p>
                                     <p className="font-bold text-slate-800">{result.student}</p>
@@ -105,7 +105,7 @@ const CertificateVerify: React.FC = () => {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-400 uppercase font-bold mb-1">{isPt ? 'ID do Certificado' : 'Certificate ID'}</p>
-                                    <p className="font-bold text-slate-800">{result.id}</p>
+                                    <p className="font-bold text-slate-800 break-all">{result.id}</p>
                                 </div>
                             </div>
 
