@@ -6,12 +6,16 @@ import { SEO } from '../components/Seo';
 import { loadData } from '../lib/dataSync';
 import { DEFAULT_SITE_URL, toAbsoluteUrl } from '../seo/routeSeo.js';
 
+type IsoNormConfig = { norms: string[]; asib: boolean };
+
 // Mapping of ISO references to their acquired norms/seals
-// Use client name slug for matching
-const isoNorms: Record<string, { norms: string[], asib: boolean }> = {
+const isoNorms: Record<string, IsoNormConfig> = {
+  'b6l': { norms: ['9001', '45001', '14001'], asib: true },
   'esmac': { norms: ['9001', '45001', '14001'], asib: true },
   'aclean': { norms: ['9001', '45001', '14001'], asib: true },
+  'imovias-urbanismo-sa': { norms: ['9001', '45001'], asib: true },
   'imovias-urbanismo-e-construcao-sa': { norms: ['9001', '45001'], asib: true },
+  'imovias-energy': { norms: ['9001', '45001'], asib: true },
   'imovias-energy-sa': { norms: ['9001', '45001'], asib: true },
   'diway': { norms: ['9001'], asib: true },
   'velonet': { norms: ['9001'], asib: true },
@@ -30,6 +34,16 @@ const isoImages: Record<string, string> = {
   '14001': '/imagens/ISO 14001_2015.png',
   'asib': '/imagens/ASIB.png'
 };
+
+const normalizeReferenceKey = (value: string = '') =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 
 const ReferenceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -65,21 +79,26 @@ const ReferenceDetail: React.FC = () => {
 
   const reference = references.find((ref: any) => ref.id === id);
   
-  // Find client norms by matching client name slug
+  // Find client norms by matching normalized client ids/names
   const getClientNorms = () => {
     if (!reference) return null;
-    const clientName = (reference.client_name || reference.name || '').toLowerCase();
-    const slug = clientName
-      .replace(/[,.]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/[-]+/g, '-');
-    
-    // Try different slug variations
-    for (const key of Object.keys(isoNorms)) {
-      if (slug.includes(key) || key.includes(slug)) {
-        return isoNorms[key];
+
+    const candidates = [reference.id, reference.client_name, reference.name]
+      .map((value) => normalizeReferenceKey(value || ''))
+      .filter(Boolean);
+
+    for (const candidate of candidates) {
+      if (isoNorms[candidate]) {
+        return isoNorms[candidate];
+      }
+
+      for (const key of Object.keys(isoNorms)) {
+        if (candidate.includes(key) || key.includes(candidate)) {
+          return isoNorms[key];
+        }
       }
     }
+
     // Also check if service_type contains ISO info
     const serviceType = reference.service_type || {};
     const serviceStr = typeof serviceType === 'string' ? serviceType : (serviceType.pt || serviceType.en || '');
@@ -93,7 +112,7 @@ const ReferenceDetail: React.FC = () => {
       if (serviceStr.includes('37001') || serviceStr.includes('37301')) norms.push('37001');
       if (serviceStr.includes('31000')) norms.push('31000');
       if (serviceStr.includes('22000')) norms.push('22000');
-      return { norms, asib: norms.length > 0 };
+      return norms.length > 0 ? { norms, asib: true } : null;
     }
     return null;
   };

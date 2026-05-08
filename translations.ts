@@ -272,6 +272,17 @@ export const translations: Record<'pt' | 'en', any> = {
       viewDetails: "Ver Detalhes",
       clients: [
         {
+          id: "b6l",
+          name: "B6L",
+          logo: "/Nossas Referências/B6L.jpg",
+          role: "Cliente",
+          comment: "Implementação das normas ISO 9001, ISO 14001 e ISO 45001.",
+          person: "B6L",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: []
+        },
+        {
           id: "esmac",
           name: "Esmac,Lda",
           logo: "/Nossas Referências/Esmac.Lda.webp",
@@ -676,6 +687,17 @@ export const translations: Record<'pt' | 'en', any> = {
       subtitle: "Companies that trusted our services",
       viewDetails: "View Details",
       clients: [
+        {
+          id: "b6l",
+          name: "B6L",
+          logo: "/Nossas Referências/B6L.jpg",
+          role: "Client",
+          comment: "Implementation of ISO 9001, ISO 14001, and ISO 45001 standards.",
+          person: "B6L",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: []
+        },
         {
           id: "esmac",
           name: "Esmac,Lda",
