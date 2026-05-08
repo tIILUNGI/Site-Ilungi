@@ -124,9 +124,9 @@ const Footer: React.FC = () => {
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
           <Link to="/certificacoes" className="hover:text-white font-bold text-white bg-[#6a00a3] px-4 py-2 rounded-lg transition-all">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
-          <a href="#" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</a>
-          <a href="#" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</a>
-          <a href="#" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</a>
+          <Link to="/privacidade" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</Link>
+          <Link to="/termos-de-uso" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</Link>
+          <Link to="/cookies" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</Link>
         </div>
       </div>
     </footer>

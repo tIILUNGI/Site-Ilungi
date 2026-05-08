@@ -29,13 +29,13 @@ const ISOPage: React.FC = () => {
                 <span className="text-[#6a00a3] font-black tracking-widest uppercase text-sm mb-4 block">
                     {isPt ? 'Especialidade ILUNGI' : 'ILUNGI Specialization'}
                 </span>
-                <h1 className="text-5xl font-black text-[#1B3C2B] mb-8 leading-tight">{t.iso.title}</h1>
-                <p className="text-xl text-slate-500 font-light leading-relaxed mb-8 text-justify">
+                <h1 className="text-4xl sm:text-5xl font-black text-[#1B3C2B] mb-8 leading-tight">{t.iso.title}</h1>
+                <p className="text-lg sm:text-xl text-slate-500 font-light leading-relaxed mb-8 text-left lg:text-justify">
                     {t.iso.subtitle}
                 </p>
             </div>
             <div className="flex-1 relative">
-                <img src="/imagens/consultoria-iso.jpg" className="rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
+                <img src="/imagens/consultoria-iso.jpg" className="w-full rounded-3xl shadow-2xl" alt={isPt ? 'Consultoria ISO' : 'ISO Consulting'} />
             </div>
         </div>
 
@@ -84,9 +84,9 @@ const ISOPage: React.FC = () => {
           </div>
         )}
 
-        <div className="bg-[#1B3C2B] rounded-[3rem] p-12 lg:p-20 text-white flex flex-col lg:flex-row items-center gap-12">
+        <div className="bg-[#1B3C2B] rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 lg:p-20 text-white flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-12">
             <div className="flex-1">
-                <h2 className="text-4xl font-bold mb-6">{t.iso.methodology}</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold mb-6">{t.iso.methodology}</h2>
                 <div className="space-y-6">
                     {[
                         { title: t.iso.steps.gap, desc: t.iso.steps.gapDesc },
@@ -96,7 +96,7 @@ const ISOPage: React.FC = () => {
                         { title: t.iso.steps.report, desc: t.iso.steps.reportDesc },
                         { title: t.iso.steps.goLive, desc: t.iso.steps.goLiveDesc }
                     ].map((step, i) => (
-                        <div key={i} className="flex space-x-4">
+                        <div key={i} className="flex gap-4">
                             <div>
                                 <h4 className="font-bold">{step.title}</h4>
                                 <p className="text-slate-300 text-sm">{step.desc}</p>
@@ -105,8 +105,8 @@ const ISOPage: React.FC = () => {
                     ))}
                 </div>
             </div>
-            <div className="shrink-0">
-                <Link to="/contacto" className="px-12 py-5 bg-[#6a00a3] rounded-full font-bold text-lg hover:bg-white hover:text-[#6a00a3] transition-all shadow-xl shadow-purple-900/40">
+            <div className="w-full lg:w-auto shrink-0">
+                <Link to="/contacto" className="inline-flex w-full items-center justify-center rounded-full bg-[#6a00a3] px-6 py-4 text-center text-base font-bold leading-snug text-white shadow-xl shadow-purple-900/40 transition-all hover:bg-white hover:text-[#6a00a3] sm:px-10 sm:py-5 sm:text-lg lg:w-auto lg:px-12">
                     {t.iso.cta}
                 </Link>
             </div>

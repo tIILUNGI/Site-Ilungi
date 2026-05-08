@@ -406,6 +406,66 @@ const exactRouteSeo = {
       },
     ],
   },
+  '/privacidade': {
+    title: {
+      pt: 'Politica de Privacidade | ILUNGI',
+      en: 'Privacy Policy | ILUNGI',
+    },
+    description: {
+      pt: 'Saiba como a ILUNGI trata dados pessoais, formularios, autenticacao e analitica no site institucional.',
+      en: 'Learn how ILUNGI processes personal data, forms, authentication, and analytics on the institutional website.',
+    },
+    keywords: {
+      pt: [...sharedKeywords.pt, 'privacidade', 'dados pessoais', 'politica de privacidade'],
+      en: [...sharedKeywords.en, 'privacy', 'personal data', 'privacy policy'],
+    },
+    image: '/imagens/ilungi_logo.jpg',
+    changefreq: 'yearly',
+    priority: '0.4',
+    schema: (siteUrl, lang, entry) => [
+      makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
+    ],
+  },
+  '/termos-de-uso': {
+    title: {
+      pt: 'Termos de Uso | ILUNGI',
+      en: 'Terms of Use | ILUNGI',
+    },
+    description: {
+      pt: 'Consulte as condicoes de utilizacao do site ILUNGI, areas restritas, formularios e conteudo institucional.',
+      en: 'Review the terms governing the use of the ILUNGI website, restricted areas, forms, and institutional content.',
+    },
+    keywords: {
+      pt: [...sharedKeywords.pt, 'termos de uso', 'condicoes do site', 'uso do website'],
+      en: [...sharedKeywords.en, 'terms of use', 'website terms', 'site conditions'],
+    },
+    image: '/imagens/ilungi_logo.jpg',
+    changefreq: 'yearly',
+    priority: '0.4',
+    schema: (siteUrl, lang, entry) => [
+      makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
+    ],
+  },
+  '/cookies': {
+    title: {
+      pt: 'Politica de Cookies | ILUNGI',
+      en: 'Cookie Policy | ILUNGI',
+    },
+    description: {
+      pt: 'Entenda como o site ILUNGI utiliza cookies, localStorage, sessionStorage e tecnologias equivalentes.',
+      en: 'Understand how the ILUNGI website uses cookies, localStorage, sessionStorage, and equivalent technologies.',
+    },
+    keywords: {
+      pt: [...sharedKeywords.pt, 'cookies', 'armazenamento local', 'session storage'],
+      en: [...sharedKeywords.en, 'cookies', 'local storage', 'session storage'],
+    },
+    image: '/imagens/ilungi_logo.jpg',
+    changefreq: 'yearly',
+    priority: '0.4',
+    schema: (siteUrl, lang, entry) => [
+      makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
+    ],
+  },
   '/blog': {
     title: {
       pt: 'Blog ILUNGI HUB | Insights e Tendencias',

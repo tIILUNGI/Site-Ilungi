@@ -60,6 +60,7 @@ const Blog = lazy(() => import('./pages/Blog'));
 const AlumniShowcase = lazy(() => import('./pages/AlumniShowcase'));
 const TalentHub = lazy(() => import('./pages/TalentHub'));
 const TalentRegistration = lazy(() => import('./pages/TalentRegistration'));
+const LegalPage = lazy(() => import('./pages/LegalPage'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -191,6 +192,9 @@ const AppShell: React.FC = () => {
                 <Route path="/parceiros" element={<Partners />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/privacidade" element={<LegalPage type="privacy" />} />
+                <Route path="/termos-de-uso" element={<LegalPage type="terms" />} />
+                <Route path="/cookies" element={<LegalPage type="cookies" />} />
                 <Route path="/referencia/:id" element={<ReferenceDetail />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
