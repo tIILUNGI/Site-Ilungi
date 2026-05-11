@@ -53,6 +53,7 @@ const AdminBlog = lazy(() => import('./pages/AdminBlog'));
 const AdminConfig = lazy(() => import('./pages/AdminConfig'));
 const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 const AdminAnalytics = lazy(() => import('./pages/AdminAnalytics'));
+const AdminMessages = lazy(() => import('./pages/AdminMessages'));
 const Certifications = lazy(() => import('./pages/Certifications'));
 const CourseCatalog = lazy(() => import('./pages/CourseCatalog'));
 const CoursePlayer = lazy(() => import('./pages/CoursePlayer'));
