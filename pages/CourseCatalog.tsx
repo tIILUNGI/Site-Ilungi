@@ -103,7 +103,7 @@ const CourseCatalog: React.FC = () => {
     const subject = isPt
       ? `Catálogo de Cursos: ${selectedCourse.name}`
       : `Course Catalog: ${selectedCourse.name}`;
-    const mailtoLink = `mailto:devfront0ilungui@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
 
     try {
       await endpoints.contact.sendCourse(payload);

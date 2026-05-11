@@ -68,10 +68,10 @@ const Contact: React.FC = () => {
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error sending contact message:', error);
-      const emailBody = isPt
-        ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
-        : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&cc=devfront0ilungui@gmail.com&body=${encodeURIComponent(emailBody)}`;
+       const emailBody = isPt
+         ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
+         : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
+       const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });

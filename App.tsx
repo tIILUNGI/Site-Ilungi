@@ -205,6 +205,7 @@ const AppShell: React.FC = () => {
                 <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
                 <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
                 <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
+                <Route path="/admin/mensagens" element={<RequireAdmin><AdminMessages /></RequireAdmin>} />
                 <Route path="/admin/analytics" element={<RequireAdmin><AdminAnalytics /></RequireAdmin>} />
                 <Route path="/certificacoes" element={<Certifications />} />
               </Routes>
