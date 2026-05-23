@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { User, Briefcase, MapPin, Mail, Phone, Linkedin, FileText, Plus, X, Save, ArrowLeft, ShieldCheck, GraduationCap, Award, Globe, Twitter, Instagram, Paperclip, Upload, CheckCircle2 } from 'lucide-react';
 import { useAppContext } from '../App';
+import { endpoints } from '../lib/api';
 
 const TalentRegistration: React.FC = () => {
   const { t, lang, isDark } = useAppContext();
@@ -58,11 +59,47 @@ const TalentRegistration: React.FC = () => {
     setFormData({ ...formData, additionalCourses: formData.additionalCourses.filter(c => c !== course) });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate save
-    alert(isPt ? 'Currículo Digital publicado com sucesso! Suas informações agora estão disponíveis para empresas parceiras.' : 'Digital CV published successfully! Your information is now available to partner companies.');
-    navigate('/academia/talent-hub');
+    setSubmitting(true);
+    
+    try {
+      // Map frontend data to backend expected format if needed
+      // Here we send the raw data, but usually we might need to handle files separately
+      // For now, let's send the text data
+      const talentData = {
+        name: formData.name,
+        role: formData.role,
+        headline: formData.headline,
+        location: formData.location,
+        experience: formData.experience,
+        availability: formData.availability,
+        education: formData.education,
+        bio: formData.bio,
+        about: formData.about,
+        email: formData.email,
+        phone: formData.phone,
+        linkedin: formData.linkedin,
+        twitter: formData.twitter,
+        instagram: formData.instagram,
+        website: formData.website,
+        skills: formData.skills,
+        additionalCourses: formData.additionalCourses,
+        category: formData.role // Using role as category for now
+      };
+
+      await endpoints.talents.create(talentData);
+
+      alert(isPt ? 'Currículo Digital publicado com sucesso! Suas informações agora estão disponíveis para empresas parceiras.' : 'Digital CV published successfully! Your information is now available to partner companies.');
+      navigate('/academia/talent-hub');
+    } catch (error) {
+      console.error('Failed to save talent profile:', error);
+      alert(isPt ? 'Erro ao publicar seu currículo. Por favor, tente novamente.' : 'Error publishing your CV. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

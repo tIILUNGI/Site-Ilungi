@@ -31,6 +31,10 @@ const AdminLogin: React.FC = () => {
         sessionStorage.setItem('ilungi_admin', 'true');
         sessionStorage.setItem('ilungi_admin_token', response.token);
         sessionStorage.setItem('ilungi_admin_email', email);
+        
+        // Trigger sync immediately after login
+        localStorage.setItem('ilungi_db_populated', 'false'); // Force a refresh
+        
         window.dispatchEvent(new Event('ilungi-admin-auth'));
         navigate('/admin');
       } else {

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Search, Briefcase, Users, Building2, MapPin, FileText, ExternalLink, Globe, X, Mail, Phone, Linkedin, Filter, GraduationCap } from 'lucide-react';
 import { useAppContext } from '../App';
+import { endpoints } from '../lib/api';
 
 interface TalentProfile {
   id: string;
@@ -42,9 +43,30 @@ const TalentHub: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const talentsData: TalentProfile[] = [];
-  const partnersData: TalentPartner[] = [];
+  const [talentsData, setTalentsData] = useState<TalentProfile[]>([]);
+  const [partnersData, setPartnersData] = useState<TalentPartner[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [talents, partners] = await Promise.all([
+          endpoints.talents.getAll().catch(() => []),
+          endpoints.partners.getAll().catch(() => [])
+        ]);
+        setTalentsData(Array.isArray(talents) ? talents : []);
+        setPartnersData(Array.isArray(partners) ? partners : []);
+      } catch (error) {
+        console.error('Failed to fetch Talent Hub data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const categories = Object.entries(
     talentsData.reduce((acc: Record<string, number>, talent) => {
@@ -184,7 +206,13 @@ const TalentHub: React.FC = () => {
           </div>
 
           <div className="max-w-7xl mx-auto">
-            {activeTab === 'talents' ? (
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <div className="w-16 h-16 border-4 border-[#6a00a3]/20 border-t-[#6a00a3] rounded-full animate-spin mb-4" />
+                <p className="text-slate-500 font-bold">{isPt ? 'Carregando talentos...' : 'Loading talents...'}</p>
+              </div>
+            ) : (
+              activeTab === 'talents' ? (
               talentsData.length > 0 ? (
                 filteredTalents.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -296,7 +324,8 @@ const TalentHub: React.FC = () => {
                   <p className="text-slate-500">{isPt ? 'A area de parceiros continua disponivel, mas neste momento nao ha empresas publicas listadas.' : 'The partners area remains available, but there are currently no public companies listed.'}</p>
                 </div>
               )
-            )}
+            )
+          )}
           </div>
         </div>
       </section>

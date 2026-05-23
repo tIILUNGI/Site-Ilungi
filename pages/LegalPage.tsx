@@ -40,15 +40,15 @@ const getLegalContent = (
   if (type === 'privacy') {
     return isPt
       ? {
-          eyebrow: 'Politica de Privacidade',
+           eyebrow: 'Política de Privacidade',
           title: 'Privacidade e Tratamento de Dados',
-          intro: `Esta politica descreve como a ${companyName} recolhe, utiliza, armazena e protege os dados pessoais tratados no site, incluindo contacto, candidatura espontanea, academia, portal AILUNGI e restantes interacoes digitais.`,
+           intro: `Esta política descreve como a ${companyName} recolhe, utiliza, armazena e protege os dados pessoais tratados no site, incluindo contacto, candidatura espontânea, academia, portal AILUNGI e restantes interações digitais.`,
           lastUpdated: 'Ultima atualizacao: 8 de maio de 2026',
           sections: [
             {
               title: '1. Ambito',
               paragraphs: [
-                'Ao utilizar este site, o utilizador reconhece esta politica e aceita o tratamento estritamente necessario para resposta a pedidos, acompanhamento comercial, operacao da plataforma e melhoria da experiencia digital.',
+                 'Ao utilizar este site, o utilizador reconhece esta política e aceita o tratamento estritamente necessário para resposta a pedidos, acompanhamento comercial, operação da plataforma e melhoria da experiência digital.',
                 'Esta politica aplica-se ao site institucional, formularios de contacto, paginas de candidatura, registo e acesso a areas autenticadas e outros pontos de recolha de dados associados a servicos da ILUNGI.',
               ],
             },
@@ -128,7 +128,7 @@ const getLegalContent = (
           ],
           contactTitle: 'Falar com a ILUNGI',
           contactDescription:
-            'Para exercicio de direitos, duvidas sobre tratamento de dados ou questoes institucionais, utilize os contactos abaixo.',
+             'Para exercício de direitos, dúvidas sobre tratamento de dados ou questões institucionais, utilize os contactos abaixo.',
         }
       : {
           eyebrow: 'Privacy Policy',
@@ -222,7 +222,7 @@ const getLegalContent = (
       ? {
           eyebrow: 'Termos de Uso',
           title: 'Condicoes de Utilizacao do Site',
-          intro: `Estes Termos de Uso regulam o acesso e a utilizacao do site da ${companyName}, incluindo paginas institucionais, formularios, areas autenticadas e conteudo publicado para clientes, parceiros, candidatos e utilizadores em geral.`,
+           intro: `Estes Termos de Uso regulam o acesso e a utilização do site da ${companyName}, incluindo páginas institucionais, formulários, áreas autenticadas e conteúdo publicado para clientes, parceiros, candidatos e utilizadores em geral.`,
           lastUpdated: 'Ultima atualizacao: 8 de maio de 2026',
           sections: [
             {
@@ -384,8 +384,8 @@ const getLegalContent = (
         eyebrow: 'Politica de Cookies',
         title: 'Cookies e Tecnologias de Navegador',
         intro: `Esta politica explica como a ${companyName} utiliza cookies e tecnologias equivalentes no site para garantir funcionamento, seguranca, preferencias do utilizador e medicao estatistica de utilizacao.`,
-        lastUpdated: 'Ultima atualizacao: 8 de maio de 2026',
-        sections: [
+           lastUpdated: 'Última atualização: 8 de maio de 2026',
+           sections: [
           {
             title: '1. O Que Sao Cookies',
             paragraphs: [

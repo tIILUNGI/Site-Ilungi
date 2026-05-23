@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Save, RotateCcw, Download, Upload, Trash2, Edit3, Globe, Palette, FileText, Users, Briefcase, Monitor, ArrowLeft } from 'lucide-react';
 import { useAppContext } from '../App';
 import { getContent, saveContent, resetContent, exportContent, importContent, resetAllContent, syncContentFromRemote } from '../lib/contentManager';
+import { pushAllDataToRemote } from '../lib/dataInitialization';
 
 // Helper to get localized value from object {pt, en} or string
 const getLocalizedValue = (value: any, lang: string): string => {
@@ -28,6 +29,26 @@ const AdminConfig: React.FC = () => {
   const [editedContent, setEditedContent] = useState<any>(null);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'synced' | 'error'>('idle');
+  const [initStatus, setInitStatus] = useState<'idle' | 'initializing' | 'done' | 'error'>('idle');
+
+  const handleInitDatabase = async () => {
+    if (confirm(isPt 
+      ? 'AVISO: Isto irá abastecer a base de dados com os dados estáticos do frontend. Deseja continuar?' 
+      : 'WARNING: This will supply the database with static frontend data. Continue?')) {
+      
+      setInitStatus('initializing');
+      try {
+        await pushAllDataToRemote();
+        setInitStatus('done');
+        alert(isPt ? 'Base de dados abastecida com sucesso!' : 'Database successfully supplied!');
+      } catch (e) {
+        setInitStatus('error');
+        alert(isPt ? 'Erro ao abastecer base de dados.' : 'Error supplying database.');
+      } finally {
+        setTimeout(() => setInitStatus('idle'), 3000);
+      }
+    }
+  };
 
   useEffect(() => {
     const localData = getContent(lang);
@@ -400,6 +421,33 @@ const AdminConfig: React.FC = () => {
                   </motion.button>
                   <p className={`text-sm text-center mt-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                     {isPt ? 'Isto irá apagar todas as alterações feitas.' : 'This will erase all changes made.'}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-slate-200 dark:border-slate-700">
+                  <h3 className={`font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                    {isPt ? 'Inicialização de Dados' : 'Data Initialization'}
+                  </h3>
+                  <motion.button
+                    onClick={handleInitDatabase}
+                    disabled={initStatus === 'initializing'}
+                    className={`flex items-center justify-center gap-2 w-full p-4 rounded-xl font-medium text-white transition-colors ${
+                      initStatus === 'initializing' ? 'bg-orange-400' : 
+                      initStatus === 'done' ? 'bg-green-500' :
+                      initStatus === 'error' ? 'bg-red-500' : 'bg-orange-500 hover:bg-orange-600'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Upload className="w-5 h-5" />
+                    <span>
+                      {initStatus === 'initializing' ? (isPt ? 'A Abastecer...' : 'Supplying...') :
+                       initStatus === 'done' ? (isPt ? 'Abastecido!' : 'Supplied!') :
+                       (isPt ? 'Abastecer Base de Dados (via Frontend)' : 'Supply Database (via Frontend)')}
+                    </span>
+                  </motion.button>
+                  <p className={`text-sm text-center mt-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                    {isPt ? '⚠️ Isto enviará todos os dados estáticos atuais para a base de dados remota.' : '⚠️ This will send all current static data to the remote database.'}
                   </p>
                 </div>
               </div>

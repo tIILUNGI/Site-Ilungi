@@ -135,7 +135,6 @@ const Blog: React.FC = () => {
           <h1 className={`text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
             <span className="text-[#6a00a3]">ILUNGI</span> HUB
           </h1>
-          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-bold uppercase tracking-[0.25em] sm:tracking-[0.4em]">Knowledge Center</p>
         </div>
       </div>
 

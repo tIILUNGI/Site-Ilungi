@@ -12,6 +12,18 @@ const getAuthHeaders = () => {
 
 const handleResponse = async (response: Response, method: string, path: string) => {
   if (!response.ok) {
+    if (response.status === 401) {
+      console.warn('[API] Unauthorized access - clearing session');
+      sessionStorage.removeItem('ilungi_admin');
+      sessionStorage.removeItem('ilungi_admin_token');
+      if (window.location.pathname.startsWith('/admin') && !window.location.pathname.includes('/login')) {
+        window.location.href = '/admin/login?error=expired';
+      }
+    }
+    if (response.status === 403) {
+      console.error('[API] Forbidden - Check user permissions');
+      // Do not use alert here to avoid blocking, handle in UI instead or use a simpler message
+    }
     const error = await response.json().catch(() => ({ message: 'Unknown error' }));
     console.error(`[API ERROR] ${method} ${path} - Status: ${response.status}`, error);
     throw new Error(error.message || `Error ${response.status}: ${response.statusText}`);
@@ -222,7 +234,17 @@ export const endpoints = {
   contact: {
     send: (data: any) => api.post('/contact', data),
     sendSpontaneous: (formData: FormData) => api.postFormData('/contact/spontaneous', formData),
-    sendCourse: (data: any) => api.post('/contact/course', data)
+    sendCourse: (data: any) => api.post('/contact/course', data),
+    getMessages: () => api.get('/contact'),
+    markAsRead: (id: string) => api.put(`/contact/${id}/read`, {}),
+    deleteMessage: (id: string) => api.delete(`/contact/${id}`)
+  },
+  talents: {
+    getAll: () => api.get('/talents'),
+    getOne: (id: string) => api.get(`/talents/${id}`),
+    create: (data: any) => api.post('/talents', data),
+    update: (id: string, data: any) => api.put(`/talents/${id}`, data),
+    delete: (id: string) => api.delete(`/talents/${id}`)
   },
   analytics: {
     // Track events

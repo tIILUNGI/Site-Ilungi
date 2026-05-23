@@ -63,18 +63,13 @@ const Contact: React.FC = () => {
     setStatus('sending');
     
     try {
-      await endpoints.contact.send(formData);
+      const payload = { ...formData, type: 'contact' };
+      await endpoints.contact.send(payload);
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error sending contact message:', error);
-       const emailBody = isPt
-         ? `Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nMensagem:\n${formData.message}`
-         : `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage:\n${formData.message}`;
-       const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Contacto' : 'Contact'}: ${formData.subject}`)}&body=${encodeURIComponent(emailBody)}`;
-      window.location.href = mailtoLink;
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setStatus('error');
     }
   };
 
@@ -92,6 +87,7 @@ const Contact: React.FC = () => {
       fd.append('phone', spontaneousData.phone);
       fd.append('area', spontaneousData.area);
       fd.append('cv', spontaneousData.cv);
+      fd.append('type', 'spontaneous');
       if (file) {
         fd.append('cvFile', file);
       }
@@ -103,14 +99,7 @@ const Contact: React.FC = () => {
       if (fileInput) fileInput.value = '';
     } catch (error) {
       console.error('Error sending spontaneous application:', error);
-      const emailBody = isPt
-        ? `Nome: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nTelefone: ${spontaneousData.phone}\nÁrea de Interesse: ${spontaneousData.area}\nBreve Apresentação:\n${spontaneousData.cv}${file ? `\n\nAnexar currículo: ${file.name}` : ''}`
-        : `Name: ${spontaneousData.name}\nEmail: ${spontaneousData.email}\nPhone: ${spontaneousData.phone}\nArea of Interest: ${spontaneousData.area}\nBrief Presentation:\n${spontaneousData.cv}${file ? `\n\nAttach resume: ${file.name}` : ''}`;
-      const mailtoLink = `mailto:geral@ilungi.ao?subject=${encodeURIComponent(`${isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}`)}&body=${encodeURIComponent(emailBody)}`;
-      window.location.href = mailtoLink;
-      setSpontaneousStatus('success');
-      setSpontaneousData({ name: '', email: '', phone: '', area: '', cv: '' });
-      if (fileInput) fileInput.value = '';
+      setSpontaneousStatus('error');
     }
   };
 

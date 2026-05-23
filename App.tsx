@@ -54,6 +54,7 @@ const AdminConfig = lazy(() => import('./pages/AdminConfig'));
 const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 const AdminAnalytics = lazy(() => import('./pages/AdminAnalytics'));
 const AdminMessages = lazy(() => import('./pages/AdminMessages'));
+const AdminTalents = lazy(() => import('./pages/AdminTalents'));
 const Certifications = lazy(() => import('./pages/Certifications'));
 const CourseCatalog = lazy(() => import('./pages/CourseCatalog'));
 const CoursePlayer = lazy(() => import('./pages/CoursePlayer'));
@@ -172,7 +173,7 @@ const AppShell: React.FC = () => {
             <AnimatePresence mode="wait">
               <Routes>
                 <Route path="/" element={<Home />} />
-<Route path="/consultoria" element={<Consulting />} />
+                <Route path="/consultoria" element={<Consulting />} />
                 <Route path="/consultoria/consultoria-e-auditoria-em-sistemas-de-gestao" element={<ISOPage />} />
                 <Route path="/consultoria/gri-sustentabilidade" element={<ServiceDetail type="risk" />} />
                 <Route path="/consultoria/procurement" element={<ServiceDetail type="procurement" />} />
@@ -207,6 +208,7 @@ const AppShell: React.FC = () => {
                 <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
                 <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />
                 <Route path="/admin/mensagens" element={<RequireAdmin><AdminMessages /></RequireAdmin>} />
+                <Route path="/admin/talentos" element={<RequireAdmin><AdminTalents /></RequireAdmin>} />
                 <Route path="/admin/analytics" element={<RequireAdmin><AdminAnalytics /></RequireAdmin>} />
                 <Route path="/certificacoes" element={<Certifications />} />
               </Routes>

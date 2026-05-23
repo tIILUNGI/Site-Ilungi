@@ -58,7 +58,7 @@ export const translations: Record<'pt' | 'en', any> = {
       partners: "Nossos Parceiros",
     },
     contact: {
-      title: "Entre em Contacto",
+       title: "Entre em Contato",
       subtitle: "Estamos prontos para elevar o nível da sua organização.",
       formName: "Nome Completo",
       formEmail: "Email Corporativo",
