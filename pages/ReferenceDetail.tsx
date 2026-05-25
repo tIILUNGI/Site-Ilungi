@@ -11,6 +11,7 @@ type IsoNormConfig = { norms: string[]; asib: boolean };
 // Mapping of ISO references to their acquired norms/seals
 const isoNorms: Record<string, IsoNormConfig> = {
   'b6l': { norms: ['9001', '45001', '14001'], asib: true },
+  'aguia-do-sul': { norms: ['9001', '45001', '14001'], asib: true },
   'esmac': { norms: ['9001', '45001', '14001'], asib: true },
   'aclean': { norms: ['9001', '45001', '14001'], asib: true },
   'imovias-urbanismo-sa': { norms: ['9001', '45001'], asib: true },

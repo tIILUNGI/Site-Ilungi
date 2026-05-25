@@ -272,12 +272,67 @@ export const translations: Record<'pt' | 'en', any> = {
       viewDetails: "Ver Detalhes",
       clients: [
         {
+          id: "aclean",
+          name: "Aclean,Lda",
+          logo: "/Nossas Referências/A Clean.jpg",
+          role: "Director Geral",
+          comment: "Foi de facto muito boa a prestação, a atenção dedicada, bem como a formulação ao detalhe do sistema, o entendimento dos consultores e a maneira interativa.",
+          person: "Gelson Salvador",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: ["/Nossas Referências/SAQIA.png"]
+        },
+        {
+          id: "aguia-do-sul",
+          name: "Aguia do Sul",
+          logo: "/Nossas Referências/Aguias do Sul.png",
+          role: "CEO - Aguia do Sul",
+          comment: "Temos orgulho em recomendar a Ilungi pelo excelente trabalho de consultoria prestado durante o nosso processo de implementação ISO.\nCom profissionalismo, dedicação e acompanhamento próximo, a Ilungi foi fundamental para que alcançássemos as certificações ISO 9001, 14001 e 45001 com sucesso.\nAgradecemos pela parceria, competência técnica e compromisso com a excelência demonstrados em cada etapa deste importante marco para a nossa empresa.",
+          person: "Evelin M S Santos",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: []
+        },
+        {
           id: "b6l",
           name: "B6L",
           logo: "/Nossas Referências/B6L.jpg",
           role: "Diretor Geral",
           comment: "Somos gratos por mais este passo rumo aos nossos objetivos. À ILUNGI, agradecemos não apenas pela parceria, mas pelo suporte e orientação fundamentais para o nosso crescimento. A satisfação de seus parceiros é reflexo de compromisso e disciplina. Vamos juntos, pois a grandiosidade se alcança em conjunto.",
           person: "Benetti Bumba",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: []
+        },
+        {
+          id: "bioprev",
+          name: "BioPrev",
+          logo: "/Nossas Referências/BioPrev.webp",
+          role: "Serviço de Assistência e Suporte de TI",
+          comment: "A ILUNGI garantiu estabilidade e melhoria dos nossos sistemas de TI.",
+          person: "Director de Tecnologia",
+          service: "pmo",
+          description: "Implementação do Primavera e suporte de TI",
+          attachments: []
+        },
+        {
+          id: "bureauveritas",
+          name: "Bureau Veritas",
+          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
+          role: "Serviço de Procurement",
+          comment: "Excelente parceria em serviços de procurement. Qualidade garantida.",
+          person: "Director de Operações",
+          service: "procurement",
+          description: "Serviços de procurement e consultoria",
+          attachments: []
+        },
+        {
+          id: "diway",
+          name: "Diway",
+          logo: "/Nossas Referências/Diway.jpg",
+          role: "Coordenadora da Qualidade",
+          comment: "Experiência agradável.",
+          person: "Nadiry Celestino",
           service: "iso",
           description: "Consultoria e auditoria em sistemas de gestão.",
           attachments: []
@@ -294,45 +349,23 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "velonet",
-          name: "Velonet",
-          logo: "/Nossas Referências/Velonet.png",
-          role: "Gestor de Qualidade",
-          comment: "Muito dedicados, comprometidos e profissionais.",
-          person: "Alves Ulo",
-          service: "iso",
-          description: "Consultoria e auditoria em sistemas de gestão.",
+          id: "goldproc",
+          name: "Gold Procurement",
+          logo: "/Nossas Referências/Gold Proc.jpg",
+          role: "Serviço de Procurement",
+          comment: "Serviço de procurement eficiente e profissional. Recomendo.",
+          person: "Director de Compras",
+          service: "procurement",
+          description: "Serviços de procurement de materiais e equipamentos",
           attachments: []
         },
         {
-          id: "interseguros",
-          name: "InterSeguros-Corretores de Seguros, S.A.",
-          logo: "/Nossas Referências/Inter Seguros.png",
-          role: "Director Geral",
-          comment: "Acompanhamento excelente durante e após o processo de certificação. Um parceiro que, certamente, nos acompanhará ao longo de muitos anos.",
-          person: "Avelina Rocha",
-          service: "iso",
-          description: "Consultoria e auditoria em sistemas de gestão.",
-          attachments: []
-        },
-        {
-          id: "aclean",
-          name: "Aclean,Lda",
-          logo: "/Nossas Referências/A Clean.jpg",
-          role: "Director Geral",
-          comment: "Foi de facto muito boa a prestação, a atenção dedicada, bem como a formulação ao detalhe do sistema, o entendimento dos consultores e a maneira interativa.",
-          person: "Gelson Salvador",
-          service: "iso",
-          description: "Consultoria e auditoria em sistemas de gestão.",
-          attachments: ["/Nossas Referências/SAQIA.png"]
-        },
-        {
-          id: "diway",
-          name: "Diway",
-          logo: "/Nossas Referências/Diway.jpg",
-          role: "Coordenadora da Qualidade",
-          comment: "Experiência agradável.",
-          person: "Nadiry Celestino",
+          id: "imovias-energy",
+          name: "Imovias Energy SA",
+          logo: "/Nossas Referências/Imovias.png",
+          role: "PCA",
+          comment: "Equipa diligente.",
+          person: "Joaquim Alves",
           service: "iso",
           description: "Consultoria e auditoria em sistemas de gestão.",
           attachments: []
@@ -349,47 +382,14 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "imovias-energy",
-          name: "Imovias Energy SA",
-          logo: "/Nossas Referências/Imovias.png",
-          role: "PCA",
-          comment: "Equipa diligente.",
-          person: "Joaquim Alves",
+          id: "interseguros",
+          name: "InterSeguros-Corretores de Seguros, S.A.",
+          logo: "/Nossas Referências/Inter Seguros.png",
+          role: "Director Geral",
+          comment: "Acompanhamento excelente durante e após o processo de certificação. Um parceiro que, certamente, nos acompanhará ao longo de muitos anos.",
+          person: "Avelina Rocha",
           service: "iso",
           description: "Consultoria e auditoria em sistemas de gestão.",
-          attachments: []
-        },
-        {
-          id: "goldproc",
-          name: "Gold Procurement",
-          logo: "/Nossas Referências/Gold Proc.jpg",
-          role: "Serviço de Procurement",
-          comment: "Serviço de procurement eficiente e profissional. Recomendo.",
-          person: "Director de Compras",
-          service: "procurement",
-          description: "Serviços de procurement de materiais e equipamentos",
-          attachments: []
-        },
-        {
-          id: "bureauveritas",
-          name: "Bureau Veritas",
-          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
-          role: "Serviço de Procurement",
-          comment: "Excelente parceria em serviços de procurement. Qualidade garantida.",
-          person: "Director de Operações",
-          service: "procurement",
-          description: "Serviços de procurement e consultoria",
-          attachments: []
-        },
-        {
-          id: "petromar",
-          name: "Petromar",
-          logo: "/Nossas Referências/PetroMar.jpg",
-          role: "Serviço de Procurement",
-          comment: "Serviço de procurement de excelência. A ILUNGI entregou com qualidade.",
-          person: "Director de Compras",
-          service: "procurement",
-          description: "Serviços de procurement para indústria petrolífera",
           attachments: []
         },
         {
@@ -404,14 +404,25 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "bioprev",
-          name: "BioPrev",
-          logo: "/Nossas Referências/BioPrev.webp",
-          role: "Serviço de Assistência e Suporte de TI",
-          comment: "A ILUNGI garantiu estabilidade e melhoria dos nossos sistemas de TI.",
-          person: "Director de Tecnologia",
-          service: "pmo",
-          description: "Implementação do Primavera e suporte de TI",
+          id: "petromar",
+          name: "Petromar",
+          logo: "/Nossas Referências/PetroMar.jpg",
+          role: "Serviço de Procurement",
+          comment: "Serviço de procurement de excelência. A ILUNGI entregou com qualidade.",
+          person: "Director de Compras",
+          service: "procurement",
+          description: "Serviços de procurement para indústria petrolífera",
+          attachments: []
+        },
+        {
+          id: "velonet",
+          name: "Velonet",
+          logo: "/Nossas Referências/Velonet.png",
+          role: "Gestor de Qualidade",
+          comment: "Muito dedicados, comprometidos e profissionais.",
+          person: "Alves Ulo",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
           attachments: []
         }
       ]
@@ -688,12 +699,67 @@ export const translations: Record<'pt' | 'en', any> = {
       viewDetails: "View Details",
       clients: [
         {
+          id: "aclean",
+          name: "Aclean,Lda",
+          logo: "/Nossas Referências/A Clean.jpg",
+          role: "General Director",
+          comment: "The service was truly very good, with dedicated attention, detailed system formulation, clear understanding by the consultants, and an interactive approach.",
+          person: "Gelson Salvador",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: ["/Nossas Referências/SAQIA.png"]
+        },
+        {
+          id: "aguia-do-sul",
+          name: "Aguia do Sul",
+          logo: "/Nossas Referências/Aguias do Sul.png",
+          role: "CEO - Aguia do Sul",
+          comment: "We are proud to recommend Ilungi for the excellent consulting work provided during our ISO implementation process.\nWith professionalism, dedication, and close monitoring, Ilungi was essential for us to successfully achieve the ISO 9001, 14001, and 45001 certifications.\nWe appreciate the partnership, technical competence, and commitment to excellence demonstrated at every stage of this important milestone for our company.",
+          person: "Evelin M S Santos",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: []
+        },
+        {
           id: "b6l",
           name: "B6L",
           logo: "/Nossas Referências/B6L.jpg",
-          role: "Client",
-          comment: "Implementation of ISO 9001, ISO 14001, and ISO 45001 standards.",
-          person: "B6L",
+          role: "General Director",
+          comment: "We are grateful for this step towards our goals. To ILUNGI, we are thankful not only for the partnership, but for the fundamental support and guidance for our growth. The satisfaction of your partners is a reflection of commitment and discipline. Let us go together, for greatness is achieved as a team.",
+          person: "Benetti Bumba",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: []
+        },
+        {
+          id: "bioprev",
+          name: "BioPrev",
+          logo: "/Nossas Referências/BioPrev.webp",
+          role: "IT Assistance and Support Service",
+          comment: "ILUNGI ensured stability and improvement of our IT systems.",
+          person: "Technology Director",
+          service: "pmo",
+          description: "Primavera implementation and IT support",
+          attachments: []
+        },
+        {
+          id: "bureauveritas",
+          name: "Bureau Veritas",
+          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
+          role: "Procurement Service",
+          comment: "Excellent partnership in procurement services. Quality guaranteed.",
+          person: "Operations Director",
+          service: "procurement",
+          description: "Procurement and consultancy services",
+          attachments: []
+        },
+        {
+          id: "diway",
+          name: "Diway",
+          logo: "/Nossas Referências/Diway.jpg",
+          role: "Quality Coordinator",
+          comment: "Pleasant experience.",
+          person: "Nadiry Celestino",
           service: "iso",
           description: "Consulting and auditing of management systems.",
           attachments: []
@@ -710,12 +776,34 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "velonet",
-          name: "Velonet",
-          logo: "/Nossas Referências/Velonet.png",
-          role: "Quality Manager",
-          comment: "Very dedicated, committed, and professional.",
-          person: "Alves Ulo",
+          id: "goldproc",
+          name: "Gold Procurement",
+          logo: "/Nossas Referências/Gold Proc.jpg",
+          role: "Procurement Service",
+          comment: "Efficient and professional procurement service. I recommend it.",
+          person: "Purchasing Director",
+          service: "procurement",
+          description: "Procurement services for materials and equipment",
+          attachments: []
+        },
+        {
+          id: "imovias-energy",
+          name: "Imovias Energy SA",
+          logo: "/Nossas Referências/Imovias.png",
+          role: "Chairman of the Board",
+          comment: "Diligent team.",
+          person: "Joaquim Alves",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: []
+        },
+        {
+          id: "imovias-urbanismo-sa",
+          name: "Imovias Urbanismo e Construção SA",
+          logo: "/Nossas Referências/Imovias.png",
+          role: "Administrative and HR Director",
+          comment: "It was a very well-planned process.",
+          person: "Paula Carneiro",
           service: "iso",
           description: "Consulting and auditing of management systems.",
           attachments: []
@@ -732,83 +820,6 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "aclean",
-          name: "Aclean,Lda",
-          logo: "/Nossas Referências/A Clean.jpg",
-          role: "General Director",
-          comment: "The service was truly very good, with dedicated attention, detailed system formulation, clear understanding by the consultants, and an interactive approach.",
-          person: "Gelson Salvador",
-          service: "iso",
-          description: "Consulting and auditing of management systems.",
-          attachments: ["/Nossas Referências/SAQIA.png"]
-        },
-        {
-          id: "diway",
-          name: "Diway",
-          logo: "/Nossas Referências/Diway.jpg",
-          role: "Quality Coordinator",
-          comment: "Pleasant experience.",
-          person: "Nadiry Celestino",
-           service: "iso",
-          description: "Consulting and auditing of management systems.",
-          attachments: []
-        },
-        {
-          id: "imovias-urbanismo-sa",
-          name: "Imovias Urbanismo e Construção SA",
-          logo: "/Nossas Referências/Imovias.png",
-          role: "Chairman of the Board",
-          comment: "Diligent team.",
-          person: "Joaquim Alves",
-          service: "iso",
-          description: "Consulting and auditing of management systems.",
-          attachments: []
-        },
-        {
-          id: "imovias-energy",
-          name: "Imovias Energy SA",
-          logo: "/Nossas Referências/Imovias.png",
-          role: "Chairman of the Board",
-          comment: "Diligent team.",
-          person: "Joaquim Alves",
-          service: "iso",
-          description: "Consulting and auditing of management systems.",
-          attachments: []
-        },
-        {
-          id: "goldproc",
-          name: "Gold Procurement",
-          logo: "/Nossas Referências/Gold Proc.jpg",
-          role: "Procurement Service",
-          comment: "Efficient and professional procurement service. Recommended.",
-          person: "Procurement Director",
-          service: "procurement",
-          description: "Procurement services for materials and equipment",
-          attachments: []
-        },
-        {
-          id: "bureauveritas",
-          name: "Bureau Veritas",
-          logo: "/Nossas Referências/Bureau_Veritas-Logo.wine.png",
-          role: "Procurement Service",
-          comment: "Excellent partnership in procurement services. Quality guaranteed.",
-          person: "Operations Director",
-          service: "procurement",
-          description: "Procurement and consultancy services",
-          attachments: []
-        },
-        {
-          id: "petromar",
-          name: "Petromar",
-          logo: "/Nossas Referências/PetroMar.jpg",
-          role: "Procurement Service",
-          comment: "Excellent procurement service. ILUNGI delivered with quality.",
-          person: "Procurement Director",
-          service: "procurement",
-          description: "Procurement services for oil industry",
-          attachments: []
-        },
-        {
           id: "pensana",
           name: "Pensana",
           logo: "/Nossas Referências/pensana-logo-sticky-blue-standard.png",
@@ -820,14 +831,25 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
-          id: "bioprev",
-          name: "BioPrev",
-          logo: "/Nossas Referências/BioPrev.webp",
-          role: "IT Assistance and Support Service",
-          comment: "ILUNGI ensured stability and improvements in our IT systems.",
-          person: "Technology Director",
-          service: "pmo",
-          description: "Primavera implementation and IT support",
+          id: "petromar",
+          name: "Petromar",
+          logo: "/Nossas Referências/PetroMar.jpg",
+          role: "Procurement Service",
+          comment: "Procurement service of excellence. ILUNGI delivered with quality.",
+          person: "Purchasing Director",
+          service: "procurement",
+          description: "Procurement services for the oil industry",
+          attachments: []
+        },
+        {
+          id: "velonet",
+          name: "Velonet",
+          logo: "/Nossas Referências/Velonet.png",
+          role: "Quality Manager",
+          comment: "Very dedicated, committed, and professional.",
+          person: "Alves Ulo",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
           attachments: []
         }
       ]
