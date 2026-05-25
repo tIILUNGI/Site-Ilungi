@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
 import { loadData } from '../lib/dataSync';
+import { mergeAndSortReferences } from '../lib/referenceDisplay';
 
 interface ServiceDetailProps {
   type: 'risk' | 'procurement' | 'pmo';
@@ -14,6 +15,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
   const { t, lang, isDark } = useAppContext();
   const isPt = lang === 'pt';
   const content = t.services[type];
+  const localizedDefaultReferences = t.references?.clients || [];
+  const defaultReferences = mergeAndSortReferences(
+    localizedDefaultReferences,
+    localizedDefaultReferences
+  );
 
   const images = {
     risk: "/imagens/gri-sustentabilidade.jpg",
@@ -21,16 +27,15 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ type }) => {
     pmo: "/imagens/suporte-ti.jpg"
   };
 
-  const defaultReferences = t.references?.clients || [];
   const [references, setReferences] = useState<any[]>(defaultReferences);
   const serviceReferences = references.filter((ref: any) => ref.service === type);
 
   useEffect(() => {
     let isMounted = true;
     setReferences(defaultReferences);
-    loadData('references', 'ilungi_references_data', defaultReferences).then((data) => {
+    loadData('references', 'ilungi_references_data', localizedDefaultReferences).then((data) => {
       if (!isMounted) return;
-      setReferences(data || []);
+      setReferences(mergeAndSortReferences(data || [], localizedDefaultReferences));
     });
     return () => {
       isMounted = false;

@@ -4,6 +4,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { SEO } from '../components/Seo';
 import { loadData } from '../lib/dataSync';
+import { mergeAndSortReferences } from '../lib/referenceDisplay';
 import { DEFAULT_SITE_URL, toAbsoluteUrl } from '../seo/routeSeo.js';
 
 type IsoNormConfig = { norms: string[]; asib: boolean };
@@ -54,6 +55,11 @@ const ReferenceDetail: React.FC = () => {
   const isPt = lang === 'pt';
   const siteUrl = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const localizedDefaultReferences = t.references?.clients || [];
+  const defaultReferences = mergeAndSortReferences(
+    localizedDefaultReferences,
+    localizedDefaultReferences
+  );
   
   // Determine the back link based on service parameter
   const getBackLink = () => {
@@ -64,14 +70,13 @@ const ReferenceDetail: React.FC = () => {
     return '/consultoria';
   };
   
-  const defaultReferences = t.references?.clients || [];
   const [references, setReferences] = useState<any[]>(defaultReferences);
   useEffect(() => {
     let isMounted = true;
     setReferences(defaultReferences);
-    loadData('references', 'ilungi_references_data', defaultReferences).then((data) => {
+    loadData('references', 'ilungi_references_data', localizedDefaultReferences).then((data) => {
       if (!isMounted) return;
-      setReferences(data || []);
+      setReferences(mergeAndSortReferences(data || [], localizedDefaultReferences));
     });
     return () => {
       isMounted = false;

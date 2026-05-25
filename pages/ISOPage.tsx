@@ -4,22 +4,33 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import ReferenceCard from '../components/ReferenceCard';
 import { loadData } from '../lib/dataSync';
+import { mergeAndSortReferences } from '../lib/referenceDisplay';
 
 const ISOPage: React.FC = () => {
   const { t, lang } = useAppContext();
   const isPt = lang === 'pt';
   const [showAllStandards, setShowAllStandards] = useState(false);
-  const [references, setReferences] = useState<any[]>([]);
+  const localizedDefaultReferences = t.references?.clients || [];
+  const defaultReferences = mergeAndSortReferences(
+    localizedDefaultReferences,
+    localizedDefaultReferences
+  );
+  const [references, setReferences] = useState<any[]>(defaultReferences);
   
   const allIsoKeys = ["9001", "14001", "45001", "27001", "22301", "37001", "37301", "31000", "22000", "29993", "20700"] as const;
   const displayedIsoKeys = showAllStandards ? allIsoKeys : allIsoKeys.slice(0, 3);
 
   useEffect(() => {
-    const defaultRefs = t.references?.clients || [];
-    loadData('references', 'ilungi_references_data', defaultRefs).then((data) => {
-      setReferences(data);
+    let isMounted = true;
+    setReferences(defaultReferences);
+    loadData('references', 'ilungi_references_data', localizedDefaultReferences).then((data) => {
+      if (!isMounted) return;
+      setReferences(mergeAndSortReferences(data || [], localizedDefaultReferences));
     });
-  }, [t.references?.clients]);
+    return () => {
+      isMounted = false;
+    };
+  }, [lang]);
 
   return (
     <div className="py-20 bg-white">
