@@ -90,10 +90,11 @@ const Solutions: React.FC = () => {
         // Fix empty image issue - use order-based fallback
         const orderIdx = (product.order || idx) - 1;
         const orderImages = [
-          '/imagens/primavera.png',  // order 1
-          '/imagens/Salya.png',  // order 2
-          '/imagens/SICLIC.png',  // order 3
-          '/imagens/Tocomply360.png'  // order 4
+          '/imagens/primavera.png',      // order 1
+          '/imagens/Salya.png',          // order 2
+          '/imagens/SICLIC.png',         // order 3
+          '/imagens/Tocomply360.png',    // order 4
+          '/imagens/TOKNOW Logo.png'     // order 5
         ];
         if (!product.image || product.image === '') {
           updated = { ...updated, image: orderImages[orderIdx] || orderImages[0] };
@@ -225,172 +226,161 @@ const Solutions: React.FC = () => {
 
         {/* Products Grid */}
         <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24"
+          className="space-y-12 mb-24"
         >
-          {products.map((product, i) => {
-            const prodName = getLocalized(product.name);
-            const isSiclic = prodName === "SICLIC";
-            const isSalya = prodName === "Salya";
-            const isTocomply = prodName === "Tocomply360";
-            const isPrimavera = prodName === "Primavera";
-            const isSpecialProduct = isSalya || isTocomply || isPrimavera;
-            return (
-              <motion.div
-                key={i}
-                variants={cardVariants}
-                custom={i}
-                whileHover={{ y: (isSiclic || isSpecialProduct) ? -8 : -12 }}
-                className={`group relative bg-white rounded-3xl overflow-hidden shadow-xl transition-all duration-500 ${isSiclic ? 'hover:shadow-[0_24px_60px_-30px_rgba(106,0,163,0.45)]' : 'hover:shadow-2xl'}`}
+          {/* Featured / Banner Solution (Primavera) */}
+          {products.filter(p => getLocalized(p.name) === "Primavera").map((product, i) => (
+            <motion.div
+              key="primavera-banner"
+              variants={cardVariants}
+              custom={0}
+              whileHover={{ y: -8 }}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:shadow-[0_24px_60px_-30px_rgba(230,81,0,0.45)]"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#e65100] to-[#6a00a3] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <Link 
+                to={product.path || '#'}
+                className="relative block h-56 sm:h-64 bg-white rounded-[22px] m-0.5 overflow-hidden"
               >
-                {/* Gradient border on hover */}
-                {!(isSiclic || isSpecialProduct) && (
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                )}
+                <motion.img 
+                  src={product.image} 
+                  alt={getLocalized(product.name)}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.8 }}
+                />
                 
-                <div className="relative bg-white rounded-[22px] m-0.5">
-                  {isSiclic || isSpecialProduct ? (
-                    <a
-                      href={product.url || product.path || '#'}
-                      target={product.url ? "_blank" : undefined}
-                      rel={product.url ? "noopener noreferrer" : undefined}
-                      aria-label={getLocalized(product.name)}
-                      className="block relative h-56 sm:h-64 rounded-[22px] bg-white overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.08),transparent_60%)]"></div>
-                      <motion.img 
-                        src={product.image} 
-                        alt={getLocalized(product.name)}
-                        className="relative z-10 w-full h-full object-contain p-6"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.6 }}
-                      />
-                    </a>
-                  ) : (
-                    <>
-                      {/* Image Container */}
-                      <div className="relative h-44 overflow-hidden rounded-t-[22px]">
-                        <motion.div 
-                          className={`absolute inset-0 ${isSalya ? 'bg-gradient-to-t from-black/40 via-black/10 to-transparent' : 'bg-gradient-to-t from-black/70 via-black/30 to-transparent'} z-10`}
-                          initial={{ opacity: 0.5 }}
-                          whileHover={{ opacity: 0.8 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-white font-bold group-hover:text-white transition-colors text-lg">
+                      <span>{isPt ? 'Configuração e implementação' : 'Configuration and implementation'}</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {isEditing && (
+                <div className="absolute top-6 right-6 z-40 flex gap-2">
+                  <button
+                    onClick={() => {
+                      const newImg = prompt("URL da Imagem:", product.image);
+                      if(newImg) handleProductChange(products.indexOf(product), 'image', newImg);
+                    }}
+                    className="p-3 bg-white/90 shadow-xl text-slate-800 rounded-xl hover:bg-[#6a00a3] hover:text-white transition-all"
+                    title="Alterar Imagem"
+                  >
+                    <ImageIcon className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          ))}
+
+          {/* Digital Solutions Grid (The 4 Cards) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.filter(p => getLocalized(p.name) !== "Primavera").map((product, i) => {
+              const hasExternalUrl = !!product.url;
+              return (
+                <motion.div
+                  key={product.id}
+                  variants={cardVariants}
+                  custom={i + 1}
+                  whileHover={{ y: -12 }}
+                  className="group relative bg-white rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:shadow-[0_24px_60px_-30px_rgba(106,0,163,0.45)]"
+                >
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6a00a3] to-[#1B3C2B] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <div className="relative bg-white rounded-[22px] m-0.5">
+                    {hasExternalUrl ? (
+                      <a
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={getLocalized(product.name)}
+                        className="block relative h-64 rounded-[22px] bg-white overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.06),transparent_70%)]"></div>
                         <motion.img 
                           src={product.image} 
                           alt={getLocalized(product.name)}
-                          className={`w-full h-full ${isSalya ? 'object-contain p-5 bg-white' : 'object-cover'}`}
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.6 }}
-                        />
-                        
-                        {/* Badge */}
-                        <motion.div 
-                          className="absolute top-5 left-5 z-20"
+                          className="relative z-10 w-full h-full object-contain p-8"
                           whileHover={{ scale: 1.05 }}
-                        >
-                          <div className={`bg-gradient-to-r ${product.color} px-5 py-2.5 rounded-xl shadow-lg border border-white/20`}>
-                            <span className="text-white font-black text-lg">
-                              {getLocalized(product.name)}
-                            </span>
-                          </div>
-                        </motion.div>
-
-                        {/* Tagline */}
-                        <div className="absolute bottom-5 left-5 z-20">
-                          <span className="text-xs px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-medium border border-white/30">
-                            {getLocalized(product.tagline)}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <div className="absolute inset-0 z-20 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span className="text-xs px-5 py-2 bg-[#6a00a3] text-white rounded-full font-bold flex items-center gap-2 shadow-xl">
+                            {isPt ? 'Visitar' : 'Visit'} <ArrowRight className="w-4 h-4" />
                           </span>
                         </div>
-                      </div>
-
-                      {/* Content */}
-                    <div className="p-5 bg-white">
-                        <p className="text-slate-500 leading-relaxed mb-6 text-sm line-clamp-3">
-                          {getLocalized(product.desc)}
-                        </p>
-                        
-                        <div className="flex items-center justify-between">
-                          {product.url ? (
-                            <motion.a 
-                              href={product.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              whileHover={{ x: 5 }}
-                              className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
-                            >
-                              <span>{isPt ? 'Visitar' : 'Visit'}</span>
-                              <ArrowRight className="w-4 h-4" />
-                            </motion.a>
-                          ) : (
-                            <motion.div whileHover={{ x: 5 }}>
-                              <Link 
-                                to={product.path || '#'}
-                                className="inline-flex items-center gap-2 font-bold text-[#1B3C2B] hover:text-[#6a00a3] transition-colors"
-                              >
-                                <span>{isPt ? 'Saber mais' : 'Learn more'}</span>
-                                <ArrowRight className="w-4 h-4" />
-                              </Link>
-                            </motion.div>
-                          )}
+                      </a>
+                    ) : (
+                      <Link 
+                        to={product.path || '#'}
+                        className="block relative h-64 rounded-[22px] bg-white overflow-hidden"
+                      >
+                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,0,163,0.06),transparent_70%)]"></div>
+                        <motion.img 
+                          src={product.image} 
+                          alt={getLocalized(product.name)}
+                          className="relative z-10 w-full h-full object-contain p-8"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <div className="absolute inset-0 z-20 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span className="text-xs px-5 py-2 bg-[#1B3C2B] text-white rounded-full font-bold flex items-center gap-2 shadow-xl">
+                            {isPt ? 'Saber mais' : 'Learn more'} <ArrowRight className="w-4 h-4" />
+                          </span>
                         </div>
-                      </div>
+                      </Link>
+                    )}
+                  </div>
 
-                      {/* Decorative line */}
-                      <motion.div 
-                        className="absolute bottom-0 left-0 h-1"
-                        style={{ background: `linear-gradient(to right, ${product.bgColor.replace('bg-', '')}, #6a00a3)` }}
-                        initial={{ width: 0 }}
-                        whileHover={{ width: '100%' }}
-                        transition={{ duration: 0.4 }}
-                      />
-                    </>
-                  )}
-                </div>
-
-                  {/* Admin Tools */}
                   {isEditing && (
                     <div className="absolute top-4 right-4 z-40 flex flex-col gap-2">
-                      <button
+                       <button
                         onClick={() => {
                           const newImg = prompt("URL da Imagem:", product.image);
-                          if(newImg) handleProductChange(i, 'image', newImg);
+                          if(newImg) handleProductChange(products.indexOf(product), 'image', newImg);
                         }}
                         className="p-2 bg-white/90 shadow-lg text-slate-800 rounded-lg hover:bg-[#6a00a3] hover:text-white transition-all"
                         title="Alterar Imagem"
                       >
                         <ImageIcon className="w-4 h-4" />
                       </button>
-                    <button
-                      onClick={() => handleDeleteProduct(i)}
-                      className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
-                      title="Eliminar"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
+                      <button
+                        onClick={() => handleDeleteProduct(products.indexOf(product))}
+                        className="p-2 bg-red-500/90 shadow-lg text-white rounded-lg hover:bg-red-600 transition-all"
+                        title="Eliminar"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+            
+            {/* Add New Button (Admin) */}
+            {isEditing && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onClick={handleAddProduct}
+                className="group relative bg-[#6a00a3]/5 rounded-3xl border-2 border-dashed border-[#6a00a3]/30 hover:bg-[#6a00a3]/10 hover:border-[#6a00a3]/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[16rem] cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-[#6a00a3] rounded-full flex items-center justify-center text-white mb-3 group-hover:scale-110 shadow-lg shadow-[#6a00a3]/30 transition-transform">
+                  <Plus className="w-6 h-6" />
+                </div>
+                <span className="font-bold text-[#6a00a3] text-sm">Nova Solução</span>
               </motion.div>
-            );
-          })}
-          
-          {/* Add New Button (Admin) */}
-          {isEditing && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              onClick={handleAddProduct}
-              className="group relative bg-[#6a00a3]/5 rounded-3xl border-2 border-dashed border-[#6a00a3]/30 hover:bg-[#6a00a3]/10 hover:border-[#6a00a3]/50 transition-all duration-500 flex flex-col items-center justify-center min-h-[400px] cursor-pointer"
-            >
-              <div className="w-16 h-16 bg-[#6a00a3] rounded-full flex items-center justify-center text-white mb-4 group-hover:scale-110 shadow-lg shadow-[#6a00a3]/30 transition-transform">
-                <Plus className="w-8 h-8" />
-              </div>
-              <span className="font-bold text-[#6a00a3] text-lg">Nova Solução</span>
-            </motion.div>
-          )}
+            )}
+          </div>
         </motion.div>
 
         {/* Features Section */}

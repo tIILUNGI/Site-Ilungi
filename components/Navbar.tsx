@@ -48,9 +48,10 @@ const Navbar: React.FC = () => {
       id: 'solutions',
       path: '/solucoes',
       mega: [
-        { title: "Salya", desc: "", path: '/solucoes/salya' },
+        { title: "Salya", desc: "", href: "https://salya.ao/" },
         { title: "SICLIC", desc: "", href: "https://siclic.ao/" },
-        { title: "Tocomply360", desc: "", path: '/solucoes/tocomply' },
+        { title: "Tocomply360", desc: "", href: "https://tocomply360.io/" },
+        { title: "ToKnow", desc: "", href: "https://toknow.tocomply360.io/" },
       ]
     },
     { label: t.nav.partners, id: 'partners', path: '/parceiros' },
