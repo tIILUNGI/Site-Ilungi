@@ -219,17 +219,23 @@ const CourseCatalog: React.FC = () => {
                     <td className="px-6 py-4 text-sm font-semibold text-slate-700 whitespace-nowrap">{getLocalized(course.code)}</td>
                     <td className="px-6 py-4 text-sm font-semibold text-slate-800">{getLocalized(course.name)}</td>
                     <td className="px-6 py-4 text-sm text-slate-600">{getLocalized(course.area)}</td>
-                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.hours}</td>
-                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.modality}</td>
-                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{course.agenda}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{getLocalized(course.hours)}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{getLocalized(course.modality)}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 whitespace-nowrap">{getLocalized(course.agenda)}</td>
                     <td className="px-6 py-4">
                       <motion.button
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => openForm(course)}
+                    onClick={() => {
+                      if (course.enrollUrl) {
+                        window.location.href = course.enrollUrl;
+                      } else {
+                        openForm(course);
+                      }
+                    }}
                         className="px-4 py-2 bg-[#6a00a3] text-white text-sm font-bold rounded-full hover:bg-[#520b7d] transition-all"
                       >
-                        {isPt ? 'Saber mais' : 'Learn more'}
+                        {course.enrollUrl ? (isPt ? 'iscrever-me' : 'Enroll') : isPt ? 'Saber mais' : 'Learn more'}
                       </motion.button>
                     </td>
                   </tr>
@@ -318,24 +324,30 @@ const CourseCatalog: React.FC = () => {
                   <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                     <div className="rounded-xl bg-slate-50 p-3">
                       <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Carga Horária' : 'Hours'}</p>
-                      <p className="font-semibold text-slate-700 mt-1">{course.hours}</p>
+                      <p className="font-semibold text-slate-700 mt-1">{getLocalized(course.hours)}</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3">
                       <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Modalidade' : 'Format'}</p>
-                      <p className="font-semibold text-slate-700 mt-1">{course.modality}</p>
+                      <p className="font-semibold text-slate-700 mt-1">{getLocalized(course.modality)}</p>
                     </div>
                     <div className="rounded-xl bg-slate-50 p-3 col-span-2">
                       <p className="text-xs uppercase font-semibold text-slate-400">{isPt ? 'Agenda' : 'Schedule'}</p>
-                      <p className="font-semibold text-slate-700 mt-1">{course.agenda}</p>
+                      <p className="font-semibold text-slate-700 mt-1 whitespace-pre-line">{getLocalized(course.agenda)}</p>
                     </div>
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => openForm(course)}
+                    onClick={() => {
+                      if (course.enrollUrl) {
+                        window.location.href = course.enrollUrl;
+                      } else {
+                        openForm(course);
+                      }
+                    }}
                     className="mt-5 w-full px-4 py-3 bg-[#6a00a3] text-white text-sm font-bold rounded-full hover:bg-[#520b7d] transition-all"
                   >
-                    {isPt ? 'Saber mais' : 'Learn more'}
+                    {course.enrollUrl ? (isPt ? 'iscrever-me' : 'Enroll') : isPt ? 'Saber mais' : 'Learn more'}
                   </motion.button>
                 </div>
               ))

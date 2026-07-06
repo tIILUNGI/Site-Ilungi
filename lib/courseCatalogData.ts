@@ -1,12 +1,16 @@
-﻿export type Course = {
+﻿export type LocalizedText = string | { pt?: string; en?: string };
+
+export type Course = {
   id: string;
   code: string;
-  name: string;
-  area: string;
-  hours: string;
-  modality: string;
-  agenda: string;
+  name: LocalizedText;
+  area: LocalizedText;
+  hours: LocalizedText;
+  modality: LocalizedText;
+  agenda: LocalizedText;
+  enrollUrl?: string;
 };
+
 
 export const defaultCourses: Course[] = [
   {
@@ -548,5 +552,78 @@ export const defaultCourses: Course[] = [
     hours: 'A definir',
     modality: 'A definir',
     agenda: 'On-demand',
+  },
+  {
+    id: 'course-061',
+    code: 'CC-061',
+    name: {
+      pt: 'MINI MBA DE ESPECIALIZAÇÃO',
+      en: 'MINI SPECIALIZATION MBA',
+    },
+    area: {
+      pt: 'Gestão & Administração',
+      en: 'Management & Administration',
+    },
+    hours: {
+      pt: '60 horas - 15 sessões de 4 horas',
+      en: '60 hours - 15 sessions of 4 hours',
+    },
+    modality: {
+      pt: 'A distância - (sessões síncronas com formador)',
+      en: 'Distance learning - (synchronous sessions with instructor)',
+    },
+    agenda:
+      '18h00–22h10\n20, 21, 23, 27, 28, 30 de Julho\n3, 4, 6, 10, 11, 13, 17, 18, 20 de Agosto',
+    enrollUrl: 'https://grcc.fillout.com/apply',
+  },
+  {
+    id: 'course-062',
+    code: 'CC-062',
+    name: {
+      pt: 'ISO 30415:2021 (Recursos Humanos - Diversidade e Inclusão) - INTERPRETAÇÃO E IMPLEMENTAÇÃO',
+      en: 'ISO 30415:2021 (Human Resources - Diversity and Inclusion) - INTERPRETATION AND IMPLEMENTATION',
+    },
+    area: {
+      pt: 'Recursos Humanos',
+      en: 'Human Resources',
+    },
+    hours: {
+      pt: '6 horas',
+      en: '6 hours',
+    },
+    modality: {
+      pt: 'Via Google Meet',
+      en: 'Via Google Meet',
+    },
+    agenda: {
+      pt: 'Dia 02, 03 e 06 de Julho - 19h às 21h',
+      en: 'July 02, 03 and 06 - 19:00 to 21:00',
+    },
+    enrollUrl: 'https://forms.fillout.com/t/2kpcY7UdDrus',
+  },
+  {
+    id: 'course-063',
+    code: 'CC-063',
+    name: {
+      pt: 'Intersecção de Normas sobre Sustentabilidade (IWA48: ESG, IWA42: NET ZERO, PAS53002: ODS) e o PSSFA',
+      en: 'Intersection of Sustainability Standards (IWA48: ESG, IWA42: NET ZERO, PAS53002: SDGs) and PSSFA',
+    },
+    area: {
+      pt: 'Sustentabilidade',
+      en: 'Sustainability',
+    },
+    hours: {
+      pt: '2 horas',
+      en: '2 hours',
+    },
+    modality: {
+      pt: 'Via Google Meet',
+      en: 'Via Google Meet',
+    },
+    agenda: {
+      pt: 'Dia 07 de Julho - 19h às 21h',
+      en: 'July 07 - 19:00 to 21:00',
+    },
+    enrollUrl: 'https://forms.fillout.com/t/2kpcY7UdDrus',
   },
 ];
