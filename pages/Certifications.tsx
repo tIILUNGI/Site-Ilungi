@@ -29,11 +29,18 @@ const Certifications: React.FC = () => {
       badge: isPt ? 'Licença' : 'License'
     },
     {
-      title: 'CPD UK',
-      subtitle: isPt ? 'Cursos Profissionais' : 'Professional Courses',
-      desc: isPt ? 'Registo pelo CPD UK para ministração de cursos profissionais no Reino Unido.' : 'CPD UK registration for professional courses in the United Kingdom.',
-      color: '#B31B1B',
-      badge: isPt ? 'Registo' : 'Registered'
+      title: 'ISO 29993',
+      subtitle: isPt ? 'Serviços de Aprendizagem' : 'Learning Services',
+      desc: isPt ? 'Certificação de serviços de aprendizagem conforme a norma ISO 29993.' : 'Learning services certification in accordance with ISO 29993.',
+      color: '#1B3C2B',
+      badge: isPt ? 'Certificado' : 'Certified'
+    },
+    {
+      title: 'ISO 29994',
+      subtitle: isPt ? 'Sistemas de Gestão da Aprendizagem' : 'Learning Management Systems',
+      desc: isPt ? 'Certificação de sistemas de gestão da aprendizagem conforme a norma ISO 29994.' : 'Learning management systems certification in accordance with ISO 29994.',
+      color: '#0A4D8C',
+      badge: isPt ? 'Certificado' : 'Certified'
     },
     {
       title: 'INIQ',
