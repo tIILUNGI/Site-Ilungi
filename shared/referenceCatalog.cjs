@@ -227,6 +227,23 @@ const referenceCatalog = [
     attachments: [],
   },
   {
+    id: 'apriori',
+    name: { pt: 'Aprori Consultoria e Formações', en: 'Aprori Consultoria e Formações' },
+    logo: '/Nossas Refer\u00eancias/APRORI.jpeg',
+    role: { pt: 'Consultor', en: 'Consultant' },
+    comment: {
+      pt: 'Recebi um apoio exemplar durante todo o processo de obten\u00e7\u00e3o da ISO. A equipa mostrou compet\u00eancia, disponibilidade e orienta\u00e7\u00e3o clara em cada etapa. Fiquei extremamente satisfeito com o acompanhamento e recomendo o trabalho.',
+      en: 'I received exemplary support throughout the entire ISO certification process. The team demonstrated competence, availability, and clear guidance at every step. I was extremely satisfied with the follow-up and recommend the work.',
+    },
+    person: 'Carlos Araujo',
+    service: 'iso',
+    description: {
+      pt: 'Consultoria e auditoria em sistemas de gest\u00e3o.',
+      en: 'Consulting and auditing of management systems.',
+    },
+    attachments: [],
+  },
+  {
     id: 'velonet',
     name: { pt: 'Velonet', en: 'Velonet' },
     logo: '/Nossas Refer\u00eancias/Velonet.png',

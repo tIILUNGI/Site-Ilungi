@@ -11,6 +11,7 @@ type IsoNormConfig = { norms: string[]; asib: boolean };
 
 // Mapping of ISO references to their acquired norms/seals
 const isoNorms: Record<string, IsoNormConfig> = {
+  'apriori': { norms: ['29993'], asib: true },
   'b6l': { norms: ['9001', '45001', '14001'], asib: true },
   'aguia-do-sul': { norms: ['9001', '45001', '14001'], asib: true },
   'esmac': { norms: ['9001', '45001', '14001'], asib: true },
@@ -34,6 +35,7 @@ const isoImages: Record<string, string> = {
   '9001': '/imagens/ISO 9001_2015.png',
   '45001': '/imagens/ISO 45001_2018.png',
   '14001': '/imagens/ISO 14001_2015.png',
+  '29993': '/imagens/ISO 29993.png',
   'asib': '/imagens/ASIB.png'
 };
 

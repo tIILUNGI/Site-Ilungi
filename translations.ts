@@ -415,6 +415,17 @@ export const translations: Record<'pt' | 'en', any> = {
           attachments: []
         },
         {
+          id: "apriori",
+          name: "Aprori Consultoria e Formações",
+          logo: "/Nossas Referências/APRORI.jpeg",
+          role: "Consultor",
+          comment: "Recebi um apoio exemplar durante todo o processo de obtenção da ISO. A equipa mostrou competência, disponibilidade e orientação clara em cada etapa. Fiquei extremamente satisfeito com o acompanhamento e recomendo o trabalho.",
+          person: "Carlos Araujo",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: []
+        },
+        {
           id: "velonet",
           name: "Velonet",
           logo: "/Nossas Referências/Velonet.png",
@@ -839,6 +850,17 @@ export const translations: Record<'pt' | 'en', any> = {
           person: "Purchasing Director",
           service: "procurement",
           description: "Procurement services for the oil industry",
+          attachments: []
+        },
+        {
+          id: "apriori",
+          name: "Aprori Consultoria e Formações",
+          logo: "/Nossas Referências/APRORI.jpeg",
+          role: "Consultant",
+          comment: "I received exemplary support throughout the entire ISO certification process. The team demonstrated competence, availability, and clear guidance at every step. I was extremely satisfied with the follow-up and recommend the work.",
+          person: "Carlos Araujo",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
           attachments: []
         },
         {
