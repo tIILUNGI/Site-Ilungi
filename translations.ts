@@ -161,6 +161,7 @@ export const translations: Record<'pt' | 'en', any> = {
           "9001": { title: "ISO 9001 - Gestão da Qualidade", benefit: "Padroniza processos e aumenta a satisfação do cliente." },
           "14001": { title: "ISO 14001 - Gestão Ambiental", benefit: "Reduz o impacto ambiental e garante conformidade legal." },
           "45001": { title: "ISO 45001 - Saúde e Segurança Ocupacional", benefit: "Melhora a segurança ocupacional e reduz acidentes." },
+          "18788": { title: "ISO 18788 - Gestão de Operações de Segurança Privada", benefit: "Estabelece os requisitos para operações de segurança privada." },
           "27001": { title: "ISO 27001 - Gestão de Informação", benefit: "Protege dados críticos e fortalece a confiança." },
           "22301": { title: "ISO 22301 - Gestão de Continuidade", benefit: "Garante continuidade do negócio em crises." },
           "37001": { title: "ISO 37001 - Gestão de Compliance e Antissuborno", benefit: "Implementa controles eficazes contra suborno." },
@@ -435,6 +436,17 @@ export const translations: Record<'pt' | 'en', any> = {
           service: "iso",
           description: "Consultoria e auditoria em sistemas de gestão.",
           attachments: []
+        },
+        {
+          id: "global-carrapas",
+          name: "GLOBAL CARRAPAS",
+          logo: "/Nossas Referências/CARRAPAS.png",
+          role: "Coordenador",
+          comment: "Excelente,na Implementação de sistema de gestão e acompanhamento a certificação recomendo.",
+          person: "Coordenador",
+          service: "iso",
+          description: "Consultoria e auditoria em sistemas de gestão.",
+          attachments: []
         }
       ]
     }
@@ -599,6 +611,7 @@ export const translations: Record<'pt' | 'en', any> = {
           "9001": { title: "ISO 9001 - Quality Management", benefit: "Standardizes processes and improves customer satisfaction." },
           "14001": { title: "ISO 14001 - Environmental Management", benefit: "Reduces environmental impact and ensures legal compliance." },
           "45001": { title: "ISO 45001 - Occupational Health and Safety", benefit: "Improves occupational safety and reduces accidents." },
+          "18788": { title: "ISO 18788 - Security Operations Management", benefit: "Establishes requirements for private security operations." },
           "27001": { title: "ISO 27001 - Information Security Management", benefit: "Protects critical data and builds trust." },
           "22301": { title: "ISO 22301 - Business Continuity", benefit: "Ensures business continuity during disruptions." },
           "37001": { title: "ISO 37001 - Compliance and Anti-Bribery", benefit: "Implements effective anti-bribery controls." },
@@ -870,6 +883,17 @@ export const translations: Record<'pt' | 'en', any> = {
           role: "Quality Manager",
           comment: "Very dedicated, committed, and professional.",
           person: "Alves Ulo",
+          service: "iso",
+          description: "Consulting and auditing of management systems.",
+          attachments: []
+        },
+        {
+          id: "global-carrapas",
+          name: "GLOBAL CARRAPAS",
+          logo: "/Nossas Referências/CARRAPAS.png",
+          role: "Coordinator",
+          comment: "Excellent, in the implementation of the management system and monitoring of certification, I recommend.",
+          person: "Coordinator",
           service: "iso",
           description: "Consulting and auditing of management systems.",
           attachments: []

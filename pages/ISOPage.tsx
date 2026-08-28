@@ -17,7 +17,7 @@ const ISOPage: React.FC = () => {
   );
   const [references, setReferences] = useState<any[]>(defaultReferences);
   
-  const allIsoKeys = ["9001", "14001", "45001", "27001", "22301", "37001", "37301", "31000", "22000", "29993", "20700"] as const;
+  const allIsoKeys = ["9001", "14001", "45001", "18788", "27001", "22301", "37001", "37301", "31000", "22000", "29993", "20700"] as const;
   const displayedIsoKeys = showAllStandards ? allIsoKeys : allIsoKeys.slice(0, 3);
 
   useEffect(() => {

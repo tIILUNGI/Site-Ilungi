@@ -260,6 +260,23 @@ const referenceCatalog = [
     },
     attachments: [],
   },
+  {
+    id: 'global-carrapas',
+    name: { pt: 'GLOBAL CARRAPAS', en: 'GLOBAL CARRAPAS' },
+    logo: '/Nossas Refer\u00eancias/CARRAPAS.png',
+    role: { pt: 'Coordenador', en: 'Coordinator' },
+    comment: {
+      pt: 'Excelente,na Implementa\u00e7\u00e3o de sistema de gest\u00e3o e acompanhamento a certifica\u00e7\u00e3o recomendo.',
+      en: 'Excellent, in the implementation of the management system and monitoring of certification, I recommend.',
+    },
+    person: 'Coordenador',
+    service: 'iso',
+    description: {
+      pt: 'Consultoria e auditoria em sistemas de gest\u00e3o.',
+      en: 'Consulting and auditing of management systems.',
+    },
+    attachments: [],
+  },
 ];
 
 module.exports = referenceCatalog;
