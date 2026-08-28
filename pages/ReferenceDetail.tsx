@@ -11,19 +11,19 @@ type IsoNormConfig = { norms: string[]; asib: boolean };
 
 // Mapping of ISO references to their acquired norms/seals
 const isoNorms: Record<string, IsoNormConfig> = {
-  'apriori': { norms: ['29993'], asib: true },
-  'b6l': { norms: ['9001', '45001', '14001'], asib: true },
-  'aguia-do-sul': { norms: ['9001', '45001', '14001'], asib: true },
-  'global-carrapas': { norms: ['9001', '45001', '18788'], asib: true },
-  'esmac': { norms: ['9001', '45001', '14001'], asib: true },
-  'aclean': { norms: ['9001', '45001', '14001'], asib: true },
-  'imovias-urbanismo-sa': { norms: ['9001', '45001'], asib: true },
-  'imovias-urbanismo-e-construcao-sa': { norms: ['9001', '45001'], asib: true },
-  'imovias-energy': { norms: ['9001', '45001'], asib: true },
-  'imovias-energy-sa': { norms: ['9001', '45001'], asib: true },
-  'diway': { norms: ['9001'], asib: true },
-  'velonet': { norms: ['9001'], asib: true },
-  'interseguros-corretores-de-seguros-sa': { norms: ['9001'], asib: true },
+  'apriori': { norms: ['29993'], asib: false },
+  'b6l': { norms: ['9001', '45001', '14001'], asib: false },
+  'aguia-do-sul': { norms: ['9001', '45001', '14001'], asib: false },
+  'global-carrapas': { norms: ['9001', '45001'], asib: false },
+  'esmac': { norms: ['9001', '45001', '14001'], asib: false },
+  'aclean': { norms: ['9001', '45001', '14001'], asib: false },
+  'imovias-urbanismo-sa': { norms: ['9001', '45001'], asib: false },
+  'imovias-urbanismo-e-construcao-sa': { norms: ['9001', '45001'], asib: false },
+  'imovias-energy': { norms: ['9001', '45001'], asib: false },
+  'imovias-energy-sa': { norms: ['9001', '45001'], asib: false },
+  'diway': { norms: ['9001'], asib: false },
+  'velonet': { norms: ['9001'], asib: false },
+  'interseguros-corretores-de-seguros-sa': { norms: ['9001'], asib: false },
   'gold-procurement': { norms: [], asib: false },
   'bureau-veritas': { norms: [], asib: false },
   'petromar': { norms: [], asib: false },
@@ -122,7 +122,7 @@ const ReferenceDetail: React.FC = () => {
       if (serviceStr.includes('37001') || serviceStr.includes('37301')) norms.push('37001');
       if (serviceStr.includes('31000')) norms.push('31000');
       if (serviceStr.includes('22000')) norms.push('22000');
-      return norms.length > 0 ? { norms, asib: true } : null;
+      return norms.length > 0 ? { norms, asib: false } : null;
     }
     return null;
   };
