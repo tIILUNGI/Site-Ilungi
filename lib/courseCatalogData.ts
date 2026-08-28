@@ -1,4 +1,4 @@
-﻿export type LocalizedText = string | { pt?: string; en?: string };
+export type LocalizedText = string | { pt?: string; en?: string };
 
 export type Course = {
   id: string;
@@ -627,3 +627,42 @@ export const defaultCourses: Course[] = [
     enrollUrl: 'https://forms.fillout.com/t/2kpcY7UdDrus',
   },
 ];
+
+export const filterCleanCCCourses = (userCourses?: Course[]): Course[] => {
+  const map = new Map<string, Course>();
+
+  // 1. Sempre carregar todos os 63 cursos oficiais (CC-001 até CC-063)
+  for (const c of defaultCourses) {
+    if (c && c.code) {
+      const code = String(c.code).trim().toUpperCase();
+      map.set(code, { ...c, code });
+    }
+  }
+
+  // 2. Se existirem edições guardadas pelo utilizador, fundir/atualizar sem perder os 63 cursos
+  if (Array.isArray(userCourses)) {
+    for (const c of userCourses) {
+      if (!c || !c.code) continue;
+      const rawCode = typeof c.code === 'string' ? c.code : ((c.code as any)?.pt || (c.code as any)?.en || '');
+      const code = rawCode.trim().toUpperCase();
+
+      if (/^CC-\d+$/i.test(code)) {
+        const existing = map.get(code) || {};
+        map.set(code, { ...existing, ...c, code });
+      }
+    }
+  }
+
+  const clean = Array.from(map.values());
+
+  // Ordenar numericamente (CC-001, CC-002, ..., CC-063)
+  clean.sort((a, b) => {
+    const numA = parseInt(a.code.replace(/\D/g, ''), 10) || 0;
+    const numB = parseInt(b.code.replace(/\D/g, ''), 10) || 0;
+    return numA - numB;
+  });
+
+  return clean;
+};
+
+

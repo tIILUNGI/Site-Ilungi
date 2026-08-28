@@ -23,28 +23,18 @@ const AdminDashboard: React.FC = () => {
   const fetchStats = async () => {
     try {
       const analytics = await endpoints.analytics.getOverview().catch(() => ({ totalVisitors: 0 }));
-      const messages = await endpoints.contact.getMessages().catch(() => []);
       setStats({
         visitors: analytics?.totalVisitors || 0,
-        messages: Array.isArray(messages) ? messages.length : 0
+        messages: 0
       });
     } catch (error) {
-      console.error('Failed to fetch stats:', error);
+      setStats({ visitors: 0, messages: 0 });
     }
   };
 
   const fetchRecentMessages = async () => {
-    try {
-      setLoadingMessages(true);
-      const data = await endpoints.contact.getMessages();
-      if (Array.isArray(data)) {
-        setRecentMessages(data.slice(0, 5)); // Get last 5
-      }
-    } catch (error) {
-      console.error('Failed to fetch recent messages:', error);
-    } finally {
-      setLoadingMessages(false);
-    }
+    setLoadingMessages(false);
+    setRecentMessages([]);
   };
 
   const handleForceSync = async () => {
@@ -73,27 +63,8 @@ const AdminDashboard: React.FC = () => {
   };
 
   useEffect(() => {
-    const runAutoSync = async () => {
-      const isPopulated = localStorage.getItem('ilungi_db_populated');
-      const token = sessionStorage.getItem('ilungi_admin_token');
-      
-      if (token && isPopulated !== 'true') {
-        setSyncing(true);
-        setSyncStatus('syncing');
-        try {
-          await pushAllDataToRemote((msg) => setSyncMessage(msg));
-          localStorage.setItem('ilungi_db_populated', 'true');
-          setSyncStatus('success');
-          setTimeout(() => setSyncStatus('idle'), 5000);
-        } catch (error) {
-          setSyncStatus('error');
-        } finally {
-          setSyncing(false);
-        }
-      }
-    };
-    
-    runAutoSync();
+    // Auto-sync desativado — era destrutivo (DELETE 403 em loop).
+    // Use o botão manual "Sincronizar Dados" no painel para forçar sync se necessário.
     fetchRecentMessages();
     fetchStats();
   }, []);

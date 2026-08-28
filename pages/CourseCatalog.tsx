@@ -6,8 +6,6 @@ import { loadData } from '../lib/dataSync';
 import { Course, defaultCourses } from '../lib/courseCatalogData';
 import { endpoints } from '../lib/api';
 
-// FORMSPREE_ENDPOINT removed
-
 const CourseCatalog: React.FC = () => {
   const { lang } = useAppContext();
   const isPt = lang === 'pt';

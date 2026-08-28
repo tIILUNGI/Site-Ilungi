@@ -1,37 +1,63 @@
 import { endpoints } from './api';
+import { DATA_TABLES } from './dataInitialization';
+import { filterCleanCCCourses, defaultCourses } from './courseCatalogData';
 
-/**
- * Reverted to safe mode.
- * This version prioritizes frontend data (code) to ensure the site's information 
- * is always correct as per the static files, while still allowing the Admin 
- * to function for messages and talents.
- */
+const mapCertificateFromAPI = (cert: any) => ({
+  id: cert.id,
+  code: cert.code || cert.id,
+  student: cert.student || cert.student_name || '',
+  course: cert.course || cert.course_name || '',
+  issuedDate: cert.issuedDate || cert.issued_date || cert.date || '',
+  hours: cert.hours || '',
+  status: cert.status || 'valid',
+  pdfUrl: cert.pdfUrl || cert.pdf_url || '',
+  pdfFileName: cert.pdfFileName || cert.pdf_file_name || '',
+  createdAt: cert.createdAt || cert.created_at || '',
+});
+
+// ─── Tabelas estáticas (frontend como fonte de verdade) ─────────────────────────
+// Cursos, Soluções, Serviços, Parceiros, Referências, Blog -> dados limpos do código/local.
+// Certificados -> carrega da API de BD.
+const STATIC_TABLES = new Set(['solutions', 'services', 'partners', 'references', 'blog_posts', 'alumni_profiles', 'courses']);
+
+// ─── loadData ──────────────────────────────────────────────────────────────────
 
 export const loadData = async (table: string, _localKey: string, defaultData: any) => {
-  try {
-    const isPopulated = localStorage.getItem('ilungi_db_populated') === 'true';
-    if (!isPopulated) return defaultData;
-
-    const tableInfo = DATA_TABLES.find(t => t.table === table);
-    if (tableInfo) {
-      const endpoint = (endpoints as any)[tableInfo.endpoint];
-      if (endpoint && endpoint.getAll) {
-        const remoteData = await endpoint.getAll();
-        if (Array.isArray(remoteData) && remoteData.length > 0) {
-          // Filter out inactive items
-          const activeRemote = remoteData.filter((item: any) => item.active !== false);
-          
-          if (table === 'services') return activeRemote.map((s: any, i: number) => mapServiceFromAPI(s, i));
-          if (table === 'solutions') return activeRemote.map((s: any, i: number) => mapSolutionFromAPI(s, i));
-          if (table === 'courses') return activeRemote.map((c: any, i: number) => mapCourseFromAPI(c, i));
-          if (table === 'partners') return activeRemote.map((p: any) => mapPartnerFromAPI(p));
-          if (table === 'references') return activeRemote.map((r: any) => mapReferenceFromAPI(r));
-          if (table === 'blog_posts') return activeRemote; // Assume blog posts are mapped or used directly
-          
-          return activeRemote;
+  if (table === 'courses') {
+    let list = Array.isArray(defaultData) && defaultData.length > 0 ? defaultData : defaultCourses;
+    try {
+      const saved = localStorage.getItem(_localKey || 'ilungi_courses_data');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          list = parsed;
         }
       }
+    } catch (e) {}
+    return filterCleanCCCourses(list);
+  }
+
+  // Outras tabelas estáticas: sempre retornam os dados estáticos do frontend
+  if (STATIC_TABLES.has(table)) {
+    return defaultData;
+  }
+
+  // Tabelas dinâmicas (Certificados): busca na API
+  try {
+    const tableInfo = DATA_TABLES.find(t => t.table === table);
+    if (!tableInfo) return defaultData;
+
+    const endpoint = (endpoints as any)[tableInfo.endpoint];
+    if (!endpoint?.getAll) return defaultData;
+
+    const remoteData = await endpoint.getAll();
+    if (!Array.isArray(remoteData) || remoteData.length === 0) return defaultData;
+
+    if (table === 'certificates') {
+      return remoteData.map(mapCertificateFromAPI);
     }
+
+    return remoteData;
   } catch (error) {
     console.error(`Failed to fetch ${table} from remote:`, error);
   }
@@ -39,29 +65,24 @@ export const loadData = async (table: string, _localKey: string, defaultData: an
 };
 
 export const purgeAllDataIfNeeded = async () => {
-  // No-op to prevent accidental data loss during this transition
+  // No-op — sem purge automático
 };
 
 export const saveDataAdmin = async (table: string, _localKey: string, newData: any[]) => {
-  // We keep this functional so that IF the user edits something in the Admin, 
-  // it still saves to the DB, even if the front-end is currently prioritized to show static code.
   try {
     const tableMap: any = {
-      'solutions': endpoints.solutions,
-      'services': endpoints.services,
-      'references': endpoints.references,
-      'partners': endpoints.partners,
-      'courses': endpoints.courses,
-      'blog_posts': endpoints.blog
+      solutions:    endpoints.solutions,
+      services:     endpoints.services,
+      references:   endpoints.references,
+      partners:     endpoints.partners,
+      courses:      endpoints.courses,
+      blog_posts:   endpoints.blog,
+      certificates: (endpoints as any).certificates,
     };
-
     const endpoint = tableMap[table];
     if (!endpoint) return;
-
-    console.log(`[Admin] Saving ${table} to remote...`);
-    // Simple implementation for background sync
     for (const item of newData) {
-      if (item.id && !item.id.includes('-')) { // Simple check for new vs old
+      if (item.id && !item.id.includes('-')) {
         await endpoint.update(item.id, item).catch(() => {});
       }
     }
@@ -70,9 +91,7 @@ export const saveDataAdmin = async (table: string, _localKey: string, newData: a
   }
 };
 
-export const loadConfig = async (_localKey: string, defaultData: any) => {
-  return defaultData;
-}
+export const loadConfig = async (_localKey: string, defaultData: any) => defaultData;
 
 export const saveConfigAdmin = async (_localKey: string, config: any) => {
   try {

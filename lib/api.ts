@@ -246,6 +246,14 @@ export const endpoints = {
     update: (id: string, data: any) => api.put(`/talents/${id}`, data),
     delete: (id: string) => api.delete(`/talents/${id}`)
   },
+  certificates: {
+    getAll: () => api.get('/certificates'),
+    getOne: (id: string) => api.get(`/certificates/${id}`),
+    getByCode: (code: string) => api.get(`/certificates/code/${encodeURIComponent(code)}`),
+    create: (data: any) => api.post('/certificates', data),
+    update: (id: string, data: any) => api.put(`/certificates/${id}`, data),
+    delete: (id: string) => api.delete(`/certificates/${id}`)
+  },
   analytics: {
     // Track events
     track: (eventData: any) => api.post('/analytics/track', eventData),
