@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, PackageSearch, Users, Briefcase, FileText, Settings, 
-  Building, GraduationCap, LogOut, Mail, RefreshCw, CheckCircle2, AlertCircle
+  Building, GraduationCap, LogOut, Mail, RefreshCw, CheckCircle2, AlertCircle, Award
 } from 'lucide-react';
 import { useAppContext } from '../App';
 import { pushAllDataToRemote } from '../lib/dataInitialization';
@@ -127,6 +127,13 @@ const AdminDashboard: React.FC = () => {
       icon: <GraduationCap className="w-6 h-6 mb-3 text-[#6a00a3]" />,
       path: '/admin/cursos',
       color: 'bg-[#6a00a3]/10 border-[#6a00a3]/20'
+    },
+    {
+      title: isPt ? 'Gerir Certificados' : 'Manage Certificates',
+      desc: isPt ? 'Cadastrar e emitir PDF.' : 'Register & issue PDF.',
+      icon: <Award className="w-6 h-6 mb-3 text-emerald-600" />,
+      path: '/admin/certificados',
+      color: 'bg-emerald-500/10 border-emerald-500/20'
     },
     {
       title: isPt ? 'Referências' : 'References',

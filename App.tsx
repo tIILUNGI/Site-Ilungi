@@ -49,6 +49,7 @@ const AdminSolutions = lazy(() => import('./pages/AdminSolutions'));
 const AdminPartners = lazy(() => import('./pages/AdminPartners'));
 const AdminServices = lazy(() => import('./pages/AdminServices'));
 const AdminCourses = lazy(() => import('./pages/AdminCourses'));
+const AdminCertificates = lazy(() => import('./pages/AdminCertificates'));
 const AdminBlog = lazy(() => import('./pages/AdminBlog'));
 const AdminConfig = lazy(() => import('./pages/AdminConfig'));
 const AdminLogin = lazy(() => import('./pages/AdminLogin'));
@@ -204,6 +205,7 @@ const AppShell: React.FC = () => {
                 <Route path="/admin/parceiros" element={<RequireAdmin><AdminPartners /></RequireAdmin>} />
                 <Route path="/admin/servicos" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
                 <Route path="/admin/cursos" element={<RequireAdmin><AdminCourses /></RequireAdmin>} />
+                <Route path="/admin/certificados" element={<RequireAdmin><AdminCertificates /></RequireAdmin>} />
                 <Route path="/admin/blog" element={<RequireAdmin><AdminBlog /></RequireAdmin>} />
                 <Route path="/admin/configuracoes" element={<RequireAdmin><AdminConfig /></RequireAdmin>} />
                 <Route path="/admin/referencias" element={<RequireAdmin><AdminReferences /></RequireAdmin>} />

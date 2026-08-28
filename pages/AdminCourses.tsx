@@ -4,7 +4,7 @@ import { Plus, Edit, Trash2, ArrowLeft, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { endpoints } from '../lib/api';
-import { Course } from '../lib/courseCatalogData';
+import { Course, defaultCourses } from '../lib/courseCatalogData';
 
 const emptyCourse: Course = {
   id: '',
@@ -25,29 +25,6 @@ const AdminCourses: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState<Course>(emptyCourse);
 
-  const fetchCourses = async () => {
-    try {
-      const data = await endpoints.courses.getAll();
-      // Map the raw API data to ensure we have strings
-      const mappedCourses = Array.isArray(data) ? data.map((c: any) => ({
-        id: c.id || '',
-        code: c.code || '',
-        name: getLocalized(c.title),
-        area: getLocalized(c.area),
-        hours: c.duration || c.hours || '',
-        modality: getLocalized(c.modality),
-        agenda: c.agenda || 'On-demand'
-      })) : [];
-      setCourses(mappedCourses);
-    } catch (error) {
-      console.error('Failed to fetch courses:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCourses();
-  }, [lang]);
-
   const getLocalized = (val: any) => {
     if (typeof val === 'string') return val;
     if (val && typeof val === 'object') {
@@ -56,9 +33,80 @@ const AdminCourses: React.FC = () => {
     return '';
   };
 
-  const handleSave = async () => {
+  const fetchCourses = async () => {
+    let localList = defaultCourses;
     try {
-      // Convert form data to API format (JSONB fields)
+      const saved = localStorage.getItem('ilungi_courses_data');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          localList = parsed;
+        }
+      }
+    } catch (e) {}
+
+    try {
+      const data = await endpoints.courses.getAll();
+      if (Array.isArray(data) && data.length > 0) {
+        const mappedCourses = data.map((c: any) => ({
+          id: c.id || `course-${Math.random().toString(36).substr(2, 9)}`,
+          code: c.code || '',
+          name: getLocalized(c.title || c.name),
+          area: getLocalized(c.area),
+          hours: c.duration || c.hours || '',
+          modality: getLocalized(c.modality),
+          agenda: c.agenda || 'On-demand',
+          enrollUrl: c.enrollUrl || ''
+        }));
+        setCourses(mappedCourses);
+        localStorage.setItem('ilungi_courses_data', JSON.stringify(mappedCourses));
+        return;
+      }
+    } catch (error) {
+      console.warn('Remote fetch failed for courses, using local data:', error);
+    }
+    setCourses(localList);
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, [lang]);
+
+  const saveCoursesToStorage = (newCourses: Course[]) => {
+    setCourses(newCourses);
+    localStorage.setItem('ilungi_courses_data', JSON.stringify(newCourses));
+    window.dispatchEvent(new Event('ilungi-courses-updated'));
+  };
+
+  const handleSave = async () => {
+    if (!formData.name || !formData.code) {
+      alert(isPt ? 'Por favor preencha o código e o nome do curso.' : 'Please enter course code and name.');
+      return;
+    }
+
+    try {
+      const courseId = editingId || `course-${Date.now()}`;
+      const newCourse: Course = {
+        id: courseId,
+        code: formData.code,
+        name: formData.name,
+        area: formData.area || 'Geral',
+        hours: formData.hours || 'A definir',
+        modality: formData.modality || 'Presencial / Online',
+        agenda: formData.agenda || 'On-demand',
+        enrollUrl: formData.enrollUrl || ''
+      };
+
+      let updatedCourses: Course[];
+      if (editingId) {
+        updatedCourses = courses.map(c => c.id === editingId ? newCourse : c);
+      } else {
+        updatedCourses = [newCourse, ...courses];
+      }
+
+      saveCoursesToStorage(updatedCourses);
+
+      // Attempt remote sync in background
       const apiData = {
         title: { pt: formData.name, en: formData.name },
         code: formData.code,
@@ -70,15 +118,15 @@ const AdminCourses: React.FC = () => {
         agenda: formData.agenda || 'On-demand',
         level: 'intermediate',
         active: true,
-        order: courses.length + 1
+        order: updatedCourses.length
       };
-      
+
       if (editingId) {
-        await endpoints.courses.update(editingId, apiData);
-      } else if (isAdding) {
-        await endpoints.courses.create(apiData);
+        await endpoints.courses.update(editingId, apiData).catch(() => {});
+      } else {
+        await endpoints.courses.create(apiData).catch(() => {});
       }
-      await fetchCourses();
+
       resetForm();
     } catch (error) {
       console.error('Failed to save course:', error);
@@ -87,13 +135,13 @@ const AdminCourses: React.FC = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm(isPt ? 'Tem certeza que deseja excluir?' : 'Are you sure?')) {
+    if (confirm(isPt ? 'Tem certeza que deseja excluir este curso?' : 'Are you sure you want to delete this course?')) {
       try {
-        await endpoints.courses.delete(id);
-        await fetchCourses();
+        const updatedCourses = courses.filter(c => c.id !== id);
+        saveCoursesToStorage(updatedCourses);
+        await endpoints.courses.delete(id).catch(() => {});
       } catch (error) {
         console.error('Failed to delete course:', error);
-        alert(isPt ? 'Erro ao excluir.' : 'Error deleting.');
       }
     }
   };
