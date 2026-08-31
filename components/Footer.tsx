@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, FileText } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadConfig } from '../lib/dataSync';
 
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
 
         <div>
           <h4 className="font-bold text-lg mb-6">{isPt ? 'Candidatura' : 'Application'}</h4>
-          <div className="mt-6">
+          <div className="mt-2 mb-6">
             <Link
               to="/contacto#candidatura"
               className="inline-flex items-center justify-center rounded-lg bg-white text-[#1B3C2B] text-xs font-bold py-2 px-4 hover:bg-white/90 transition-colors"
@@ -90,6 +90,32 @@ const Footer: React.FC = () => {
               {isPt ? 'Candidatura Espontânea' : 'Spontaneous Application'}
             </Link>
           </div>
+
+          <h4 className="font-bold text-lg mb-4">{isPt ? 'Políticas' : 'Policies'}</h4>
+          <ul className="space-y-3 text-slate-300 text-sm">
+            <li>
+              <a
+                href="/Politica%20de%20Qualidade.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4 text-[#6a00a3] shrink-0" />
+                {isPt ? 'Política de Qualidade' : 'Quality Policy'}
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Politica%20de%20Compliance.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4 text-[#6a00a3] shrink-0" />
+                {isPt ? 'Política de Compliance' : 'Compliance Policy'}
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div>
@@ -124,6 +150,8 @@ const Footer: React.FC = () => {
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
           <Link to="/certificacoes" className="hover:text-white font-bold text-white bg-[#6a00a3] px-4 py-2 rounded-lg transition-all">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
+          <a href="/Politica%20de%20Qualidade.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white">{isPt ? 'Política de Qualidade' : 'Quality Policy'}</a>
+          <a href="/Politica%20de%20Compliance.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white">{isPt ? 'Política de Compliance' : 'Compliance Policy'}</a>
           <Link to="/privacidade" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</Link>
           <Link to="/termos-de-uso" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</Link>
           <Link to="/cookies" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</Link>
