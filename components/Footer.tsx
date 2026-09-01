@@ -94,26 +94,31 @@ const Footer: React.FC = () => {
           <h4 className="font-bold text-lg mb-4">{isPt ? 'Políticas' : 'Policies'}</h4>
           <ul className="space-y-3 text-slate-300 text-sm">
             <li>
-              <a
-                href="/Politica%20de%20Qualidade.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/politica-de-qualidade"
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
                 <FileText className="w-4 h-4 text-[#6a00a3] shrink-0" />
                 {isPt ? 'Política de Qualidade' : 'Quality Policy'}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/Politica%20de%20Compliance.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/politica-de-compliance"
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
                 <FileText className="w-4 h-4 text-[#6a00a3] shrink-0" />
                 {isPt ? 'Política de Compliance' : 'Compliance Policy'}
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/privacidade"
+                className="hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4 text-[#6a00a3] shrink-0" />
+                {isPt ? 'Privacidade' : 'Privacy'}
+              </Link>
             </li>
           </ul>
         </div>
@@ -150,8 +155,8 @@ const Footer: React.FC = () => {
         </p>
         <div className="flex flex-wrap gap-4 sm:space-x-6 mt-4 md:mt-0 items-center justify-center">
           <Link to="/certificacoes" className="hover:text-white font-bold text-white bg-[#6a00a3] px-4 py-2 rounded-lg transition-all">{isPt ? 'Nossas Certificações' : 'Our Certifications'}</Link>
-          <a href="/Politica%20de%20Qualidade.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white">{isPt ? 'Política de Qualidade' : 'Quality Policy'}</a>
-          <a href="/Politica%20de%20Compliance.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white">{isPt ? 'Política de Compliance' : 'Compliance Policy'}</a>
+          <Link to="/politica-de-qualidade" className="hover:text-white">{isPt ? 'Política de Qualidade' : 'Quality Policy'}</Link>
+          <Link to="/politica-de-compliance" className="hover:text-white">{isPt ? 'Política de Compliance' : 'Compliance Policy'}</Link>
           <Link to="/privacidade" className="hover:text-white">{isPt ? 'Privacidade' : 'Privacy'}</Link>
           <Link to="/termos-de-uso" className="hover:text-white">{isPt ? 'Termos de Uso' : 'Terms of Use'}</Link>
           <Link to="/cookies" className="hover:text-white">{isPt ? 'Cookies' : 'Cookies'}</Link>

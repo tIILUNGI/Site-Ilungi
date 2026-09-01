@@ -1,15 +1,24 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Cookie, FileText, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { Cookie, FileText, Mail, MapPin, Phone, ShieldCheck, Award, CheckCircle2, Download, ExternalLink } from 'lucide-react';
 import { useAppContext } from '../App';
 import { loadConfig } from '../lib/dataSync';
 
-type LegalPageType = 'privacy' | 'terms' | 'cookies';
+export type LegalPageType = 'privacy' | 'terms' | 'cookies' | 'qualidade' | 'compliance';
 
 type LegalSection = {
   title: string;
   paragraphs: string[];
   items?: string[];
+};
+
+type LegalMetaInfo = {
+  code: string;
+  approvalDate: string;
+  revision: string;
+  signoff: string;
+  pdfUrl: string;
+  history?: Array<{ rev: string; date: string; description: string }>;
 };
 
 type LegalPageContent = {
@@ -21,12 +30,13 @@ type LegalPageContent = {
   relatedLinks: Array<{ to: string; label: string }>;
   contactTitle: string;
   contactDescription: string;
+  metaInfo?: LegalMetaInfo;
 };
 
 const defaultConfigByLang = (isPt: boolean) => ({
   companyName: 'ILUNGI Lda',
   address: isPt
-    ? 'Urbanizacao Nova Vida, Rua 46, Edificio E209, Apartamento 24, Luanda, Angola'
+    ? 'Urbanização Nova Vida, Rua 46, Edifício E209, Apartamento 24, Luanda, Angola'
     : 'Nova Vida Urbanization, Street 46, Building E209, Apartment 24, Luanda, Angola',
   phone: '+244 935 793 270',
   email: 'geral@ilungi.ao',
@@ -40,95 +50,96 @@ const getLegalContent = (
   if (type === 'privacy') {
     return isPt
       ? {
-           eyebrow: 'Política de Privacidade',
+          eyebrow: 'Política de Privacidade',
           title: 'Privacidade e Tratamento de Dados',
-           intro: `Esta política descreve como a ${companyName} recolhe, utiliza, armazena e protege os dados pessoais tratados no site, incluindo contacto, candidatura espontânea, academia, portal AILUNGI e restantes interações digitais.`,
-          lastUpdated: 'Ultima atualizacao: 8 de maio de 2026',
+          intro: `Esta política descreve como a ${companyName} recolhe, utiliza, armazena e protege os dados pessoais tratados no site, incluindo contacto, candidatura espontânea, academia, portal AILUNGI e restantes interações digitais.`,
+          lastUpdated: 'Última atualização: 8 de maio de 2026',
           sections: [
             {
-              title: '1. Ambito',
+              title: '1. Âmbito',
               paragraphs: [
-                 'Ao utilizar este site, o utilizador reconhece esta política e aceita o tratamento estritamente necessário para resposta a pedidos, acompanhamento comercial, operação da plataforma e melhoria da experiência digital.',
-                'Esta politica aplica-se ao site institucional, formularios de contacto, paginas de candidatura, registo e acesso a areas autenticadas e outros pontos de recolha de dados associados a servicos da ILUNGI.',
+                'Ao utilizar este site, o utilizador reconhece esta política e aceita o tratamento estritamente necessário para resposta a pedidos, acompanhamento comercial, operação da plataforma e melhoria da experiência digital.',
+                'Esta política aplica-se ao site institucional, formulários de contacto, páginas de candidatura, registo e acesso a áreas autenticadas e outros pontos de recolha de dados associados a serviços da ILUNGI.',
               ],
             },
             {
               title: '2. Dados Que Recolhemos',
               paragraphs: [
-                'Os dados tratados dependem do tipo de interacao realizada no site.',
+                'Os dados tratados dependem do tipo de interação realizada no site.',
               ],
               items: [
-                'Dados fornecidos voluntariamente: nome, email, telefone, assunto, mensagem, area de interesse, CV, anexos e outras informacoes submetidas em formularios.',
-                'Dados de conta e autenticacao: nome completo, email e credenciais usadas no portal AILUNGI ou noutras areas restritas.',
-                'Dados tecnicos e de navegacao: pagina visitada, URL, origem do acesso, resolucao de ecran, identificadores de visitante e sessao e parametros UTM para analitica.',
-                'Preferencias funcionais: idioma, tema visual e estados de sessao guardados no navegador para manter funcionalidades ativas.',
+                'Dados fornecidos voluntariamente: nome, email, telefone, assunto, mensagem, área de interesse, CV, anexos e outras informações submetidas em formulários.',
+                'Dados de conta e autenticação: nome completo, email e credenciais usadas no portal AILUNGI ou noutras áreas restritas.',
+                'Dados técnicos e de navegação: página visitada, URL, origem do acesso, resolução de ecrã, identificadores de visitante e sessão e parâmetros UTM para analítica.',
+                'Preferências funcionais: idioma, tema visual e estados de sessão guardados no navegador para manter funcionalidades ativas.',
               ],
             },
             {
               title: '3. Finalidades do Tratamento',
               paragraphs: [
-                'Tratamos dados pessoais apenas para fins ligados ao funcionamento do negocio e do proprio site.',
+                'Tratamos dados pessoais apenas para fins ligados ao funcionamento do negócio e do próprio site.',
               ],
               items: [
                 'Responder a pedidos de contacto, proposta comercial, agendamento e esclarecimento.',
-                'Receber, analisar e encaminhar candidaturas espontaneas e submissao de documentos.',
-                'Gerir registos, autenticacao e acesso a funcionalidades da academia e do portal AILUNGI.',
-                'Melhorar desempenho, seguranca, conteudo, navegacao e medicao estatistica do site.',
-                'Cumprir obrigacoes legais, administrativas e de suporte ao cliente quando aplicavel.',
+                'Receber, analisar e encaminhar candidaturas espontâneas e submissão de documentos.',
+                'Gerir registos, autenticação e acesso a funcionalidades da academia e do portal AILUNGI.',
+                'Melhorar desempenho, segurança, conteúdo, navegação e medição estatística do site.',
+                'Cumprir obrigações legais, administrativas e de suporte ao cliente quando aplicável.',
               ],
             },
             {
               title: '4. Partilha de Dados',
               paragraphs: [
-                'A ILUNGI nao comercializa dados pessoais. A partilha pode ocorrer apenas quando necessaria para operacao tecnica, atendimento ou cumprimento legal.',
+                'A ILUNGI não comercializa dados pessoais. A partilha pode ocorrer apenas quando necessária para operação técnica, atendimento ou cumprimento legal.',
               ],
               items: [
-                'Prestadores de alojamento, API, suporte tecnico e infraestrutura digital.',
-                'Ferramentas de contacto, email, formularios, mapas incorporados e servicos de analitica.',
-                'Autoridades competentes, quando houver obrigacao legal ou regulatoria.',
+                'Prestadores de alojamento, API, suporte técnico e infraestrutura digital.',
+                'Ferramentas de contacto, email, formulários, mapas incorporados e serviços de analítica.',
+                'Autoridades competentes, quando houver obrigação legal ou regulatória.',
               ],
             },
             {
-              title: '5. Conservacao e Seguranca',
+              title: '5. Conservação e Segurança',
               paragraphs: [
-                'Os dados sao conservados pelo periodo necessario para cumprir a finalidade da recolha, manter historico operacional razoavel e satisfazer exigencias legais ou contratuais.',
-                'Adotamos medidas tecnicas e organizativas razoaveis para reduzir risco de acesso indevido, alteracao, divulgacao ou perda. Ainda assim, nenhum sistema online garante seguranca absoluta.',
+                'Os dados são conservados pelo período necessário para cumprir a finalidade da recolha, manter histórico operacional razoável e satisfazer exigências legais ou contratuais.',
+                'Adotamos medidas técnicas e organizativas razoáveis para reduzir risco de acesso indevido, alteração, divulgação ou perda. Ainda assim, nenhum sistema online garante segurança absoluta.',
               ],
             },
             {
               title: '6. Cookies e Tecnologias Equivalentes',
               paragraphs: [
-                'O site utiliza cookies e mecanismos equivalentes de navegador, incluindo localStorage e sessionStorage, para manter sessoes, preferencias funcionais e indicadores de analitica.',
-                'Para detalhes adicionais sobre estas tecnologias, consulte a nossa Politica de Cookies.',
+                'O site utiliza cookies e mecanismos equivalentes de navegador, incluindo localStorage e sessionStorage, para manter sessões, preferências funcionais e indicadores de analítica.',
+                'Para detalhes adicionais sobre estas tecnologias, consulte a nossa Política de Cookies.',
               ],
             },
             {
               title: '7. Direitos do Titular',
               paragraphs: [
-                'Sempre que aplicavel, o titular pode solicitar informacao sobre os seus dados e pedir correcao ou atualizacao.',
+                'Sempre que aplicável, o titular pode solicitar informação sobre os seus dados e pedir correção ou atualização.',
               ],
               items: [
                 'Solicitar acesso aos dados tratados.',
-                'Pedir correcao, atualizacao ou eliminacao de dados inexatos ou desnecessarios.',
-                'Retirar consentimento para comunicacoes nao essenciais, quando esse consentimento for a base do tratamento.',
-                'Apresentar pedido ou reclamacao atraves dos canais de contacto da ILUNGI.',
+                'Pedir correção, atualização ou eliminação de dados inexatos ou desnecessários.',
+                'Retirar consentimento para comunicações não essenciais, quando esse consentimento for a base do tratamento.',
+                'Apresentar pedido ou reclamação através dos canais de contacto da ILUNGI.',
               ],
             },
             {
-              title: '8. Alteracoes a Esta Politica',
+              title: '8. Alterações a Esta Política',
               paragraphs: [
-                'Esta politica pode ser atualizada para refletir alteracoes do site, dos servicos ou de exigencias legais. A versao publicada nesta pagina e a versao em vigor.',
+                'Esta política pode ser atualizada para refletir alterações do site, dos serviços ou de exigências legais. A versão publicada nesta página é a versão em vigor.',
               ],
             },
           ],
           relatedLinks: [
             { to: '/termos-de-uso', label: 'Ver Termos de Uso' },
-            { to: '/cookies', label: 'Ver Politica de Cookies' },
-            { to: '/contacto', label: 'Entrar em Contacto' },
+            { to: '/cookies', label: 'Ver Política de Cookies' },
+            { to: '/politica-de-qualidade', label: 'Ver Política da Qualidade' },
+            { to: '/politica-de-compliance', label: 'Ver Política de Compliance' },
           ],
           contactTitle: 'Falar com a ILUNGI',
           contactDescription:
-             'Para exercício de direitos, dúvidas sobre tratamento de dados ou questões institucionais, utilize os contactos abaixo.',
+            'Para exercício de direitos, dúvidas sobre tratamento de dados ou questões institucionais, utilize os contactos abaixo.',
         }
       : {
           eyebrow: 'Privacy Policy',
@@ -209,7 +220,8 @@ const getLegalContent = (
           relatedLinks: [
             { to: '/termos-de-uso', label: 'View Terms of Use' },
             { to: '/cookies', label: 'View Cookie Policy' },
-            { to: '/contacto', label: 'Contact ILUNGI' },
+            { to: '/politica-de-qualidade', label: 'View Quality Policy' },
+            { to: '/politica-de-compliance', label: 'View Compliance Policy' },
           ],
           contactTitle: 'Contact ILUNGI',
           contactDescription:
@@ -221,83 +233,84 @@ const getLegalContent = (
     return isPt
       ? {
           eyebrow: 'Termos de Uso',
-          title: 'Condicoes de Utilizacao do Site',
-           intro: `Estes Termos de Uso regulam o acesso e a utilização do site da ${companyName}, incluindo páginas institucionais, formulários, áreas autenticadas e conteúdo publicado para clientes, parceiros, candidatos e utilizadores em geral.`,
-          lastUpdated: 'Ultima atualizacao: 8 de maio de 2026',
+          title: 'Condições de Utilização do Site',
+          intro: `Estes Termos de Uso regulam o acesso e a utilização do site da ${companyName}, incluindo páginas institucionais, formulários, áreas autenticadas e conteúdo publicado para clientes, parceiros, candidatos e utilizadores em geral.`,
+          lastUpdated: 'Última atualização: 8 de maio de 2026',
           sections: [
             {
-              title: '1. Aceitacao e Objeto',
+              title: '1. Aceitação e Objeto',
               paragraphs: [
-                'Ao aceder ou utilizar este site, o utilizador concorda com estes Termos de Uso e com a Politica de Privacidade aplicavel.',
-                'O site tem natureza institucional e informativa, podendo incluir pedidos de contacto, candidaturas, acesso a conteudo restrito e ligacoes para servicos e canais externos da ILUNGI.',
+                'Ao aceder ou utilizar este site, o utilizador concorda com estes Termos de Uso e com a Política de Privacidade aplicável.',
+                'O site tem natureza institucional e informativa, podendo incluir pedidos de contacto, candidaturas, acesso a conteúdo restrito e ligações para serviços e canais externos da ILUNGI.',
               ],
             },
             {
               title: '2. Uso Permitido',
               paragraphs: [
-                'O utilizador compromete-se a utilizar o site de forma licita, diligente e compativel com a sua finalidade.',
+                'O utilizador compromete-se a utilizar o site de forma lícita, diligente e compatível com a sua finalidade.',
               ],
               items: [
-                'Nao utilizar o site para fraude, spam, engenharia social, difusao de malware ou tentativa de acesso indevido.',
-                'Nao interferir com o funcionamento, seguranca, disponibilidade ou integridade tecnica da plataforma.',
-                'Nao submeter informacoes falsas, enganosas, ofensivas ou que violem direitos de terceiros.',
-                'Nao reproduzir ou explorar conteudo do site sem autorizacao previa, salvo nos limites legais aplicaveis.',
+                'Não utilizar o site para fraude, spam, engenharia social, difusão de malware ou tentativa de acesso indevido.',
+                'Não interferir com o funcionamento, segurança, disponibilidade ou integridade técnica da plataforma.',
+                'Não submeter informações falsas, enganosas, ofensivas ou que violem direitos de terceiros.',
+                'Não reproduzir ou explorar conteúdo do site sem autorização prévia, salvo nos limites legais aplicáveis.',
               ],
             },
             {
-              title: '3. Conteudo e Propriedade Intelectual',
+              title: '3. Conteúdo e Propriedade Intelectual',
               paragraphs: [
-                'Marcas, textos, imagens, identidade visual, estruturacao de servicos, materiais institucionais e demais elementos disponibilizados no site pertencem a ILUNGI ou aos respetivos titulares de direitos.',
-                'A consulta do site nao transfere qualquer licenca ampla de utilizacao comercial sobre esse conteudo.',
+                'Marcas, textos, imagens, identidade visual, estruturação de serviços, materiais institucionais e demais elementos disponibilizados no site pertencem à ILUNGI ou aos respetivos titulares de direitos.',
+                'A consulta do site não transfere qualquer licença ampla de utilização comercial sobre esse conteúdo.',
               ],
             },
             {
-              title: '4. Formularios, Pedidos e Informacoes',
+              title: '4. Formulários, Pedidos e Informações',
               paragraphs: [
-                'O utilizador e responsavel pela veracidade, atualidade e legitimidade dos dados submetidos por meio dos formularios do site.',
-                'O envio de pedido de contacto, candidatura, interesse em cursos ou solicitacao comercial nao cria, por si so, obrigacao contratual imediata entre as partes. Propostas, contratos e servicos dependem de validacao posterior da ILUNGI.',
+                'O utilizador é responsável pela veracidade, atualidade e legitimidade dos dados submetidos por meio dos formulários do site.',
+                'O envio de pedido de contacto, candidatura, interesse em cursos ou solicitação comercial não cria, por si só, obrigação contratual imediata entre as partes. Propostas, contratos e serviços dependem de validação posterior da ILUNGI.',
               ],
             },
             {
-              title: '5. Areas Restritas e Credenciais',
+              title: '5. Áreas Restritas e Credenciais',
               paragraphs: [
-                'Sempre que existir conta, portal ou area autenticada, o utilizador deve proteger as suas credenciais e responder pelo uso realizado com elas.',
+                'Sempre que existir conta, portal ou área autenticada, o utilizador deve proteger as suas credenciais e responder pelo uso realizado com elas.',
               ],
               items: [
                 'Manter password e dados de acesso sob controlo pessoal.',
-                'Nao partilhar acesso com terceiros sem autorizacao expressa.',
-                'Comunicar rapidamente qualquer suspeita de uso indevido, perda de acesso ou incidente de seguranca.',
+                'Não partilhar acesso com terceiros sem autorização expressa.',
+                'Comunicar rapidamente qualquer suspeita de uso indevido, perda de acesso ou incidente de segurança.',
               ],
             },
             {
-              title: '6. Ligacoes Externas e Servicos de Terceiros',
+              title: '6. Ligações Externas e Serviços de Terceiros',
               paragraphs: [
-                'O site pode conter links para redes sociais, mapas, plataformas parceiras e outros servicos externos. A utilizacao desses ambientes passa a ser regida pelos termos e politicas proprios de cada terceiro.',
+                'O site pode conter links para redes sociais, mapas, plataformas parceiras e outros serviços externos. A utilização desses ambientes passa a ser regida pelos termos e políticas próprios de cada terceiro.',
               ],
             },
             {
-              title: '7. Disponibilidade e Limitacao de Responsabilidade',
+              title: '7. Disponibilidade e Limitação de Responsabilidade',
               paragraphs: [
-                'A ILUNGI procura manter o site atualizado e funcional, mas nao garante disponibilidade ininterrupta, ausencia absoluta de falhas, nem que todo o conteudo esteja permanentemente livre de imprecisoes ou omissoes.',
-                'Dentro dos limites legais aplicaveis, a ILUNGI nao responde por danos decorrentes de indisponibilidade temporaria, uso inadequado do site pelo utilizador ou dependencia exclusiva de conteudo institucional sem validacao adicional.',
+                'A ILUNGI procura manter o site atualizado e funcional, mas não garante disponibilidade ininterrupta, ausência absoluta de falhas, nem que todo o conteúdo esteja permanentemente livre de imprecisões ou omissões.',
+                'Dentro dos limites legais aplicáveis, a ILUNGI não responde por danos decorrentes de indisponibilidade temporária, uso inadequado do site pelo utilizador ou dependência exclusiva de conteúdo institucional sem validação adicional.',
               ],
             },
             {
-              title: '8. Alteracoes, Suspensao e Legislacao Aplicavel',
+              title: '8. Alterações, Suspensão e Legislação Aplicável',
               paragraphs: [
-                'A ILUNGI pode atualizar estes termos, ajustar funcionalidades, restringir acessos ou descontinuar partes do site quando necessario por razoes tecnicas, operacionais, legais ou estrategicas.',
-                'Estes termos devem ser interpretados segundo as leis aplicaveis em Angola, sem prejuizo de outras obrigacoes legais que possam incidir sobre a relacao.',
+                'A ILUNGI pode atualizar estes termos, ajustar funcionalidades, restringir acessos ou descontinuar partes do site quando necessário por razões técnicas, operacionais, legais ou estratégicas.',
+                'Estes termos devem ser interpretados segundo as leis aplicáveis em Angola, sem prejuízo de outras obrigações legais que possam incidir sobre a relação.',
               ],
             },
           ],
           relatedLinks: [
-            { to: '/privacidade', label: 'Ver Politica de Privacidade' },
-            { to: '/cookies', label: 'Ver Politica de Cookies' },
+            { to: '/privacidade', label: 'Ver Política de Privacidade' },
+            { to: '/cookies', label: 'Ver Política de Cookies' },
+            { to: '/politica-de-qualidade', label: 'Ver Política da Qualidade' },
             { to: '/contacto', label: 'Solicitar Esclarecimento' },
           ],
           contactTitle: 'Esclarecimentos e Suporte',
           contactDescription:
-            'Se precisar de esclarecer algum ponto destes termos ou tratar de um pedido especifico, utilize os contactos institucionais abaixo.',
+            'Se precisar de esclarecer algum ponto destes termos ou tratar de um pedido específico, utilize os contactos institucionais abaixo.',
         }
       : {
           eyebrow: 'Terms of Use',
@@ -371,6 +384,7 @@ const getLegalContent = (
           relatedLinks: [
             { to: '/privacidade', label: 'View Privacy Policy' },
             { to: '/cookies', label: 'View Cookie Policy' },
+            { to: '/politica-de-qualidade', label: 'View Quality Policy' },
             { to: '/contacto', label: 'Request Clarification' },
           ],
           contactTitle: 'Clarifications and Support',
@@ -379,35 +393,226 @@ const getLegalContent = (
         };
   }
 
+  if (type === 'qualidade') {
+    return isPt
+      ? {
+          eyebrow: 'Política da Qualidade',
+          title: 'Política da Qualidade ILUNGI',
+          intro: `A ${companyName}, no âmbito das suas atividades, orienta-se pela prestação consistente de serviços e soluções de qualidade, comprometendo-se a apoiar organizações e profissionais no seu desenvolvimento e crescimento sustentável, tanto de forma vertical, por meio da especialização das suas atividades, como de forma horizontal, através do alargamento das suas bases de oferta.`,
+          lastUpdated: 'Aprovado pela Direção: 20 de janeiro de 2026 (Rev. 02)',
+          metaInfo: {
+            code: 'ILUNGI-POL-SGQ-002',
+            approvalDate: '16/01/2026',
+            revision: '02',
+            signoff: 'Manuel do Rosário Isaac Cafelo (Pela Direcção)',
+            pdfUrl: '/Politica%20de%20Qualidade.pdf',
+            history: [
+              { rev: '01', date: '26.11.2023', description: 'Versão original' },
+              { rev: '02', date: '16.01.2026', description: 'Versão Revista' },
+            ],
+          },
+          sections: [
+            {
+              title: '1. Compromissos Fundamentais da Qualidade',
+              paragraphs: [
+                'Para concretizar o seu compromisso com a excelência e o valor acrescentado aos seus clientes e parceiros, a ILUNGI compromete-se expressamente a:',
+              ],
+              items: [
+                'Compreender e atender às necessidades e expectativas das partes interessadas relevantes, com especial enfoque na satisfação dos seus clientes.',
+                'Cumprir os requisitos aplicáveis, incluindo os requisitos legais, regulamentares, contratuais e outros requisitos assumidos pela organização.',
+                'Assegurar a eficácia e a melhoria contínua do Sistema de Gestão da Qualidade, implementado e certificado, promovendo a abordagem por processos, a gestão de riscos e oportunidades e o desempenho consistente das suas atividades.',
+                'Valorizar o envolvimento, a competência e a consciencialização das pessoas, como fator essencial para a qualidade dos serviços prestados e para a criação de valor.',
+              ],
+            },
+            {
+              title: '2. Comunicação, Aplicação e Revisão Periódica',
+              paragraphs: [
+                'Esta Política da Qualidade é comunicada, compreendida e aplicada em toda a organização, encontrando-se disponível às partes interessadas relevantes.',
+                'É revista periodicamente para assegurar a sua contínua adequação, alinhamento estratégico e conformidade com os mais elevados padrões internacionais.',
+              ],
+            },
+          ],
+          relatedLinks: [
+            { to: '/politica-de-compliance', label: 'Ver Política de Compliance' },
+            { to: '/certificacoes', label: 'Ver Nossas Certificações' },
+            { to: '/privacidade', label: 'Ver Política de Privacidade' },
+          ],
+          contactTitle: 'Gestão da Qualidade',
+          contactDescription:
+            'Para mais esclarecimentos sobre o nosso Sistema de Gestão da Qualidade (SGQ) ou sugestões de melhoria contínua, utilize os contactos abaixo.',
+        }
+      : {
+          eyebrow: 'Quality Policy',
+          title: 'ILUNGI Quality Policy',
+          intro: `${companyName} is guided by the consistent delivery of quality services and solutions, committing to supporting organizations and professionals in their sustainable development and growth both vertically and horizontally.`,
+          lastUpdated: 'Approved by Management: January 20, 2026 (Rev. 02)',
+          metaInfo: {
+            code: 'ILUNGI-POL-SGQ-002',
+            approvalDate: '16/01/2026',
+            revision: '02',
+            signoff: 'Manuel do Rosário Isaac Cafelo (For the Management)',
+            pdfUrl: '/Politica%20de%20Qualidade.pdf',
+            history: [
+              { rev: '01', date: '26.11.2023', description: 'Original Version' },
+              { rev: '02', date: '16.01.2026', description: 'Revised Version' },
+            ],
+          },
+          sections: [
+            {
+              title: '1. Key Quality Commitments',
+              paragraphs: [
+                'To realize our commitment to excellence and value creation for clients and partners, ILUNGI explicitly commits to:',
+              ],
+              items: [
+                'Understand and fulfill the needs and expectations of relevant stakeholders, with a special focus on client satisfaction.',
+                'Comply with applicable requirements, including legal, regulatory, contractual, and other organizational obligations.',
+                'Ensure the effectiveness and continual improvement of the implemented and certified Quality Management System, promoting a process approach, risk and opportunity management, and consistent performance.',
+                'Value employee involvement, competence, and awareness as essential factors for service quality and value creation.',
+              ],
+            },
+            {
+              title: '2. Communication, Application, and Periodic Review',
+              paragraphs: [
+                'This Quality Policy is communicated, understood, and applied throughout the organization and is available to all relevant stakeholders.',
+                'It is reviewed periodically to ensure ongoing suitability, strategic alignment, and full compliance with international standards.',
+              ],
+            },
+          ],
+          relatedLinks: [
+            { to: '/politica-de-compliance', label: 'View Compliance Policy' },
+            { to: '/certificacoes', label: 'View Our Certifications' },
+            { to: '/privacidade', label: 'View Privacy Policy' },
+          ],
+          contactTitle: 'Quality Management Inquiries',
+          contactDescription:
+            'For further details regarding our Quality Management System or continuous improvement, contact ILUNGI Management.',
+        };
+  }
+
+  if (type === 'compliance') {
+    return isPt
+      ? {
+          eyebrow: 'Política de Compliance',
+          title: 'Política de Compliance e Ética ILUNGI',
+          intro: `A ${companyName}, no âmbito da sua governação, gestão e prestação de serviços especializados, compromete-se a actuar com integridade, ética, transparência e conformidade, assegurando o cumprimento das obrigações legais, regulamentares, contratuais e demais requisitos aplicáveis.`,
+          lastUpdated: 'Aprovado pela Direção: 20 de janeiro de 2026 (Rev. 01)',
+          metaInfo: {
+            code: 'ILUNGI-POL-SGC-001',
+            approvalDate: '16/01/2026',
+            revision: '01',
+            signoff: 'Manuel do Rosário Isaac Cafelo (Pela Direcção)',
+            pdfUrl: '/Politica%20de%20Compliance.pdf',
+            history: [{ rev: '01', date: '16.01.2026', description: 'Versão original' }],
+          },
+          sections: [
+            {
+              title: '1. Compromissos de Compliance e Integridade (ISO 37301)',
+              paragraphs: [
+                'Para concretizar este compromisso com a conformidade e integridade institucional, a ILUNGI compromete-se a:',
+              ],
+              items: [
+                'Implementar, manter e melhorar continuamente um Sistema de Gestão de Compliance, em conformidade com a Norma ISO 37301.',
+                'Promover uma cultura de integridade e responsabilidade, assegurando que as decisões e actividades são conduzidas de forma ética e conforme.',
+                'Identificar, avaliar e tratar riscos de compliance, com base numa abordagem sistemática e proporcional.',
+                'Garantir a independência, autoridade e recursos adequados à Função de Compliance.',
+                'Disponibilizar mecanismos adequados para a comunicação de preocupações e denúncias, assegurando confidencialidade e protecção contra retaliação.',
+                'Assegurar a comunicação, formação e consciencialização das pessoas relativamente às suas responsabilidades em matéria de compliance.',
+              ],
+            },
+            {
+              title: '2. Comunicação, Aplicação e Revisão',
+              paragraphs: [
+                'Esta Política de Compliance é comunicada, compreendida e aplicada em toda a organização, encontrando-se disponível às partes interessadas relevantes.',
+                'É revista periodicamente para assegurar a sua contínua adequação, alinhamento estratégico e conformidade.',
+              ],
+            },
+          ],
+          relatedLinks: [
+            { to: '/politica-de-qualidade', label: 'Ver Política da Qualidade' },
+            { to: '/certificacoes', label: 'Ver Nossas Certificações' },
+            { to: '/termos-de-uso', label: 'Ver Termos de Uso' },
+          ],
+          contactTitle: 'Canal de Compliance e Ética',
+          contactDescription:
+            'Para reportar preocupações, esclarecer dúvidas de ética ou interagir com a Função de Compliance, utilize os nossos canais oficiais.',
+        }
+      : {
+          eyebrow: 'Compliance Policy',
+          title: 'ILUNGI Compliance & Ethics Policy',
+          intro: `${companyName}, within its governance, management, and specialized service delivery, commits to operating with integrity, ethics, transparency, and compliance, ensuring full compliance with legal, regulatory, contractual, and applicable requirements.`,
+          lastUpdated: 'Approved by Management: January 20, 2026 (Rev. 01)',
+          metaInfo: {
+            code: 'ILUNGI-POL-SGC-001',
+            approvalDate: '16/01/2026',
+            revision: '01',
+            signoff: 'Manuel do Rosário Isaac Cafelo (For the Management)',
+            pdfUrl: '/Politica%20de%20Compliance.pdf',
+            history: [{ rev: '01', date: '16.01.2026', description: 'Original Version' }],
+          },
+          sections: [
+            {
+              title: '1. Compliance & Integrity Commitments (ISO 37301)',
+              paragraphs: [
+                'To achieve this commitment to compliance and institutional integrity, ILUNGI commits to:',
+              ],
+              items: [
+                'Implement, maintain, and continually improve a Compliance Management System in accordance with ISO 37301 standard.',
+                'Promote a culture of integrity and responsibility, ensuring decisions and activities are conducted ethically and conformably.',
+                'Identify, evaluate, and mitigate compliance risks using a systematic and proportional approach.',
+                'Guarantee independence, authority, and adequate resources for the Compliance Function.',
+                'Provide adequate mechanisms for communicating concerns and whistleblower reports, ensuring confidentiality and protection against retaliation.',
+                'Ensure communication, training, and awareness for all personnel regarding compliance responsibilities.',
+              ],
+            },
+            {
+              title: '2. Communication, Application, and Review',
+              paragraphs: [
+                'This Compliance Policy is communicated, understood, and applied throughout the organization and is available to relevant stakeholders.',
+                'It is reviewed periodically to ensure continued suitability, strategic alignment, and regulatory compliance.',
+              ],
+            },
+          ],
+          relatedLinks: [
+            { to: '/politica-de-qualidade', label: 'View Quality Policy' },
+            { to: '/certificacoes', label: 'View Our Certifications' },
+            { to: '/termos-de-uso', label: 'View Terms of Use' },
+          ],
+          contactTitle: 'Compliance & Ethics Channel',
+          contactDescription:
+            'To report concerns, request compliance guidance, or interact with the Compliance Function, use our official channels.',
+        };
+  }
+
+  // Default: cookies
   return isPt
     ? {
-        eyebrow: 'Politica de Cookies',
+        eyebrow: 'Política de Cookies',
         title: 'Cookies e Tecnologias de Navegador',
-        intro: `Esta politica explica como a ${companyName} utiliza cookies e tecnologias equivalentes no site para garantir funcionamento, seguranca, preferencias do utilizador e medicao estatistica de utilizacao.`,
-           lastUpdated: 'Última atualização: 8 de maio de 2026',
-           sections: [
+        intro: `Esta política explica como a ${companyName} utiliza cookies e tecnologias equivalentes no site para garantir funcionamento, segurança, preferências do utilizador e medição estatística de utilização.`,
+        lastUpdated: 'Última atualização: 8 de maio de 2026',
+        sections: [
           {
-            title: '1. O Que Sao Cookies',
+            title: '1. O Que São Cookies',
             paragraphs: [
-              'Cookies sao pequenos ficheiros ou identificadores armazenados no navegador. Em complemento, o site tambem pode usar tecnologias equivalentes, como localStorage e sessionStorage, para guardar preferencias, sessoes e informacoes operacionais.',
+              'Cookies são pequenos ficheiros ou identificadores armazenados no navegador. Em complemento, o site também pode usar tecnologias equivalentes, como localStorage e sessionStorage, para guardar preferências, sessões e informações operacionais.',
             ],
           },
           {
             title: '2. O Que Utilizamos Neste Site',
             paragraphs: [
-              'O site utiliza mecanismos tecnicos necessarios para a experiencia do utilizador e para analise basica de utilizacao.',
+              'O site utiliza mecanismos técnicos necessários para a experiência do utilizador e para análise básica de utilização.',
             ],
             items: [
-              'Funcionais e essenciais: manter idioma, tema visual, estado de sessao e acessos autenticados.',
-              'Analitica e desempenho: identificar visitante e sessao, medir page views, origem de trafego, parametros UTM e resolucao de ecran.',
-              'Conteudo de terceiros: mapas incorporados, links externos e servicos sociais podem aplicar as suas proprias tecnologias e politicas.',
-              'Publicidade: neste momento, o site nao utiliza cookies proprios de publicidade comportamental.',
+              'Funcionais e essenciais: manter idioma, tema visual, estado de sessão e acessos autenticados.',
+              'Analítica e desempenho: identificar visitante e sessão, medir page views, origem de tráfego, parâmetros UTM e resolução de ecrã.',
+              'Conteúdo de terceiros: mapas incorporados, links externos e serviços sociais podem aplicar as suas próprias tecnologias e políticas.',
+              'Publicidade: neste momento, o site não utiliza cookies próprios de publicidade comportamental.',
             ],
           },
           {
-            title: '3. Base de Utilizacao',
+            title: '3. Base de Utilização',
             paragraphs: [
-              'Alguns identificadores sao necessarios para o funcionamento minimo do site. Outros sao usados para compreender desempenho, melhorar navegacao e manter seguranca operacional.',
+              'Alguns identificadores são necessários para o funcionamento mínimo do site. Outros são usados para compreender desempenho, melhorar navegação e manter segurança operacional.',
             ],
           },
           {
@@ -418,31 +623,32 @@ const getLegalContent = (
             items: [
               'Remover dados armazenados pelo navegador.',
               'Bloquear cookies de terceiros.',
-              'Apagar sessoes ativas ou navegar em modo privado.',
-              'Rever permissoes do navegador e do dispositivo para servicos externos.',
+              'Apagar sessões ativas ou navegar em modo privado.',
+              'Rever permissões do navegador e do dispositivo para serviços externos.',
             ],
           },
           {
-            title: '5. Impacto da Desativacao',
+            title: '5. Impacto da Desativação',
             paragraphs: [
-              'A desativacao de cookies ou armazenamento local pode afetar login, manutencao de sessao, preferencia de idioma, tema visual e algumas funcoes de medicao ou integracao do site.',
+              'A desativação de cookies ou armazenamento local pode afetar login, manutenção de sessão, preferência de idioma, tema visual e algumas funções de medição ou integração do site.',
             ],
           },
           {
-            title: '6. Atualizacoes',
+            title: '6. Atualizações',
             paragraphs: [
-              'Esta politica pode ser revista sempre que o site passar a utilizar novos mecanismos tecnicos, integracoes ou requisitos legais.',
+              'Esta política pode ser revista sempre que o site passar a utilizar novos mecanismos técnicos, integrações ou requisitos legais.',
             ],
           },
         ],
         relatedLinks: [
-          { to: '/privacidade', label: 'Ver Politica de Privacidade' },
+          { to: '/privacidade', label: 'Ver Política de Privacidade' },
           { to: '/termos-de-uso', label: 'Ver Termos de Uso' },
+          { to: '/politica-de-qualidade', label: 'Ver Política da Qualidade' },
           { to: '/contacto', label: 'Falar com a ILUNGI' },
         ],
-        contactTitle: 'Duvidas Sobre Cookies',
+        contactTitle: 'Dúvidas Sobre Cookies',
         contactDescription:
-          'Se precisar de mais informacoes sobre cookies, armazenamento local ou funcionamento tecnico do site, utilize os contactos institucionais.',
+          'Se precisar de mais informações sobre cookies, armazenamento local ou funcionamento técnico do site, utilize os contactos institucionais.',
       }
     : {
         eyebrow: 'Cookie Policy',
@@ -502,6 +708,7 @@ const getLegalContent = (
         relatedLinks: [
           { to: '/privacidade', label: 'View Privacy Policy' },
           { to: '/termos-de-uso', label: 'View Terms of Use' },
+          { to: '/politica-de-qualidade', label: 'View Quality Policy' },
           { to: '/contacto', label: 'Contact ILUNGI' },
         ],
         contactTitle: 'Questions About Cookies',
@@ -510,10 +717,12 @@ const getLegalContent = (
       };
 };
 
-const iconByType = {
+const iconByType: Record<LegalPageType, React.ElementType> = {
   privacy: ShieldCheck,
   terms: FileText,
   cookies: Cookie,
+  qualidade: Award,
+  compliance: CheckCircle2,
 };
 
 const LegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
@@ -529,28 +738,114 @@ const LegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
     });
   }, [defaultConfig, isPt]);
 
-  const Icon = iconByType[type];
+  const Icon = iconByType[type] || FileText;
   const content = getLegalContent(type, isPt, config.companyName || 'ILUNGI');
 
   return (
     <div className="bg-slate-50 py-20">
       <div className="mx-auto max-w-5xl px-4">
+        {/* Banner Header */}
         <div className="mb-10 rounded-[2rem] bg-gradient-to-br from-[#1B3C2B] via-[#234b35] to-[#6a00a3] p-8 text-white shadow-2xl sm:p-10 lg:p-12">
-          <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/12 backdrop-blur-sm">
-            <Icon className="h-7 w-7" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+            <div>
+              <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/12 backdrop-blur-sm">
+                <Icon className="h-7 w-7" />
+              </div>
+              <p className="mb-4 text-sm font-black uppercase tracking-[0.25em] text-white/80">
+                {content.eyebrow}
+              </p>
+              <h1 className="mb-5 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">
+                {content.title}
+              </h1>
+              <p className="max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">
+                {content.intro}
+              </p>
+              <p className="mt-6 text-sm font-semibold text-white/70">{content.lastUpdated}</p>
+            </div>
+
+            {/* Official PDF Download Button if available */}
+            {content.metaInfo?.pdfUrl && (
+              <div className="shrink-0">
+                <a
+                  href={content.metaInfo.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 rounded-2xl bg-white/15 px-6 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:bg-white hover:text-[#1B3C2B] border border-white/20 shadow-lg"
+                >
+                  <Download className="h-5 w-5" />
+                  <span>{isPt ? 'Descarregar PDF Assinado' : 'Download Signed PDF'}</span>
+                  <ExternalLink className="h-4 w-4 opacity-70" />
+                </a>
+              </div>
+            )}
           </div>
-          <p className="mb-4 text-sm font-black uppercase tracking-[0.25em] text-white/80">
-            {content.eyebrow}
-          </p>
-          <h1 className="mb-5 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">
-            {content.title}
-          </h1>
-          <p className="max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">
-            {content.intro}
-          </p>
-          <p className="mt-6 text-sm font-semibold text-white/70">{content.lastUpdated}</p>
         </div>
 
+        {/* Document Metadata Table for Official Policies */}
+        {content.metaInfo && (
+          <div className="mb-8 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <h3 className="mb-4 text-lg font-bold text-[#1B3C2B] uppercase tracking-wider">
+              {isPt ? 'Ficha Técnica do Documento' : 'Document Metadata'}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="rounded-xl bg-slate-50 p-4 border border-slate-100">
+                <span className="block text-xs font-semibold text-slate-400 uppercase">
+                  {isPt ? 'Código' : 'Code'}
+                </span>
+                <span className="font-bold text-slate-800">{content.metaInfo.code}</span>
+              </div>
+              <div className="rounded-xl bg-slate-50 p-4 border border-slate-100">
+                <span className="block text-xs font-semibold text-slate-400 uppercase">
+                  {isPt ? 'Revisão' : 'Revision'}
+                </span>
+                <span className="font-bold text-slate-800">{content.metaInfo.revision}</span>
+              </div>
+              <div className="rounded-xl bg-slate-50 p-4 border border-slate-100">
+                <span className="block text-xs font-semibold text-slate-400 uppercase">
+                  {isPt ? 'Aprovação' : 'Approval'}
+                </span>
+                <span className="font-bold text-slate-800">{content.metaInfo.approvalDate}</span>
+              </div>
+              <div className="rounded-xl bg-slate-50 p-4 border border-slate-100">
+                <span className="block text-xs font-semibold text-slate-400 uppercase">
+                  {isPt ? 'Aprovado Por' : 'Signed By'}
+                </span>
+                <span className="font-bold text-slate-800 text-xs">{content.metaInfo.signoff}</span>
+              </div>
+            </div>
+
+            {/* Revision History if present */}
+            {content.metaInfo.history && (
+              <div className="mt-6 border-t border-slate-100 pt-4">
+                <p className="mb-3 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  {isPt ? 'Histórico de Revisões' : 'Revision History'}
+                </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs text-slate-600">
+                    <thead>
+                      <tr className="border-b border-slate-200 font-bold text-slate-700">
+                        <th className="py-2 px-3">{isPt ? 'Revisão' : 'Rev'}</th>
+                        <th className="py-2 px-3">{isPt ? 'Data' : 'Date'}</th>
+                        <th className="py-2 px-3">{isPt ? 'Alterações' : 'Changes'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {content.metaInfo.history.map((h) => (
+                        <tr key={h.rev} className="border-b border-slate-100">
+                          <td className="py-2 px-3 font-semibold text-[#6a00a3]">{h.rev}</td>
+                          <td className="py-2 px-3">{h.date}</td>
+                          <td className="py-2 px-3">{h.description}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Policy Content Sections */}
         <div className="space-y-6">
           {content.sections.map((section) => (
             <section
@@ -579,6 +874,31 @@ const LegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
           ))}
         </div>
 
+        {/* Sign-off footer card for Quality & Compliance policies */}
+        {content.metaInfo && (
+          <div className="mt-6 rounded-[2rem] border border-emerald-100 bg-emerald-50/50 p-6 sm:p-8 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold text-emerald-800 uppercase tracking-widest">
+                {isPt ? 'Aprovação da Direção' : 'Executive Approval'}
+              </p>
+              <p className="text-sm font-semibold text-slate-700 mt-1">
+                {content.metaInfo.signoff}
+              </p>
+              <p className="text-xs text-slate-500 mt-0.5">Luanda, Angola</p>
+            </div>
+            <a
+              href={content.metaInfo.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#1B3C2B] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#6a00a3]"
+            >
+              <Download className="h-4 w-4" />
+              <span>{isPt ? 'Ver PDF Assinado' : 'View Signed PDF'}</span>
+            </a>
+          </div>
+        )}
+
+        {/* Contact and Related Links */}
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="mb-3 text-2xl font-black text-[#1B3C2B]">{content.contactTitle}</h2>

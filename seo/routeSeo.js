@@ -466,6 +466,46 @@ const exactRouteSeo = {
       makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
     ],
   },
+  '/politica-de-qualidade': {
+    title: {
+      pt: 'Politica da Qualidade | ILUNGI',
+      en: 'Quality Policy | ILUNGI',
+    },
+    description: {
+      pt: 'Consulte a Politica da Qualidade da ILUNGI (ILUNGI-POL-SGQ-002), compromisso com a satisfacao dos clientes e melhoria continua.',
+      en: 'Review ILUNGI Quality Policy (ILUNGI-POL-SGQ-002), commitment to customer satisfaction and continuous improvement.',
+    },
+    keywords: {
+      pt: [...sharedKeywords.pt, 'politica da qualidade', 'SGQ', 'ISO 9001', 'qualidade'],
+      en: [...sharedKeywords.en, 'quality policy', 'QMS', 'ISO 9001', 'quality'],
+    },
+    image: '/imagens/ilungi_logo.jpg',
+    changefreq: 'yearly',
+    priority: '0.5',
+    schema: (siteUrl, lang, entry) => [
+      makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
+    ],
+  },
+  '/politica-de-compliance': {
+    title: {
+      pt: 'Politica de Compliance | ILUNGI',
+      en: 'Compliance Policy | ILUNGI',
+    },
+    description: {
+      pt: 'Conheca a Politica de Compliance da ILUNGI (ILUNGI-POL-SGC-001) alinhada a ISO 37301 para gestao da etica e conformidade.',
+      en: 'Discover ILUNGI Compliance Policy (ILUNGI-POL-SGC-001) aligned with ISO 37301 for ethics and compliance management.',
+    },
+    keywords: {
+      pt: [...sharedKeywords.pt, 'politica de compliance', 'ISO 37301', 'etica corporativa', 'conformidade'],
+      en: [...sharedKeywords.en, 'compliance policy', 'ISO 37301', 'corporate ethics', 'compliance'],
+    },
+    image: '/imagens/ilungi_logo.jpg',
+    changefreq: 'yearly',
+    priority: '0.5',
+    schema: (siteUrl, lang, entry) => [
+      makeWebPageSchema(siteUrl, entry.canonicalPath, lang, entry.title, entry.description),
+    ],
+  },
   '/blog': {
     title: {
       pt: 'Blog ILUNGI HUB | Insights e Tendencias',

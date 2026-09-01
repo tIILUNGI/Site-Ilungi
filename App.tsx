@@ -198,6 +198,8 @@ const AppShell: React.FC = () => {
                 <Route path="/privacidade" element={<LegalPage type="privacy" />} />
                 <Route path="/termos-de-uso" element={<LegalPage type="terms" />} />
                 <Route path="/cookies" element={<LegalPage type="cookies" />} />
+                <Route path="/politica-de-qualidade" element={<LegalPage type="qualidade" />} />
+                <Route path="/politica-de-compliance" element={<LegalPage type="compliance" />} />
                 <Route path="/referencia/:id" element={<ReferenceDetail />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />

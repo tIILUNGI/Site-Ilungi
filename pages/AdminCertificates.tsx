@@ -33,6 +33,7 @@ const AdminCertificates: React.FC = () => {
   const [availableCourses, setAvailableCourses] = useState<string[]>([]);
   const [uploadingPdf, setUploadingPdf] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [selectedPdfFile, setSelectedPdfFile] = useState<File | null>(null);
 
   // Helper para obter cursos disponíveis
   useEffect(() => {
@@ -92,18 +93,9 @@ const AdminCertificates: React.FC = () => {
       alert(isPt ? 'Por favor selecione apenas ficheiros PDF.' : 'Please select PDF files only.');
       return;
     }
-    setUploadingPdf(true);
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64Data = event.target?.result as string;
-      setFormData(prev => ({ ...prev, pdfUrl: base64Data, pdfFileName: file.name }));
-      setUploadingPdf(false);
-    };
-    reader.onerror = () => {
-      alert(isPt ? 'Erro ao ler ficheiro PDF.' : 'Error reading PDF file.');
-      setUploadingPdf(false);
-    };
-    reader.readAsDataURL(file);
+    // Guardar o ficheiro localmente; o upload real acontece em handleSave
+    setSelectedPdfFile(file);
+    setFormData(prev => ({ ...prev, pdfFileName: file.name }));
   };
 
   const handleSave = async () => {
@@ -113,6 +105,21 @@ const AdminCertificates: React.FC = () => {
     }
     setSaving(true);
     try {
+      let pdfUrl = formData.pdfUrl || '';
+      let pdfFileName = formData.pdfFileName || '';
+
+      // Se há um novo ficheiro PDF selecionado, fazer upload primeiro
+      if (selectedPdfFile) {
+        setUploadingPdf(true);
+        try {
+          const uploadResult = await (endpoints as any).certificates.uploadPdf(selectedPdfFile);
+          pdfUrl = uploadResult.pdfUrl || pdfUrl;
+          pdfFileName = uploadResult.pdfFileName || pdfFileName;
+        } finally {
+          setUploadingPdf(false);
+        }
+      }
+
       const payload = {
         code: formData.code.trim().toUpperCase(),
         student: formData.student.trim(),
@@ -123,10 +130,10 @@ const AdminCertificates: React.FC = () => {
         issued_date: formData.issuedDate,
         hours: formData.hours || '',
         status: formData.status,
-        pdfUrl: formData.pdfUrl || '',
-        pdf_url: formData.pdfUrl || '',
-        pdfFileName: formData.pdfFileName || '',
-        pdf_file_name: formData.pdfFileName || '',
+        pdfUrl,
+        pdf_url: pdfUrl,
+        pdfFileName,
+        pdf_file_name: pdfFileName,
       };
 
       if (editingId) {
@@ -164,6 +171,7 @@ const AdminCertificates: React.FC = () => {
     setEditingId(null);
     setIsAdding(false);
     setFormData(emptyCertificate);
+    setSelectedPdfFile(null);
   };
 
   const filteredCertificates = certificates.filter(c => {
@@ -267,12 +275,24 @@ const AdminCertificates: React.FC = () => {
                 <label className="block text-sm font-bold mb-2">Ficheiro PDF do Certificado (Upload)</label>
                 <div className={`p-6 rounded-2xl border-2 border-dashed ${isDark ? 'border-slate-700' : 'border-slate-200 bg-slate-50'} text-center`}>
                   <Upload className="w-8 h-8 mx-auto text-[#6a00a3] mb-2" />
-                  <p className="text-sm font-semibold mb-2">{uploadingPdf ? 'Processando...' : 'Selecionar PDF do certificado'}</p>
+                  <p className="text-sm font-semibold mb-2 text-slate-500">
+                    {uploadingPdf
+                      ? (isPt ? 'A enviar PDF para o servidor...' : 'Uploading PDF to server...')
+                      : (isPt ? 'Selecionar ficheiro PDF do certificado' : 'Select certificate PDF file')}
+                  </p>
+                  <p className="text-xs text-slate-400 mb-3">{isPt ? 'Tamanho máximo: 20 MB' : 'Max size: 20 MB'}</p>
                   <input type="file" accept="application/pdf" onChange={handleFileUpload}
                     className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-[#6a00a3] file:text-white hover:file:bg-[#520b7d] cursor-pointer" />
-                  {formData.pdfFileName && (
+                  {selectedPdfFile && (
+                    <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-xs font-bold">
+                      <FileText className="w-4 h-4" /> {selectedPdfFile.name}
+                      <span className="text-blue-500">({(selectedPdfFile.size / 1024 / 1024).toFixed(1)} MB) — {isPt ? 'será enviado ao guardar' : 'will upload on save'}</span>
+                    </div>
+                  )}
+                  {!selectedPdfFile && formData.pdfFileName && (
                     <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-xl text-xs font-bold">
                       <FileText className="w-4 h-4" /> {formData.pdfFileName}
+                      <span className="text-green-500">{isPt ? '(já guardado)' : '(already saved)'}</span>
                     </div>
                   )}
                 </div>

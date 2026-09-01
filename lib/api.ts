@@ -252,7 +252,12 @@ export const endpoints = {
     getByCode: (code: string) => api.get(`/certificates/code/${encodeURIComponent(code)}`),
     create: (data: any) => api.post('/certificates', data),
     update: (id: string, data: any) => api.put(`/certificates/${id}`, data),
-    delete: (id: string) => api.delete(`/certificates/${id}`)
+    delete: (id: string) => api.delete(`/certificates/${id}`),
+    uploadPdf: (file: File) => {
+      const fd = new FormData();
+      fd.append('pdf', file);
+      return api.postFormData('/certificates/upload-pdf', fd);
+    }
   },
   analytics: {
     // Track events
