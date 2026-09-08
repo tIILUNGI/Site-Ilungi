@@ -92,22 +92,31 @@ const AdminCourses: React.FC = () => {
 
       const apiData = {
         title: { pt: courseName, en: courseName },
+        name: { pt: courseName, en: courseName },
         code: newCourse.code,
         area: { pt: courseArea, en: courseArea },
         description: { pt: courseName, en: courseName },
         duration: getLocalized(newCourse.hours),
         hours: getLocalized(newCourse.hours),
         modality: { pt: getLocalized(newCourse.modality), en: getLocalized(newCourse.modality) },
-        agenda: getLocalized(newCourse.agenda),
+        agenda: typeof newCourse.agenda === 'string' ? { pt: newCourse.agenda, en: newCourse.agenda } : newCourse.agenda,
+        enrollUrl: newCourse.enrollUrl || '',
         level: 'intermediate',
         active: true,
         order: updatedCourses.length
       };
 
-      if (editingId) {
-        await endpoints.courses.update(editingId, apiData).catch(() => {});
+      if (editingId && !editingId.startsWith('course-')) {
+        await endpoints.courses.update(editingId, apiData).catch(async (err) => {
+          console.warn('[AdminCourses] Update failed, attempting create fallback...', err);
+          await endpoints.courses.create(apiData).catch((createErr) => {
+            console.error('[AdminCourses] Fallback create also failed:', createErr);
+          });
+        });
       } else {
-        await endpoints.courses.create(apiData).catch(() => {});
+        await endpoints.courses.create(apiData).catch((err) => {
+          console.error('[AdminCourses] Failed to create course in remote API:', err);
+        });
       }
 
       await fetchCourses();
@@ -129,9 +138,28 @@ const AdminCourses: React.FC = () => {
         saveCoursesToStorage(updatedCourses);
 
         if (id) {
-          await endpoints.courses.delete(id).catch((err) => {
-            console.warn('[AdminCourses] API DELETE request ignored or forbidden:', err);
-          });
+          let deleteSuccess = false;
+          try {
+            await endpoints.courses.delete(id);
+            deleteSuccess = true;
+          } catch (err) {
+            console.warn('[AdminCourses] API HTTP DELETE failed/forbidden (403), falling back to PUT active:false...', err);
+          }
+
+          // Soft-delete on server via PUT active:false so it persists across all devices
+          if (!deleteSuccess && target) {
+            try {
+              const apiData = {
+                title: typeof target.name === 'string' ? { pt: target.name, en: target.name } : target.name,
+                code: target.code,
+                area: typeof target.area === 'string' ? { pt: target.area, en: target.area } : target.area,
+                active: false
+              };
+              await endpoints.courses.update(id, apiData);
+            } catch (err2) {
+              console.warn('[AdminCourses] API soft-delete active:false also failed:', err2);
+            }
+          }
         }
         await fetchCourses();
       } catch (error) {

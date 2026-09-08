@@ -4,8 +4,8 @@ const ANALYTICS_COOKIE_NAME = 'ilungi_analytics';
 const ANALYTICS_SESSION_NAME = 'ilungi_session';
 
 const getAuthHeaders = () => {
-  const adminToken = sessionStorage.getItem('ilungi_admin_token');
-  const alumniToken = sessionStorage.getItem('alumni_token');
+  const adminToken = sessionStorage.getItem('ilungi_admin_token') || localStorage.getItem('ilungi_admin_token');
+  const alumniToken = sessionStorage.getItem('alumni_token') || localStorage.getItem('alumni_token');
   const token = adminToken || alumniToken;
   return token ? { 'Authorization': `Bearer ${token}` } : {};
 };

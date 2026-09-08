@@ -44,10 +44,18 @@ const AILUNGIPortal: React.FC = () => {
     });
   }, []);
 
+  const getLocalizedStr = (val: any) => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val[lang] || val.pt || val.en || '';
+    }
+    return '';
+  };
+
   // Filter courses based on search
   const availableCourses = courses.filter(course => 
-    course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    course.area.toLowerCase().includes(searchTerm.toLowerCase())
+    getLocalizedStr(course.name).toLowerCase().includes(searchTerm.toLowerCase()) ||
+    getLocalizedStr(course.area).toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(0, 6);
 
   // Show welcome page when not logged in

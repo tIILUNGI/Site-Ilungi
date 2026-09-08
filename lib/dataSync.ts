@@ -49,7 +49,8 @@ export const loadData = async (table: string, _localKey: string, defaultData: an
     try {
       const remoteData = await endpoints.courses.getAll();
       if (Array.isArray(remoteData) && remoteData.length > 0) {
-        const mappedRemote = remoteData.map(mapCourseFromAPI);
+        const activeRemoteData = remoteData.filter((c: any) => c.active !== false && c.active !== 'false' && c.status !== 'inactive');
+        const mappedRemote = activeRemoteData.map(mapCourseFromAPI);
         const merged = filterCleanCCCourses([...localList, ...mappedRemote]);
         localStorage.setItem(_localKey || 'ilungi_courses_data', JSON.stringify(merged));
         return merged;
