@@ -32,21 +32,25 @@ const CourseCatalog: React.FC = () => {
   const areas = useMemo(() => {
     const uniqueAreas = Array.from(new Set(courses.map((course) => getLocalized(course.area)).filter(Boolean)));
     return ['all', ...uniqueAreas];
-  }, [courses]);
+  }, [courses, lang]);
 
   const filteredCourses = useMemo(() => {
     const term = searchTerm.trim().toLowerCase();
     return courses.filter((course) => {
-      const matchesArea = areaFilter === 'all' || course.area === areaFilter;
+      const courseArea = getLocalized(course.area);
+      const matchesArea = areaFilter === 'all' || courseArea === areaFilter || course.area === areaFilter;
       if (!matchesArea) return false;
       if (!term) return true;
+      const nameStr = getLocalized(course.name).toLowerCase();
+      const codeStr = getLocalized(course.code).toLowerCase();
+      const areaStr = courseArea.toLowerCase();
       return (
-        course.name.toLowerCase().includes(term) ||
-        course.code.toLowerCase().includes(term) ||
-        course.area.toLowerCase().includes(term)
+        nameStr.includes(term) ||
+        codeStr.includes(term) ||
+        areaStr.includes(term)
       );
     });
-  }, [courses, searchTerm, areaFilter]);
+  }, [courses, searchTerm, areaFilter, lang]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredCourses.length / COURSES_PER_PAGE);

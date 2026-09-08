@@ -1,6 +1,6 @@
 import { endpoints } from './api';
 import { DATA_TABLES } from './dataInitialization';
-import { filterCleanCCCourses, defaultCourses } from './courseCatalogData';
+import { filterCleanCCCourses, defaultCourses, Course } from './courseCatalogData';
 
 const mapCertificateFromAPI = (cert: any) => ({
   id: cert.id,
@@ -15,26 +15,50 @@ const mapCertificateFromAPI = (cert: any) => ({
   createdAt: cert.createdAt || cert.created_at || '',
 });
 
+const mapCourseFromAPI = (c: any): Course => ({
+  id: c.id || c._id || `course-${c.code}`,
+  code: c.code || '',
+  name: c.name || c.title || '',
+  area: c.area || '',
+  hours: c.hours || c.duration || '',
+  modality: c.modality || '',
+  agenda: c.agenda || '',
+  enrollUrl: c.enrollUrl || c.enroll_url || '',
+});
+
 // ─── Tabelas estáticas (frontend como fonte de verdade) ─────────────────────────
-// Cursos, Soluções, Serviços, Parceiros, Referências, Blog -> dados limpos do código/local.
-// Certificados -> carrega da API de BD.
-const STATIC_TABLES = new Set(['solutions', 'services', 'partners', 'references', 'blog_posts', 'alumni_profiles', 'courses']);
+// Soluções, Serviços, Parceiros, Referências, Blog -> dados limpos do código/local.
+// Certificados e Cursos -> carrega da API de BD.
+const STATIC_TABLES = new Set(['solutions', 'services', 'partners', 'references', 'blog_posts', 'alumni_profiles']);
 
 // ─── loadData ──────────────────────────────────────────────────────────────────
 
 export const loadData = async (table: string, _localKey: string, defaultData: any) => {
   if (table === 'courses') {
-    let list = Array.isArray(defaultData) && defaultData.length > 0 ? defaultData : defaultCourses;
+    let localList = Array.isArray(defaultData) && defaultData.length > 0 ? defaultData : defaultCourses;
     try {
       const saved = localStorage.getItem(_localKey || 'ilungi_courses_data');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          list = parsed;
+          localList = parsed;
         }
       }
     } catch (e) {}
-    return filterCleanCCCourses(list);
+
+    try {
+      const remoteData = await endpoints.courses.getAll();
+      if (Array.isArray(remoteData) && remoteData.length > 0) {
+        const mappedRemote = remoteData.map(mapCourseFromAPI);
+        const merged = filterCleanCCCourses([...localList, ...mappedRemote]);
+        localStorage.setItem(_localKey || 'ilungi_courses_data', JSON.stringify(merged));
+        return merged;
+      }
+    } catch (error) {
+      console.warn('[dataSync] Failed to fetch courses from remote API:', error);
+    }
+
+    return filterCleanCCCourses(localList);
   }
 
   // Outras tabelas estáticas: sempre retornam os dados estáticos do frontend

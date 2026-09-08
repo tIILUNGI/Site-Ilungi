@@ -4,7 +4,8 @@ import { Plus, Edit, Trash2, ArrowLeft, GraduationCap, Search, Filter, BookOpen 
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../App';
 import { endpoints } from '../lib/api';
-import { Course, defaultCourses, filterCleanCCCourses } from '../lib/courseCatalogData';
+import { loadData } from '../lib/dataSync';
+import { Course, defaultCourses, filterCleanCCCourses, addDeletedCourseId, removeDeletedCourseId } from '../lib/courseCatalogData';
 
 const emptyCourse: Course = {
   id: '',
@@ -39,20 +40,9 @@ const AdminCourses: React.FC = () => {
     return '';
   };
 
-  const fetchCourses = () => {
-    let localList = defaultCourses;
-    try {
-      const saved = localStorage.getItem('ilungi_courses_data');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          localList = parsed;
-        }
-      }
-    } catch (e) {}
-
-    const clean = filterCleanCCCourses(localList);
-    setCourses(clean);
+  const fetchCourses = async () => {
+    const data = await loadData('courses', 'ilungi_courses_data', defaultCourses);
+    setCourses(data);
   };
 
   useEffect(() => {
@@ -88,6 +78,9 @@ const AdminCourses: React.FC = () => {
         enrollUrl: formData.enrollUrl || ''
       };
 
+      removeDeletedCourseId(newCourse.code);
+      if (newCourse.id) removeDeletedCourseId(newCourse.id);
+
       let updatedCourses: Course[];
       if (editingId) {
         updatedCourses = courses.map(c => c.id === editingId ? newCourse : c);
@@ -117,6 +110,7 @@ const AdminCourses: React.FC = () => {
         await endpoints.courses.create(apiData).catch(() => {});
       }
 
+      await fetchCourses();
       resetForm();
     } catch (error) {
       console.error('Failed to save course:', error);
@@ -127,9 +121,19 @@ const AdminCourses: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (confirm(isPt ? 'Tem certeza que deseja excluir este curso?' : 'Are you sure you want to delete this course?')) {
       try {
+        const target = courses.find(c => c.id === id);
+        if (id) addDeletedCourseId(id);
+        if (target?.code) addDeletedCourseId(target.code);
+
         const updatedCourses = courses.filter(c => c.id !== id);
         saveCoursesToStorage(updatedCourses);
-        await endpoints.courses.delete(id).catch(() => {});
+
+        if (id) {
+          await endpoints.courses.delete(id).catch((err) => {
+            console.warn('[AdminCourses] API DELETE request ignored or forbidden:', err);
+          });
+        }
+        await fetchCourses();
       } catch (error) {
         console.error('Failed to delete course:', error);
       }

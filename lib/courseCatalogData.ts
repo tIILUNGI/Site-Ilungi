@@ -628,38 +628,75 @@ export const defaultCourses: Course[] = [
   },
 ];
 
+export const getDeletedCourseIds = (): Set<string> => {
+  try {
+    const saved = localStorage.getItem('ilungi_deleted_course_ids');
+    if (saved) {
+      return new Set(JSON.parse(saved));
+    }
+  } catch (e) {}
+  return new Set();
+};
+
+export const addDeletedCourseId = (idOrCode: string) => {
+  try {
+    if (!idOrCode) return;
+    const deleted = getDeletedCourseIds();
+    deleted.add(idOrCode.trim().toUpperCase());
+    deleted.add(idOrCode.trim());
+    localStorage.setItem('ilungi_deleted_course_ids', JSON.stringify(Array.from(deleted)));
+  } catch (e) {}
+};
+
+export const removeDeletedCourseId = (idOrCode: string) => {
+  try {
+    if (!idOrCode) return;
+    const deleted = getDeletedCourseIds();
+    deleted.delete(idOrCode.trim().toUpperCase());
+    deleted.delete(idOrCode.trim());
+    localStorage.setItem('ilungi_deleted_course_ids', JSON.stringify(Array.from(deleted)));
+  } catch (e) {}
+};
+
 export const filterCleanCCCourses = (userCourses?: Course[]): Course[] => {
   const map = new Map<string, Course>();
+  const deletedSet = getDeletedCourseIds();
 
   // 1. Sempre carregar todos os 63 cursos oficiais (CC-001 até CC-063)
   for (const c of defaultCourses) {
     if (c && c.code) {
       const code = String(c.code).trim().toUpperCase();
-      map.set(code, { ...c, code });
+      const id = String(c.id).trim();
+      if (!deletedSet.has(code) && !deletedSet.has(id)) {
+        map.set(code, { ...c, code });
+      }
     }
   }
 
-  // 2. Se existirem edições guardadas pelo utilizador, fundir/atualizar sem perder os 63 cursos
+  // 2. Se existirem edições ou novos cursos guardados pelo utilizador ou API, fundir/atualizar sem perder os 63 cursos
   if (Array.isArray(userCourses)) {
     for (const c of userCourses) {
       if (!c || !c.code) continue;
       const rawCode = typeof c.code === 'string' ? c.code : ((c.code as any)?.pt || (c.code as any)?.en || '');
       const code = rawCode.trim().toUpperCase();
+      const id = c.id ? String(c.id).trim() : '';
 
-      if (/^CC-\d+$/i.test(code)) {
-        const existing = map.get(code) || {};
-        map.set(code, { ...existing, ...c, code });
-      }
+      if (!code) continue;
+      if (deletedSet.has(code) || (id && deletedSet.has(id))) continue;
+
+      const existing = map.get(code) || {};
+      map.set(code, { ...existing, ...c, code });
     }
   }
 
   const clean = Array.from(map.values());
 
-  // Ordenar numericamente (CC-001, CC-002, ..., CC-063)
+  // Ordenar numericamente (CC-001, CC-002, ..., CC-063, etc.)
   clean.sort((a, b) => {
-    const numA = parseInt(a.code.replace(/\D/g, ''), 10) || 0;
-    const numB = parseInt(b.code.replace(/\D/g, ''), 10) || 0;
-    return numA - numB;
+    const numA = parseInt(a.code.replace(/\D/g, ''), 10) || 999999;
+    const numB = parseInt(b.code.replace(/\D/g, ''), 10) || 999999;
+    if (numA !== numB) return numA - numB;
+    return a.code.localeCompare(b.code);
   });
 
   return clean;
